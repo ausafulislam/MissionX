@@ -34,6 +34,17 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 bun run build
 ```
 
+## Documentation
+
+- [docs/PRD.md](docs/PRD.md) — Product requirements, missions, gameplay loop, scope and submission checklist.
+- [docs/Architecture.md](docs/Architecture.md) — Tech stack, routes, folder structure, data models and engine contracts.
+- [docs/Rules.md](docs/Rules.md) — Agent boundaries, code/design/tech rules and the definition of done.
+- [docs/Phases.md](docs/Phases.md) — Build phases, goals and the current phase to work on.
+- [docs/Design.md](docs/Design.md) — Read-only design system: colors, typography, components and motion.
+- [docs/Memory.md](docs/Memory.md) — Living progress log: status, decisions, risks and next steps.
+
+AI agents should start from [AGENTS.md](AGENTS.md).
+
 ## Team
 
 **Team NASA WARRIORS**

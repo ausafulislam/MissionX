@@ -1,3 +1,18 @@
+# MissionX
+
+MissionX is an interactive space mission design game built by Team NASA WARRIORS for the NASA Space Apps Challenge 2026.
+
+Before doing anything, read these files in order: docs/PRD.md, docs/Architecture.md, docs/Rules.md, docs/Phases.md, docs/Design.md, docs/Memory.md. Then work only on the current phase listed in docs/Phases.md.
+
+## Most important rules
+
+- Use bun only (`bun install`, `bun dev`, `bun add`, `bun run build`). Never npm, yarn or pnpm.
+- Do not add dependencies without asking the owner first.
+- Do not invent layouts. The owner gives design and layout instructions at runtime; ask if something is missing.
+- `docs/Design.md` is read-only. Never edit it.
+- Update `docs/Memory.md` after every task: what changed, files touched, decisions and next step.
+- Run `bun run lint` and `bun run build` before finishing, and fix anything you introduced.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know

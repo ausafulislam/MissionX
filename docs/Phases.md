@@ -1,0 +1,228 @@
+# Phases: MissionX
+
+Build in small phases. Work only on the current phase. Mark a phase done only when its "Done when" list is complete, then update `Memory.md`.
+
+Hackathon window: submission closes 15 Nov 2026, 11:59 PM (local time). Aim to freeze features by mid afternoon on 15 Nov and submit with a safety buffer.
+
+**Time-box rule:** the landing page is built first, but it must not eat the whole schedule. The game itself is what judges evaluate. Parallel work (Phase 2 engine and data) can run at the same time if teammates are available.
+
+---
+
+## Phase 0: Project foundation
+
+**Goal:** Clean, branded starting point.
+
+**Tasks**
+- Remove all default Next.js boilerplate (logos, demo content, default CSS, unused assets).
+- Set project name, description and metadata for MissionX.
+- Load fonts (Space Grotesk, Inter) with `next/font`.
+- Add design tokens from `Design.md` to `globals.css` and Tailwind.
+- Create the folder structure from `Architecture.md`.
+- Add `.env.example`, README, and a simple favicon.
+
+**Done when**
+- App runs with `bun dev`, `bun run lint` and `bun run build` pass.
+- No leftover references to the default template.
+
+---
+
+## Phase 1: Landing page (start here)
+
+**Goal:** A polished landing page that explains MissionX and sends people into the game.
+
+**Important:** The layout, sections and visual direction for the landing page are NOT defined in these files. The owner provides them at runtime, section by section. Ask if anything is missing.
+
+**Tasks**
+- Build the shared Navbar and Footer components using the tokens in `Design.md`.
+- Build the landing page one section at a time, following the owner's instructions for each.
+- Add scroll and entrance animations with GSAP and smooth scrolling with Lenis, as instructed.
+- Add the 3D Earth scene only if the owner asks for it, and only after a static version works.
+- Make every call to action link to `/play`.
+- Include the footer disclaimer: "Not affiliated with or endorsed by NASA."
+- Responsive pass for mobile and tablet.
+- Accessibility pass: focus states, alt text, reduced motion.
+
+**Done when**
+- All requested sections are built and responsive.
+- Primary buttons open the game entry route.
+- Lint and build pass, page loads fast, no console errors.
+- Time-box respected (suggested: about 3 hours).
+
+---
+
+## Phase 2: Game data and engine
+
+**Goal:** Working game rules with no UI.
+
+**Tasks**
+- Create shared types in `src/types`.
+- Create JSON catalogs in `src/game/data`: missions (3), parts (about 12 to 16), rockets (3), orbits (3 to 4), events (4 to 5), fallback explanation text.
+- Mark every value as a simplified approximation.
+- Implement engine functions: totals, power balance, data balance, requirement verification, launch compatibility, mission simulation (seeded), scoring and 4-segment report.
+- Add the seeded random number helper in `src/lib`.
+- Write unit tests or a script for the engine, plus a balance script that prints the success rate over many random designs.
+
+**Done when**
+- Same design and seed always produce the same result.
+- Balance script shows a reasonable success rate (roughly 30 to 60 percent).
+- Engine has no UI imports and passes lint and build.
+
+---
+
+## Phase 3: Game shell and state
+
+**Goal:** Navigable game skeleton.
+
+**Tasks**
+- Create the `/play` routes for Goal, Build, Verify, Launch and Result.
+- Build the Zustand store with persistence (client only, try/catch).
+- Build the shared game top bar with the 5-step progress indicator.
+- Add step guards (cannot skip ahead), back navigation, reset and "change design".
+- Add error and not-found boundaries.
+
+**Done when**
+- Can move through all five steps with placeholder content.
+- Refreshing the page restores progress.
+
+---
+
+## Phase 4: Goal screen (mission and requirements)
+
+**Goal:** Player picks a mission and sees measurable requirements.
+
+**Tasks**
+- Mission selection with 3 missions.
+- Requirements list for the selected mission.
+- Continue to Build.
+
+Screen layout and visuals are given by the owner at runtime.
+
+**Done when**
+- Selection is saved in the store and drives the next screens.
+
+---
+
+## Phase 5: Build screen
+
+**Goal:** Core gameplay screen.
+
+**Tasks**
+- Parts browsing by category and adding or removing parts.
+- Live Budget, Mass, Power and Data meters from engine calculations.
+- Inline warnings with exact amounts (over mass, over budget, power shortage).
+- Spacecraft visual that reflects chosen parts.
+- Tooltips for technical terms.
+
+**Done when**
+- Every part change updates meters instantly and correctly.
+- Warnings are accurate and understandable.
+
+---
+
+## Phase 6: Verify screen (checks, rocket and orbit)
+
+**Goal:** Prove the design meets requirements and pick the launch setup.
+
+**Tasks**
+- Requirement checks with Pass, Close, Fail.
+- Rocket and orbit selection.
+- Compatibility check with a plain-language reason.
+- Launch button disabled until all checks pass.
+
+**Done when**
+- Impossible combinations are blocked with a clear explanation.
+- Launch is only possible with a valid design.
+
+---
+
+## Phase 7: Launch screen (simulation)
+
+**Goal:** Watch the mission happen.
+
+**Tasks**
+- Play back the engine timeline with pause and speed controls (1x, 2x, 4x).
+- Live camera style sequence for liftoff, stage separation, satellite release and deployment, plus failure variants (rocket breakup, satellite lost).
+- Timeline stages, live readouts, event captions and warning banners.
+- Orbit map showing the satellite position.
+- "See results" enabled when the mission ends, plus a skip option.
+
+**Done when**
+- Success and failure runs both play correctly and end on the Result screen.
+- Animation respects reduced motion and runs smoothly on mobile.
+
+---
+
+## Phase 8: Result screen
+
+**Goal:** Explain why the mission worked or failed.
+
+**Tasks**
+- SUCCESS, PARTIAL or FAILED state with score.
+- 4-segment report (Launch, Space, Ground, User), each with status and one sentence.
+- Similar real NASA mission line.
+- Try again and change design actions.
+
+**Done when**
+- Every outcome path shows a correct and understandable explanation.
+
+---
+
+## Phase 9: AI mentor
+
+**Goal:** Plain-language explanations that feel personal.
+
+**Tasks**
+- `/api/mentor` route with input validation, size limit and timeout.
+- Mentor panel on the Result screen.
+- Fallback text from `fallback-text.json` on any failure.
+
+**Done when**
+- Works with a valid key and degrades gracefully without one.
+- No secrets reach the browser.
+
+---
+
+## Phase 10: Polish and quality
+
+**Goal:** Reliable, accessible, ready to show.
+
+**Tasks**
+- Tutorial or coach marks on the Build screen.
+- Mobile and tablet pass on every screen.
+- Accessibility pass (keyboard, focus, labels, color-independent status).
+- Performance pass (images, fonts, 3D fallback).
+- Balance tuning using the balance script.
+- Full playthrough testing, including refresh mid-game and failure paths.
+- Optional stretch items if time remains: compare designs, Urdu and English toggle, team mode.
+
+**Done when**
+- No blocking bugs, lint and build pass, a stranger can play a full mission without help.
+
+---
+
+## Phase 11: Submission
+
+**Goal:** Ship it.
+
+**Tasks**
+- Deploy to Vercel and test the production URL in a private window.
+- Make the repository public with a clear README.
+- Record a short demo video of a full mission.
+- Write the project description (problem, solution, NASA resources used, what makes it different).
+- Fill in the Space Apps submission form and submit with a safety buffer before 11:59 PM on 15 Nov.
+
+**Done when**
+- Submission is confirmed on the Space Apps site.
+
+---
+
+## Suggested time plan
+
+| When | Focus |
+|---|---|
+| 14 Nov, first half | Phase 0, Phase 1 (time-boxed), Phase 2 in parallel |
+| 14 Nov, second half | Phase 3, 4, 5 (playable Build screen) |
+| 14 Nov night | Phase 6, 7 start (one full playable loop) |
+| 15 Nov morning | Phase 7 finish, Phase 8, Phase 9 |
+| 15 Nov midday | Phase 10, feature freeze |
+| 15 Nov afternoon to evening | Phase 11, submit early |
