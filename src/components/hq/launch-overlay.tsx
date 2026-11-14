@@ -81,6 +81,7 @@ export function LaunchOverlay({
             <small>GB/DAY RETURN</small>
           </span>
         </div>
+        <p className="hq-fineprint">Ground: {t.contact?"contact window":"waiting for contact"} · usable battery {t.batteryWh.toFixed(1)} Wh · stored {t.storedGB.toFixed(2)} GB · Earth received {t.receivedGB.toFixed(2)} GB.</p>
         <p className="hq-fineprint">
           * Schematic altitude and compressed time. Resources and outcomes use
           your actual design.

@@ -4,8 +4,9 @@ import { useRouter } from "next/navigation";
 import { getMission, getOrbit, getRocket } from "@/game/data/catalog";
 import { useMissionStore } from "@/game/store/mission-store";
 import { ScreenHeading } from "./game-shell";
-import { CheckList, Status } from "./check-list";
+import { CheckList } from "./check-list";
 import { AnimatedScore } from "./animated-score";
+import { OperationsNote } from "./operations-note";
 import { OutcomeReveal } from "./outcome-reveal";
 import { MentorPanel } from "./mentor-panel";
 export function ResultScreen() {
@@ -131,10 +132,11 @@ export function ResultScreen() {
           <article className="game-panel segment-report" key={segment.name}>
             <div>
               <span className="report-number">0{i + 1}</span>
-              <Status status={segment.status} />
+              <span className={`status-pill status-${segment.status}`}>{segment.status === "pass" ? "SUCCESS" : segment.status === "close" ? "PARTIAL" : "FAILED"}</span>
             </div>
             <h3>{segment.name}</h3>
             <p>{segment.explanation}</p>
+            {segment.name==="GROUND"&&<OperationsNote result={r}/>}
           </article>
         ))}
       </div>

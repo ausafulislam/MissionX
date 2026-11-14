@@ -2,10 +2,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ORBITS, ROCKETS, getMission } from "@/game/data/catalog";
+import { ORBITS, ROCKETS, getMission, getOrbit, getRocket } from "@/game/data/catalog";
 import { verify } from "@/game/engine/validation";
 import { useMissionStore } from "@/game/store/mission-store";
 import { ScreenHeading } from "./game-shell";
+import { SourceNote } from "./source-note";
 import { CheckList } from "./check-list";
 import { ResourcePanel } from "./resource-panel";
 import { MentorPanel } from "./mentor-panel";
@@ -36,7 +37,7 @@ export function VerifyScreen() {
           </h2>
           <p>
             {v.ready
-              ? "Your design passes every preflight check. Unexpected events can still affect the mission."
+              ? "All blocking requirements pass. Review advisory warnings; they may limit science return."
               : `${v.checks.filter((c) => c.status !== "pass").length} checks need attention. Resolve blocking requirements. Advisory warnings identify risks you may choose to fly.`}
           </p>
         </div>
@@ -119,6 +120,8 @@ export function VerifyScreen() {
               </button>
             ))}
           </div>
+          <SourceNote source={getRocket(s.design.rocketId).source}/>
+          <SourceNote source={getOrbit(s.design.orbitId).source}/>
           <ResourcePanel design={s.design} />
         </aside>
       </div>

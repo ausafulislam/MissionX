@@ -9,10 +9,18 @@ export function telemetry(design: Design, result: Simulation, time: number) {
   const incident = active.find((e) =>
     ["storm", "outage", "fault"].includes(e.kind),
   );
+  const op=result.operations;
+  const operationHour=op?Math.max(0,Math.min(1,(t-18)/12))*op.days*24:0;
+  const sample=t>=18?op?.samples.filter(s=>s.hour<=operationHour).at(-1):undefined;
   const failed = active.some((e) => e.kind === "failure"),
     orbit = t >= 13 && !failed;
   return {
     phase: last,
+    batteryWh:failed?0:sample?.batteryWh??r.batteryUsable,
+    storedGB:failed?0:sample?.storedGB??0,
+    generatedGB:failed?0:sample?.generatedGB??0,
+    receivedGB:failed?0:sample?.receivedGB??0,
+    contact:!failed&&(sample?.contact??false),
     altitude: failed
       ? 0
       : Math.round(

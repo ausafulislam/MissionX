@@ -1,10 +1,10 @@
 {
-  "modelVersion": 2,
+  "modelVersion": 3,
   "solarAnnualRetention": 0.98,
   "batteryUsableFraction": 0.8,
   "batteryDischargeEfficiency": 0.95,
   "batteryChargeEfficiency": 0.95,
-  "groundReceptionEfficiency": 0.98,
+  "groundReceptionEfficiency": 1,
   "representativeDays": 4,
   "stepsPerOrbit": 48,
   "advisoryMarginPercent": 10,

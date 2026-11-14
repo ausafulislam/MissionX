@@ -139,7 +139,19 @@ export interface SegmentReport {
   status: CheckStatus;
   explanation: string;
 }
+export interface OperationsSample {
+  hour: number; batteryWh: number; storedGB: number; generatedGB: number;
+  transmittedGB: number; receivedGB: number; contact: boolean; sunlight: boolean;
+}
+export interface OperationsReport {
+  days: number; generatedGB: number; transmittedGB: number; receivedGB: number;
+  remainingGB: number; lostGB: number; groundLostGB: number;
+  batteryMinWh: number; brownoutHours: number; availability: number;
+  averageDeliveredPower: number; contacts: number; samples: OperationsSample[];
+  campaignGeneratedGB: number; campaignReceivedGB: number; scienceFraction: number;
+}
 export interface Simulation {
+  operations?: OperationsReport;
   modelVersion?: number;
   seed: number;
   outcome: Outcome;

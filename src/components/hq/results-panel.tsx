@@ -1,5 +1,6 @@
 "use client";
 import { AnimatedScore } from "@/components/game/animated-score";
+import { OperationsNote } from "@/components/game/operations-note";
 import { OutcomeReveal } from "@/components/game/outcome-reveal";
 import { useState } from "react";
 import { ACHIEVEMENTS } from "@/game/engine/progression";
@@ -71,10 +72,11 @@ export function ResultsPanel({ onRedesign }: { onRedesign: () => void }) {
             <strong>
               0{i + 1} / {seg.name}
               <span className={`hq-${seg.status}`}>
-                {seg.status.toUpperCase()}
+                {seg.status==="pass"?"SUCCESS":seg.status==="close"?"PARTIAL":"FAILED"}
               </span>
             </strong>
             <p>{seg.explanation}</p>
+            {seg.name==="GROUND"&&<OperationsNote result={r}/>}
           </div>
         ))}
       </div>

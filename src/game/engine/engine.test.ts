@@ -179,6 +179,6 @@ test("extra battery reserve mitigates short storm power deficits", () => {
   const seed = Array.from({ length: 100 }, (_, i) => i).find((i) =>
     simulate(d, i).events.some((e) => e.kind === "storm"),
   )!;
+  assert.ok(simulate(larger, seed).operations!.brownoutHours < simulate(d, seed).operations!.brownoutHours);
   assert.ok(simulate(larger, seed).power > simulate(d, seed).power);
-  assert.ok(simulate(larger, seed).lifetime > simulate(d, seed).lifetime);
 });

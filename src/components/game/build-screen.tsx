@@ -6,6 +6,7 @@ import { useMissionStore } from "@/game/store/mission-store";
 import type { Category } from "@/game/types";
 import { ScreenHeading } from "./game-shell";
 import { ResourcePanel } from "./resource-panel";
+import { SourceNote } from "./source-note";
 import { Spacecraft } from "./spacecraft";
 export function BuildScreen() {
   const s = useMissionStore(),
@@ -89,13 +90,15 @@ export function BuildScreen() {
                       ${p.cost}M<small>PER CRAFT</small>
                     </span>
                   </div>
-                  <p>{p.description}</p>
+                  <p>{p.description} {p.limitations}</p>
+                  <SourceNote source={p.source}/>
                   <dl className="part-stats">
                     {[
                       ["MASS", `${p.mass} kg`],
                       ["DRAW", `${p.draw} W`],
                       ["GENERATION", `${p.generation} W`],
                       ["DATA", `${p.data} GB/d`],
+                      ["STORAGE", `${p.storage} GB`],
                       ["DOWNLINK", `${p.downlink} GB/d*`],
                       ["LIFETIME", `${p.lifetime} mo`],
                       ...(p.battery ? [["STORAGE", `${p.battery} Wh`]] : []),

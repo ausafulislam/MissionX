@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { ORBITS, ROCKETS } from "@/game/data/catalog";
+import { SourceNote } from "@/components/game/source-note";
+import { ORBITS, ROCKETS, getOrbit, getRocket } from "@/game/data/catalog";
 import { verify } from "@/game/engine/validation";
 import { mentorAdvice } from "@/game/engine/mentor";
 import { useMissionStore } from "@/game/store/mission-store";
@@ -64,6 +65,8 @@ export function VerificationPanel({
           ))}
         </select>
       </label>
+      <SourceNote source={getRocket(s.design.rocketId).source}/>
+      <SourceNote source={getOrbit(s.design.orbitId).source}/>
       <div className="hq-checks">
         {v.checks.map((c) => (
           <div key={c.id}>

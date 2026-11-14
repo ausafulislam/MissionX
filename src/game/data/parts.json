@@ -326,7 +326,7 @@
       "confidence": "concept-only",
       "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
     },
-    "storage": 4,
+    "storage": 2,
     "limitations": "One selection per subsystem, except science instruments. Destination compatibility and shortest installed lifetime constrain this part."
   },
   {

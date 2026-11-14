@@ -1,6 +1,9 @@
 "use client";
 import { create } from "zustand";
 import { ORBITS, PARTS, ROCKETS, STARTERS } from "../data/catalog";
+import { simulate as simulateLegacy } from "../engine/legacy-v1/simulation";
+import { verify as verifyLegacy } from "../engine/legacy-v1/validation";
+import { simulate as simulateV2 } from "../engine/legacy-v2";
 import { simulate } from "../engine/simulation";
 import { verify } from "../engine/validation";
 import { validDesign } from "../engine/schema";
@@ -24,18 +27,19 @@ function restoreRun(value: unknown): SavedRun | null {
     typeof r.createdAt !== "string" ||
     !Number.isFinite(Date.parse(r.createdAt)) ||
     !result ||
+    (result.modelVersion!==undefined && ![1,2,3].includes(result.modelVersion as number)) ||
     typeof result.seed !== "number" ||
     !Number.isInteger(result.seed) ||
     result.seed < 0 ||
     result.seed > 4294967295 ||
-    !verify(r.design).ready
+    !(result.modelVersion===3?verify(r.design):result.modelVersion===2?verify(r.design):verifyLegacy(r.design)).ready
   )
     return null;
   return {
     id: r.id,
     createdAt: r.createdAt,
     design: r.design,
-    result: simulate(r.design, result.seed),
+    result: result.modelVersion===3?simulate(r.design,result.seed):result.modelVersion===2?simulateV2(r.design,result.seed):simulateLegacy(r.design,result.seed),
   };
 }
 interface GameState {
@@ -74,7 +78,7 @@ export const useMissionStore = create<GameState>((set, get) => ({
         set({ hydrated: true });
         return;
       }
-      if (raw.length > 250000) throw new Error("Save too large");
+      if (raw.length > 2000000) throw new Error("Save too large");
       const data = JSON.parse(raw);
       if (
         data.version !== 1 ||

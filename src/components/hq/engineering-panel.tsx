@@ -1,4 +1,5 @@
 "use client";
+import { SourceNote } from "@/components/game/source-note";
 import { useState } from "react";
 import { CATEGORIES, PARTS, getMission } from "@/game/data/catalog";
 import { resources } from "@/game/engine/resources";
@@ -143,10 +144,12 @@ export function EngineeringPanel({
         <div className="hq-inspection" aria-live="polite">
           <span className="eyebrow">COMPONENT INSPECTION</span>
           <h3>{selected.name}</h3>
-          <p>{selected.description}</p>
+          <p>{selected.description} {selected.limitations}</p>
+          <SourceNote source={selected.source}/>
           <dl>
             {[
               ["Mass", `${selected.mass} kg`],
+              ["Mass memory", `${selected.storage} GB`],
               ["Cost", `$${selected.cost}M`],
               ["Power draw", `${selected.draw} W`],
               ["Solar supply", `${selected.generation} W`],
