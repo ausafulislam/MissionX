@@ -231,3 +231,6 @@ Screen layout and visuals are given by the owner at runtime.
 
 ## Owner-authorized Phase03 headquarters commission — implemented 2026-11-14
 The subsequent owner commission supersedes the original incremental phase schedule above. `/hq` now supplies the immersive orbital headquarters and integrates the completed engineering engine, while `/play` remains a functional accessible alternative. Delivery, test evidence and remaining release checks are tracked in [HQ-Implementation.md](HQ-Implementation.md). Public deployment, physical-device/audio listening checks and event submission remain separate release tasks; no event submission is claimed.
+
+## Engineering completion commission — 2026-11-14
+Current owner commission: improve in place, no layout changes without design approval. PRD/Architecture and legacy Design are protected. Task 1: audit and static sourced catalogs (v0.1.1). Next: engineering margins/verification, then operations/ground delivery and educational report integration. Track exact evidence and boundaries in Engineering-Audit.md and Memory.md; patch version/test/build/commit after each completed task.

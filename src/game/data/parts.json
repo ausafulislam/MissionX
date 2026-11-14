@@ -1,0 +1,556 @@
+[
+  {
+    "draw": 0,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 18,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "bus-light",
+    "name": "Sparrow bus",
+    "category": "structure",
+    "mass": 70,
+    "cost": 8,
+    "description": "Lean and affordable. Excellent for short missions; limited design life.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 0,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "bus-deep",
+    "name": "Pioneer bus",
+    "category": "structure",
+    "mass": 120,
+    "cost": 14,
+    "description": "A durable deep-space platform with a longer operating life.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 0,
+    "generation": 320,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "solar-compact",
+    "name": "Compact solar array",
+    "category": "power",
+    "mass": 30,
+    "cost": 5,
+    "description": "A light power source. Less headroom for hungry instruments.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 0,
+    "generation": 650,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "solar-wide",
+    "name": "Extended solar array",
+    "category": "power",
+    "mass": 55,
+    "cost": 10,
+    "description": "More collection area and more power, at a mass penalty.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 0,
+    "generation": 1000,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "solar-deep",
+    "name": "Deep-space solar wings",
+    "category": "power",
+    "mass": 75,
+    "cost": 16,
+    "description": "Designed for dimmer sunlight. Expensive, but generous energy margins.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 0,
+    "generation": 0,
+    "battery": 180,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 18,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "battery-small",
+    "name": "180 Wh battery",
+    "category": "battery",
+    "mass": 14,
+    "cost": 2,
+    "description": "Stores enough energy for modest eclipse operations.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 0,
+    "generation": 0,
+    "battery": 600,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "battery-large",
+    "name": "600 Wh battery",
+    "category": "battery",
+    "mass": 28,
+    "cost": 5,
+    "description": "A larger reserve for long shadows and demanding payloads.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 18,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 50,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "radio-basic",
+    "name": "Compact radio",
+    "category": "communications",
+    "mass": 12,
+    "cost": 3,
+    "description": "Low cost, low throughput. Best for nearby, low-data missions.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 32,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 190,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "radio-dish",
+    "name": "High-gain dish",
+    "category": "communications",
+    "mass": 24,
+    "cost": 7,
+    "description": "A focused antenna trades power and mass for stronger downlink.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 45,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 500,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "radio-relay",
+    "name": "Deep-space transceiver",
+    "category": "communications",
+    "mass": 30,
+    "cost": 10,
+    "description": "High-capacity link for distant worlds and demanding science.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 12,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 18,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "computer-basic",
+    "name": "Compact flight computer",
+    "category": "computer",
+    "mass": 8,
+    "cost": 2,
+    "description": "A simple controller for shorter missions.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 20,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "computer-rad",
+    "name": "Radiation-tolerant computer",
+    "category": "computer",
+    "mass": 20,
+    "cost": 5,
+    "description": "Added protection reduces the impact of solar storms.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 10,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "attitude-basic",
+    "name": "Reaction wheel set",
+    "category": "attitude",
+    "mass": 12,
+    "cost": 3,
+    "description": "Precision pointing for cameras, solar arrays and antennas.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 16,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 5,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "attitude-deep",
+    "name": "Precision pointing suite",
+    "category": "attitude",
+    "mass": 18,
+    "cost": 4,
+    "description": "More stable instrument pointing yields a little more science.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 25,
+    "generation": 0,
+    "battery": 0,
+    "data": 12,
+    "downlink": 0,
+    "science": 45,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "mars"
+    ],
+    "id": "camera-map",
+    "name": "Mapping camera",
+    "category": "camera",
+    "mass": 20,
+    "cost": 5,
+    "description": "An efficient camera for broad surface maps.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 55,
+    "generation": 0,
+    "battery": 0,
+    "data": 34,
+    "downlink": 0,
+    "science": 65,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "mars"
+    ],
+    "id": "camera-hires",
+    "name": "High-resolution camera",
+    "category": "camera",
+    "mass": 42,
+    "cost": 10,
+    "description": "Sharper images, but heavier, thirstier and harder to downlink.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 30,
+    "generation": 0,
+    "battery": 0,
+    "data": 14,
+    "downlink": 0,
+    "science": 42,
+    "lifetime": 48,
+    "missions": [
+      "sun"
+    ],
+    "id": "coronagraph",
+    "name": "Solar coronagraph",
+    "category": "science",
+    "mass": 22,
+    "cost": 6,
+    "description": "Blocks the bright solar disk to reveal the faint outer corona.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 35,
+    "generation": 0,
+    "battery": 0,
+    "data": 14,
+    "downlink": 0,
+    "science": 30,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "mars"
+    ],
+    "id": "spectrometer",
+    "name": "Surface spectrometer",
+    "category": "science",
+    "mass": 26,
+    "cost": 8,
+    "description": "Reads reflected light to reveal surface composition.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 8,
+    "generation": 0,
+    "battery": 0,
+    "data": 3,
+    "downlink": 0,
+    "science": 12,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "magnetometer",
+    "name": "Magnetometer",
+    "category": "science",
+    "mass": 8,
+    "cost": 3,
+    "description": "A lightweight instrument that measures magnetic fields.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "draw": 140,
+    "generation": 0,
+    "battery": 0,
+    "data": 50,
+    "downlink": 0,
+    "science": 50,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "mars"
+    ],
+    "id": "radar",
+    "name": "Subsurface radar",
+    "category": "science",
+    "mass": 65,
+    "cost": 18,
+    "description": "Probes beneath the surface. Demands substantial energy and downlink.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  }
+]

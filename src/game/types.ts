@@ -1,3 +1,7 @@
+export interface SourceInfo {
+  title: string; url: string; parameter: string; accessed: string;
+  confidence: "concept-only" | "verified"; simplification: string;
+}
 export type MissionId = "moon" | "sun" | "mars";
 export type Category =
   | "structure"
@@ -9,6 +13,7 @@ export type Category =
   | "camera"
   | "science";
 export interface Part {
+  source: SourceInfo;
   id: string;
   name: string;
   category: Category;
@@ -25,6 +30,7 @@ export interface Part {
   description: string;
 }
 export interface Mission {
+  source: SourceInfo;
   id: MissionId;
   name: string;
   subtitle: string;
@@ -39,6 +45,7 @@ export interface Mission {
   reference: { name: string; url: string };
 }
 export interface Rocket {
+  source: SourceInfo;
   id: string;
   name: string;
   capacity: number;
@@ -48,6 +55,7 @@ export interface Rocket {
   description: string;
 }
 export interface Orbit {
+  source: SourceInfo;
   id: string;
   name: string;
   missions: MissionId[];

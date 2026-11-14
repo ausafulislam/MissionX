@@ -1,0 +1,80 @@
+[
+  {
+    "id": "earth",
+    "name": "Low Earth orbit",
+    "missions": [],
+    "solarFactor": 1,
+    "eclipse": 0.35,
+    "period": 1.5,
+    "contact": 0.5,
+    "description": "A useful staging orbit, but not a science destination for these missions.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "id": "lunar",
+    "name": "Lunar polar orbit",
+    "missions": [
+      "moon"
+    ],
+    "solarFactor": 1,
+    "eclipse": 0.3,
+    "period": 2,
+    "contact": 0.45,
+    "description": "Polar passes map the Moon. Eclipses require stored energy.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "id": "solar",
+    "name": "Sun-observing Earth orbit",
+    "missions": [
+      "sun"
+    ],
+    "solarFactor": 1,
+    "eclipse": 0.2,
+    "period": 1.6,
+    "contact": 0.55,
+    "description": "Four spacecraft coordinate observations of the solar corona from Earth orbit.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "id": "mars",
+    "name": "Mars science orbit",
+    "missions": [
+      "mars"
+    ],
+    "solarFactor": 0.44,
+    "eclipse": 0.12,
+    "period": 3,
+    "contact": 0.12,
+    "description": "Weaker sunlight and short ground contacts make energy and data harder.",
+    "source": {
+      "title": "NASA — Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  }
+]
