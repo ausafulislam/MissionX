@@ -546,3 +546,9 @@ These README-linked tools support the implementation stack, not mission paramete
 - **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
 - **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
 - **Verification status:** Reference found locally; external verification pending.
+
+## Cinematic foundation usage amendment — 0.1.6
+- `NASA-SCIENCE-MISSIONS`: existing verified requirements/verification concepts now inform `src/game/engine/diagnostics.ts`; no claim of NASA test procedures or sensor measurements.
+- `NASA-MISSION-VIZ`: remains reference-only for visuals. Mentioned by planned presentation metadata; no propagator/code/assets integrated.
+- `MISSIONX-EDUCATIONAL-ASSUMPTIONS`: implemented lifecycle/status policies in `flight-lifecycle.ts`, `diagnostics.ts` and static `flight-stages.json`. Exact assumptions and tests in ENGINEERING_REFERENCES.md. Static IDs resolve to this register; this is not the broader parameter-level catalog migration.
+- Verification basis is the preceding approved audit and its recorded source review; no new external numerical evidence or fresh link verification claimed. Commander/timestamp capture is local application metadata, not a sourced engineering measurement.

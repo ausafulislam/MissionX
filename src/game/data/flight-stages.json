@@ -1,0 +1,14 @@
+{
+  "sourceIds": ["MISSIONX-EDUCATIONAL-ASSUMPTIONS", "NASA-SCIENCE-MISSIONS", "NASA-MISSION-VIZ"],
+  "note": "Authored presentation timing, not flight dynamics. Maps onto existing model playback; commissioning is a presentation gate at operation start, not a new physics event.",
+  "countdownSeconds": 10,
+  "stages": [
+    {"id":"preparation","at":0,"title":"Earth launch preparation"},
+    {"id":"ascent","at":3,"title":"Atmospheric ascent"},
+    {"id":"upper-ascent","at":8,"title":"Upper-stage ascent"},
+    {"id":"journey","at":13,"title":"Spacecraft deployment and journey"},
+    {"id":"commissioning","at":18,"title":"Mission-phase commissioning"},
+    {"id":"operations","at":18,"title":"Scientific operations"},
+    {"id":"evaluation","at":30,"title":"Mission evaluation"}
+  ]
+}

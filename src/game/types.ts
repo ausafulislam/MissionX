@@ -200,6 +200,8 @@ export interface Simulation {
   lessons: string[];
 }
 export interface SavedRun {
+  commanderName?: string;
+  completedAt?: string;
   id: string;
   createdAt: string;
   design: Design;

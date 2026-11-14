@@ -27,3 +27,9 @@
 - Added current-code engineering formulas, parameter snapshots, policies, tests and known gaps; consolidated stale chronological Engineering.md notes.
 - Added mandatory research/source workflow to AGENTS.md and Rules.md, including the independence disclaimer. No runtime/UI/catalog/dependency changes; metadata IDs and full user-facing credits remain pending separate tasks.
 - Validation: lint,48 tests and production build pass; register structure/anchor/inventory checks pass. Fresh-production Chromium three-viewport mission flows and HQ pass; an initial existing-server phone overflow was not reproduced. External verification gaps remain explicitly recorded; no blanket link-validity claim.
+
+## 0.1.6 — 2026-11-14
+- Added pure mission-specific presentation lifecycle and six configuration diagnostic groups with explicit NOT EVALUATED findings for absent models. Failed launches cannot arrive or become operation-ready.
+- Snapshot actual local commander identity at launch and completion timestamp on first evaluation; preserve fields through saves without attributing legacy flights to a current profile.
+- Documented timing/status assumptions and source mapping. Scene, audio, interactive gating and PDF remain subsequent approved tasks; no dependencies or scoring changes.
+- Validation:55 unit tests, lint and production build pass. New commissioning UI, scene/audio behavior and PDF export are not yet implemented or browser-tested.

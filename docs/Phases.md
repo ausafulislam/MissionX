@@ -242,3 +242,6 @@ Catalog breadth, payload/pointing compatibility, explicit energy ledger, and reg
 
 ## Resource documentation task 1 — v0.1.5 (approved)
 Source register and engineering reference inventory created; permanent source policy appended to AGENTS.md/Rules.md; stale engineering summary consolidated. Documentation-only: source IDs currently resolve within the register, not runtime catalogs. No game/UI behavior changed. Next approval: migrate catalog metadata and add source-resolution/coverage tests. User-facing source disclosures remain a separate approval scope.
+
+## Cinematic launch/report commission — task1 v0.1.6
+Approved sequence: lifecycle/identity/diagnostics → continuous journey → interactive commissioning/audio → PDF export → results/regression. First foundation implemented without UI or simulation-score changes. Next integrate existing scenes/controllers; pdf-lib approved but not installed. No completion claim for cinematic visuals, gating UI or PDF yet.

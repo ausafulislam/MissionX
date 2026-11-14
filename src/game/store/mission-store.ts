@@ -8,6 +8,7 @@ import { simulate } from "../engine/simulation";
 import { verify } from "../engine/validation";
 import { validDesign } from "../engine/schema";
 import type { Design, MissionId, SavedRun } from "../types";
+import { useCommander, validCommanderName } from "./commander-store";
 const KEY = "missionx-flight-deck-v1";
 const emptyDesign = (): Design => ({
   missionId: "moon",
@@ -45,6 +46,8 @@ function restoreRun(value: unknown): SavedRun | null {
   return {
     id: r.id,
     createdAt: r.createdAt,
+    ...(typeof r.commanderName === "string" && validCommanderName(r.commanderName) ? {commanderName:r.commanderName.trim()} : {}),
+    ...(typeof r.completedAt === "string" && Number.isFinite(Date.parse(r.completedAt)) && Date.parse(r.completedAt)>=Date.parse(r.createdAt) ? {completedAt:r.completedAt} : {}),
     design: r.design,
     result:
       result.modelVersion === 3
@@ -183,11 +186,13 @@ export const useMissionStore = create<GameState>((set, get) => ({
       seed > 4294967295
     )
       return false;
+    useCommander.getState().hydrate();
     const timestamp = new Date().toISOString();
     set({
       run: {
         id: `${Date.now()}-${seed}`,
         createdAt: timestamp,
+        ...(validCommanderName(useCommander.getState().name) ? {commanderName:useCommander.getState().name.trim()} : {}),
         design: { ...design, partIds: [...design.partIds] },
         result: simulate(design, seed),
       },
@@ -196,9 +201,11 @@ export const useMissionStore = create<GameState>((set, get) => ({
     return true;
   },
   finish: () => {
-    const run = get().run;
-    if (!run) return;
+    const saved = get().run;
+    if (!saved) return;
+    const run = {...saved, completedAt:saved.completedAt??new Date().toISOString()};
     set({
+      run,
       complete: true,
       history: [run, ...get().history.filter((r) => r.id !== run.id)].slice(
         0,
