@@ -224,6 +224,7 @@ export function simulate(design: Design, seed: number): Simulation {
       "Your design met the science goal. Explore whether a lighter or less expensive configuration can return the same science.",
     );
   return {
+    modelVersion: 2,
     seed,
     outcome,
     score,

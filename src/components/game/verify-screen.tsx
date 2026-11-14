@@ -37,7 +37,7 @@ export function VerifyScreen() {
           <p>
             {v.ready
               ? "Your design passes every preflight check. Unexpected events can still affect the mission."
-              : `${v.checks.filter((c) => c.status !== "pass").length} checks need attention. CLOSE is not a pass; resolve every issue before launch.`}
+              : `${v.checks.filter((c) => c.status !== "pass").length} checks need attention. Resolve blocking requirements. Advisory warnings identify risks you may choose to fly.`}
           </p>
         </div>
         <span className="technical">
@@ -156,7 +156,7 @@ export function VerifyScreen() {
         <p>
           {v.ready
             ? "Verified, not invulnerable. Leave margin for the unexpected."
-            : "Launch remains locked until every check passes."}
+            : "Resolve every blocking check; advisory warnings may be flown with reduced science return."}
         </p>
         <button
           className="button"

@@ -1,0 +1,12 @@
+{
+  "modelVersion": 2,
+  "solarAnnualRetention": 0.98,
+  "batteryUsableFraction": 0.8,
+  "batteryDischargeEfficiency": 0.95,
+  "batteryChargeEfficiency": 0.95,
+  "groundReceptionEfficiency": 0.98,
+  "representativeDays": 4,
+  "stepsPerOrbit": 48,
+  "advisoryMarginPercent": 10,
+  "note": "All factors and thresholds are MissionX gameplay assumptions, not universal engineering constants or agency standards. Contact fractions, orbit periods, costs and reliability remain scenario inputs. A month is 30 days for campaign totals. No radiation, thermal, RF link or orbit propagator is claimed."
+}

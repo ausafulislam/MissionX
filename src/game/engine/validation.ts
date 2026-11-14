@@ -121,7 +121,7 @@ export function verify(design: Design): Verification {
     numericCheck(
       "battery",
       "Eclipse energy reserve",
-      r.battery,
+      r.batteryUsable,
       r.batteryNeeded,
       "Wh",
       true,
@@ -134,6 +134,7 @@ export function verify(design: Design): Verification {
       "GB/day",
       true,
     ),
+    numericCheck("storage", "Onboard storage between contacts",r.storage,r.storageNeeded,"GB",true),
     numericCheck(
       "rocket-mass",
       "Launch vehicle capacity",
@@ -201,9 +202,19 @@ export function verify(design: Design): Verification {
       "Configuration uses known catalog components, launcher and orbit.",
     ),
   ];
+  // Data/storage deficits may be flown for learning, but never silent or full-science promises.
+  for(const check of checks){
+    if(["data","storage"].includes(check.id)&&check.actual>0&&check.status!=="pass"){
+      check.status="close";check.blocking=false;
+      check.reason+=" Accepted operational risk: limited capacity may lose observations and reduce science credit.";
+    }
+  }
+  for(const [id,label,value] of [["mass-margin","Mass headroom",r.massMarginPercent],["power-margin","End-of-life power headroom",r.powerMarginPercent]] as const){
+    checks.push({id,label,status:value>=10?"pass":"close",blocking:false,actual:value,target:10,unit:"%",reason:`${value.toFixed(1)}% headroom. 10% is a gameplay advisory, not a flight standard. Low headroom increases vulnerability to events.`});
+  }
   return {
     checks,
     resources: r,
-    ready: checks.every((c) => c.status === "pass"),
+    ready: checks.every((c) => c.status === "pass" || c.blocking === false),
   };
 }

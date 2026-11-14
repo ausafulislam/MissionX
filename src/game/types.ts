@@ -17,6 +17,8 @@ export interface Part {
   id: string;
   name: string;
   category: Category;
+  storage: number;
+  limitations: string;
   mass: number;
   cost: number;
   draw: number;
@@ -72,6 +74,15 @@ export interface Design {
   orbitId: string;
 }
 export interface Resources {
+  nominalGeneration: number;
+  batteryUsable: number;
+  storage: number;
+  storageNeeded: number;
+  massMarginPercent: number;
+  powerMarginPercent: number;
+  budgetRemaining: number;
+  risk: "low" | "moderate" | "high";
+
   mass: number;
   cost: number;
   generation: number;
@@ -90,6 +101,7 @@ export interface Check {
   id: string;
   label: string;
   status: CheckStatus;
+  blocking?: boolean;
   actual: number;
   target: number;
   unit: string;
@@ -128,6 +140,7 @@ export interface SegmentReport {
   explanation: string;
 }
 export interface Simulation {
+  modelVersion?: number;
   seed: number;
   outcome: Outcome;
   score: number;

@@ -71,7 +71,7 @@ export function VerificationPanel({
               {c.label}
               <span className={`hq-${c.status}`}>
                 {c.status === "pass" ? "✓" : c.status === "close" ? "!" : "×"}{" "}
-                {c.status.toUpperCase()}
+                {c.status === "close" ? "WARNING" : c.status.toUpperCase()}
               </span>
             </strong>
             <p>{c.reason}</p>
@@ -94,8 +94,7 @@ export function VerificationPanel({
         />
       </label>
       <p className="hq-fineprint">
-        Same design + seed = same flight events. CLOSE is not a pass. All checks
-        must pass.
+        Same design + seed = same flight events. Blocking requirements must pass. Warnings marked as accepted operational risks may reduce science return.
       </p>
       <button
         className="button"

@@ -234,3 +234,4 @@ The subsequent owner commission supersedes the original incremental phase schedu
 
 ## Engineering completion commission — 2026-11-14
 Current owner commission: improve in place, no layout changes without design approval. PRD/Architecture and legacy Design are protected. Task 1: audit and static sourced catalogs (v0.1.1). Next: engineering margins/verification, then operations/ground delivery and educational report integration. Track exact evidence and boundaries in Engineering-Audit.md and Memory.md; patch version/test/build/commit after each completed task.
+- Engineering task 2 (0.1.2): explicit EOL/battery assumptions, margins, finite memory, advisory vs blocking verification. Existing layouts retained; next is deterministic operations/data delivery integration.

@@ -128,3 +128,8 @@ Keep a list of every external image or texture, with source and license, for NAS
 - Read current docs, catalogs, pure engine/store and existing game/HQ flow. Reviewed official challenge, NASA mission-segments/CubeSat introductory references and Quicksat power/sizing guides. Recorded exact source scope, access date, limitations and sequential plan in Engineering-Audit.md.
 - Migrated existing literals to static missions/parts/rockets/orbits/setup JSON with stable typed facade and IDs. Per-entry source metadata explicitly states numerical values are NOT supported by conceptual references. Added integrity/starter regression tests; no gameplay/layout behavior changed.
 - Validation recorded with task commit after lint/build/tests; next: finite storage, EOL/battery margins and advisory risks, then operations/ground/science conservation. PRD/Architecture/legacy Design untouched. No new dependencies.
+
+## Engineering task 2 — budgets and verification (0.1.2)
+- Added static documented assumptions, EOL solar supply, usable battery Wh, computer storage, contact-gap memory requirement, normalized mass/power margins, budget remaining and disclosed heuristic risk. Source scope remains conceptual, not numerical certification.
+- Verification distinguishes advisory nonzero data/storage deficits/low margins from blocking constraints. Existing check/resource cards display WARNING and engineering explanations; no layouts/styles changed. Added regression tests and model revision marker.
+- Run lint/build/tests before task commit. Next: time-stepped battery/storage/contact simulation, conservation, science credit from received observations and archived-model preservation. PRD/Architecture/legacy Design untouched.
