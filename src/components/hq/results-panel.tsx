@@ -1,4 +1,6 @@
 "use client";
+import { AnimatedScore } from "@/components/game/animated-score";
+import { OutcomeReveal } from "@/components/game/outcome-reveal";
 import { useState } from "react";
 import { ACHIEVEMENTS } from "@/game/engine/progression";
 import { getMission, PARTS } from "@/game/data/catalog";
@@ -47,9 +49,10 @@ export function ResultsPanel({ onRedesign }: { onRedesign: () => void }) {
               : "FAILED."}
         </em>
       </h2>
+      <OutcomeReveal run={run} />
       <div className="hq-score">
         <strong>
-          {r.score}
+          <AnimatedScore value={r.score} />
           <small>/ 100</small>
         </strong>
         <span>

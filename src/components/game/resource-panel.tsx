@@ -1,4 +1,5 @@
 "use client";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -6,6 +7,7 @@ import { getMission } from "@/game/data/catalog";
 import { resources } from "@/game/engine/resources";
 import type { Design } from "@/game/types";
 export function ResourcePanel({ design }: { design: Design }) {
+  const reduced = useReducedMotion();
   const r = resources(design),
     m = getMission(design.missionId),
     scope = useRef<HTMLDivElement>(null);
@@ -45,6 +47,7 @@ export function ResourcePanel({ design }: { design: Design }) {
   ];
   useGSAP(
     () => {
+      if (reduced) return;
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.from(".game-meter-fill", {
@@ -56,7 +59,7 @@ export function ResourcePanel({ design }: { design: Design }) {
       });
       return () => mm.revert();
     },
-    { scope, dependencies: [design], revertOnUpdate: true },
+    { scope, dependencies: [design, reduced], revertOnUpdate: true },
   );
   return (
     <div className="game-panel resource-panel" ref={scope}>

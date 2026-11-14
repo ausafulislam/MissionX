@@ -1,0 +1,27 @@
+# Connected game experience upgrade — 2026-11-14
+
+## Audit and scope
+Improved the existing implementation in place: current Next.js routes, six flight-deck screens, HQ entry/station flow, catalogs, validated store, pure engine, 3D world, settings, fonts and existing animation utilities. No architecture reset, catalog replacement, or dependency installation. The audit found existing HQ-only oscillator cues and a nearly fixed background drone; the accessible `/play` journey did not share audio. Resource meters and result reports already existed and were extended rather than replaced.
+
+## Implemented
+- Original Web Audio score: five moods (landing, preparation, launch, results, failure), harmonic progressions, bass/pads and arpeggiated accents. Soft attack/release overlaps mood changes. No copyrighted tracks, external downloads, audio assets or autoplay. Scheduler uses short lookahead, bounded source disposal and no note scheduling while music is disabled/muted.
+- Distinct click/hover/selection/install/removal/transition/warning/error/verification/countdown/ignition/liftoff/staging/deployment/completion/outcome signatures. Filtered procedural noise adds ignition bursts, separation transients and sustained engine rumble. Dynamic compression limits combined output. Sources are stopped when playback pauses, stages, fails, or unmounts.
+- Shared `useAudioSystems` across landing, HQ and flight deck; master/mute controls on flight deck, mute on landing, full independent master/music/effects settings retained in HQ. Same local preferences apply across experiences. First interaction unlocks audio; visibility suspends/resumes only an already unlocked context. Route teardown closes context/timer/sources.
+- Shared `useGameFeedback` observes real design/store changes once: mission selection, component install/removal, live over-budget/over-mass/incompatible-component warning messages, positive preflight cue, scene mood transitions and actual evaluated-run progression. Warnings remain textual, not audio-only.
+- Shared `useFlightAudio` synchronizes actual simulation events and countdown/ignition. Skip-to-report plays evaluation feedback rather than all missed events. Both launch views now have guidance/propulsion/payload status indicators and progress. HQ ignition/exhaust lighting starts at T−1; pooled low-poly smoke adds pad atmosphere without extra dependencies.
+- Animated result count-up, distinct success/partial/failure reveals and badges earned by that evaluated flight. Existing engineering explanations, lessons, requirement checks, mentor, redesign and comparison remain intact. Music mood follows the actual result, including failures.
+- Game-only dark-neutral tokens and Space Grotesk/Inter typography per the latest commission. Selection/hover/press states, star drift, certification pulse, meter interpolation, result light sweep and loading treatment are scoped and reduced-motion-safe. Stored reduced-motion preference now works on the accessible flight deck too.
+- Fixed a discovered correctness issue: telemetry and the 2D launch scene no longer regain a successful orbit/power/data after the final evaluation event of a failed launch. Simulation scoring and probability logic are unchanged.
+
+## Validation
+- 35 automated tests, lint, TypeScript and production build passed. New tests cover terminal-failure telemetry, post-deployment telemetry, score/cue distinctions, gesture-only audio creation, mute/effect guards, engine source idempotence and disposal.
+- Production Chromium HQ desktop normal-motion flow and phone landscape/portrait + tablet flows passed: selection → build → verify → launch → result → redesign, profile/settings/progression reload, denied fullscreen/orientation; zero browser errors and no page overflow.
+- Existing `/play` six-screen desktop Moon/tablet Sun/mobile Mars regression passed: all categories, exact engine outcome, mentor, archive/compare, persistence, new-mission retention, guards, corrupt storage and API size/input checks. Zero browser errors or clipped controls.
+- Browser AudioContext instrumentation verified no context before gesture, running context after interaction, distinct scheduled music/SFX frequencies, and master gain reaching zero/restoring after mute/unmute.
+- Screenshots reviewed for menu, assembly, results and phone layout. Final browser smoke/release notes are recorded in Memory.md.
+
+## Honest boundaries
+Audio is original procedural cinematic-style music, not a downloaded orchestral soundtrack. Automated Web Audio graph tests do not constitute human listening approval. The sandbox audio sink did not supply useful live waveform samples, so no acoustic loudness/quality claim is made. Human listening on speakers/headphones, Safari/iOS/Android vendor audio policies, real-device FPS/battery profiling and public-host verification remain release checks. Browser tools/screenshots stay in ignored `.tools`; no tooling dependencies or large generated assets are committed.
+
+### Final smoke checks
+Success, partial and failed seeded results were opened and replayed in Chromium; exact final score text and appropriate outcome reveals passed, and failure stayed non-orbital at evaluation. Landing START → HQ → Settings → accessible flight deck preserved the saved reduced-motion setting. Computed game heading family was the self-hosted Space Grotesk font. Final browser audio graph checks passed again without errors. Preview uses port 3002.

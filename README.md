@@ -109,3 +109,6 @@ The primary entry is `/hq`: device/orientation handling → real module/asset in
 - Development: `bun dev --hostname 0.0.0.0`; production: `bun run build && bun run start --hostname 0.0.0.0`. No new environment variables are needed for HQ.
 
 Implementation/QA evidence and known limitations: [docs/HQ-Implementation.md](docs/HQ-Implementation.md). The 3D launch is schematic, not a physically accurate flight calculation. Hardware performance, human audio listening and Safari/iOS/Android release checks remain necessary.
+
+### Connected game feel
+Both `/hq` and `/play` now share original scene-specific procedural music and action sounds, live engineering feedback, synchronized launch audio/status, animated scores and earned-flight result reveals. The engine remains separate and unchanged apart from a terminal-failure telemetry correction. Current game typography is Space Grotesk/Inter with neutral black surfaces and orange/status feedback. See [docs/Game-Feel-Upgrade.md](docs/Game-Feel-Upgrade.md) for implementation and QA boundaries. No added dependencies or audio downloads are required.

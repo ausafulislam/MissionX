@@ -9,7 +9,7 @@ export function telemetry(design: Design, result: Simulation, time: number) {
   const incident = active.find((e) =>
     ["storm", "outage", "fault"].includes(e.kind),
   );
-  const failed = last?.kind === "failure",
+  const failed = active.some((e) => e.kind === "failure"),
     orbit = t >= 13 && !failed;
   return {
     phase: last,

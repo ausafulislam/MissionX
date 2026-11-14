@@ -5,6 +5,8 @@ import { getMission, getOrbit, getRocket } from "@/game/data/catalog";
 import { useMissionStore } from "@/game/store/mission-store";
 import { ScreenHeading } from "./game-shell";
 import { CheckList, Status } from "./check-list";
+import { AnimatedScore } from "./animated-score";
+import { OutcomeReveal } from "./outcome-reveal";
 import { MentorPanel } from "./mentor-panel";
 export function ResultScreen() {
   const s = useMissionStore(),
@@ -28,6 +30,7 @@ export function ResultScreen() {
         accent="A DISCOVERY."
         description="Behind every result is an engineering decision. Follow your science from launch to the people who use it."
       />
+      <OutcomeReveal run={run} />
       <div className={`result-hero result-${r.outcome} game-panel`}>
         <div className="score-dial">
           <svg viewBox="0 0 200 200" aria-hidden="true">
@@ -51,7 +54,7 @@ export function ResultScreen() {
             />
           </svg>
           <strong>
-            {r.score}
+            <AnimatedScore value={r.score} />
             <small>/ 100</small>
           </strong>
           <span>MISSION SCORE</span>

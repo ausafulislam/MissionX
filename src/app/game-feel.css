@@ -1,0 +1,648 @@
+/* Game-only polish; the established marketing composition stays intact. */
+:is(.game-app, .hq-experience) {
+  --color-bg: #0a0a0c;
+  --color-surface: #131316;
+  --color-border: #26262b;
+  --color-muted: #8a8a93;
+  --color-success: #3ddc84;
+  --color-warning: #ffb020;
+  --color-danger: #ff4d4f;
+  --color-accent: #ff6a2b;
+  --color-text: #f5f5f2;
+  color: #f5f5f2;
+}
+:is(.game-app, .hq-experience) :is(h1, h2) {
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+}
+.game-app {
+  background:
+    radial-gradient(ellipse at 80% 0, #ff6a2b0b, transparent 50%), #0a0a0c;
+  position: relative;
+  isolation: isolate;
+}
+.game-app:before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(#f5f5f244 0.65px, transparent 1px),
+    radial-gradient(#ffb58e44 0.65px, transparent 1px);
+  background-size:
+    173px 157px,
+    251px 239px;
+  background-position:
+    0 0,
+    54px 31px;
+  animation: mission-star-drift 80s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+}
+.game-app :is(.game-panel, .part-card, .mission-card) {
+  background: linear-gradient(135deg, #1c1c2199, #131316f2);
+  border-color: #26262b;
+  box-shadow: 0 15px 50px #0002;
+}
+.game-app :is(.part-card, .mission-card) {
+  transition:
+    transform 0.22s,
+    border-color 0.22s,
+    box-shadow 0.22s;
+}
+.game-app :is(.part-card, .mission-card):hover {
+  transform: translateY(-3px);
+  border-color: #ff6a2b80;
+  box-shadow: 0 8px 30px #ff6a2b0c;
+}
+.game-app :is(.installed, .mission-card[aria-pressed="true"]) {
+  border-color: #ff6a2b;
+  background: linear-gradient(125deg, #ff6a2b16, #131316 65%);
+}
+:is(.game-app, .hq-experience) button:not(:disabled) {
+  transition:
+    background-color 0.18s,
+    border-color 0.18s,
+    box-shadow 0.18s,
+    transform 0.18s;
+}
+:is(.game-app, .hq-experience) button:not(:disabled):active {
+  transform: translateY(1px);
+}
+:is(.game-app, .hq-experience) :is(button, a, input, select):focus-visible {
+  outline: 2px solid #ff9b70;
+  outline-offset: 4px;
+}
+.game-app .game-heading h1 {
+  font-size: clamp(34px, 4vw, 63px);
+  line-height: 1.04;
+}
+.game-app .game-meter-fill {
+  transition:
+    width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.3s;
+  box-shadow: 0 0 15px #ff6a2b22;
+}
+.game-app .resource-alert .game-meter-fill {
+  background: #ffb020;
+  box-shadow: 0 0 15px #ffb02033;
+}
+.game-app .readiness-banner.ready,
+.hq-experience .hq-readiness.ready {
+  animation: certification-reveal 0.7s ease-out;
+  border-color: #3ddc8466;
+  background: linear-gradient(90deg, #3ddc8413, transparent);
+}
+.game-app .game-progress .active {
+  box-shadow: inset 0 -2px #ff6a2b;
+  background: linear-gradient(0deg, #ff6a2b12, transparent);
+}
+.game-loading:after {
+  content: "";
+  display: block;
+  width: 240px;
+  max-width: 80%;
+  height: 3px;
+  margin-top: 30px;
+  background: linear-gradient(90deg, transparent, #ff6a2b, transparent);
+  background-size: 200% 100%;
+  animation: mission-loading 1.5s linear infinite;
+}
+.game-audio-toggle {
+  min-height: 40px;
+  min-width: 65px;
+  background: #131316;
+  border: 1px solid #34343b;
+  color: #f5f5f2;
+  font:
+    10px var(--font-heading),
+    sans-serif;
+  padding: 8px;
+}
+.game-volume {
+  font:
+    7px var(--font-mono),
+    monospace;
+  color: #8a8a93;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 90px;
+}
+.game-volume input {
+  width: 85px;
+  accent-color: #ff6a2b;
+}
+.game-header {
+  gap: 20px;
+}
+.game-flight-id {
+  margin-right: auto;
+}
+.game-feedback {
+  position: fixed;
+  z-index: 80;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  width: max-content;
+  border: 1px solid #ff6a2b77;
+  padding: 16px 22px;
+  background: #131316f5;
+  box-shadow: 0 10px 50px #0008;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #f5f5f2;
+  pointer-events: none;
+  animation: feedback-in 0.25s ease-out;
+}
+.outcome-reveal {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 24px;
+  margin: 20px 0 28px;
+  border: 1px solid #3ddc8455;
+  background:
+    radial-gradient(ellipse at left, #3ddc8413, transparent 75%), #131316;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  animation: outcome-arrival 0.8s ease-out;
+}
+.outcome-reveal:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    #f5f5f20d 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+  animation: outcome-sweep 1.6s ease-out 0.2s forwards;
+  pointer-events: none;
+}
+.outcome-emblem {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  color: #3ddc84;
+  font-size: 40px;
+  flex-shrink: 0;
+  box-shadow: 0 0 30px #3ddc8415;
+}
+.outcome-reveal .technical {
+  font:
+    9px/1.8 var(--font-mono),
+    monospace;
+  color: #3ddc84;
+  letter-spacing: 0.07em;
+}
+.outcome-reveal p {
+  font-size: 12px;
+  color: #aba9b3;
+  line-height: 1.8;
+  margin: 10px 0;
+}
+.outcome-partial {
+  border-color: #ffb02066;
+  background:
+    radial-gradient(ellipse at left, #ffb02012, transparent 75%), #131316;
+}
+.outcome-partial :is(.technical, .outcome-emblem) {
+  color: #ffb020;
+}
+.outcome-failed {
+  border-color: #ff4d4f66;
+  background:
+    radial-gradient(ellipse at left, #ff4d4f12, transparent 75%), #131316;
+}
+.outcome-failed :is(.technical, .outcome-emblem) {
+  color: #ff7c7d;
+}
+.flight-achievements {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.flight-achievements span {
+  font:
+    8px/1.8 var(--font-mono),
+    monospace;
+  color: #e6bf9a;
+  border: 1px solid #b48b5644;
+  padding: 6px 9px;
+  background: #ff6a2b08;
+}
+.hq-experience .outcome-reveal {
+  padding: 16px;
+  display: block;
+  margin: 18px 0;
+}
+.hq-experience .outcome-emblem {
+  width: 45px;
+  height: 45px;
+  font-size: 27px;
+  margin-bottom: 15px;
+}
+.hq-experience .outcome-reveal .technical {
+  font-size: 8px;
+}
+.hq-experience .outcome-reveal p {
+  font-size: 11px;
+}
+.hq-experience .flight-achievements span {
+  font-size: 7px;
+}
+.animated-score {
+  font: inherit !important;
+  color: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  display: inline !important;
+}
+.mission-control-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  position: relative;
+  padding: 18px 15px;
+  background: #0a0a0cdd;
+  border: 1px solid #42424a77;
+  border-radius: 3px;
+  margin: 20px 0;
+  color: #f5f5f2;
+}
+.mission-control-strip > div:not(.control-flight-progress) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.mission-control-strip i {
+  display: block;
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  background: #3ddc84;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #3ddc8466;
+}
+.mission-control-strip span {
+  font:
+    6px/1.8 var(--font-mono),
+    monospace;
+  letter-spacing: 0.03em;
+  color: #8a8a93;
+}
+.mission-control-strip strong {
+  display: block;
+  font-size: 7px;
+  color: #c8d1ce;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+.control-abort i {
+  background: #ff4d4f;
+  box-shadow: none;
+}
+.control-abort strong {
+  color: #ff7c7d;
+}
+.control-flight-progress {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  left: 0;
+  right: 0;
+  background: #26262b;
+}
+.control-flight-progress > span {
+  display: block;
+  height: 100%;
+  background: #ff6a2b;
+  transition: width 0.15s linear;
+}
+.flight-scene > .mission-control-strip {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 40px;
+  z-index: 5;
+  width: max-content;
+  max-width: calc(100% - 40px);
+  gap: 25px;
+  background: #0a0a0ca0;
+}
+.flight-scene .countdown-number {
+  font-family: var(--font-heading), sans-serif;
+  text-shadow: 0 0 80px #ff6a2b66;
+}
+.flight-scene .flight-stars {
+  animation: mission-star-drift 70s linear infinite;
+}
+.flight-scene.flight-failed .flight-stars {
+  animation-play-state: paused;
+}
+.timeline-event.current .timeline-node {
+  box-shadow: 0 0 20px #ff6a2b33;
+}
+.result-hero.result-success {
+  border-color: #3ddc8477;
+}
+.result-hero.result-failed {
+  border-color: #ff4d4f77;
+}
+.score-dial svg {
+  animation: score-orbit-reveal 1.2s ease-out;
+}
+.hq-experience :is(.hq-side-panel, .hq-modal) {
+  background: linear-gradient(125deg, #1b1b20f0, #131316f5);
+  border-color: #45454d80;
+}
+.hq-experience :is(.hq-side-panel-content h2, .hq-modal h2) {
+  font-size: 35px;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+}
+.hq-experience .hq-main-menu h1 {
+  font-size: clamp(44px, 5vw, 72px);
+  line-height: 1.04;
+}
+.hq-experience .identity-card h1 {
+  font-size: 44px;
+  line-height: 1.08;
+}
+.hq-experience .launch-cinematic-title h1 {
+  font-size: clamp(38px, 4.8vw, 70px);
+  line-height: 1.04;
+}
+.hq-experience .hq-entry h1 {
+  font-size: clamp(34px, 4.5vw, 64px);
+  line-height: 1.06;
+}
+.hq-experience .hq-command-caption h1 {
+  font-size: 45px;
+  line-height: 1.08;
+}
+.hq-component-list article.equipped {
+  animation: component-lock 0.45s ease-out;
+}
+.hq-resource-strip .resource-over {
+  box-shadow: inset 0 2px #ffb020;
+  background: #ffb02008;
+}
+.hq-component-list article:hover {
+  border-color: #ff9e7088;
+}
+.hq-resource-bar {
+  height: 2px;
+  background: #393941;
+  display: block;
+  margin: 10px 0 8px;
+  overflow: hidden;
+}
+.hq-resource-bar > i {
+  height: 100%;
+  display: block;
+  background: #ff6a2b;
+  transition: width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.resource-over .hq-resource-bar > i {
+  background: #ffb020;
+}
+.landing-audio-toggle {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 45;
+  border: 1px solid #7d7d8544;
+  background: #131316dd;
+  backdrop-filter: blur(10px);
+  min-height: 40px;
+  padding: 10px 15px;
+  font:
+    9px var(--font-heading),
+    sans-serif;
+  color: #d5d5da;
+}
+@keyframes mission-star-drift {
+  to {
+    background-position:
+      120px -160px,
+      174px -129px;
+  }
+}
+@keyframes certification-reveal {
+  from {
+    box-shadow: inset 0 0 70px #3ddc8433;
+  }
+  to {
+    box-shadow: inset 0 0 0 transparent;
+  }
+}
+@keyframes component-lock {
+  from {
+    box-shadow: inset 0 0 40px #ff6a2b33;
+  }
+  to {
+    box-shadow: inset 0 0 0 transparent;
+  }
+}
+@keyframes feedback-in {
+  from {
+    opacity: 0;
+    margin-bottom: -6px;
+  }
+  to {
+    opacity: 1;
+    margin-bottom: 0;
+  }
+}
+@keyframes mission-loading {
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes outcome-arrival {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes outcome-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes score-orbit-reveal {
+  from {
+    opacity: 0;
+    transform: rotate(-25deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0);
+  }
+}
+@media (max-width: 750px) {
+  .game-header {
+    gap: 10px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 100px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .game-volume {
+    display: none;
+  }
+  .game-audio-toggle {
+    font-size: 8px;
+    min-width: 50px;
+  }
+  .game-flight-id {
+    flex: 1;
+  }
+  .game-app .game-heading h1 {
+    font-size: 36px;
+  }
+  .outcome-reveal {
+    padding: 20px;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  .outcome-emblem {
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+  }
+  .outcome-reveal .technical {
+    font-size: 8px;
+  }
+  .outcome-reveal p {
+    font-size: 11px;
+  }
+  .hq-experience .hq-main-menu h1 {
+    font-size: 45px;
+  }
+  .hq-experience .hq-command-caption h1 {
+    font-size: 34px;
+  }
+  .hq-experience .identity-card h1 {
+    font-size: 35px;
+  }
+  .hq-experience :is(.hq-side-panel-content h2, .hq-modal h2) {
+    font-size: 30px;
+  }
+  .flight-scene > .mission-control-strip {
+    top: 35px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: none;
+    gap: 8px;
+    padding: 10px;
+  }
+  .mission-control-strip {
+    padding: 12px 8px;
+    gap: 6px;
+  }
+  .mission-control-strip strong {
+    font-size: 6px;
+  }
+  .mission-control-strip span {
+    font-size: 5px;
+  }
+  .mission-control-strip i {
+    width: 4px;
+    height: 4px;
+  }
+  .hq-resource-bar {
+    margin-top: 8px;
+  }
+}
+@media (max-height: 550px) and (orientation: landscape) {
+  .hq-experience .hq-main-menu h1 {
+    font-size: 40px;
+  }
+  .hq-experience .identity-card h1 {
+    font-size: 30px;
+  }
+  .hq-experience .launch-cinematic-title h1 {
+    font-size: 38px;
+  }
+  .hq-experience :is(.hq-side-panel-content h2, .hq-modal h2) {
+    font-size: 27px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-app *,
+  .game-app:before,
+  .outcome-reveal:after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+.hq-reduced .outcome-reveal:after {
+  animation: none !important;
+}
+/* Keep the game typography/tokens authoritative over route-local legacy rules. */
+.hq-experience.hq-experience :is(h1, h2),
+.game-app.game-app :is(h1, h2) {
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+}
+.game-app.game-app {
+  background:
+    radial-gradient(ellipse at 80% 0, #ff6a2b0b, transparent 50%), #0a0a0c;
+}
+.game-app .mission-choice {
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.2s;
+}
+.game-app .mission-choice:hover {
+  transform: translateX(3px);
+  border-color: #ff6a2b99;
+}
+.game-app .mission-choice.selected {
+  background: linear-gradient(90deg, #ff6a2b16, #131316);
+  border-color: #ff6a2b;
+}
+.game-app .game-panel.game-panel {
+  border-color: #26262b;
+  background: linear-gradient(135deg, #1c1c21d9, #131316f2);
+}
+.game-reduced *,
+.game-reduced:before,
+.game-reduced *:after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+.game-app .result-hero.result-success.game-panel {
+  border-color: #3ddc8477;
+}
+.game-app .result-hero.result-partial.game-panel {
+  border-color: #ffb02077;
+}
+.game-app .result-hero.result-failed.game-panel {
+  border-color: #ff4d4f77;
+}

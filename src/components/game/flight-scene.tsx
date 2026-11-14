@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import type { Design, Simulation } from "@/game/types";
 import { telemetry } from "@/game/engine/telemetry";
 import { getRocket } from "@/game/data/catalog";
+import { FlightStatus } from "./flight-status";
 import { Destination } from "./destination";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 export function FlightScene({
@@ -18,8 +19,8 @@ export function FlightScene({
 }) {
   const scope = useRef<HTMLDivElement>(null),
     t = telemetry(design, result, time),
-    deployed = time >= 13 && t.phase?.kind !== "failure",
-    failed = t.phase?.kind === "failure";
+    failed = result.events.some((e) => e.kind === "failure" && e.at <= time),
+    deployed = time >= 13 && !failed;
   const move = useRef<
     | ((
         y: number,
@@ -80,6 +81,7 @@ export function FlightScene({
       ref={scope}
     >
       <div className="flight-stars" />
+      <FlightStatus result={result} time={time} />
       {deployed ? (
         <>
           <Destination id={design.missionId} className="flight-planet" />
@@ -157,7 +159,7 @@ export function FlightScene({
                   d="M329 398L314 425V439L337 427M371 398L386 425V439L363 427"
                   fill="#5f7188"
                 />
-                {time >= 3 && !failed && (
+                {time >= 2 && time < 8 && !failed && (
                   <path d="M336 427Q350 480 364 427" fill="#ff6a2b" />
                 )}
               </g>

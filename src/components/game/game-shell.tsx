@@ -6,6 +6,11 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Logo } from "@/components/layout/site-header";
 import { useMissionStore } from "@/game/store/mission-store";
+import { useAudioSystems } from "@/components/hq/use-hq-systems";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useGameFeedback } from "@/hooks/use-game-feedback";
+import { useCommander } from "@/game/store/commander-store";
+import { missionAudio } from "@/game/audio/audio-manager";
 import { getMission } from "@/game/data/catalog";
 gsap.registerPlugin(useGSAP);
 const steps = ["goal", "build", "verify", "launch", "result", "debrief"];
@@ -14,6 +19,7 @@ export function GameShell({ children }: { children: ReactNode }) {
     path = usePathname(),
     router = useRouter(),
     scope = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
   const step = path.split("/").pop() ?? "goal",
     index = steps.indexOf(step),
     m = getMission(state.design.missionId);
@@ -45,7 +51,7 @@ export function GameShell({ children }: { children: ReactNode }) {
       const screens = Array.from(
         scope.current?.querySelectorAll<HTMLElement>(".game-screen") ?? [],
       ).filter((el) => el.getClientRects().length > 0);
-      if (!screens.length) return;
+      if (!screens.length || reduced) return;
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         gsap.from(screens, {
@@ -59,10 +65,17 @@ export function GameShell({ children }: { children: ReactNode }) {
     },
     {
       scope,
-      dependencies: [path, state.hydrated, redirect],
+      dependencies: [path, state.hydrated, redirect, reduced],
       revertOnUpdate: true,
     },
   );
+  useAudioSystems();
+  const feedback = useGameFeedback(step);
+  const commander = useCommander();
+  const hydrateCommander = commander.hydrate;
+  useEffect(() => {
+    hydrateCommander();
+  }, [hydrateCommander]);
   const allowed = (target: string) =>
     target === "goal" ||
     target === "debrief" ||
@@ -70,7 +83,18 @@ export function GameShell({ children }: { children: ReactNode }) {
     (!!state.run && target === "launch") ||
     (state.complete && target === "result");
   return (
-    <div className="game-app" ref={scope}>
+    <div
+      className={`game-app ${reduced ? "game-reduced" : ""}`}
+      ref={scope}
+      onPointerOver={(e) => {
+        if ((e.target as HTMLElement).closest("button:not(:disabled),a"))
+          missionAudio.play("hover");
+      }}
+      onClick={(e) => {
+        if ((e.target as HTMLElement).closest("button:not(:disabled),a"))
+          missionAudio.play("click");
+      }}
+    >
       <a className="skip-link" href="#game-main">
         Skip to mission workspace
       </a>
@@ -87,6 +111,31 @@ export function GameShell({ children }: { children: ReactNode }) {
             ● {state.storageWarning ? "SESSION ONLY" : "LOCAL AUTO-SAVE"}
           </span>
         </div>
+        <button
+          className="game-audio-toggle"
+          aria-label={
+            commander.preferences.muted ? "Unmute audio" : "Mute audio"
+          }
+          onClick={() => {
+            void missionAudio.unlock();
+            commander.update({ muted: !commander.preferences.muted });
+          }}
+        >
+          {commander.preferences.muted ? "♪ OFF" : "♪ ON"}
+        </button>
+        <label className="game-volume">
+          VOLUME
+          <input
+            aria-label="Master volume"
+            type="range"
+            min="0"
+            max="100"
+            value={commander.preferences.master * 100}
+            onChange={(e) =>
+              commander.update({ master: Number(e.target.value) / 100 })
+            }
+          />
+        </label>
         <Link href="/" className="game-exit">
           EXIT TO EARTH ↗
         </Link>
@@ -136,6 +185,11 @@ export function GameShell({ children }: { children: ReactNode }) {
           children
         )}
       </main>
+      {feedback && (
+        <div className="game-feedback" role="status">
+          ✳ {feedback}
+        </div>
+      )}
       <footer className="game-footer">
         <span>TEAM NASA WARRIORS · SPACE APPS 2026</span>
         <span>SIMPLIFIED EDUCATIONAL ESTIMATES · NOT FLIGHT-READY</span>

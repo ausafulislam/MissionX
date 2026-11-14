@@ -27,7 +27,7 @@ export function useDevice() {
   }, []);
   return { device, fullscreen };
 }
-export function useAudioSystems() {
+export function useAudioSystems(immersion = false) {
   const p = useCommander((s) => s.preferences);
   useEffect(() => {
     missionAudio.configure(p);
@@ -45,12 +45,14 @@ export function useAudioSystems() {
       window.removeEventListener("pointerdown", gesture);
       window.removeEventListener("keydown", gesture);
       missionAudio.dispose();
-      try {
-        screen.orientation?.unlock?.();
-      } catch {}
-      if (document.fullscreenElement)
-        void document.exitFullscreen().catch(() => {});
+      if (immersion) {
+        try {
+          screen.orientation?.unlock?.();
+        } catch {}
+        if (document.fullscreenElement)
+          void document.exitFullscreen().catch(() => {});
+      }
       document.body.style.cursor = "";
     };
-  }, []);
+  }, [immersion]);
 }

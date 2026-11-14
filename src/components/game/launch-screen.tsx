@@ -5,6 +5,7 @@ import { useMissionStore } from "@/game/store/mission-store";
 import { telemetry } from "@/game/engine/telemetry";
 import { getMission } from "@/game/data/catalog";
 import { ScreenHeading } from "./game-shell";
+import { useFlightAudio } from "@/hooks/use-flight-audio";
 import { FlightScene } from "./flight-scene";
 export function LaunchScreen() {
   const id = useMissionStore((s) => s.run?.id);
@@ -29,6 +30,7 @@ function LaunchPlayback() {
   useEffect(() => {
     if (done && !s.complete) finish();
   }, [done, s.complete, finish]);
+  useFlightAudio(run, time, playing);
   if (!run) return null;
   const result = run.result,
     t = telemetry(run.design, result, time),

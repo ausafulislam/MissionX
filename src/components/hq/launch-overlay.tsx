@@ -1,5 +1,6 @@
 "use client";
 import type { SavedRun } from "@/game/types";
+import { FlightStatus } from "@/components/game/flight-status";
 import { telemetry } from "@/game/engine/telemetry";
 export function LaunchOverlay({
   run,
@@ -58,6 +59,7 @@ export function LaunchOverlay({
         <span className="eyebrow">FLIGHT EVENT / {Math.floor(time)}s</span>
         <h2 aria-live="polite">{t.phase?.label}</h2>
         <p>{t.phase?.description}</p>
+        <FlightStatus result={run.result} time={time} />
         <ol>
           {run.result.events.map((e) => (
             <li className={time >= e.at ? "reached" : ""} key={e.at}>

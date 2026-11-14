@@ -24,10 +24,17 @@ export function ResourceStrip() {
           `${r.data} / ${r.downlink.toFixed(0)} GB/d`,
           r.data <= r.downlink,
         ],
-      ].map(([name, value, ok]) => (
+      ].map(([name, value, ok], index) => (
         <div key={String(name)} className={ok ? "" : "resource-over"}>
           <small>{name}</small>
           <strong>{value}</strong>
+          <div className="hq-resource-bar" aria-hidden="true">
+            <i
+              style={{
+                width: `${Math.min(100, Math.max(0, [r.mass / m.massLimit, r.cost / m.budget, r.generation ? r.consumption / r.generation : r.consumption ? 1 : 0, r.downlink ? r.data / r.downlink : r.data ? 1 : 0][index]) * 100)}%`,
+              }}
+            />
+          </div>
           <span>{ok ? "✓ IN LIMIT" : "! REVIEW"}</span>
         </div>
       ))}
@@ -52,7 +59,7 @@ export function EngineeringPanel({
   const toggle = (id: string) => {
     const installed = s.design.partIds.includes(id);
     s.toggle(id);
-    missionAudio.play(installed ? "remove" : "install");
+
     notify(
       `${PARTS.find((p) => p.id === id)?.name} ${installed ? "removed" : "installed"}. Resource model updated.`,
     );
@@ -75,7 +82,7 @@ export function EngineeringPanel({
         className="hq-outlined"
         onClick={() => {
           s.starter();
-          missionAudio.play("install");
+
           notify(
             "Verified baseline loaded. Every component is now installed on your workbench.",
           );

@@ -39,7 +39,7 @@ function Rocket({
       stage.current.rotation.z = time >= 8 ? (time - 8) * 0.12 : 0;
     }
     if (flame.current) {
-      flame.current.visible = time >= 3 && !failure;
+      flame.current.visible = time >= 2 && time < 8 && !failure;
       flame.current.scale.y = reduced
         ? 1
         : 1 + Math.sin(clock.elapsedTime * 35) * 0.12;
@@ -102,6 +102,48 @@ function Rocket({
         <meshBasicMaterial color="#ff6a2b" />
       </mesh>
     </group>
+  );
+}
+function ExhaustCloud({
+  time,
+  low,
+  reduced,
+}: {
+  time: number;
+  low: boolean;
+  reduced: boolean;
+}) {
+  const ref = useRef<THREE.InstancedMesh>(null);
+  const dummy = new THREE.Object3D();
+  useFrame(() => {
+    if (!ref.current) return;
+    for (let i = 0; i < (low ? 10 : 22); i++) {
+      const phase = (i * 0.37 + Math.max(0, time - 2) * 0.8) % 2.5,
+        angle = i * 2.4;
+      dummy.position.set(
+        Math.cos(angle) * (phase * 1.8 + 0.4),
+        0.1 + phase * 0.25,
+        Math.sin(angle) * (phase * 1.8 + 0.4),
+      );
+      dummy.scale.setScalar(
+        time >= 2 && time < 8 ? (reduced ? 0.4 : (1 - phase / 3) * 0.6) : 0,
+      );
+      dummy.updateMatrix();
+      ref.current.setMatrixAt(i, dummy.matrix);
+    }
+    ref.current.instanceMatrix.needsUpdate = true;
+  });
+  return (
+    <instancedMesh ref={ref} args={[undefined, undefined, low ? 10 : 22]}>
+      <sphereGeometry args={[1, 8, 6]} />
+      <meshStandardMaterial
+        color="#ada49c"
+        transparent
+        opacity={0.17}
+        depthWrite={false}
+        roughness={1}
+      />
+    </instancedMesh>
   );
 }
 export function LaunchWorld({
@@ -179,6 +221,7 @@ export function LaunchWorld({
             />
           </mesh>
           <Rocket time={time} run={run} reduced={reduced} />
+          {!failed && <ExhaustCloud time={time} low={low} reduced={reduced} />}
           <group position={[-2, 0, -1]}>
             {[0, 1, 2, 3, 4, 5, 6].map((y) => (
               <group key={y} position={[0, y * 1.1, 0]}>
@@ -217,7 +260,7 @@ export function LaunchWorld({
               />
             </mesh>
           ))}
-          {time >= 3 && !failed && (
+          {time >= 2 && time < 8 && !failed && (
             <pointLight
               position={[0, Math.min(12, (time - 3) * 1.15), 0]}
               color="#ff9145"

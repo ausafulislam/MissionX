@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useCommander } from "@/game/store/commander-store";
 import { useMissionStore } from "@/game/store/mission-store";
-import { missionAudio, type Sound } from "@/game/audio/audio-manager";
+import { missionAudio } from "@/game/audio/audio-manager";
 import { verify } from "@/game/engine/validation";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import type { MissionId } from "@/game/types";
@@ -20,6 +20,8 @@ import {
   LoadingScreen,
   OrientationScreen,
 } from "./entry-screens";
+import { useGameFeedback } from "@/hooks/use-game-feedback";
+import { useFlightAudio } from "@/hooks/use-flight-audio";
 import { useAudioSystems, useDevice } from "./use-hq-systems";
 import { FocusGuard } from "./focus-guard";
 import { WorldBoundary } from "./world-boundary";
@@ -70,7 +72,7 @@ export function HQExperience() {
         (device.kind !== "desktop" || device.compact)),
     eventRef = useRef(""),
     noticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useAudioSystems();
+  useAudioSystems(true);
   const canInitialize = !!device && !orientation;
   const mark = useCallback(
     (task: string) =>
@@ -144,8 +146,7 @@ export function HQExperience() {
       setCollapsed(false);
       setView((v) => v + 1);
       window.history.pushState({ station: next }, "", `#${next}`);
-      missionAudio.play("transition");
-      missionAudio.scene(next);
+
       if (next !== "launch") setPlaying(false);
     },
     [notify],
@@ -209,26 +210,8 @@ export function HQExperience() {
   useEffect(() => {
     if (done && !game.complete) finish();
   }, [done, game.complete, finish]);
-  useEffect(() => {
-    if (!run || station !== "launch") return;
-    const e = run.result.events.filter((e) => e.at <= time).at(-1);
-    if (!e) return;
-    const id = `${run.id}:${e.at}`;
-    if (eventRef.current === id) return;
-    eventRef.current = id;
-    const sound: Partial<Record<typeof e.kind, Sound>> = {
-      countdown: "notification",
-      liftoff: "liftoff",
-      separation: "separation",
-      deployment: "deployment",
-      storm: "error",
-      outage: "error",
-      fault: "error",
-      failure: "failure",
-      complete: run.result.outcome === "failed" ? "failure" : "success",
-    };
-    if (sound[e.kind]) missionAudio.play(sound[e.kind]!);
-  }, [time, run, station]);
+  useFlightAudio(run, time, playing, station === "launch");
+  const feedback = useGameFeedback(active ? station : "landing");
   useGSAP(
     () => {
       if (reduced) return;
@@ -256,7 +239,7 @@ export function HQExperience() {
       return;
     }
     game.choose(id);
-    missionAudio.play("click");
+    missionAudio.play("select");
   };
   const launch = (seed: number) => {
     if (!game.launch(seed)) {
@@ -579,10 +562,10 @@ export function HQExperience() {
               </section>
             </div>
           )}
-          {notice && (
+          {(notice || feedback) && (
             <div className="hq-notification" role="status">
               <span>✳</span>
-              {notice}
+              {feedback || notice}
             </div>
           )}
         </>
