@@ -1,6 +1,6 @@
 # MissionX Design System (Design.md)
 
-This file is the source of truth for visual language and tokens. Do not edit it. Page layouts and screen-by-screen design instructions are given by the owner at runtime.
+Historical design baseline, preserved in full below. The owner authorized a new cinematic landing system on 2026-11-14: see [`../design.md`](../design.md) for current colors, four-font typography, layouts, responsive behavior and motion. Its values supersede conflicting values in this historical document.
 
 ---
 
