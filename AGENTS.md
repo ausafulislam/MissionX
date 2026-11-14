@@ -34,3 +34,47 @@ Owner authorizes the 3D-first `/hq` experience and multiple procedural scenes, s
 
 ## Game-feel upgrade — 2026-11-14 (latest owner refinement)
 Improve the existing HQ and accessible flight deck, never rebuild them. Current game typography/tokens are Space Grotesk headings, Inter body, #0A0A0C/#131316/#26262B neutral UI with established orange/status colors (see design.md). Reuse `useGameFeedback`, `useFlightAudio`, shared outcome/score/flight-status components and the original procedural audio score; do not duplicate event timing or resource rules in screens. Keep engine terminal failure telemetry terminal through evaluation. Tests now include audio lifecycle/signatures and telemetry regression. Audio context creation must remain gesture-only, sources bounded/disposed, and stored reduced-motion respected as well as OS preference.
+
+## Research, Sources and Engineering Accuracy Policy
+
+This mandatory policy applies to every future feature, change, calculation, simulation, component, mission, parameter, scientific explanation and engineering rule.
+
+1. Research before implementation.
+2. Prefer official primary sources from NASA, JPL, ESA, CSA or other relevant space agencies.
+3. Use academic papers and reputable technical publications when primary sources are insufficient.
+4. Record the actual provider and original URL.
+5. Record the access date.
+6. Identify the exact section, page or technical concept used.
+7. Explain why the source is relevant.
+8. Identify exactly where the information is used in MissionX.
+9. Document adaptations, assumptions and simplifications.
+10. Never invent scientific facts, engineering parameters, formulas, source links or provider names.
+11. Never describe a simplified educational model as professional engineering simulation.
+12. Never claim NASA endorsement, certification, partnership or affiliation.
+13. Respect third-party terms, licences and data-use conditions.
+14. If a source is unavailable, do not pretend it was verified.
+15. If reliable evidence is absent, explicitly label an estimate, explain its reason and record unresolved original rationale honestly. An estimate label is not permission to pick arbitrary numbers.
+16. Update docs/RESOURCES.md and docs/ENGINEERING_REFERENCES.md when sources or engineering rules change.
+17. Update relevant catalog source metadata; until the approved metadata migration, record traceability in the registers and do not claim runtime IDs exist.
+18. Remove or update obsolete references when implementation changes; preserve clearly labeled historical evidence.
+19. No live API/external-service dependency without approval.
+20. Every new feature must trace from implementation to research evidence or an explicit educational assumption.
+
+### Mandatory Future Change Workflow
+
+1. **Research:** identify sources needed for the proposed change.
+2. **Source verification:** open original resources; record what was actually reviewed and what remains inaccessible.
+3. **Implementation plan:** identify files, calculations, components and systems that will change.
+4. **Approval:** wait when project rules require it. New layouts and protected-document edits still require their own approval; docs/Design.md remains read-only.
+5. **Implementation:** make the smallest necessary changes; preserve working features and static data architecture.
+6. **Documentation:** update source register, engineering references, catalog provenance and relevant project documentation.
+7. **Testing:** validate behavior and that the cited source supports the actual claim. Run bun run lint, bun test and bun run build; check complete flow, success/partial/failure, compatibility, source-ID resolution, formulas, links and unsupported claims as applicable. Report unavailable checks honestly; never confuse retrieval with technical validation.
+8. **Change record:** update CHANGELOG.md, docs/Memory.md and docs/Phases.md; increment package.json patch; update README only for user-facing changes.
+
+A feature is not complete until implementation and research documentation are both complete. Use Bun only; no new dependencies without approval. Source links do not imply endorsement or permission to copy assets/code/text.
+
+### Independence and third-party data
+
+MissionX is an independent educational project created by Team NASA WARRIORS for the NASA International Space Apps Challenge 2026. It is not affiliated with, endorsed by, or sponsored by NASA or any other space agency. NASA is not responsible for information contained on non-U.S. Government websites.
+
+Preserve the existing user-facing disclaimer. Distinguish NASA, CSA, academic, commercial and community providers. Review item-specific rights before reuse; do not copy without permission or compatible terms. Full disclaimer in the user-facing credits area is pending the separately approved UI task, not implemented by this policy update.

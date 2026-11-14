@@ -239,3 +239,6 @@ Current owner commission: improve in place, no layout changes without design app
 
 ## Engineering completion task 4 — v0.1.4
 Catalog breadth, payload/pointing compatibility, explicit energy ledger, and regression checks complete. 48 unit tests/lint/build pass; Chromium desktop/tablet/phone mission flows and desktop HQ flow pass. Result→redesign route guard fixed. Operations controls, difficulty selection and comparative-history presentation remain pending owner layout direction; automatic operations are implemented, not interactive ground command gameplay.
+
+## Resource documentation task 1 — v0.1.5 (approved)
+Source register and engineering reference inventory created; permanent source policy appended to AGENTS.md/Rules.md; stale engineering summary consolidated. Documentation-only: source IDs currently resolve within the register, not runtime catalogs. No game/UI behavior changed. Next approval: migrate catalog metadata and add source-resolution/coverage tests. User-facing source disclosures remain a separate approval scope.
