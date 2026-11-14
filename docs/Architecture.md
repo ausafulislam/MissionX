@@ -226,3 +226,20 @@ Provide `.env.example` with empty values. Never commit `.env.local`.
 - Vercel project connected to the repository, preview on every push, production from main.
 - Environment variables set in Vercel.
 - Final check: open the production URL in a private window and play one full mission.
+
+
+## Implemented application — 2026-11-14
+The preceding architecture is the original plan. Current code adapts it without duplicating folders:
+- `src/game/types.ts`: shared typed models.
+- `src/game/data/catalog.ts`, `events.ts`: typed catalogs (TypeScript instead of separate JSON for type safety).
+- `src/game/engine/resources.ts`, `validation.ts`, `simulation.ts`, `telemetry.ts`, `mentor.ts`, `schema.ts`: pure, deterministic logic and trust-boundary validation. Scoring/reporting currently live together in simulation.ts, not a redundant second engine.
+- `src/game/store/mission-store.ts`: Zustand, versioned local persistence, schema validation, bounded 12-run history, launch snapshot and guards.
+- `src/components/game/`: six screen components, shared shell, schematic spacecraft, resource panel, event-driven scene and mentor.
+- `src/app/play/`: six routes plus resumable entry, scoped stylesheet and error boundary. `/play/debrief` is the added sixth-screen comparison/archive route.
+- `src/app/api/mentor/route.ts`: validated 12KB streaming request limit, server-only optional provider call with 8-second timeout, deterministic fallback and no-store responses.
+- `src/hooks/use-reduced-motion.ts`: live preference subscription.
+- Native game scrolling; the original Lenis + ScrollTrigger remain landing-only. Static SVG/CSS mission views avoid a new WebGL requirement.
+- Browser-local state gates play content. These segments export `instant = false` intentionally, because server instant-navigation validation cannot observe validated client saves.
+- No user accounts, cloud storage or backend database. Secrets are optional mentor environment variables only.
+
+See Engineering.md for exact simplified equations, Game-QA.md for validation, and Implementation.md for completion status.

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { missions, type MissionId } from "./mission-data";
 
 export function MissionDialog({
@@ -68,22 +69,19 @@ export function MissionDialog({
           ))}
         </ul>
         <div className="development-note">
-          <span className="status-dot" /> MISSION SIMULATOR IN DEVELOPMENT
+          <span className="status-dot" /> YOUR FLIGHT DECK IS READY
           <p>
-            Your briefing is ready. The full build, verify, launch and result
-            experience is being engineered. For now, explore the mission design
-            process below.
+            Build your spacecraft, verify every requirement, and see how your
+            decisions perform. All values are simplified educational estimates.
           </p>
         </div>
-        <button
+        <Link
           className="button"
-          onClick={() => {
-            onClose();
-            document.getElementById("how-it-works")?.scrollIntoView();
-          }}
+          href={`/play/goal?mission=${mission.id}`}
+          onClick={onClose}
         >
-          EXPLORE THE PROCESS <span>↗</span>
-        </button>
+          ENTER MISSION CONTROL <span>↗</span>
+        </Link>
       </div>
     </dialog>
   );

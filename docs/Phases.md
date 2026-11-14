@@ -1,5 +1,7 @@
 # Phases: MissionX
 
+**Current owner directive (2026-11-14):** execute the complete application phase across original phases 2–10. The previous landing-only scope is complete. Current implementation/validation checklist: [Implementation.md](Implementation.md). Deployment and event submission remain owner-operated Phase 11 tasks.
+
 Build in small phases. Work only on the current phase. Mark a phase done only when its "Done when" list is complete, then update `Memory.md`.
 
 Hackathon window: submission closes 15 Nov 2026, 11:59 PM (local time). Aim to freeze features by mid afternoon on 15 Nov and submit with a safety buffer.

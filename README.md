@@ -57,7 +57,7 @@ Not affiliated with or endorsed by NASA.
 
 The landing page uses the original logo, self-hosted Google Fonts, original generated orbital imagery, GSAP/ScrollTrigger and Lenis. See [design.md](design.md) for the current owner-approved design system and [define.md](define.md) for scope. The legacy docs remain available as project history.
 
-No new application dependencies were needed. GSAP, @gsap/react and Lenis were already declared. No environment variables are required for the landing page. The simulator is not implemented yet: start actions open mission briefings, not a fake playable experience. Engineering resource numbers are illustrative only.
+No new application dependencies were needed. GSAP, @gsap/react and Lenis were already declared. No environment variables are required for the landing page. The complete game is now implemented: landing briefings link to mission selection and the six-screen flight deck. Engineering resource numbers are illustrative only.
 
 Validation:
 ```bash
@@ -65,3 +65,32 @@ bun run lint
 bunx tsc --noEmit
 bun run build
 ```
+
+## Full game application
+
+Routes: `/play` resumes locally; `/play/goal`, `/play/build`, `/play/verify`, `/play/launch`, `/play/result`, `/play/debrief`. Game code follows existing `src/game/data`, `src/game/engine`, `src/game/store`; screens live in `src/components/game`. All engineering values are simplified educational estimates, not flight calculations.
+
+```bash
+bun test
+bun run lint
+bun x tsc --noEmit
+bun run build
+```
+
+Local progress and up to 12 runs are stored in the browser. No account, database or keys required. Browser storage can be cleared from the game's New Mission control (history is retained for comparison).
+
+Optional mentor environment: `MENTOR_API_KEY`, `MENTOR_MODEL` (default `gpt-4o-mini`). Server-only OpenAI-compatible completion at api.openai.com; no client keys. Missing service/key/network uses deterministic local recommendations. The deployment environment must allow the provider host to enable remote advice. No remote service is required for gameplay.
+
+Implementation checklist: [docs/Implementation.md](docs/Implementation.md). QA scope and limitations: [docs/Game-QA.md](docs/Game-QA.md). Catalog balance probe: `bun run balance`.
+
+
+### Source map
+- `src/components/game/` — six screens and reusable flight-deck UI
+- `src/game/data/` — typed component, mission, launcher, orbit and event catalogs
+- `src/game/engine/` — resource calculations, verification, seeded outcomes, scoring, telemetry, mentor and tests
+- `src/game/store/` — guarded Zustand state and versioned local saves
+- `src/app/api/mentor/` — optional server-only AI with deterministic fallback
+- `scripts/balance.ts` — repeatable catalog balance diagnostics
+- `tests/mentor-api.test.ts` — request validation, mocked provider and offline fallback tests
+
+Exact model and caveats: [docs/Engineering.md](docs/Engineering.md). All six game screens reuse the landing's original MissionX branding and four-font system. No runtime dependencies were added for this phase.

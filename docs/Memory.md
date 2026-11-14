@@ -13,24 +13,24 @@ Keep entries short. Newest entries on top in each log section.
 - **Package manager:** bun
 - **Stack:** Next.js (App Router), TypeScript, Tailwind, GSAP, Three.js (React Three Fiber), Lenis, Zustand
 - **Deadline:** 15 Nov 2026, 11:59 PM (local time). Aim to submit early.
-- **Current phase:** Phase 1 (Landing page)
+- **Current phase:** Complete application delivered; deployment/submission remain owner tasks.
 - **Last updated:** 2026-11-14 UTC
 
 ## Status by phase
 
 | Phase | Status | Notes |
 |---|---|---|
-| 0 Project foundation | Not started | |
-| 1 Landing page | Done | Cinematic landing + mission briefings; simulator integration awaits engine phase. |
-| 2 Game data and engine | Not started | |
-| 3 Game shell and state | Not started | |
-| 4 Goal screen | Not started | |
-| 5 Build screen | Not started | |
-| 6 Verify screen | Not started | |
-| 7 Launch screen | Not started | |
-| 8 Result screen | Not started | |
-| 9 AI mentor | Not started | |
-| 10 Polish and quality | Not started | |
+| 0 Project foundation | Done | Existing stack and brand preserved. |
+| 1 Landing page | Done | Landing preserved; briefing action now links to the real game. |
+| 2 Game data and engine | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
+| 3 Game shell and state | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
+| 4 Goal screen | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
+| 5 Build screen | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
+| 6 Verify screen | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
+| 7 Launch screen | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
+| 8 Result screen | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
+| 9 AI mentor | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
+| 10 Polish and quality | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
 | 11 Submission | Not started | |
 
 Status values: Not started, In progress, Done, Blocked.
@@ -80,8 +80,9 @@ Keep a list of every external image or texture, with source and license, for NAS
 
 ## Next steps
 
-1. Finish Phase 0 (clean boilerplate, tokens, fonts, folders).
-2. Start Phase 1 and ask the owner for the first section's layout instructions.
+1. Deploy and test on the public production host.
+2. Optionally configure remote AI, translate the interface, or add team mode in future work.
+3. Submit event materials; event submission was not part of this coding task.
 
 
 ## Landing implementation handoff — 2026-11-14
@@ -92,3 +93,14 @@ Keep a list of every external image or texture, with source and license, for NAS
 - Validation: bun run lint; bun x tsc --noEmit; bun run build. Browser automation at 1440×1000, 820×1180, 390×844: no horizontal overflow; working mission choices, modal Escape dismissal, process tabs, resource toggle, mobile menu. All internal anchors resolve; all images loaded after scrolling; no JavaScript page errors. Reduced-motion browser check: no Lenis, headings visible. Full-page screenshots reviewed at all three widths.
 - Browser testing used temporary Playwright/Chromium tools only; removed from application dependencies afterward. Existing animation packages were already installed; no new runtime dependencies.
 - Scope boundary: no playable simulator exists yet. Start/Explore actions open honest mission briefings identifying the simulator as in development. Engineering figures are illustrative. Next: game catalogs/engine, then replace briefing launch actions with /play entry when available.
+
+
+## Complete game handoff — 2026-11-14
+- All six screens delivered: Goal, Build, Verify, Launch, Result, Debrief. Completed landing visual design unchanged; only its briefing CTA/copy connects into the real game.
+- Added 20-part/eight-category catalog, three missions, three launchers, four orbits, four operations events, pure resource/verification/seeded-simulation/scoring/reporting engine. Battery reserve affects eclipse viability and event resilience; Sun Watch scales four identical craft.
+- Added guarded resumable routes, versioned local saves, bounded 12-flight history, design comparison, redesign/restore, reset confirmation, corruption and blocked-storage fallbacks.
+- Mentor before launch and after result: actionable local advice always available. Secure optional server provider with validated request size/schema, timeout and fallback. Live AI was not called; provider paths tested with mocks.
+- Shared branded flight deck, spacecraft assembly SVG, meaningful GSAP route/meter/rocket transitions, timeline-driven scene, playback controls and dynamic reduced-motion handling. Native game scrolling leaves landing Lenis isolated. Error and not-found recovery views included.
+- Validation: 25 tests pass; lint/typecheck/production build pass; catalog balance probe runs. Full browser flows at 1440×1000, 820×1180, 390×844; all outcomes, every component toggle and launcher/orbit, mentor, archive/compare/redesign, confirmations, refresh and storage errors tested. Normal-motion console clean after guarding loading animation targets. No runtime dependencies added.
+- Sources: new files under src/app/play, src/app/api/mentor, src/components/game, src/game/{data,engine,store}, src/hooks/use-reduced-motion.ts, scripts/balance.ts and tests/mentor-api.test.ts. Added .env.example; root documentation updated plus Implementation.md, Engineering.md and Game-QA.md. Existing imagery/fonts/logo reused.
+- Limitations: educational—not physically exact—model; four identical Sun satellites; local-only history; in-flight refresh restarts the same seeded playback; no Urdu/team mode. See Game-QA.md.
