@@ -22,3 +22,6 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Landing-page commission — 2026-11-14 (owner-authorized override)
+The owner explicitly authorizes documentation updates and the complete landing page. The new root `design.md` and `define.md` specify this commission; their tokens supersede conflicting legacy design values. Preserve the legacy design document for history. Use the existing logo unchanged. Keep landing sections in `src/components/sections`, shared navigation/footer in `layout`, and motion in a scoped client wrapper. No new engine logic is part of this phase. CTAs must open a real mission briefing, clearly identifying that the simulator is not yet available. All controls need keyboard focus, descriptive names, and reduced-motion support. Use GSAP/useGSAP cleanup, one Lenis ticker, no native smooth-scroll conflict. Validate with bun lint, TypeScript, production build, and browser viewport checks when available. The requested animation dependencies are already approved and installed in package.json.

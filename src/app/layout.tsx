@@ -1,17 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  weight: ["500", "700"],
+const display = localFont({
+  src: [
+    { path: "../../public/fonts/barlow-600.ttf", weight: "600" },
+    { path: "../../public/fonts/barlow-700.ttf", weight: "700" },
+    { path: "../../public/fonts/barlow.ttf", weight: "800" },
+    { path: "../../public/fonts/barlow-900.ttf", weight: "900" },
+  ],
+  variable: "--font-display",
   display: "swap",
 });
-
-const inter = Inter({
+const space = localFont({
+  src: "../../public/fonts/space.ttf",
+  variable: "--font-heading",
+  weight: "400 700",
+  display: "swap",
+});
+const inter = localFont({
+  src: "../../public/fonts/inter.ttf",
   variable: "--font-body",
-  subsets: ["latin"],
+  weight: "400 600",
+  display: "swap",
+});
+const mono = localFont({
+  src: [
+    { path: "../../public/fonts/mono.ttf", weight: "400" },
+    { path: "../../public/fonts/mono-500.ttf", weight: "500" },
+  ],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -47,13 +65,18 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   colorScheme: "dark",
-  themeColor: "#0A0A0C",
+  themeColor: "#080A0F",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-bg text-text antialiased">{children}</body>
+    <html
+      lang="en"
+      className={`${display.variable} ${space.variable} ${inter.variable} ${mono.variable}`}
+    >
+      <body className="min-h-screen bg-bg text-text antialiased">
+        {children}
+      </body>
     </html>
   );
 }

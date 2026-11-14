@@ -40,7 +40,7 @@ bun run build
 - [docs/Architecture.md](docs/Architecture.md) — Tech stack, routes, folder structure, data models and engine contracts.
 - [docs/Rules.md](docs/Rules.md) — Agent boundaries, code/design/tech rules and the definition of done.
 - [docs/Phases.md](docs/Phases.md) — Build phases, goals and the current phase to work on.
-- [docs/Design.md](docs/Design.md) — Read-only design system: colors, typography, components and motion.
+- [docs/Design.md](docs/Design.md) — Historical design baseline; current landing specification is [design.md](design.md).
 - [docs/Memory.md](docs/Memory.md) — Living progress log: status, decisions, risks and next steps.
 
 AI agents should start from [AGENTS.md](AGENTS.md).
@@ -52,3 +52,16 @@ AI agents should start from [AGENTS.md](AGENTS.md).
 ## Disclaimer
 
 Not affiliated with or endorsed by NASA.
+
+## Cinematic landing page (November 2026)
+
+The landing page uses the original logo, self-hosted Google Fonts, original generated orbital imagery, GSAP/ScrollTrigger and Lenis. See [design.md](design.md) for the current owner-approved design system and [define.md](define.md) for scope. The legacy docs remain available as project history.
+
+No new application dependencies were needed. GSAP, @gsap/react and Lenis were already declared. No environment variables are required for the landing page. The simulator is not implemented yet: start actions open mission briefings, not a fake playable experience. Engineering resource numbers are illustrative only.
+
+Validation:
+```bash
+bun run lint
+bunx tsc --noEmit
+bun run build
+```
