@@ -552,3 +552,30 @@ These README-linked tools support the implementation stack, not mission paramete
 - `NASA-MISSION-VIZ`: remains reference-only for visuals. Mentioned by planned presentation metadata; no propagator/code/assets integrated.
 - `MISSIONX-EDUCATIONAL-ASSUMPTIONS`: implemented lifecycle/status policies in `flight-lifecycle.ts`, `diagnostics.ts` and static `flight-stages.json`. Exact assumptions and tests in ENGINEERING_REFERENCES.md. Static IDs resolve to this register; this is not the broader parameter-level catalog migration.
 - Verification basis is the preceding approved audit and its recorded source review; no new external numerical evidence or fresh link verification claimed. Commander/timestamp capture is local application metadata, not a sourced engineering measurement.
+
+<a id="TOOL-PDF-LIB"></a>
+### Resource: pdf-lib
+- **Source ID:** `TOOL-PDF-LIB`
+- **Provider:** Andrew Dillon / Hopding and contributors
+- **Resource type:** Open-source PDF generation library, implementation reference only
+- **Official URL:** https://github.com/Hopding/pdf-lib
+- **Accessed date:** 2026-11-14
+- **Relevant section/page:** Repository overview; installed1.17.1 API/types and LICENSE.md inspected; document/page/font/PNG/save APIs exercised by tests.
+- **Purpose:** Generate direct multipage PDF downloads in browser without uploading flight data.
+- **Why MissionX uses it:** Owner explicitly approved pdf-lib after native print limitations were explained.
+- **Implementation location:** src/game/report/pdf-export.ts
+- **Related files/components:** mission-report.ts; components/game/mission-report.tsx; mission-report.test.ts
+- **Supported feature or calculation:** PDF formatting, PNG embedding, standard fonts and serialization; no scientific authority.
+- **Implementation status:** Implemented
+- **Adaptation or simplification:** Application handles wrapping/pagination; Unicode lines rasterized with browser fonts to avoid an unapproved font dependency. ASCII remains vector text; Unicode raster lines are not searchable text.
+- **Confidence:** High
+- **Limitations:** Browser/system font glyph coverage varies; not PDF/UA certified. No external font dependency added. Headless unit export replaces unsupported non-ASCII with question marks; user-facing browser export uses raster lines.
+- **Usage and licensing notes:** Installed MIT license ©2019 Andrew Dillon; retain distributed license notices. No NASA assets copied; existing MissionX logo embedded.
+- **Verification status:** Repository overview retrieved, installed license/types inspected; unit roundtrip and browser downloads tested. Full repository documentation not reviewed.
+
+## Cinematic integration usage amendment — v0.1.7
+- NASA-SCIENCE-MISSIONS supports requirements/verification and four report segments in the shared diagnostic/report modules, not simulated sensor or navigation certification.
+- NASA-MISSION-VIZ remains visualization reference only; continuous procedural scene/path implementation is original. No assets/code copied and no propagator integrated.
+- MISSIONX-EDUCATIONAL-ASSUMPTIONS supports authored scene geometry, camera interpolation, compressed clocks, load presentation and commissioning gate. These are not sourced distances/travel times.
+- Quicksat references retain the previously reviewed conceptual budgeting scope in the report. Numerical coefficients and performance tables remain MissionX estimates.
+- src/game/report/mission-report.ts maps only these genuinely relevant engineering references into the downloaded report; TOOL-PDF-LIB is an implementation dependency, not scientific evidence.

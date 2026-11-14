@@ -200,6 +200,7 @@ export interface Simulation {
   lessons: string[];
 }
 export interface SavedRun {
+  diagnosticsReviewed?: number;
   commanderName?: string;
   completedAt?: string;
   id: string;

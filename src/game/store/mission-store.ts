@@ -6,6 +6,7 @@ import { verify as verifyLegacy } from "../engine/legacy-v1/validation";
 import { simulate as simulateV2 } from "../engine/legacy-v2";
 import { simulate } from "../engine/simulation";
 import { verify } from "../engine/validation";
+import { missionDiagnostics } from "../engine/diagnostics";
 import { validDesign } from "../engine/schema";
 import type { Design, MissionId, SavedRun } from "../types";
 import { useCommander, validCommanderName } from "./commander-store";
@@ -46,6 +47,7 @@ function restoreRun(value: unknown): SavedRun | null {
   return {
     id: r.id,
     createdAt: r.createdAt,
+    diagnosticsReviewed: typeof r.diagnosticsReviewed === "number" ? Math.max(0,Math.min(6,Math.floor(r.diagnosticsReviewed))) : 0,
     ...(typeof r.commanderName === "string" && validCommanderName(r.commanderName) ? {commanderName:r.commanderName.trim()} : {}),
     ...(typeof r.completedAt === "string" && Number.isFinite(Date.parse(r.completedAt)) && Date.parse(r.completedAt)>=Date.parse(r.createdAt) ? {completedAt:r.completedAt} : {}),
     design: r.design,
@@ -73,6 +75,7 @@ interface GameState {
   setOrbit: (id: string) => void;
   launch: (seed: number) => boolean;
   finish: () => void;
+  acknowledgeDiagnostic: () => void;
   redesign: () => void;
   restore: (run: SavedRun) => void;
   reset: () => void;
@@ -199,6 +202,13 @@ export const useMissionStore = create<GameState>((set, get) => ({
       complete: false,
     });
     return true;
+  },
+  acknowledgeDiagnostic: () => {
+    const run=get().run;if(!run)return;
+    const tests=missionDiagnostics(run,18);
+    const index=run.diagnosticsReviewed??0;
+    if(index>=6||tests[index].status==='FAIL')return;
+    set({run:{...run,diagnosticsReviewed:index+1}});
   },
   finish: () => {
     const saved = get().run;

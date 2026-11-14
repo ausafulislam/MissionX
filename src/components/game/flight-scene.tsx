@@ -176,13 +176,13 @@ export function FlightScene({
       )}
       <div className="flight-view-top">
         <span className="eyebrow">
-          {deployed ? "ORBITAL OPERATIONS" : "LAUNCH CAMERA"} /{" "}
+          {deployed ? time<=18 ? "JOURNEY / COMMISSIONING" : "ORBITAL OPERATIONS" : "LAUNCH CAMERA"} /{" "}
           {design.missionId.toUpperCase()}
         </span>
         <span className="technical">
           T{" "}
           {time < 3
-            ? `−${Math.ceil(3 - time)
+            ? `−${Math.ceil(10*(1-time/3))
                 .toString()
                 .padStart(2, "0")}`
             : `+${Math.floor(time - 3)
@@ -202,7 +202,7 @@ export function FlightScene({
         </span>
       </div>
       {time < 3 && (
-        <div className="countdown-number">{Math.ceil(3 - time)}</div>
+        <div className="countdown-number">{Math.ceil(10*(1-time/3))}</div>
       )}
       {failed && (
         <div className="failure-overlay">

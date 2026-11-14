@@ -1,4 +1,5 @@
 "use client";
+import { MissionReport } from "@/components/game/mission-report";
 import { AnimatedScore } from "@/components/game/animated-score";
 import { OperationsNote } from "@/components/game/operations-note";
 import { OutcomeReveal } from "@/components/game/outcome-reveal";
@@ -50,6 +51,7 @@ export function ResultsPanel({ onRedesign }: { onRedesign: () => void }) {
               : "FAILED."}
         </em>
       </h2>
+      <MissionReport run={run} />
       <OutcomeReveal run={run} />
       <div className="hq-score">
         <strong>

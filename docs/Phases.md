@@ -245,3 +245,6 @@ Source register and engineering reference inventory created; permanent source po
 
 ## Cinematic launch/report commission — task1 v0.1.6
 Approved sequence: lifecycle/identity/diagnostics → continuous journey → interactive commissioning/audio → PDF export → results/regression. First foundation implemented without UI or simulation-score changes. Next integrate existing scenes/controllers; pdf-lib approved but not installed. No completion claim for cinematic visuals, gating UI or PDF yet.
+
+## Cinematic commission — visible integration v0.1.7
+Connected HQ continuous launch/journey and mission-specific arrival, flight-deck schematic, sequential commissioning gate/review and results PDF download. Commander/completion snapshot retained. All previously approved main systems are connected to the UI; no further approval pause. No real navigation/thermal/RF certification. See Memory for executed tests and remaining physical-device/PDF-accessibility limits.

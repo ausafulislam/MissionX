@@ -33,3 +33,10 @@
 - Snapshot actual local commander identity at launch and completion timestamp on first evaluation; preserve fields through saves without attributing legacy flights to a current profile.
 - Documented timing/status assumptions and source mapping. Scene, audio, interactive gating and PDF remain subsequent approved tasks; no dependencies or scoring changes.
 - Validation:55 unit tests, lint and production build pass. New commissioning UI, scene/audio behavior and PDF export are not yet implemented or browser-tested.
+
+## 0.1.7 — 2026-11-14
+- Connected six interactive arrival-time configuration diagnostics to HQ and accessible flight deck, with persistent acknowledgement, review, clear unavailable-model findings and a shared gate that Skip cannot bypass.
+- Replaced abrupt HQ launch/orbit switch with continuous Earth ascent, background transition, original trajectory path and mission-correct destination approach; retained procedural configured spacecraft, bounded effects, gesture audio and reduced-motion support. Ten countdown ticks now span approximately10 seconds at1x.
+- Added actual-state multipage PDF mission report download to both results screens, including branding, commander, components, balances, diagnostics, events, science, four segments, recommendations, sources and disclaimer. Approved pdf-lib1.17.1 only; no extra font dependency or external mission-data API.
+- Added report/outcome/gating tests and source/model documentation. Numerical outcomes remain model3; diagnostics are configuration checks, not invented live sensors.
+- Validation:60 tests, lint/build/diff/source-reference checks pass; Chromium desktop/tablet/phone mission flows and normal-motion HQ flow pass including six checks and actual PDF downloads. Eight seeded success/partial/launch-loss browser cases also pass reload/identity/download checks. Physical-device/audio listening and PDF accessibility certification remain outside executed validation.

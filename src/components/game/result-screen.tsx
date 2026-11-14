@@ -1,4 +1,5 @@
 "use client";
+import { MissionReport } from "@/components/game/mission-report";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getMission, getOrbit, getRocket } from "@/game/data/catalog";
@@ -31,6 +32,7 @@ export function ResultScreen() {
         accent="A DISCOVERY."
         description="Behind every result is an engineering decision. Follow your science from launch to the people who use it."
       />
+      <MissionReport run={run} />
       <OutcomeReveal run={run} />
       <div className={`result-hero result-${r.outcome} game-panel`}>
         <div className="score-dial">

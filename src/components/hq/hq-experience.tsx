@@ -1,4 +1,5 @@
 "use client";
+import { advanceFlight } from "@/game/engine/flight-lifecycle";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -201,7 +202,7 @@ export function HQExperience() {
   useEffect(() => {
     if (!playing || !run || done || station !== "launch") return;
     const timer = setInterval(
-      () => setTime((t) => Math.min(run.result.duration, t + 0.1 * speed)),
+      () => setTime((t) => advanceFlight(run,t,0.1*speed)),
       100,
     );
     return () => clearInterval(timer);
@@ -420,7 +421,7 @@ export function HQExperience() {
                 }}
                 onSpeed={setSpeed}
                 onSkip={() => {
-                  setTime(run.result.duration);
+                  setTime(advanceFlight(run,time,0,true));
                   setPlaying(false);
                 }}
                 onResults={() => navigate("results")}
