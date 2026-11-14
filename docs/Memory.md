@@ -13,7 +13,7 @@ Keep entries short. Newest entries on top in each log section.
 - **Package manager:** bun
 - **Stack:** Next.js (App Router), TypeScript, Tailwind, GSAP, Three.js (React Three Fiber), Lenis, Zustand
 - **Deadline:** 15 Nov 2026, 11:59 PM (local time). Aim to submit early.
-- **Current phase:** Complete application delivered; deployment/submission remain owner tasks.
+- **Current phase:** Engineering completion in progress; operations controls/difficulty/comparison presentation await owner design direction.
 - **Last updated:** 2026-11-14 UTC
 
 ## Status by phase
@@ -140,3 +140,9 @@ Keep a list of every external image or texture, with source and license, for NAS
 - Added operations conservation/bounds/counterfactual tests, invalid-configuration explanations and archived-v1/current-save recomputation tests. Retained frozen model1 and intermediate model2 algorithms to avoid silent historical rescoring; save guard raised to bounded 2MB for 12 sampled traces.
 - Test development caught a counterfactual upgrade exceeding usable battery; corrected the test to include the necessary battery upgrade (real coupled resource trade-off), not weakened validation. Existing storm-reserve test now checks measured brownout/power rather than pretending a battery changes hardware lifetime.
 - Lint/typecheck/tests/build run before task commit. Next: catalog breadth and browser/end-to-end regression. New standalone operations-control layouts require owner instruction; current computer/radio/array/orbit choices already alter operations measurably.
+
+## Engineering task 4 — 2026-11-14 / v0.1.4
+- Broadened authored component/orbit choices; payload allowance and high-resolution pointing dependencies verified. Fictional rocket labeling explicit. Added energy conservation ledger and assertions, HQ margin text and actual-reception telemetry.
+- Fixed result redesign guard race discovered by real browser automation. All 48 tests, lint/build passed. Chromium desktop Moon/tablet Sun/phone Mars complete flows + reload/redesign and desktop HQ complete flow passed without page/console errors. No physical device/vendor-browser/audio listening validation.
+- Balance sweep: Moon 395/1000 verified (249 success/112 partial/34 failed), Sun 138 (77/54/7), Mars 28 (7/5/16). Randomized designs are not player difficulty measurements.
+- Remaining acceptance: user-controlled ground operations, selectable difficulty and comparison presentation need owner design direction; not claimed complete. Current ground operations are automatic deterministic simulation. Protected design/PRD/architecture files unchanged. No push requested/performed.

@@ -16,7 +16,14 @@ export function CheckList({ checks }: { checks: Check[] }) {
             <h3>{c.label}</h3>
             <Status status={c.status} />
           </div>
-          <p>{c.reason}{c.status !== "pass" ? c.blocking === false ? " This advisory does not block launch." : " Resolve this requirement before launch." : ""}</p>
+          <p>
+            {c.reason}
+            {c.status !== "pass"
+              ? c.blocking === false
+                ? " This advisory does not block launch."
+                : " Resolve this requirement before launch."
+              : ""}
+          </p>
           {!!c.unit && (
             <span className="technical">
               ACTUAL {c.actual.toFixed(1)} {c.unit} / TARGET{" "}

@@ -9,7 +9,7 @@
     "contact": 0.5,
     "description": "A useful staging orbit, but not a science destination for these missions.",
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
       "accessed": "2026-11-14",
@@ -29,7 +29,7 @@
     "contact": 0.45,
     "description": "Polar passes map the Moon. Eclipses require stored energy.",
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
       "accessed": "2026-11-14",
@@ -49,7 +49,7 @@
     "contact": 0.55,
     "description": "Four spacecraft coordinate observations of the solar corona from Earth orbit.",
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
       "accessed": "2026-11-14",
@@ -69,7 +69,47 @@
     "contact": 0.12,
     "description": "Weaker sunlight and short ground contacts make energy and data harder.",
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "id": "sso",
+    "name": "Sun-synchronous Earth orbit",
+    "missions": [
+      "sun"
+    ],
+    "solarFactor": 1,
+    "eclipse": 0.15,
+    "period": 1.65,
+    "contact": 0.3,
+    "description": "Teaching option for repeatable Sun-observing geometry around Earth. Short contact windows trade against lower assumed eclipse. This is not a propagated orbit or a substitute for lunar/Mars insertion.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "id": "geo",
+    "name": "Geostationary Earth orbit",
+    "missions": [
+      "sun"
+    ],
+    "solarFactor": 1,
+    "eclipse": 0.05,
+    "period": 24,
+    "contact": 0.8,
+    "description": "Teaching option with long assumed ground visibility, but a much longer modeled orbit and battery shadow interval. Not suitable for lunar or Mars surface mapping; factors are authored, not actual access predictions.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Orbit and mission requirements interact; no claimed numerical orbit solution.",
       "accessed": "2026-11-14",

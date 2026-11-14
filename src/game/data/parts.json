@@ -27,7 +27,8 @@
       "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
     },
     "storage": 0,
-    "limitations": "One selection per subsystem, except science instruments. Destination compatibility and shortest installed lifetime constrain this part."
+    "limitations": "One selection per subsystem, except science instruments. Destination compatibility and shortest installed lifetime constrain this part.",
+    "payloadLimit": 120
   },
   {
     "draw": 0,
@@ -57,7 +58,8 @@
       "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
     },
     "storage": 0,
-    "limitations": "One selection per subsystem, except science instruments. Destination compatibility and shortest installed lifetime constrain this part."
+    "limitations": "One selection per subsystem, except science instruments. Destination compatibility and shortest installed lifetime constrain this part.",
+    "payloadLimit": 300
   },
   {
     "draw": 0,
@@ -475,7 +477,11 @@
       "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
     },
     "storage": 0,
-    "limitations": "One selection per subsystem, except science instruments. Destination compatibility and shortest installed lifetime constrain this part."
+    "limitations": "One selection per subsystem, except science instruments. Destination compatibility and shortest installed lifetime constrain this part. High-resolution imaging needs the deep-space or star-tracker pointing suite.",
+    "requiresAny": [
+      "attitude-deep",
+      "attitude-star"
+    ]
   },
   {
     "draw": 30,
@@ -592,5 +598,187 @@
     },
     "storage": 0,
     "limitations": "One selection per subsystem, except science instruments. Destination compatibility and shortest installed lifetime constrain this part."
+  },
+  {
+    "draw": 0,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 12,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "bus-cube",
+    "name": "CubeSat-class learning bus",
+    "category": "structure",
+    "mass": 28,
+    "cost": 4,
+    "description": "Fictional compact teaching platform. Lower mass and cost, but a short life and a small payload allowance.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs. Storage capacity, like other numeric attributes, is an authored gameplay estimate.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    },
+    "storage": 0,
+    "limitations": "Authored educational subsystem option, not a flight-qualified product. One part per subsystem; mandatory compatibility checks apply.",
+    "payloadLimit": 35
+  },
+  {
+    "draw": 0,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 36,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "bus-medium",
+    "name": "Medium science bus",
+    "category": "structure",
+    "mass": 100,
+    "cost": 11,
+    "description": "Mid-range platform for longer experiments without the full deep-space mass penalty.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs. Storage capacity, like other numeric attributes, is an authored gameplay estimate.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    },
+    "storage": 0,
+    "limitations": "Authored educational subsystem option, not a flight-qualified product. One part per subsystem; mandatory compatibility checks apply.",
+    "payloadLimit": 180
+  },
+  {
+    "draw": 8,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 24,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "radio-low",
+    "name": "Low-gain teaching radio",
+    "category": "communications",
+    "mass": 6,
+    "cost": 1.5,
+    "description": "Lower mass and power consumption trade against low data throughput.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs. Storage capacity, like other numeric attributes, is an authored gameplay estimate.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    },
+    "storage": 0,
+    "limitations": "Authored educational subsystem option, not a flight-qualified product. One part per subsystem; mandatory compatibility checks apply."
+  },
+  {
+    "draw": 6,
+    "generation": 0,
+    "battery": 0,
+    "data": 2,
+    "downlink": 0,
+    "science": 10,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "radiation-detector",
+    "name": "Radiation detector",
+    "category": "science",
+    "mass": 6,
+    "cost": 3,
+    "description": "Counts charged particles. A low-data complement to solar and planetary observations.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs. Storage capacity, like other numeric attributes, is an authored gameplay estimate.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    },
+    "storage": 0,
+    "limitations": "Authored educational subsystem option, not a flight-qualified product. One part per subsystem; mandatory compatibility checks apply."
+  },
+  {
+    "draw": 5,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 0,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "attitude-sun",
+    "name": "Sun-sensor pointing suite",
+    "category": "attitude",
+    "mass": 6,
+    "cost": 1.5,
+    "description": "Sun sensors and basic actuators support low-cost pointing. Not precise enough for high-resolution imaging.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs. Storage capacity, like other numeric attributes, is an authored gameplay estimate.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    },
+    "storage": 0,
+    "limitations": "Authored educational subsystem option, not a flight-qualified product. One part per subsystem; mandatory compatibility checks apply."
+  },
+  {
+    "draw": 14,
+    "generation": 0,
+    "battery": 0,
+    "data": 0,
+    "downlink": 0,
+    "science": 5,
+    "lifetime": 48,
+    "missions": [
+      "moon",
+      "sun",
+      "mars"
+    ],
+    "id": "attitude-star",
+    "name": "Star-tracker pointing suite",
+    "category": "attitude",
+    "mass": 16,
+    "cost": 4,
+    "description": "Reaction wheels with a star tracker support precise pointing at moderate mass.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Space segment subsystem roles and resource trade-offs. Storage capacity, like other numeric attributes, is an authored gameplay estimate.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    },
+    "storage": 0,
+    "limitations": "Authored educational subsystem option, not a flight-qualified product. One part per subsystem; mandatory compatibility checks apply."
   }
 ]

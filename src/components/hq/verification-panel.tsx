@@ -65,8 +65,8 @@ export function VerificationPanel({
           ))}
         </select>
       </label>
-      <SourceNote source={getRocket(s.design.rocketId).source}/>
-      <SourceNote source={getOrbit(s.design.orbitId).source}/>
+      <SourceNote source={getRocket(s.design.rocketId).source} />
+      <SourceNote source={getOrbit(s.design.orbitId).source} />
       <div className="hq-checks">
         {v.checks.map((c) => (
           <div key={c.id}>
@@ -97,7 +97,9 @@ export function VerificationPanel({
         />
       </label>
       <p className="hq-fineprint">
-        Same design + seed = same flight events. Blocking requirements must pass. Warnings marked as accepted operational risks may reduce science return.
+        Same design + seed = same flight events. Blocking requirements must
+        pass. Warnings marked as accepted operational risks may reduce science
+        return.
       </p>
       <button
         className="button"

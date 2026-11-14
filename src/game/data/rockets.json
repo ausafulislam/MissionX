@@ -7,11 +7,12 @@
     "reliability": 0.96,
     "orbits": [
       "lunar",
-      "earth"
+      "earth",
+      "sso"
     ],
-    "description": "Small payloads, modest cost. Reaches Earth and lunar orbit.",
+    "description": "Fictional gameplay service, not a real provider specification. Small payloads, modest cost. Reaches Earth and lunar orbit.",
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Launch segment role; fictional services, not actual provider vehicles.",
       "accessed": "2026-11-14",
@@ -28,11 +29,13 @@
     "orbits": [
       "earth",
       "lunar",
-      "solar"
+      "solar",
+      "sso",
+      "geo"
     ],
-    "description": "Flexible medium-lift service for constellations and lunar missions.",
+    "description": "Fictional gameplay service, not a real provider specification. Flexible medium-lift service for constellations and lunar missions.",
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Launch segment role; fictional services, not actual provider vehicles.",
       "accessed": "2026-11-14",
@@ -50,11 +53,13 @@
       "earth",
       "lunar",
       "solar",
-      "mars"
+      "mars",
+      "sso",
+      "geo"
     ],
-    "description": "Heavy-lift deep-space service. The only Mars-capable option.",
+    "description": "Fictional gameplay service, not a real provider specification. Heavy-lift deep-space service. The only Mars-capable option.",
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Launch segment role; fictional services, not actual provider vehicles.",
       "accessed": "2026-11-14",

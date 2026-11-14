@@ -115,7 +115,7 @@ export function GoalScreen() {
           </div>
           <div className="overview-details">
             <p>{m.description}</p>
-            <SourceNote source={m.source}/>
+            <SourceNote source={m.source} />
             <div className="goal-requirements">
               {requirements.map(([label, value]) => (
                 <div key={label}>

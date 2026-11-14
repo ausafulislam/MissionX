@@ -109,7 +109,7 @@ function LaunchPlayback() {
               ["USABLE BATTERY", `${t.batteryWh.toFixed(1)} Wh`],
               ["ONBOARD DATA", `${t.storedGB.toFixed(2)} GB`],
               ["EARTH RECEIVED", `${t.receivedGB.toFixed(2)} GB`],
-              ["GROUND WINDOW", t.contact?"CONTACT":"NO CONTACT"],
+              ["GROUND WINDOW", t.contact ? "CONTACT" : "NO CONTACT"],
             ].map(([label, value]) => (
               <div key={label}>
                 <span className="technical">{label}</span>

@@ -15,3 +15,9 @@
 - Science now depends on useful data actually received and achieved lifetime. Causal reports identify storage overflow, onboard backlog, brownouts and unmet requirements; four-segment labels show SUCCESS/PARTIAL/FAILED.
 - Existing cards expose source notes, estimate limits and an expandable operations/scoring ledger. Live telemetry reads battery/storage/contact samples. No layout/styles changed.
 - Preserved historical deterministic models for archived flights; current saves recompute under their identified model and never trust cached scores. Added conservation, counterfactual and save-migration tests.
+
+## 0.1.4 — 2026-11-14
+- Expanded authored catalog choices: CubeSat-class and medium buses, low-gain radio, radiation detector, two pointing suites, SSO and GEO teaching orbits. Added bus payload allowances and precision-imaging pointing dependencies; fictional launch services explicitly labeled.
+- Added a closed per-spacecraft energy ledger (solar, initial/final battery, served loads, charge loss, unused solar), conservation assertions, and HQ margin text in existing slots. Current-model return telemetry uses actual received fraction.
+- Fixed result→redesign route guard race. Reformatted touched engineering files for maintenance.
+- Validation: 48 unit tests, lint and production build passed. Headless Chromium desktop Moon/tablet Sun/phone Mars full flows, ledger, redesign and save reload passed; desktop HQ launch/results/redesign passed, no console/page errors. Browser tools isolated in ignored workspace, no application dependencies changed.

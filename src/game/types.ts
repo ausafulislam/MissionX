@@ -1,6 +1,10 @@
 export interface SourceInfo {
-  title: string; url: string; parameter: string; accessed: string;
-  confidence: "concept-only" | "verified"; simplification: string;
+  title: string;
+  url: string;
+  parameter: string;
+  accessed: string;
+  confidence: "concept-only" | "verified";
+  simplification: string;
 }
 export type MissionId = "moon" | "sun" | "mars";
 export type Category =
@@ -13,6 +17,8 @@ export type Category =
   | "camera"
   | "science";
 export interface Part {
+  requiresAny?: string[];
+  payloadLimit?: number;
   source: SourceInfo;
   id: string;
   name: string;
@@ -140,15 +146,39 @@ export interface SegmentReport {
   explanation: string;
 }
 export interface OperationsSample {
-  hour: number; batteryWh: number; storedGB: number; generatedGB: number;
-  transmittedGB: number; receivedGB: number; contact: boolean; sunlight: boolean;
+  hour: number;
+  batteryWh: number;
+  storedGB: number;
+  generatedGB: number;
+  transmittedGB: number;
+  receivedGB: number;
+  contact: boolean;
+  sunlight: boolean;
 }
 export interface OperationsReport {
-  days: number; generatedGB: number; transmittedGB: number; receivedGB: number;
-  remainingGB: number; lostGB: number; groundLostGB: number;
-  batteryMinWh: number; brownoutHours: number; availability: number;
-  averageDeliveredPower: number; contacts: number; samples: OperationsSample[];
-  campaignGeneratedGB: number; campaignReceivedGB: number; scienceFraction: number;
+  solarGeneratedWh: number;
+  loadServedWh: number;
+  chargeLossWh: number;
+  spilledWh: number;
+  initialBatteryWh: number;
+  finalBatteryWh: number;
+
+  days: number;
+  generatedGB: number;
+  transmittedGB: number;
+  receivedGB: number;
+  remainingGB: number;
+  lostGB: number;
+  groundLostGB: number;
+  batteryMinWh: number;
+  brownoutHours: number;
+  availability: number;
+  averageDeliveredPower: number;
+  contacts: number;
+  samples: OperationsSample[];
+  campaignGeneratedGB: number;
+  campaignReceivedGB: number;
+  scienceFraction: number;
 }
 export interface Simulation {
   operations?: OperationsReport;

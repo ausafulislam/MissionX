@@ -13,14 +13,14 @@
     "objectives": [
       "Map lunar terrain with a camera",
       "Return useful surface imagery",
-      "Operate through lunar eclipses"
+      "Operate through orbital shadow periods"
     ],
     "reference": {
       "name": "Lunar Reconnaissance Orbiter",
       "url": "https://science.nasa.gov/mission/lro/"
     },
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Scientific objective and four-segment mission lifecycle.",
       "accessed": "2026-11-14",
@@ -49,7 +49,7 @@
       "url": "https://science.nasa.gov/mission/punch/"
     },
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Scientific objective and four-segment mission lifecycle.",
       "accessed": "2026-11-14",
@@ -78,7 +78,7 @@
       "url": "https://science.nasa.gov/mission/mars-reconnaissance-orbiter/"
     },
     "source": {
-      "title": "NASA — Design and Develop Science Missions",
+      "title": "NASA \u2014 Design and Develop Science Missions",
       "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
       "parameter": "Scientific objective and four-segment mission lifecycle.",
       "accessed": "2026-11-14",

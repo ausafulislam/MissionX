@@ -132,11 +132,17 @@ export function ResultScreen() {
           <article className="game-panel segment-report" key={segment.name}>
             <div>
               <span className="report-number">0{i + 1}</span>
-              <span className={`status-pill status-${segment.status}`}>{segment.status === "pass" ? "SUCCESS" : segment.status === "close" ? "PARTIAL" : "FAILED"}</span>
+              <span className={`status-pill status-${segment.status}`}>
+                {segment.status === "pass"
+                  ? "SUCCESS"
+                  : segment.status === "close"
+                    ? "PARTIAL"
+                    : "FAILED"}
+              </span>
             </div>
             <h3>{segment.name}</h3>
             <p>{segment.explanation}</p>
-            {segment.name==="GROUND"&&<OperationsNote result={r}/>}
+            {segment.name === "GROUND" && <OperationsNote result={r} />}
           </article>
         ))}
       </div>

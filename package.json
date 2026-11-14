@@ -1,6 +1,6 @@
 {
   "name": "missionx",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "An interactive game where students design, launch and run a complete space mission, balancing budget, mass, power and data, then learn why it succeeded or failed.",
   "author": "Team NASA WARRIORS",

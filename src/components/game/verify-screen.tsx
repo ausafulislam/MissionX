@@ -2,7 +2,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ORBITS, ROCKETS, getMission, getOrbit, getRocket } from "@/game/data/catalog";
+import {
+  ORBITS,
+  ROCKETS,
+  getMission,
+  getOrbit,
+  getRocket,
+} from "@/game/data/catalog";
 import { verify } from "@/game/engine/validation";
 import { useMissionStore } from "@/game/store/mission-store";
 import { ScreenHeading } from "./game-shell";
@@ -120,8 +126,8 @@ export function VerifyScreen() {
               </button>
             ))}
           </div>
-          <SourceNote source={getRocket(s.design.rocketId).source}/>
-          <SourceNote source={getOrbit(s.design.orbitId).source}/>
+          <SourceNote source={getRocket(s.design.rocketId).source} />
+          <SourceNote source={getOrbit(s.design.orbitId).source} />
           <ResourcePanel design={s.design} />
         </aside>
       </div>

@@ -1,11 +1,85 @@
-import {test} from 'node:test';
-import assert from 'node:assert/strict';
-import {STARTERS,MISSIONS} from '../data/catalog';
-import {resources} from './resources';
-import {simulate} from './simulation';
-import type {Design} from '../types';
-const design=(id:Design['missionId']='moon'):Design=>({missionId:id,partIds:[...STARTERS[id]],orbitId:id==='moon'?'lunar':id==='sun'?'solar':'mars',rocketId:id==='moon'?'swift':id==='sun'?'atlas':'horizon'});
-test('finite storage and Earth reception conserve data through every seeded outcome',()=>{for(const m of MISSIONS)for(let seed=0;seed<60;seed++){const d=design(m.id),r=resources(d),result=simulate(d,seed),o=result.operations!;assert.ok(Math.abs(o.generatedGB-o.transmittedGB-o.remainingGB-o.lostGB)<1e-7);assert.ok(Math.abs(o.transmittedGB-o.receivedGB-o.groundLostGB)<1e-7);assert.ok(o.receivedGB<=o.generatedGB+1e-9);for(const p of o.samples){assert.ok(p.storedGB>=-1e-9&&p.storedGB<=r.storage+1e-9);assert.ok(p.batteryWh>=-1e-9&&p.batteryWh<=r.batteryUsable+1e-9);}assert.ok(o.samples.length<200);}});
-test('radio and mass memory changes alter science, not merely preflight decorations',()=>{const d=design();d.partIds.push('radar');const upgraded={...d,partIds:d.partIds.filter(x=>x!=='radio-basic'&&x!=='computer-basic'&&x!=='solar-compact'&&x!=='battery-small').concat('radio-relay','computer-rad','solar-wide','battery-large')};const seed=Array.from({length:100},(_,i)=>i).find(i=>simulate(d,i).events.some(e=>e.label==='Stable science operations'))!;const low=simulate(d,seed),high=simulate(upgraded,seed);assert.ok(low.operations!.lostGB>0);assert.ok(high.operations!.receivedGB>low.operations!.receivedGB);assert.ok(high.science>low.science);});
-test('no launch means no observations, contact, stored data or science credit',()=>{const d=design();d.orbitId='mars';const r=simulate(d,1);assert.equal(r.outcome,'failed');assert.equal(r.operations!.generatedGB,0);assert.equal(r.operations!.receivedGB,0);assert.equal(r.science,0);assert.equal(r.score,0);assert.match(r.segments[0].explanation,/Science orbit|Launch trajectory/);});
-test('repeatability includes battery trace and causal reports',()=>{const d=design('sun');assert.deepEqual(simulate(d,71),simulate(d,71));});
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { STARTERS, MISSIONS } from "../data/catalog";
+import { resources } from "./resources";
+import { simulate } from "./simulation";
+import type { Design } from "../types";
+const design = (id: Design["missionId"] = "moon"): Design => ({
+  missionId: id,
+  partIds: [...STARTERS[id]],
+  orbitId: id === "moon" ? "lunar" : id === "sun" ? "solar" : "mars",
+  rocketId: id === "moon" ? "swift" : id === "sun" ? "atlas" : "horizon",
+});
+test("finite storage and Earth reception conserve data through every seeded outcome", () => {
+  for (const m of MISSIONS)
+    for (let seed = 0; seed < 60; seed++) {
+      const d = design(m.id),
+        r = resources(d),
+        result = simulate(d, seed),
+        o = result.operations!;
+      assert.ok(
+        Math.abs(o.generatedGB - o.transmittedGB - o.remainingGB - o.lostGB) <
+          1e-7,
+      );
+      assert.ok(
+        Math.abs(o.transmittedGB - o.receivedGB - o.groundLostGB) < 1e-7,
+      );
+      assert.ok(o.receivedGB <= o.generatedGB + 1e-9);
+      assert.ok(
+        Math.abs(
+          o.initialBatteryWh +
+            o.solarGeneratedWh -
+            o.loadServedWh -
+            o.finalBatteryWh -
+            o.chargeLossWh -
+            o.spilledWh,
+        ) < 1e-6,
+      );
+      for (const p of o.samples) {
+        assert.ok(p.storedGB >= -1e-9 && p.storedGB <= r.storage + 1e-9);
+        assert.ok(
+          p.batteryWh >= -1e-9 && p.batteryWh <= r.batteryUsable + 1e-9,
+        );
+      }
+      assert.ok(o.samples.length < 200);
+    }
+});
+test("radio and mass memory changes alter science, not merely preflight decorations", () => {
+  const d = design();
+  d.partIds.push("radar");
+  const upgraded = {
+    ...d,
+    partIds: d.partIds
+      .filter(
+        (x) =>
+          x !== "radio-basic" &&
+          x !== "computer-basic" &&
+          x !== "solar-compact" &&
+          x !== "battery-small",
+      )
+      .concat("radio-relay", "computer-rad", "solar-wide", "battery-large"),
+  };
+  const seed = Array.from({ length: 100 }, (_, i) => i).find((i) =>
+    simulate(d, i).events.some((e) => e.label === "Stable science operations"),
+  )!;
+  const low = simulate(d, seed),
+    high = simulate(upgraded, seed);
+  assert.ok(low.operations!.lostGB > 0);
+  assert.ok(high.operations!.receivedGB > low.operations!.receivedGB);
+  assert.ok(high.science > low.science);
+});
+test("no launch means no observations, contact, stored data or science credit", () => {
+  const d = design();
+  d.orbitId = "mars";
+  const r = simulate(d, 1);
+  assert.equal(r.outcome, "failed");
+  assert.equal(r.operations!.generatedGB, 0);
+  assert.equal(r.operations!.receivedGB, 0);
+  assert.equal(r.science, 0);
+  assert.equal(r.score, 0);
+  assert.match(r.segments[0].explanation, /Science orbit|Launch trajectory/);
+});
+test("repeatability includes battery trace and causal reports", () => {
+  const d = design("sun");
+  assert.deepEqual(simulate(d, 71), simulate(d, 71));
+});

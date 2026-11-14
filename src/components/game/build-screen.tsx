@@ -90,8 +90,10 @@ export function BuildScreen() {
                       ${p.cost}M<small>PER CRAFT</small>
                     </span>
                   </div>
-                  <p>{p.description} {p.limitations}</p>
-                  <SourceNote source={p.source}/>
+                  <p>
+                    {p.description} {p.limitations}
+                  </p>
+                  <SourceNote source={p.source} />
                   <dl className="part-stats">
                     {[
                       ["MASS", `${p.mass} kg`],

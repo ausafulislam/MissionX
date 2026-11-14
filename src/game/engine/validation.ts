@@ -108,6 +108,15 @@ export function verify(design: Design): Verification {
     m.id === "sun"
       ? parts.some((p) => p.id === "coronagraph")
       : parts.some((p) => p.category === "camera");
+  const dependencies = parts.filter(
+    (p) =>
+      p.requiresAny && !p.requiresAny.some((id) => design.partIds.includes(id)),
+  );
+  const payloadMass = parts
+    .filter((p) => ["science", "camera"].includes(p.category))
+    .reduce((n, p) => n + p.mass, 0);
+  const payloadLimit =
+    parts.find((p) => p.category === "structure")?.payloadLimit ?? 0;
   const checks = [
     ...missionRequirements(design, r),
     numericCheck(
@@ -134,7 +143,14 @@ export function verify(design: Design): Verification {
       "GB/day",
       true,
     ),
-    numericCheck("storage", "Onboard storage between contacts",r.storage,r.storageNeeded,"GB",true),
+    numericCheck(
+      "storage",
+      "Onboard storage between contacts",
+      r.storage,
+      r.storageNeeded,
+      "GB",
+      true,
+    ),
     numericCheck(
       "rocket-mass",
       "Launch vehicle capacity",
@@ -167,6 +183,21 @@ export function verify(design: Design): Verification {
       incompatible.length
         ? `Remove incompatible components: ${incompatible.map((p) => p.name).join(", ")}.`
         : "All components support this destination.",
+    ),
+    condition(
+      "dependencies",
+      "Pointing / payload dependencies",
+      !dependencies.length,
+      dependencies.length
+        ? `${dependencies.map((p) => p.name).join(", ")} needs a compatible precision pointing suite (deep-space or star-tracker).`
+        : "All payload pointing requirements are supported.",
+    ),
+    numericCheck(
+      "bus-payload",
+      "Structure payload allowance",
+      payloadMass,
+      payloadLimit,
+      "kg",
     ),
     condition(
       "slots",
@@ -203,14 +234,32 @@ export function verify(design: Design): Verification {
     ),
   ];
   // Data/storage deficits may be flown for learning, but never silent or full-science promises.
-  for(const check of checks){
-    if(["data","storage"].includes(check.id)&&check.actual>0&&check.status!=="pass"){
-      check.status="close";check.blocking=false;
-      check.reason+=" Accepted operational risk: limited capacity may lose observations and reduce science credit.";
+  for (const check of checks) {
+    if (
+      ["data", "storage"].includes(check.id) &&
+      check.actual > 0 &&
+      check.status !== "pass"
+    ) {
+      check.status = "close";
+      check.blocking = false;
+      check.reason +=
+        " Accepted operational risk: limited capacity may lose observations and reduce science credit.";
     }
   }
-  for(const [id,label,value] of [["mass-margin","Mass headroom",r.massMarginPercent],["power-margin","End-of-life power headroom",r.powerMarginPercent]] as const){
-    checks.push({id,label,status:value>=10?"pass":"close",blocking:false,actual:value,target:10,unit:"%",reason:`${value.toFixed(1)}% headroom. 10% is a gameplay advisory, not a flight standard. Low headroom increases vulnerability to events.`});
+  for (const [id, label, value] of [
+    ["mass-margin", "Mass headroom", r.massMarginPercent],
+    ["power-margin", "End-of-life power headroom", r.powerMarginPercent],
+  ] as const) {
+    checks.push({
+      id,
+      label,
+      status: value >= 10 ? "pass" : "close",
+      blocking: false,
+      actual: value,
+      target: 10,
+      unit: "%",
+      reason: `${value.toFixed(1)}% headroom. 10% is a gameplay advisory, not a flight standard. Low headroom increases vulnerability to events.`,
+    });
   }
   return {
     checks,

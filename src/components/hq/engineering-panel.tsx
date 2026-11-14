@@ -56,7 +56,8 @@ export function EngineeringPanel({
   const s = useMissionStore(),
     [category, setCategory] = useState<Category>("structure"),
     selected = PARTS.find((p) => p.id === inspect),
-    m = getMission(s.design.missionId);
+    m = getMission(s.design.missionId),
+    balance = resources(s.design);
   const toggle = (id: string) => {
     const installed = s.design.partIds.includes(id);
     s.toggle(id);
@@ -77,7 +78,12 @@ export function EngineeringPanel({
         {m.fleet === 4
           ? "Build one satellite; this assembly is replicated four times."
           : "Click installed components on the model to inspect them."}{" "}
-        Drag to orbit. Pinch or scroll to inspect.
+        Drag to orbit. Pinch or scroll to inspect. Mass headroom{" "}
+        {balance.massMarginPercent.toFixed(1)}%; EOL power headroom{" "}
+        {balance.powerMarginPercent.toFixed(1)}%; usable battery{" "}
+        {balance.batteryUsable.toFixed(0)} Wh; onboard memory {balance.storage}{" "}
+        GB. Remaining budget ${balance.budgetRemaining.toFixed(1)}M;{" "}
+        {balance.risk} risk (gameplay heuristic).
       </p>
       <button
         className="hq-outlined"
@@ -144,8 +150,10 @@ export function EngineeringPanel({
         <div className="hq-inspection" aria-live="polite">
           <span className="eyebrow">COMPONENT INSPECTION</span>
           <h3>{selected.name}</h3>
-          <p>{selected.description} {selected.limitations}</p>
-          <SourceNote source={selected.source}/>
+          <p>
+            {selected.description} {selected.limitations}
+          </p>
+          <SourceNote source={selected.source} />
           <dl>
             {[
               ["Mass", `${selected.mass} kg`],

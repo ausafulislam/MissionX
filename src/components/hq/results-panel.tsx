@@ -72,11 +72,15 @@ export function ResultsPanel({ onRedesign }: { onRedesign: () => void }) {
             <strong>
               0{i + 1} / {seg.name}
               <span className={`hq-${seg.status}`}>
-                {seg.status==="pass"?"SUCCESS":seg.status==="close"?"PARTIAL":"FAILED"}
+                {seg.status === "pass"
+                  ? "SUCCESS"
+                  : seg.status === "close"
+                    ? "PARTIAL"
+                    : "FAILED"}
               </span>
             </strong>
             <p>{seg.explanation}</p>
-            {seg.name==="GROUND"&&<OperationsNote result={r}/>}
+            {seg.name === "GROUND" && <OperationsNote result={r} />}
           </div>
         ))}
       </div>

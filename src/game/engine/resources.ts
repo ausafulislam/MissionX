@@ -20,21 +20,44 @@ export function resources(design: Design): Resources {
       | "downlink"
       | "science",
   ) => parts.reduce((n, p) => n + p[key], 0);
-  const nominalGeneration=sum("generation")*orbit.solarFactor;
+  const nominalGeneration = sum("generation") * orbit.solarFactor;
   const generation =
-      nominalGeneration * (1 - orbit.eclipse) * assumptions.solarAnnualRetention ** (mission.lifetimeTarget/12),
+      nominalGeneration *
+      (1 - orbit.eclipse) *
+      assumptions.solarAnnualRetention ** (mission.lifetimeTarget / 12),
     consumption = sum("draw");
-  const mass=sum("mass")*fleet,cost=sum("cost")*fleet+getRocket(design.rocketId).cost;
-  const massLimit=Math.min(mission.massLimit,getRocket(design.rocketId).capacity);
-  const massMarginPercent=(massLimit-mass)/massLimit*100;
-  const powerMarginPercent=generation? (generation-consumption)/generation*100 : consumption? -100 : 0;
-  const storage=parts.reduce((n,p)=>n+p.storage,0)*fleet;
-  const storageNeeded=sum("data")*fleet/24*orbit.period*(1-orbit.contact);
+  const mass = sum("mass") * fleet,
+    cost = sum("cost") * fleet + getRocket(design.rocketId).cost;
+  const massLimit = Math.min(
+    mission.massLimit,
+    getRocket(design.rocketId).capacity,
+  );
+  const massMarginPercent = ((massLimit - mass) / massLimit) * 100;
+  const powerMarginPercent = generation
+    ? ((generation - consumption) / generation) * 100
+    : consumption
+      ? -100
+      : 0;
+  const storage = parts.reduce((n, p) => n + p.storage, 0) * fleet;
+  const storageNeeded =
+    ((sum("data") * fleet) / 24) * orbit.period * (1 - orbit.contact);
   return {
     nominalGeneration,
-    batteryUsable:sum("battery")*assumptions.batteryUsableFraction*assumptions.batteryDischargeEfficiency,
-    storage,storageNeeded,massMarginPercent,powerMarginPercent,budgetRemaining:mission.budget-cost,
-    risk:massMarginPercent<0||powerMarginPercent<0||cost>mission.budget?"high":Math.min(massMarginPercent,powerMarginPercent)<10?"moderate":"low",
+    batteryUsable:
+      sum("battery") *
+      assumptions.batteryUsableFraction *
+      assumptions.batteryDischargeEfficiency,
+    storage,
+    storageNeeded,
+    massMarginPercent,
+    powerMarginPercent,
+    budgetRemaining: mission.budget - cost,
+    risk:
+      massMarginPercent < 0 || powerMarginPercent < 0 || cost > mission.budget
+        ? "high"
+        : Math.min(massMarginPercent, powerMarginPercent) < 10
+          ? "moderate"
+          : "low",
     mass: sum("mass") * fleet,
     cost: sum("cost") * fleet + getRocket(design.rocketId).cost,
     generation,

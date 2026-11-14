@@ -1,7 +1,7 @@
 import { EVENT_OPTIONS } from "../data/events";
 import { getMission, getRocket } from "../data/catalog";
 import type { Design, MissionEvent, SegmentReport, Simulation } from "../types";
-import {operate} from "./operations";
+import { operate } from "./operations";
 import { missionRequirements, verify } from "./validation";
 export function seededRandom(seed: number) {
   let value = seed >>> 0;
@@ -109,16 +109,30 @@ export function simulate(design: Design, seed: number): Simulation {
     );
   }
   const incident = launchOk ? events[events.length - 2] : null;
-  const operations=operate(design,incident,launchOk);
-  const availability=operations.availability;
-  const power=operations.averageDeliveredPower;
-  const lifetime=launchOk?Number((r.lifetime*(incident?.lifetimeFactor??1)).toFixed(1)):0;
-  operations.campaignGeneratedGB=operations.generatedGB/operations.days*Math.min(lifetime,m.lifetimeTarget)*30;
-  operations.campaignReceivedGB=operations.receivedGB/operations.days*Math.min(lifetime,m.lifetimeTarget)*30;
+  const operations = operate(design, incident, launchOk);
+  const availability = operations.availability;
+  const power = operations.averageDeliveredPower;
+  const lifetime = launchOk
+    ? Number((r.lifetime * (incident?.lifetimeFactor ?? 1)).toFixed(1))
+    : 0;
+  operations.campaignGeneratedGB =
+    (operations.generatedGB / operations.days) *
+    Math.min(lifetime, m.lifetimeTarget) *
+    30;
+  operations.campaignReceivedGB =
+    (operations.receivedGB / operations.days) *
+    Math.min(lifetime, m.lifetimeTarget) *
+    30;
   // Scientific credit requires received observations AND the required operating duration.
-  const dataFactor=operations.scienceFraction;
-  const science=Number((r.science*dataFactor*Math.min(1,lifetime/m.lifetimeTarget)).toFixed(1));
-  const returnedData=Number((operations.receivedGB/operations.days).toFixed(3));
+  const dataFactor = operations.scienceFraction;
+  const science = Number(
+    (r.science * dataFactor * Math.min(1, lifetime / m.lifetimeTarget)).toFixed(
+      1,
+    ),
+  );
+  const returnedData = Number(
+    (operations.receivedGB / operations.days).toFixed(3),
+  );
   const requirements = missionRequirements(design, { ...r, science, lifetime });
   const passed = requirements.filter((c) => c.status === "pass").length;
   const scienceScore = Math.round(Math.min(1, science / m.scienceTarget) * 100);
@@ -129,11 +143,14 @@ export function simulate(design: Design, seed: number): Simulation {
     : 0;
   const efficiencyScore = launchOk
     ? Math.round(
-        Math.max(0,Math.min(
-          1,
-          ((m.budget - r.cost) / m.budget + 0.55) *
-            Math.min(1, science / m.scienceTarget),
-        )) * 100,
+        Math.max(
+          0,
+          Math.min(
+            1,
+            ((m.budget - r.cost) / m.budget + 0.55) *
+              Math.min(1, science / m.scienceTarget),
+          ),
+        ) * 100,
       )
     : 0;
   const score = launchOk
@@ -144,7 +161,7 @@ export function simulate(design: Design, seed: number): Simulation {
   const outcome: Simulation["outcome"] =
     !launchOk || science < m.scienceTarget * 0.5
       ? "failed"
-      : passed === 4 && availability >= 1-1e-9
+      : passed === 4 && availability >= 1 - 1e-9
         ? "success"
         : "partial";
   const segments: SegmentReport[] = [
@@ -153,7 +170,12 @@ export function simulate(design: Design, seed: number): Simulation {
       status: launchOk ? "pass" : "fail",
       explanation: launchOk
         ? `${rocket.name} delivered the ${r.mass} kg payload to the selected orbit.`
-        : validation.ready?events[events.length - 1].description:validation.checks.filter(c=>c.status!=="pass"&&c.blocking!==false).map(c=>`${c.label}: ${c.reason}`).join(" "),
+        : validation.ready
+          ? events[events.length - 1].description
+          : validation.checks
+              .filter((c) => c.status !== "pass" && c.blocking !== false)
+              .map((c) => `${c.label}: ${c.reason}`)
+              .join(" "),
     },
     {
       name: "SPACE",
@@ -168,7 +190,12 @@ export function simulate(design: Design, seed: number): Simulation {
     },
     {
       name: "GROUND",
-      status: !launchOk || operations.receivedGB===0 ? "fail" : dataFactor < .999999 ? "close" : "pass",
+      status:
+        !launchOk || operations.receivedGB === 0
+          ? "fail"
+          : dataFactor < 0.999999
+            ? "close"
+            : "pass",
       explanation: launchOk
         ? `Across ${operations.contacts} contact windows in ${operations.days} representative days: generated ${operations.generatedGB.toFixed(2)} GB; transmitted ${operations.transmittedGB.toFixed(2)} GB; Earth received ${operations.receivedGB.toFixed(2)} GB. ${operations.remainingGB.toFixed(2)} GB remains onboard; ${operations.lostGB.toFixed(2)} GB was discarded when ${r.storage} GB memory filled. Actual reception, not orbit arrival, earns science credit.`
         : "No science data reached the ground segment.",
@@ -209,9 +236,18 @@ export function simulate(design: Design, seed: number): Simulation {
     lessons.push(
       "A deep-space transceiver can recover more data after a missed ground contact.",
     );
-  if(launchOk&&operations.lostGB>1e-6)lessons.push(`Instruments generated data faster than storage/contact windows could handle. ${operations.lostGB.toFixed(2)} GB was discarded after memory filled; upgrade computer storage or radio capacity.`);
-  if(launchOk&&operations.remainingGB>1e-6)lessons.push(`${operations.remainingGB.toFixed(2)} GB is still onboard at campaign end and earns no science credit until received on Earth.`);
-  if(launchOk&&operations.brownoutHours>1e-6)lessons.push(`Shadow/event energy deficits exhausted usable reserves for ${operations.brownoutHours.toFixed(2)} equivalent hours. Instruments collected less data; increase array or battery capacity.`);
+  if (launchOk && operations.lostGB > 1e-6)
+    lessons.push(
+      `Instruments generated data faster than storage/contact windows could handle. ${operations.lostGB.toFixed(2)} GB was discarded after memory filled; upgrade computer storage or radio capacity.`,
+    );
+  if (launchOk && operations.remainingGB > 1e-6)
+    lessons.push(
+      `${operations.remainingGB.toFixed(2)} GB is still onboard at campaign end and earns no science credit until received on Earth.`,
+    );
+  if (launchOk && operations.brownoutHours > 1e-6)
+    lessons.push(
+      `Shadow/event energy deficits exhausted usable reserves for ${operations.brownoutHours.toFixed(2)} equivalent hours. Instruments collected less data; increase array or battery capacity.`,
+    );
   if (!lessons.length)
     lessons.push(
       "Your design met the science goal. Explore whether a lighter or less expensive configuration can return the same science.",

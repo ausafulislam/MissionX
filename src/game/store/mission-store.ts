@@ -27,19 +27,31 @@ function restoreRun(value: unknown): SavedRun | null {
     typeof r.createdAt !== "string" ||
     !Number.isFinite(Date.parse(r.createdAt)) ||
     !result ||
-    (result.modelVersion!==undefined && ![1,2,3].includes(result.modelVersion as number)) ||
+    (result.modelVersion !== undefined &&
+      ![1, 2, 3].includes(result.modelVersion as number)) ||
     typeof result.seed !== "number" ||
     !Number.isInteger(result.seed) ||
     result.seed < 0 ||
     result.seed > 4294967295 ||
-    !(result.modelVersion===3?verify(r.design):result.modelVersion===2?verify(r.design):verifyLegacy(r.design)).ready
+    !(
+      result.modelVersion === 3
+        ? verify(r.design)
+        : result.modelVersion === 2
+          ? verify(r.design)
+          : verifyLegacy(r.design)
+    ).ready
   )
     return null;
   return {
     id: r.id,
     createdAt: r.createdAt,
     design: r.design,
-    result: result.modelVersion===3?simulate(r.design,result.seed):result.modelVersion===2?simulateV2(r.design,result.seed):simulateLegacy(r.design,result.seed),
+    result:
+      result.modelVersion === 3
+        ? simulate(r.design, result.seed)
+        : result.modelVersion === 2
+          ? simulateV2(r.design, result.seed)
+          : simulateLegacy(r.design, result.seed),
   };
 }
 interface GameState {
