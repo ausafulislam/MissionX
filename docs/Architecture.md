@@ -243,3 +243,10 @@ The preceding architecture is the original plan. Current code adapts it without 
 - No user accounts, cloud storage or backend database. Secrets are optional mentor environment variables only.
 
 See Engineering.md for exact simplified equations, Game-QA.md for validation, and Implementation.md for completion status.
+
+## Phase 03 implementation — orbital headquarters
+`/hq` is now the primary experience; `/play` remains the working accessible, non-WebGL fallback, not a removed legacy route. Landing START enters `/hq` while preserving the established landing presentation. See [HQ-Implementation.md](HQ-Implementation.md) for the validated module map and limitations.
+
+The rendering layer (`src/components/hq/world`) consumes the same design/run state as the flight deck. It cannot decide launch readiness, invent science returns or award arbitrary results. Client-only dynamically loaded R3F owns procedural local geometry/textures, camera and lifecycle. Separate station panels provide keyboard/touch access and are collapsible. WebGL/context failure replaces only rendering, not game controls. All graphics/audio dependencies were already installed.
+
+`src/game/store/commander-store.ts` adds a separate guarded local identity/preferences/progression save; `src/game/engine/progression.ts` calculates earned XP/achievements from evaluated engine runs. `src/game/audio/audio-manager.ts` owns gesture-created original Web Audio synthesis, independent gains and cleanup. No accounts, database, asset CDN, physics backend or extra server endpoints were introduced.

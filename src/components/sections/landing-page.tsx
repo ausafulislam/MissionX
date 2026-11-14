@@ -1,6 +1,9 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { detectDevice, requestImmersion } from "@/components/hq/device";
+import { missionAudio } from "@/game/audio/audio-manager";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Motion } from "@/components/landing/motion";
 import { MissionDialog } from "@/components/landing/mission-dialog";
@@ -14,7 +17,12 @@ import { SectionLabel } from "@/components/ui/section-label";
 
 export function LandingPage() {
   const [selected, setSelected] = useState<MissionId | null>(null);
-  const start = () => setSelected("moon");
+  const router = useRouter();
+  const start = () => {
+    if (detectDevice().kind === "desktop") requestImmersion();
+    void missionAudio.unlock();
+    router.push("/hq");
+  };
   return (
     <Motion>
       <a className="skip-link" href="#main-content">

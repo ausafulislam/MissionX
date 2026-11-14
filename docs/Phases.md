@@ -228,3 +228,6 @@ Screen layout and visuals are given by the owner at runtime.
 | 15 Nov morning | Phase 7 finish, Phase 8, Phase 9 |
 | 15 Nov midday | Phase 10, feature freeze |
 | 15 Nov afternoon to evening | Phase 11, submit early |
+
+## Owner-authorized Phase03 headquarters commission — implemented 2026-11-14
+The subsequent owner commission supersedes the original incremental phase schedule above. `/hq` now supplies the immersive orbital headquarters and integrates the completed engineering engine, while `/play` remains a functional accessible alternative. Delivery, test evidence and remaining release checks are tracked in [HQ-Implementation.md](HQ-Implementation.md). Public deployment, physical-device/audio listening checks and event submission remain separate release tasks; no event submission is claimed.

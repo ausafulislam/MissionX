@@ -55,7 +55,7 @@ Not affiliated with or endorsed by NASA.
 
 ## Cinematic landing page (November 2026)
 
-The landing page uses the original logo, self-hosted Google Fonts, original generated orbital imagery, GSAP/ScrollTrigger and Lenis. See [design.md](design.md) for the current owner-approved design system and [define.md](define.md) for scope. The legacy docs remain available as project history.
+The landing page uses the original logo, self-hosted Google Fonts, original generated orbital imagery, GSAP/ScrollTrigger and Lenis. See [design.md](design.md) for the current owner-approved design system and the product requirements below for scope. The legacy docs remain available as project history.
 
 No new application dependencies were needed. GSAP, @gsap/react and Lenis were already declared. No environment variables are required for the landing page. The complete game is now implemented: landing briefings link to mission selection and the six-screen flight deck. Engineering resource numbers are illustrative only.
 
@@ -77,7 +77,7 @@ bun x tsc --noEmit
 bun run build
 ```
 
-Local progress and up to 12 runs are stored in the browser. No account, database or keys required. Browser storage can be cleared from the game's New Mission control (history is retained for comparison).
+Local progress and up to 12 runs are stored in the browser. No account, database or keys required. New Mission clears the active design while retaining history. HQ Settings provides a confirmed full local-data reset.
 
 Optional mentor environment: `MENTOR_API_KEY`, `MENTOR_MODEL` (default `gpt-4o-mini`). Server-only OpenAI-compatible completion at api.openai.com; no client keys. Missing service/key/network uses deterministic local recommendations. The deployment environment must allow the provider host to enable remote advice. No remote service is required for gameplay.
 
@@ -94,3 +94,18 @@ Implementation checklist: [docs/Implementation.md](docs/Implementation.md). QA s
 - `tests/mentor-api.test.ts` — request validation, mocked provider and offline fallback tests
 
 Exact model and caveats: [docs/Engineering.md](docs/Engineering.md). All six game screens reuse the landing's original MissionX branding and four-font system. No runtime dependencies were added for this phase.
+
+## Product requirements (migrated from the retired product-definition document)
+MissionX is an independent educational browser game for students ages 12–18, educators and space enthusiasts, by Team NASA WARRIORS for the NASA International Space Apps Challenge 2026. It is not affiliated with or endorsed by NASA. The established landing remains unchanged visually. The scientific journey remains GOAL → BUILD → VERIFY → LAUNCH → RESULT, with saved-run debrief/comparison. Moon Mapping, four-identical-satellite Sun Watch and Mars Orbiter each have numeric mass, budget, science and lifetime requirements. Parts, batteries, communications, launcher, orbit and seeded events determine outcomes. All values are simplified educational estimates. No registration, unnecessary personal data, payments or cloud account is required. Local saves and deterministic mentor advice work without external services.
+
+## Phase 03 — immersive headquarters
+The primary entry is `/hq`: device/orientation handling → real module/asset initialization → commander identity → cinematic menu → interactive 3D headquarters. Five stations connect mission planning, spacecraft assembly, preflight/launch control, results and archive. The existing `/play` screens remain an accessible, low-resource flight-deck alternative and preserve existing saves. Display name, settings and earned progression are local-only. Original procedural geometry/textures and Web Audio synthesis avoid unlicensed assets and broken external URLs. Three.js, R3F and Drei are already installed; no extra rendering, physics or audio dependency is needed.
+
+### Headquarters controls and local data
+- Click a 3D station sign/platform or use the bottom station dock. Drag to inspect, scroll/pinch to zoom, **Reset View** to return; station side panels can be minimized. Every mission/engineering action also has a keyboard/touch control.
+- Choose a mission, install a verified baseline or assemble catalog parts, pass **every** preflight check, and initiate a seeded flight. Start/pause/speed/skip playback from the launch console. Results and archive use actual engine returns.
+- Settings independently control master/music/effects, graphics, reduced motion and camera sensitivity. English is the only installed language. Fullscreen/orientation/audio are optional browser capabilities, never prerequisites for play.
+- `missionx-commander-v1` stores your display name, preferences and earned progression; the existing flight-deck key stores your design and up to 12 flights. New Mission retains history; **Settings → Reset all local game data** removes both after confirmation. No data is sent to an account or analytics service.
+- Development: `bun dev --hostname 0.0.0.0`; production: `bun run build && bun run start --hostname 0.0.0.0`. No new environment variables are needed for HQ.
+
+Implementation/QA evidence and known limitations: [docs/HQ-Implementation.md](docs/HQ-Implementation.md). The 3D launch is schematic, not a physically accurate flight calculation. Hardware performance, human audio listening and Safari/iOS/Android release checks remain necessary.

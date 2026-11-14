@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { detectDevice, requestImmersion } from "@/components/hq/device";
+import { missionAudio } from "@/game/audio/audio-manager";
 import { missions, type MissionId } from "./mission-data";
 
 export function MissionDialog({
@@ -77,8 +79,12 @@ export function MissionDialog({
         </div>
         <Link
           className="button"
-          href={`/play/goal?mission=${mission.id}`}
-          onClick={onClose}
+          href={`/hq?mission=${mission.id}`}
+          onClick={() => {
+            if (detectDevice().kind === "desktop") requestImmersion();
+            void missionAudio.unlock();
+            onClose();
+          }}
         >
           ENTER MISSION CONTROL <span>↗</span>
         </Link>
