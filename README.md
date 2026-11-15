@@ -182,3 +182,7 @@ MissionX software and associated documentation are licensed under the [MIT Licen
 ## Independence disclaimer
 
 MissionX is an independent educational project created by Team NASA WARRIORS. It is not affiliated with, endorsed by, or sponsored by NASA or any other government space agency. NASA and other organization names, resources, and references are acknowledged for their respective educational or informational contributions. Their inclusion does not imply endorsement.
+
+### Score and saved-run interpretation (0.1.12)
+
+Weighted Performance Score is rounded independently of mission outcome:100 does not necessarily mean every objective was achieved. Inspect SUCCESS/PARTIAL/FAILED and unmet requirements. Schema1 reports use captured inputs; unsupported/corrupt supplied snapshots are not silently reconstructed. Snapshotless legacy saves remain explicitly current-catalog reconstructions. See [final corrections](docs/Post-Audit-Corrections.md).

@@ -38,3 +38,7 @@ New store-launched runs capture selected inputs, assumptions, calculated balance
 Legacy runs without snapshots cannot recover original inputs: restoration retains legacy model dispatch but reconstructs using current catalogs, explicitly labeled in UI/PDF. Legacy-v2 also shares current resource/verification helpers. No claim of bit-for-bit historical replay is made. Current visual telemetry/archive comparison outside the captured report context can still use current catalog presentation; the report's provenance disclosure is authoritative for its balance tables.
 
 Agency/community source links are conceptual or historical references, not numerical justification. See classifications and actual review scope in [RESOURCES.md](RESOURCES.md). Future scientific models need verified sources, units, assumptions, review and separate owner approval.
+
+### 0.1.12 snapshot/score clarification
+
+Fixed schema1 validation is independent of current catalog/assumption structure. Future optional fields do not become required by changing today’s data; required historical numeric fields remain required. Invalid/unsupported supplied snapshots fail closed, with a storage warning and retained raw save, not reconstructed reports. This is not a permanent executable archive. Weighted Performance Score is rounded independently of outcome;100 does not imply all objectives were achieved.

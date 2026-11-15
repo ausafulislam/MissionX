@@ -12,7 +12,7 @@ FlightScene now reads the lifecycle countdown and renders no second number overl
 
 ## Historical integrity
 
-New store-launched runs capture selected catalog entries, assumptions, balances/checks, actual result and release IDs in optional schema1, within existing saved-run storage. Corruption checksum/shape validation,150KB bound; not authentication. Legacy missing snapshots remain restoreable using existing dispatch with explicit current-catalog reconstruction/unavailable-original wording; no old input fabricated. Reports use captured values; current source descriptions/diagnostic aggregation are not historical executable snapshots. Current telemetry/visual presentation is not fully archived. Schema validation still uses the current model3 structural template: future schema/catalog-ID removals require an explicit backward-compatible reader, not silent recomputation or a promised permanent replay guarantee. No risky mandatory migration performed.
+New store-launched runs capture selected catalog entries, assumptions, balances/checks, actual result and release IDs in optional schema1, within existing saved-run storage. Corruption checksum/shape validation,150KB bound; not authentication. Legacy missing snapshots remain restoreable using existing dispatch with explicit current-catalog reconstruction/unavailable-original wording; no old input fabricated. Reports use captured values; current source descriptions/diagnostic aggregation are not historical executable snapshots. Current telemetry/visual presentation is not fully archived. At 0.1.11 schema validation used the current model3 structural template. The 0.1.12 correction below replaces that template; catalog-ID removals still require separate compatibility work. Permanent executable replay is not promised. No risky mandatory migration performed.
 
 ## Sources and numeric provenance
 
@@ -35,3 +35,37 @@ README/index, references, field provenance, limitations, PDF, verification, simu
 ## Protected-document proposals — not applied
 
 No PRD/Architecture/Design edits. If approved, add a current-state paragraph to PRD describing configuration-readiness (not spacecraft certification), NOT EVALUATED properties, shared3/2/1 countdown and optional captured-run provenance. Proposed Architecture addition: optional `SavedRun.snapshot` schema1, captured-input report/diagnostics path, explicit legacy reconstruction, and future versioned-reader requirement. These changes require owner approval before any edit; Design remains permanently read-only. No result/score changes proposed or required.
+
+
+## Final blocker corrections — 0.1.12 (2026-11-14)
+
+The owner authorized only shared diagnostic precedence, score interpretation and version-aware snapshot reading. No scientific model, catalog magnitude, numerical formula, score weight, rounding, requirement or outcome threshold changed. Protected Design/PRD/Architecture, CSS/layout, artwork and dependencies are unchanged. Package patch increased only after implementation tests/lint/typecheck/build and targeted browser/PDF checks passed; catalog/assumption registry IDs remain0.1.11 because those data values did not change.
+
+### Shared summary policy
+
+`aggregate()` now accepts status-bearing findings or groups; `summarizeTests()` calls it rather than defining a second precedence. It returns canonical `diagnosticStatus` plus existing presentation labels (FAIL→BLOCKED, WARNING→READY WITH WARNINGS, NOT EVALUATED→NOT EVALUATED, PASS→MISSION READY). Both group and finding summaries use FAIL > WARNING > NOT EVALUATED > PASS; empty→NOT EVALUATED. Missing counts/reasons remain visible when warnings take precedence. Launch, result report review and PDF continue to consume `flightTestResults()`/`testSummaryText()`.
+
+### Weighted Performance Score
+
+Both existing result screens, compact report identity and report/PDF label the weighted score explicitly. Shared explanation: the score is rounded independently of outcome;100 does not imply every objective was achieved. Original outcome-specific headings/classes/emblems and explanations remain. Moon starter seed0 is unchanged:44.9/45 science points,100 weighted score,PARTIAL. No score cap or hidden balance adjustment was introduced.
+
+### Schema-1 reader and safe defaults
+
+`snapshot-schema-v1.ts` defines a fixed wire contract independent of live catalogs, current assumptions shape or `simulate()`. Required numerical/structural fields, finite values, enums, IDs, unique selected part records, array/payload bounds and checksum are validated. Unknown additional fields are tolerated, not sourced from today's catalog. Adding a field to current assumptions no longer changes schema1 validation. Future scientific behavior must still define its own compatible reader; accepting extra data is not claiming the old reader implements it.
+
+Optional defaults: absent explanatory `assumptions.note` gets “Historical explanatory note not recorded; captured numerical assumptions are preserved.” Absent verification-check `blocking` defaults to true, preserving existing required-check semantics. Absent `payloadLimit`/`requiresAny` remain absent (no added limit/dependency). No missing required scientific numeric value receives a guessed or current-catalog default.
+
+Version dispatch explicitly distinguishes missing, valid, invalid and unsupported snapshots. Only genuinely snapshotless legacy saves use labeled current-catalog reconstruction. Supplied invalid/unsupported snapshots cannot fall back: report input access throws, restoration warns and omits unsupported flights from active memory, and automatic persistence is paused to retain the original raw save. Explicit workspace reset clears that warning/resumes saving. This may require owner/user recovery of a rejected record; no automatic migration is attempted. Current editor/schema still recognizes current catalog IDs; removal/renaming of IDs needs separate compatibility work. Snapshots are educational data records, not permanent executable archives or authenticated evidence.
+
+### Actual validation
+
+- `bun run test`:114 pass,0fail across19 files (19 new tests). Added all seven requested precedence cases plus mixed-group precedence/count/reason checks; exact seed0; fixed-schema optional/required/unknown cases; frozen schema1 fixture generated with committed0.1.11 writer; six success/loss restoration/report/PDF cases; legacy model1/2/3 restoration for all missions.
+- `bun run lint`, `bun run typecheck`, `bun run build`, `git diff --check`: passed before patch bump. No dependencies added.
+- Chromium compatibility mode, production build: Moon/Sun/Mars seed5 success1440×900 and seed43 loss390×844; Moon seed0 partial1440×900. HQ journeys, six reviews where eligible, shared UI summary equality and PDF downloads passed; flight-deck result labels/explanations checked after reload/navigation. No observed page/console errors; no horizontal overflow in measured flight-deck results.
+- Phone-width Moon radio-low warning journey: displayed6 groups (1PASS,2WARNING,3NOT EVALUATED),41 findings (33PASS,2WARNING,6NOT EVALUATED),READY WITH WARNINGS. Exact shared summary matched UI.
+- Independently parsed seven PDFs (three success/loss pairs plus Moon seed0): score label/explanation, outcome, exact shared arrival summary, all text bounds and per-page site links passed; Moon/Sun23 pages, Mars24. Captured result parity checked.
+- Browser flows used WebGL-disabled compatibility mode; physical GPU/audio/print/accessibility and exhaustive visual sign-off were not rerun or certified. Artwork permission remains unresolved; software fixes are not legal release clearance.
+
+### Owner confirmation required — unchanged assets
+
+See [Asset-Attribution.md](Asset-Attribution.md): logo.png, its logo-report.png derivative, orbital-hero.png and lunar-mission.png. No lunar-closeup.png exists; owner must confirm intended identity. No artwork replaced, removed or relicensed. No push, PR or release performed.

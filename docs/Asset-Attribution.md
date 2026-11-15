@@ -74,3 +74,16 @@ Installed manifest scan in the preceding audit covered405 packages, not shipped 
 | three-stdlib, maath, three-mesh-bvh, @pdf-lib/standard-fonts, @pdf-lib/upng | MIT declarations | Retain notices; full transitive closure still needs artifact review |
 
 Pending owner decisions: artwork identity/rights, actual redistribution targets, and whether to commission a full shipped-artifact license/SBOM review. Referencing NASA/JPL/CSA or a participant team page grants neither endorsement nor asset permission.
+
+
+## Separate owner confirmation checklist — 0.1.12
+
+No artwork was changed by the final software corrections. For each item, confirm creator, creation/source history, ownership or permission, and distribution/derivative rights in the intended public release:
+
+1. `public/images/logo.png` — supplied logo.
+2. `public/images/logo-report.png` — derivative of the same logo; underlying and derivative permission.
+3. `public/images/orbital-hero.png` — supplied cinematic artwork; earlier AI-generation history is not proof of rights.
+4. `public/images/lunar-mission.png` — supplied lunar artwork; confirm whether this is the intended “lunar-closeup.png,” which is absent.
+5. `docs/images/*.webp` — application screenshots inherit any restrictions of the artwork above; not an independent clearance.
+
+Status for the underlying supplied art remains **Unknown / Requires owner confirmation**. Repository MIT and passing software tests do not establish legal clearance.

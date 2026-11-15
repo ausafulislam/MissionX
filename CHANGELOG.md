@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.12 — final release blocker corrections (2026-11-14)
+
+- Unified group/finding summary aggregation through one policy: FAIL > WARNING > NOT EVALUATED > PASS; empty is NOT EVALUATED. Counts and individual reasons retained.
+- Labeled Weighted Performance Score and explained independent rounding in both result screens and PDF; Moon seed0 remains100/PARTIAL with44.9/45 science. No numerical gameplay/balance change.
+- Added a fixed version-aware schema1 reader, safe non-numeric/structural defaults and explicit unsupported/invalid handling without current-catalog fallback. Rejected raw saves are retained until explicit reset; snapshotless legacy dispatch preserved.
+- Added19 tests (114 total passing), including a frozen0.1.11-writer fixture. Lint/typecheck/build passed. Seven mission browser journeys and seven PDF bounds/summary/score checks passed in the documented compatibility environment.
+- No dependencies/artwork/Design/PRD/Architecture changes. Ownership confirmation still needed for supplied logo, report derivative, hero and lunar art; no legal clearance or publish/push/PR implied.
+- Evidence, defaults and limitations: [Post-Audit-Corrections.md](docs/Post-Audit-Corrections.md).
+
 ## 0.1.11 — post-audit accuracy corrections (2026-11-14)
 
 - Corrected incomplete diagnostic aggregation, visible group/finding counts and shared UI/PDF reasons; readiness is not physical certification.

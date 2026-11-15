@@ -276,3 +276,15 @@ Added root LICENSE (standard MIT text), copyright 2026 Team NASA WARRIORS. Updat
 - Validation:95 tests, lint, typecheck, build; Moon desktop success/phone-sized loss browser flows/downloads;23-page PDF bounds/links. Scope/limits and protected-document proposals: docs/Post-Audit-Corrections.md.
 
 No PRD/Architecture/Design edits, new dependency, numeric model/score change or mandatory save migration. Legacy original inputs and artwork ownership remain unavailable/unconfirmed. Full evidence and follow-up: [Post-Audit-Corrections.md](Post-Audit-Corrections.md).
+
+
+## 0.1.12 — final release blocker corrections (2026-11-14)
+
+- Unified group/finding summary aggregation through one policy: FAIL > WARNING > NOT EVALUATED > PASS; empty is NOT EVALUATED. Counts and individual reasons retained.
+- Labeled Weighted Performance Score and explained independent rounding in both result screens and PDF; Moon seed0 remains100/PARTIAL with44.9/45 science. No numerical gameplay/balance change.
+- Added a fixed version-aware schema1 reader, safe non-numeric/structural defaults and explicit unsupported/invalid handling without current-catalog fallback. Rejected raw saves are retained until explicit reset; snapshotless legacy dispatch preserved.
+- Added19 tests (114 total passing), including a frozen0.1.11-writer fixture. Lint/typecheck/build passed. Seven mission browser journeys and seven PDF bounds/summary/score checks passed in the documented compatibility environment.
+- No dependencies/artwork/Design/PRD/Architecture changes. Ownership confirmation still needed for supplied logo, report derivative, hero and lunar art; no legal clearance or publish/push/PR implied.
+- Evidence, defaults and limitations: [Post-Audit-Corrections.md](Post-Audit-Corrections.md).
+
+Files: engine diagnostics/flight-tests/run-snapshot/new snapshot-schema-v1/release-blockers.test + frozen fixture; mission-store; score-presentation/report/PDF; result screens/compact report; package/README and current snapshot/attribution docs. Next: owner confirms artwork rights and decides release; no push/PR/release.
