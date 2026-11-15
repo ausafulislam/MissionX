@@ -1,4 +1,6 @@
 "use client";
+import { TutorialTour } from "./tutorial-tour";
+import { TUTORIAL_STEPS, tutorialSeen, saveTutorial } from "@/game/onboarding/tutorial";
 import { advanceFlight } from "@/game/engine/flight-lifecycle";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -58,7 +60,17 @@ export function HQExperience() {
     [pendingMission, setPendingMission] = useState<MissionId | null>(null),
     [time, setTime] = useState(0),
     [playing, setPlaying] = useState(false),
-    [speed, setSpeed] = useState(1);
+    [speed, setSpeed] = useState(1),
+    [tourStep, setTourStep] = useState<number | null>(null);
+  const tourReturn = useRef<Station>("menu");
+  const changeTourStep = useCallback((step:number) => {
+    setTourStep(step);setStation(TUTORIAL_STEPS[step].station);setCollapsed(false);
+  },[]);
+  const exitTour = useCallback((completed:boolean) => {
+    let saved=false;try{saved=saveTutorial(completed?"completed":"skipped",window.localStorage);}catch{saveTutorial(completed?"completed":"skipped");}
+    setTourStep(null);setStation(tourReturn.current);
+    if(!saved)setNotice("Tutorial choice saved for this session only. Browser storage is unavailable.");
+  },[]);
   const reduced = osReduced || commander.preferences.reducedMotion,
     orientation =
       !!device &&
@@ -153,7 +165,7 @@ export function HQExperience() {
     [notify],
   );
   useEffect(() => {
-    if (!active) return;
+    if (!active || tourStep !== null) return;
     const back = () => {
       const value = location.hash.slice(1) as Station;
       if (
@@ -176,7 +188,7 @@ export function HQExperience() {
       window.removeEventListener("popstate", back);
       window.removeEventListener("hashchange", back);
     };
-  }, [active]);
+  }, [active, tourStep]);
   useEffect(() => {
     const escape = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
@@ -200,13 +212,13 @@ export function HQExperience() {
   const run = game.run,
     done = !!run && time >= run.result.duration;
   useEffect(() => {
-    if (!playing || !run || done || station !== "launch") return;
+    if (!playing || !run || done || station !== "launch" || tourStep !== null) return;
     const timer = setInterval(
-      () => setTime((t) => advanceFlight(run,t,0.1*speed)),
+      () => setTime((t) => advanceFlight(run,t,0.1*(t<3?1:speed))),
       100,
     );
     return () => clearInterval(timer);
-  }, [playing, run, done, speed, station]);
+  }, [playing, run, done, speed, station, tourStep]);
   const finish = game.finish;
   useEffect(() => {
     if (done && !game.complete) finish();
@@ -265,6 +277,8 @@ export function HQExperience() {
     setActive(true);
     setIdentity(false);
     setStation("menu");
+    let seen=false;try{seen=tutorialSeen(window.localStorage);}catch{seen=tutorialSeen();}
+    if(!seen){tourReturn.current="menu";changeTourStep(0);}
     missionAudio.play("open");
     const requested = new URLSearchParams(location.search).get("mission");
     if (
@@ -305,7 +319,7 @@ export function HQExperience() {
     >
       <FocusGuard
         active={
-          showIdentity || identity || settings || newMission || !!pendingMission
+          showIdentity || identity || settings || newMission || !!pendingMission || tourStep !== null
         }
       />
       <a className="skip-link" href="#hq-controls">
@@ -417,7 +431,7 @@ export function HQExperience() {
                 speed={speed}
                 onPlay={() => {
                   void missionAudio.unlock();
-                  setPlaying((p) => !p);
+                  if(time<3)setPlaying(true);else setPlaying((p) => !p);
                 }}
                 onSpeed={setSpeed}
                 onSkip={() => {
@@ -498,6 +512,9 @@ export function HQExperience() {
           {settings && (
             <SettingsPanel
               fullscreen={fullscreen}
+              onReplayTutorial={() => {
+                tourReturn.current=station;setSettings(false);setPlaying(false);changeTourStep(0);
+              }}
               onClose={() => {
                 setSettings(false);
                 missionAudio.play("close");
@@ -509,6 +526,7 @@ export function HQExperience() {
               onReset={resetAll}
             />
           )}
+          {tourStep !== null && <TutorialTour step={tourStep} onStep={changeTourStep} onExit={exitTour} reduced={reduced}/>}
           {identity && (
             <IdentityScreen
               name={commander.name}

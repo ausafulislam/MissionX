@@ -55,7 +55,7 @@ export function resources(design: Design): Resources {
     risk:
       massMarginPercent < 0 || powerMarginPercent < 0 || cost > mission.budget
         ? "high"
-        : Math.min(massMarginPercent, powerMarginPercent) < 10
+        : Math.min(massMarginPercent, powerMarginPercent) < assumptions.advisoryMarginPercent
           ? "moderate"
           : "low",
     mass: sum("mass") * fleet,

@@ -1,0 +1,8 @@
+.launch-countdown-stage{position:fixed;inset:0;z-index:80;pointer-events:none;display:grid;place-items:center;padding:16px;background:radial-gradient(ellipse at center,rgba(10,10,12,.7),transparent 65%)}
+.launch-countdown-number{width:min(570px,100%);text-align:center;color:#f5f5f2;text-shadow:0 2px 18px #0a0a0c;animation:launch-number .8s ease-out both;font-family:var(--font-heading),Arial,sans-serif}
+.launch-countdown-number span,.launch-countdown-number small{display:block;font-size:clamp(10px,2vw,13px);letter-spacing:.13em;line-height:1.6}
+.launch-countdown-number strong{display:block;font-size:clamp(110px,15vw,180px);font-weight:700;line-height:1.2;color:#ff6a2b;text-shadow:0 0 32px #ff6a2b55;overflow-wrap:anywhere}
+.launch-countdown-number.is-liftoff strong{font-size:clamp(40px,9vw,100px)}
+@keyframes launch-number{0%{opacity:.2;transform:scale(.85)}20%,75%{opacity:1;transform:scale(1)}100%{opacity:.25;transform:scale(1.025)}}
+@media(prefers-reduced-motion:reduce){.launch-countdown-number{animation:none}}
+.hq-reduced .launch-countdown-number,.game-reduced .launch-countdown-number{animation:none}

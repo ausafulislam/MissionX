@@ -1,5 +1,7 @@
 # MissionX
 
+> **Current finalization scope (2026-11-14):** preserve implemented0.1.12, no redesign/balance/dependency changes; historical landing-only/unavailable-CTA commissions below have been superseded. Existing code is playable. Design is read-only; PRD/Architecture edits still need exact approval. No push/PR/release. Current evidence/manual submission gates: [docs/Finalization-Report.md](docs/Finalization-Report.md). Preserve earlier policies/history.
+
 MissionX is an interactive space mission design game built by Team NASA WARRIORS for the NASA Space Apps Challenge 2026.
 
 Before doing anything, read these files in order: docs/PRD.md, docs/Architecture.md, docs/Rules.md, docs/Phases.md, docs/Design.md, docs/Memory.md. Then work only on the current phase listed in docs/Phases.md.
@@ -78,3 +80,37 @@ A feature is not complete until implementation and research documentation are bo
 MissionX is an independent educational project created by Team NASA WARRIORS for the NASA International Space Apps Challenge 2026. It is not affiliated with, endorsed by, or sponsored by NASA or any other space agency. NASA is not responsible for information contained on non-U.S. Government websites.
 
 Preserve the existing user-facing disclaimer. Distinguish NASA, CSA, academic, commercial and community providers. Review item-specific rights before reuse; do not copy without permission or compatible terms. Full disclaimer in the user-facing credits area is pending the separately approved UI task, not implemented by this policy update.
+
+
+## Documentation and repository standards — owner-approved 2026-11-14
+
+This additive policy preserves all preceding rules. The owner approved the documentation plan and Architecture reconciliation; `docs/Design.md` remains read-only and PRD changes still require approval.
+
+- Maintain README and docs index as accurate entry points; distinguish current behavior, historical plans and proposed work. Prefer existing filenames; avoid case-conflicting duplicates.
+- Documentation must trace features/formulas/commands/env/API descriptions to actual code and tests. No invented metrics, endpoints, author identities, badges, releases or successful checks.
+- Capture screenshots from the real application; record viewport, date, compatibility/reduced-motion settings and limitations. Optimize without fabricating UI; include meaningful alt text.
+- Maintain original resource URLs, access dates, reviewed sections, implementation mapping, use type, confidence, adaptations and licensing status. Retrieval alone is not scientific or reuse validation.
+- Preserve exact independence language supplied by the owner in current documentation. Agency/team-page links imply no endorsement or asset permission.
+- No root license, private reporting address, funding link or third-party rights grant may be invented. Record unresolved decisions and obtain owner approval.
+- Documentation-only changes do **not** require a package version bump or release; this overrides only the unconditional patch-bump wording above for documentation-only tasks.
+- Validate relative links, anchors, screenshots, source IDs, diagrams and setup claims. Run Bun lint, typecheck, tests and build; report skipped external/browser checks honestly. Add automation only when it runs real supported commands; badges must not imply unexecuted CI.
+- Update CHANGELOG.md, docs/Memory.md and docs/Phases.md with actual work/evidence. Preserve application functionality, architecture boundaries, local fallback and accessibility accommodations.
+
+## Post-audit accuracy standards — 0.1.11 (additive owner instruction)
+
+Preserve all preceding rules; never edit `docs/Design.md`.
+1. Never claim NASA affiliation, endorsement, certification or validation without official evidence.
+2. Every external scientific source needs a verified purpose and traceable code relationship.
+3. Source URLs alone are not implementation evidence; similarity is not adoption evidence.
+4. Document provenance for each source-dependent numerical parameter.
+5. Label MissionX-authored values educational estimates; record unknown balancing rationale honestly.
+6. Document formula variables, units, assumptions and limitations.
+7. Keep conceptual references separate from implemented sources.
+8. Keep software dependencies/APIs separate from scientific references; identity/challenge pages are not engineering datasets.
+9. Mark unmodeled spacecraft properties NOT EVALUATED.
+10. PASS must never imply an unperformed physical measurement; incomplete groups cannot be plain PASS.
+11. PDF reports must share diagnostic data and actual mission state; distinguish captured, reconstructed and unavailable inputs and current metadata.
+12. Screenshots must depict actual application states and identify older-release captures.
+13. Respect third-party licensing and asset ownership; unknown permissions require confirmation.
+14. Documentation must match actual implementation, including historical limitations.
+15. `docs/Design.md` is permanently read-only. PRD/Architecture edits require exact proposal and approval.

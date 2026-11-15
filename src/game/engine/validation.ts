@@ -1,3 +1,4 @@
+import assumptions from "../data/assumptions.json";
 import {
   CATEGORIES,
   ORBITS,
@@ -253,12 +254,12 @@ export function verify(design: Design): Verification {
     checks.push({
       id,
       label,
-      status: value >= 10 ? "pass" : "close",
+      status: value >= assumptions.advisoryMarginPercent ? "pass" : "close",
       blocking: false,
       actual: value,
-      target: 10,
+      target: assumptions.advisoryMarginPercent,
       unit: "%",
-      reason: `${value.toFixed(1)}% headroom. 10% is a gameplay advisory, not a flight standard. Low headroom increases vulnerability to events.`,
+      reason: `${value.toFixed(1)}% headroom. ${assumptions.advisoryMarginPercent}% is a gameplay advisory, not a flight standard. Low headroom increases vulnerability to events.`,
     });
   }
   return {

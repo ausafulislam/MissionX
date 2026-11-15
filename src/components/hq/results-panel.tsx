@@ -1,4 +1,5 @@
 "use client";
+import { PERFORMANCE_SCORE_LABEL, PERFORMANCE_SCORE_EXPLANATION } from "@/game/report/score-presentation";
 import { MissionReport } from "@/components/game/mission-report";
 import { AnimatedScore } from "@/components/game/animated-score";
 import { OperationsNote } from "@/components/game/operations-note";
@@ -59,11 +60,12 @@ export function ResultsPanel({ onRedesign }: { onRedesign: () => void }) {
           <small>/ 100</small>
         </strong>
         <span>
-          MISSION SCORE
+          {PERFORMANCE_SCORE_LABEL}
           <br />
           {r.lifetime} MONTHS ACHIEVED
         </span>
       </div>
+      <p>{PERFORMANCE_SCORE_EXPLANATION}</p>
       <p>
         {r.science} / {m.scienceTarget} science points · {r.returnedData} GB/day
         returned.

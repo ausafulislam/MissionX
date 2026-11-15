@@ -1,5 +1,9 @@
 # Connected game experience upgrade — 2026-11-14
 
+> **Finalization reader note (0.1.12):** this is a historical record, not the current test count or task queue. Diagnostic precedence, weighted-score copy, captured-input/schema1 reading, authored provenance and stable-event copy were subsequently corrected. Current evidence/remaining work: [Finalization-Report.md](Finalization-Report.md), [Testing.md](Testing.md), [Post-Audit-Corrections.md](Post-Audit-Corrections.md). Earlier claims of pending work apply only to their recorded phase.
+
+> **Historical implementation/validation record.** Statements and check counts below apply to the recorded phase, not a new test execution. Use the [documentation index](README.md), [current architecture](Architecture.md) and [current testing record](Testing.md) for the present baseline. Original evidence is preserved.
+
 ## Audit and scope
 Improved the existing implementation in place: current Next.js routes, six flight-deck screens, HQ entry/station flow, catalogs, validated store, pure engine, 3D world, settings, fonts and existing animation utilities. No architecture reset, catalog replacement, or dependency installation. The audit found existing HQ-only oscillator cues and a nearly fixed background drone; the accessible `/play` journey did not share audio. Resource meters and result reports already existed and were extended rather than replaced.
 

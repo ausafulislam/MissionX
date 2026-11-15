@@ -1,0 +1,21 @@
+name: Documentation improvement
+description: Report inaccurate, missing or unclear documentation.
+title: "[Docs] "
+body:
+  - type: input
+    id: location
+    attributes:
+      label: File or section
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Problem and suggested correction
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Implementation or source evidence
+      description: Include source paths or original resource links; distinguish assumptions from sourced facts.

@@ -12,12 +12,12 @@
     ],
     "description": "Fictional gameplay service, not a real provider specification. Small payloads, modest cost. Reaches Earth and lunar orbit.",
     "source": {
-      "title": "NASA \u2014 Design and Develop Science Missions",
-      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
-      "parameter": "Launch segment role; fictional services, not actual provider vehicles.",
+      "title": "MissionX authored educational parameters",
+      "url": "https://github.com/ausafulislam/MissionX",
+      "parameter": "Numerical fields: MissionX-authored educational estimate; original balancing rationale not recorded.",
       "accessed": "2026-11-14",
-      "confidence": "concept-only",
-      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+      "confidence": "authored",
+      "simplification": "No external numerical source established. Historical NASA presentation link described mission concepts, NOT these numbers. Field provenance: docs/DATA_SOURCES.md."
     }
   },
   {
@@ -35,12 +35,12 @@
     ],
     "description": "Fictional gameplay service, not a real provider specification. Flexible medium-lift service for constellations and lunar missions.",
     "source": {
-      "title": "NASA \u2014 Design and Develop Science Missions",
-      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
-      "parameter": "Launch segment role; fictional services, not actual provider vehicles.",
+      "title": "MissionX authored educational parameters",
+      "url": "https://github.com/ausafulislam/MissionX",
+      "parameter": "Numerical fields: MissionX-authored educational estimate; original balancing rationale not recorded.",
       "accessed": "2026-11-14",
-      "confidence": "concept-only",
-      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+      "confidence": "authored",
+      "simplification": "No external numerical source established. Historical NASA presentation link described mission concepts, NOT these numbers. Field provenance: docs/DATA_SOURCES.md."
     }
   },
   {
@@ -59,12 +59,12 @@
     ],
     "description": "Fictional gameplay service, not a real provider specification. Heavy-lift deep-space service. The only Mars-capable option.",
     "source": {
-      "title": "NASA \u2014 Design and Develop Science Missions",
-      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
-      "parameter": "Launch segment role; fictional services, not actual provider vehicles.",
+      "title": "MissionX authored educational parameters",
+      "url": "https://github.com/ausafulislam/MissionX",
+      "parameter": "Numerical fields: MissionX-authored educational estimate; original balancing rationale not recorded.",
       "accessed": "2026-11-14",
-      "confidence": "concept-only",
-      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+      "confidence": "authored",
+      "simplification": "No external numerical source established. Historical NASA presentation link described mission concepts, NOT these numbers. Field provenance: docs/DATA_SOURCES.md."
     }
   }
 ]

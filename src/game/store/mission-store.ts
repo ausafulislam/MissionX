@@ -7,10 +7,12 @@ import { simulate as simulateV2 } from "../engine/legacy-v2";
 import { simulate } from "../engine/simulation";
 import { verify } from "../engine/validation";
 import { missionDiagnostics } from "../engine/diagnostics";
+import { captureRunSnapshot, readRunSnapshot } from "../engine/run-snapshot";
 import { validDesign } from "../engine/schema";
 import type { Design, MissionId, SavedRun } from "../types";
 import { useCommander, validCommanderName } from "./commander-store";
 const KEY = "missionx-flight-deck-v1";
+const SNAPSHOT_WARNING = "A historical snapshot is invalid or uses an unsupported schema. That flight was not restored; current-catalog reconstruction was not performed. Original save retained; reset the workspace explicitly to resume saving.";
 const emptyDesign = (): Design => ({
   missionId: "moon",
   partIds: [],
@@ -35,28 +37,31 @@ function restoreRun(value: unknown): SavedRun | null {
     !Number.isInteger(result.seed) ||
     result.seed < 0 ||
     result.seed > 4294967295 ||
-    !(
+    !(r.snapshot !== undefined || (
       result.modelVersion === 3
         ? verify(r.design)
         : result.modelVersion === 2
           ? verify(r.design)
           : verifyLegacy(r.design)
-    ).ready
+    ).ready)
   )
     return null;
+  const captured = readRunSnapshot(r.snapshot, r.design);
+  if (r.snapshot !== undefined && !captured) return null;
   return {
+    ...(captured ? { snapshot: r.snapshot as SavedRun["snapshot"] } : {}),
     id: r.id,
     createdAt: r.createdAt,
     diagnosticsReviewed: typeof r.diagnosticsReviewed === "number" ? Math.max(0,Math.min(6,Math.floor(r.diagnosticsReviewed))) : 0,
     ...(typeof r.commanderName === "string" && validCommanderName(r.commanderName) ? {commanderName:r.commanderName.trim()} : {}),
     ...(typeof r.completedAt === "string" && Number.isFinite(Date.parse(r.completedAt)) && Date.parse(r.completedAt)>=Date.parse(r.createdAt) ? {completedAt:r.completedAt} : {}),
     design: r.design,
-    result:
+    result: captured?.result ?? (
       result.modelVersion === 3
         ? simulate(r.design, result.seed)
         : result.modelVersion === 2
           ? simulateV2(r.design, result.seed)
-          : simulateLegacy(r.design, result.seed),
+          : simulateLegacy(r.design, result.seed)),
   };
 }
 interface GameState {
@@ -105,8 +110,11 @@ export const useMissionStore = create<GameState>((set, get) => ({
       )
         throw new Error("Invalid save");
       const run = restoreRun(data.run);
+      const snapshotRejected = [data.run, ...data.history.slice(0,12)].some(
+        r => r && r.snapshot !== undefined && !readRunSnapshot(r.snapshot, r.design));
       set({
         hydrated: true,
+        ...(snapshotRejected ? {storageWarning:SNAPSHOT_WARNING} : {}),
         design: data.design,
         chosen: data.chosen === true,
         run,
@@ -191,13 +199,15 @@ export const useMissionStore = create<GameState>((set, get) => ({
       return false;
     useCommander.getState().hydrate();
     const timestamp = new Date().toISOString();
+    const result = simulate(design, seed);
     set({
       run: {
+        snapshot: captureRunSnapshot(design, result, timestamp),
         id: `${Date.now()}-${seed}`,
         createdAt: timestamp,
         ...(validCommanderName(useCommander.getState().name) ? {commanderName:useCommander.getState().name.trim()} : {}),
         design: { ...design, partIds: [...design.partIds] },
-        result: simulate(design, seed),
+        result,
       },
       complete: false,
     });
@@ -232,10 +242,10 @@ export const useMissionStore = create<GameState>((set, get) => ({
       complete: false,
     }),
   reset: () =>
-    set({ chosen: false, design: emptyDesign(), run: null, complete: false }),
+    set({ chosen: false, design: emptyDesign(), run: null, complete: false, storageWarning: "" }),
 }));
 useMissionStore.subscribe((state) => {
-  if (!state.hydrated) return;
+  if (!state.hydrated || state.storageWarning === SNAPSHOT_WARNING) return;
   try {
     localStorage.setItem(
       KEY,

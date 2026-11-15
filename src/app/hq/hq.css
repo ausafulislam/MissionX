@@ -2538,3 +2538,21 @@
 .commissioning-panel h3{font-size:16px;line-height:1.4}
 .commissioning-panel p,.mission-report p{line-height:1.5}
 .commissioning-panel .button,.mission-report .button{white-space:normal;max-width:100%;font-size:12px}
+/* Guided tour: existing panels are spotlighted, never cloned or made interactive. */
+.hq-tour-root{position:fixed;inset:0;z-index:300;pointer-events:none}
+.hq-tour-shade{position:fixed;background:rgba(10,10,12,.82);pointer-events:auto}
+.hq-tour-spotlight{position:fixed;border:2px solid #ff6a2b;box-shadow:0 0 16px #ff6a2b44;border-radius:6px;pointer-events:auto}
+.hq-tour-card.hq-modal{position:fixed;transform:none;margin:0;width:min(360px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:hidden;display:flex;flex-direction:column;background:#131316;border:1px solid #ff6a2b;padding:20px;pointer-events:auto;box-shadow:0 8px 30px #0009}
+.hq-tour-card.hq-modal h2{font-size:24px;line-height:1.2;margin:12px 0;text-transform:none;letter-spacing:-.02em}
+.hq-tour-card p{font-size:14px;line-height:1.6;color:#d3d3d6;margin-bottom:14px}
+.hq-tour-card progress{width:100%;height:5px;accent-color:#ff6a2b;display:block;margin:14px 0}
+.hq-tour-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.hq-tour-actions button{font-size:11px;min-height:40px;padding:8px 10px}
+.hq-tour-copy{animation:tour-copy .18s ease-out;overflow:auto;min-height:0}
+.hq-tour-actions,.hq-tour-card progress,.hq-tour-card>.eyebrow{flex-shrink:0}
+@keyframes tour-copy{from{opacity:.5;transform:translateY(3px)}to{opacity:1;transform:none}}
+.tour-reduced .hq-tour-copy{animation:none}
+@media(prefers-reduced-motion:reduce){.hq-tour-copy{animation:none}}
+.hq-tour-card progress::-webkit-progress-bar{background:#26262b}
+.hq-tour-card progress::-webkit-progress-value{background:#ff6a2b}
+.hq-tour-card progress::-moz-progress-bar{background:#ff6a2b}

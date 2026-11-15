@@ -1,7 +1,7 @@
 {
   "sourceIds": ["MISSIONX-EDUCATIONAL-ASSUMPTIONS", "NASA-SCIENCE-MISSIONS", "NASA-MISSION-VIZ"],
-  "note": "Authored presentation timing, not flight dynamics. Maps onto existing model playback; commissioning is a presentation gate at operation start, not a new physics event.",
-  "countdownSeconds": 10,
+  "note": "Descriptive historical source IDs only; this file is not imported by runtime and does not control timing. Historical adoption of named references is not established. Authored presentation timing, not flight dynamics. Maps onto existing model playback; commissioning is a presentation gate at operation start, not a new physics event.",
+  "countdownSeconds": 3,
   "stages": [
     {"id":"preparation","at":0,"title":"Earth launch preparation"},
     {"id":"ascent","at":3,"title":"Atmospheric ascent"},

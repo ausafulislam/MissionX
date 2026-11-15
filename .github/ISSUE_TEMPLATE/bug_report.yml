@@ -1,0 +1,25 @@
+name: Bug report
+description: Report a reproducible non-sensitive application problem.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include secrets, personal saves or security exploit details. See SECURITY.md."
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include route, mission, selected parts, launcher/orbit and seed when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and evidence
+      description: Browser, device/viewport, compatibility/reduced-motion mode, version/commit, sanitized screenshot or errors.

@@ -1930,3 +1930,13 @@ h1 {
     scroll-behavior: auto !important;
   }
 }
+/* Keep the desktop statistics in layout flow: large headings cannot collide
+   with an absolutely anchored bottom bar at short viewport heights. */
+@media (min-width:700px){
+  .hero{display:flex;flex-direction:column;height:auto}
+  .hero-content{flex:0 0 auto;margin-bottom:64px}
+  .hero-bottom{position:relative;left:auto;right:auto;bottom:auto;margin:0 5.1% 0 8%;margin-top:auto;flex:0 0 auto;min-height:105px}
+}
+@media (min-width:700px) and (max-width:1099px){
+  .hero-bottom{margin-left:7%;margin-right:5%}
+}

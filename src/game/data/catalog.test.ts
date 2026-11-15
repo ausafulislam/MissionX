@@ -11,6 +11,8 @@ test("all static entries disclose scope and gameplay assumptions", () => {
       assert.equal(new URL(x.source.url).protocol, "https:");
       assert.equal(x.source.accessed, "2026-11-14");
       assert.ok(x.source.parameter);
+      assert.equal(x.source.confidence, "authored");
+      assert.ok(!x.source.url.includes("nasa.gov"));
       assert.ok(x.source.simplification.includes("NOT these numbers"));
     }
   }

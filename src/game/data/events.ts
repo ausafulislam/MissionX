@@ -34,7 +34,7 @@ export const EVENT_OPTIONS: Omit<MissionEvent, "at">[] = [
     kind: "operations",
     label: "Stable science operations",
     description:
-      "Power, pointing and downlink remain stable. The spacecraft returns its planned dataset.",
+      "Power, pointing and downlink remain stable. Science return remains limited by the configured power, memory and downlink.",
     severity: "info",
     powerFactor: 1,
     dataFactor: 1,

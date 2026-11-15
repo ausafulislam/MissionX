@@ -13,7 +13,7 @@ export function ResourcePanel({ design }: { design: Design }) {
     scope = useRef<HTMLDivElement>(null);
   const rows = [
     {
-      label: "BUDGET",
+      label: "FLEET BUDGET",
       value: r.cost,
       limit: m.budget,
       unit: "$M",
@@ -21,7 +21,7 @@ export function ResourcePanel({ design }: { design: Design }) {
       note: "Parts + selected launch service",
     },
     {
-      label: "MASS",
+      label: "FLEET MASS",
       value: r.mass,
       limit: m.massLimit,
       unit: "kg",
@@ -29,7 +29,7 @@ export function ResourcePanel({ design }: { design: Design }) {
       note: `Total for ${m.fleet} spacecraft`,
     },
     {
-      label: "POWER",
+      label: "POWER / SPACECRAFT",
       value: r.consumption,
       limit: r.generation,
       unit: "W",
@@ -37,7 +37,7 @@ export function ResourcePanel({ design }: { design: Design }) {
       note: "Average demand / available generation",
     },
     {
-      label: "DATA",
+      label: "FLEET DATA",
       value: r.data,
       limit: r.downlink,
       unit: "GB/day",
@@ -65,7 +65,7 @@ export function ResourcePanel({ design }: { design: Design }) {
     <div className="game-panel resource-panel" ref={scope}>
       <div className="game-panel-heading">
         <h2>RESOURCE MONITOR</h2>
-        <span>{m.fleet === 4 ? "FLEET TOTALS" : "LIVE DESIGN"}</span>
+        <span>{m.fleet === 4 ? "4 CRAFT · SCOPES LABELED" : "1 SPACECRAFT"}</span>
       </div>
       <div className="resource-panel-body" aria-live="polite">
         {rows.map((row) => (
@@ -102,7 +102,7 @@ export function ResourcePanel({ design }: { design: Design }) {
             </strong>
           </span>
           <span>
-            ONBOARD STORAGE
+            FLEET ONBOARD STORAGE
             <strong>
               {r.storage.toFixed(1)} GB / {r.storageNeeded.toFixed(2)} GB
               between contacts
@@ -116,7 +116,7 @@ export function ResourcePanel({ design }: { design: Design }) {
             </strong>
           </span>
           <span>
-            USABLE BATTERY RESERVE{" "}
+            USABLE BATTERY / SPACECRAFT{" "}
             <strong>
               {r.batteryUsable.toFixed(0)} / {r.batteryNeeded.toFixed(0)} Wh
               required

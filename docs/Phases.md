@@ -1,6 +1,8 @@
 # Phases: MissionX
 
-**Current owner directive (2026-11-14):** execute the complete application phase across original phases 2–10. The previous landing-only scope is complete. Current implementation/validation checklist: [Implementation.md](Implementation.md). Deployment and event submission remain owner-operated Phase 11 tasks.
+**Historical implementation directive (2026-11-14):** execute the complete application phase across original phases 2–10. The previous landing-only scope is complete. Current implementation/validation checklist: [Implementation.md](Implementation.md). Deployment and event submission remain owner-operated Phase 11 tasks.
+
+**Current finalization:**0.1.12 app preserved. README/guides, deployment and submission drafts prepared; tests/browsers/PDF checked. Phase11 remains incomplete until owner resolves rights/SI, roster/timezone, tooling advisory, public short demo and exact production revision, then submits. [Current report](Finalization-Report.md). Universal deadline uses Team Owner residence timezone.
 
 Build in small phases. Work only on the current phase. Mark a phase done only when its "Done when" list is complete, then update `Memory.md`.
 
@@ -248,3 +250,43 @@ Approved sequence: lifecycle/identity/diagnostics → continuous journey → int
 
 ## Cinematic commission — visible integration v0.1.7
 Connected HQ continuous launch/journey and mission-specific arrival, flight-deck schematic, sequential commissioning gate/review and results PDF download. Commander/completion snapshot retained. All previously approved main systems are connected to the UI; no further approval pause. No real navigation/thermal/RF certification. See Memory for executed tests and remaining physical-device/PDF-accessibility limits.
+
+### 2026-11-14 — targeted journey polish (0.1.8)
+Existing HQ refinement only: shared clearance-safe schematic trajectory/operations orbit, target-aware arrival zoom, tangent attitude and bounded three-layer stable starfield. Original rocket, planets, UI placement and engine retained. Automated geometry plus engine regression checked; final visual/device sign-off remains manual.
+
+### 2026-11-14 — countdown and first-use guidance (0.1.9)
+Owner-authorized targeted refinement, not a redesign. Added shared visible launch countdown/interlock, eight-step real-control HQ spotlight tour, versioned completion/skip and Settings replay. Preserved current station panels/models, engine outcomes and six-check commissioning. Desktop/phone complete functional journeys and responsive tour checked in Chromium compatibility mode; actual hardware WebGL/audio/screen-reader sign-off remains separate.
+
+### 2026-11-14 — targeted Hero / PDF / launch-test presentation (0.1.10)
+Desktop Hero stats moved into normal flex flow with reserved CTA spacing; mobile layout unchanged. Printer-friendly, sectioned PDF with supplied-artwork black/orange transparent logo, clickable exact site URL, measured tables/pagination. Shared real preflight/arrival result projection drives the dedicated launch test panel and PDF; no calculation, gate or outcome changes. Desktop/tablet/phone Hero and successful/lost-launch functional flows/downloads checked; physical WebGL/audio and tagged-PDF certification remain unverified.
+
+
+## Documentation standards — owner-approved 2026-11-14
+Documentation-only commission: approved audit/plan and team URL integrated. Current architecture reconciled with original plan retained; Design/PRD untouched. README, current guides, source/formula registers, actual screenshot gallery and repository policies/templates prepared. No runtime change, dependency, license selection, CI workflow or version bump. Lint/types/89 tests/balance/build passed; browser seed-5 Moon compatibility journey completed with six reviews and no page errors. Full evidence/file list and unresolved license/private-contact/asset-rights decisions: [Documentation-Audit.md](Documentation-Audit.md).
+
+
+## 2026-11-14 — owner-approved MIT license
+Added root LICENSE (standard MIT text), copyright 2026 Team NASA WARRIORS. Updated current README, CONTRIBUTING, CITATION.cff, docs index/asset attribution and historical audit follow-up; changelog records the decision. Third-party font/dependency licenses and unresolved artwork ownership/trademark rights remain separate. No application, protected Design/PRD/Architecture or package-version change. Validation passed: lint, typecheck, 89 tests (0 failures), production build, 176 local documentation references and git diff --check. Private reporting contacts and asset-rights confirmation remain owner decisions.
+
+
+## 0.1.11 — post-audit accuracy corrections (2026-11-14)
+
+- Corrected incomplete diagnostic aggregation, visible group/finding counts and shared UI/PDF reasons; readiness is not physical certification.
+- Removed separate ten-count; clarified Sun Earth-orbit observations, per-craft/fleet scopes and capped-lifetime projection.
+- Added optional captured run inputs/IDs and explicit legacy current-catalog reconstruction; equivalent assumption wiring preserves numeric policy/results.
+- Reclassified NASA/Quicksat conceptual sources, added field-level DATA_SOURCES, selected PDF provenance and rights/dependency register; added15 permanent standards.
+- Validation:95 tests, lint, typecheck, build; Moon desktop success/phone-sized loss browser flows/downloads;23-page PDF bounds/links. Scope/limits and protected-document proposals: docs/Post-Audit-Corrections.md.
+
+No PRD/Architecture/Design edits, new dependency, numeric model/score change or mandatory save migration. Legacy original inputs and artwork ownership remain unavailable/unconfirmed. Full evidence and follow-up: [Post-Audit-Corrections.md](Post-Audit-Corrections.md).
+
+
+## 0.1.12 — final release blocker corrections (2026-11-14)
+
+- Unified group/finding summary aggregation through one policy: FAIL > WARNING > NOT EVALUATED > PASS; empty is NOT EVALUATED. Counts and individual reasons retained.
+- Labeled Weighted Performance Score and explained independent rounding in both result screens and PDF; Moon seed0 remains100/PARTIAL with44.9/45 science. No numerical gameplay/balance change.
+- Added a fixed version-aware schema1 reader, safe non-numeric/structural defaults and explicit unsupported/invalid handling without current-catalog fallback. Rejected raw saves are retained until explicit reset; snapshotless legacy dispatch preserved.
+- Added19 tests (114 total passing), including a frozen0.1.11-writer fixture. Lint/typecheck/build passed. Seven mission browser journeys and seven PDF bounds/summary/score checks passed in the documented compatibility environment.
+- No dependencies/artwork/Design/PRD/Architecture changes. Ownership confirmation still needed for supplied logo, report derivative, hero and lunar art; no legal clearance or publish/push/PR implied.
+- Evidence, defaults and limitations: [Post-Audit-Corrections.md](Post-Audit-Corrections.md).
+
+Files: engine diagnostics/flight-tests/run-snapshot/new snapshot-schema-v1/release-blockers.test + frozen fixture; mission-store; score-presentation/report/PDF; result screens/compact report; package/README and current snapshot/attribution docs. Next: owner confirms artwork rights and decides release; no push/PR/release.

@@ -1,0 +1,21 @@
+name: Feature request
+description: Propose an improvement without assuming implementation approval.
+title: "[Feature] "
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Learning need or problem
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior and alternatives
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources, assumptions and scope
+      description: Original source URLs/sections, adaptations, affected systems and any new dependencies or services.

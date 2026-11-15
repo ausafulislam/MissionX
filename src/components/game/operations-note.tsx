@@ -13,7 +13,7 @@ export function OperationsNote({ result }: { result: Simulation }) {
       <summary>OPERATIONS LEDGER & SCORING MODEL</summary>
       <p>
         Model {result.modelVersion}. Four-day representative end-of-life
-        campaign, extrapolated over achieved life (30 days/month). Energy is per
+        campaign, extrapolated over the lesser of achieved and required life (30 days/month). Energy is per
         spacecraft; data totals cover the fleet. Generated{" "}
         {o.generatedGB.toFixed(2)} GB → transmitted {o.transmittedGB.toFixed(2)}{" "}
         GB → Earth received {o.receivedGB.toFixed(2)} GB. Still onboard{" "}

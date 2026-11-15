@@ -1,4 +1,5 @@
 "use client";
+import { LaunchCountdown } from "@/components/game/launch-countdown";
 import { CommissioningPanel } from "@/components/game/commissioning-panel";
 import type { SavedRun } from "@/game/types";
 import { FlightStatus } from "@/components/game/flight-status";
@@ -26,6 +27,7 @@ export function LaunchOverlay({
     done = time >= run.result.duration;
   return (
     <>
+      <LaunchCountdown time={time} playing={playing}/>
       <div className="launch-cinematic-title">
         <span className="eyebrow">LIVE FLIGHT / SEED {run.result.seed}</span>
         <h1>
@@ -47,14 +49,7 @@ export function LaunchOverlay({
                   : "THE BLUE."}
           </em>
         </h1>
-        {time < 3 && (
-          <span className="hq-countdown">
-            T −{" "}
-            {Math.ceil(10 * (1-time/3))
-              .toString()
-              .padStart(2, "0")}
-          </span>
-        )}
+
       </div>
       <section className="hq-launch-events">
         <CommissioningPanel run={run} time={time} />
@@ -76,17 +71,17 @@ export function LaunchOverlay({
             {t.altitude} km<small>ALTITUDE*</small>
           </span>
           <span>
-            {t.power.toFixed(0)} W<small>SOLAR + RESERVE</small>
+            {t.power.toFixed(0)} W<small>POWER / CRAFT</small>
           </span>
           <span>
             {t.data.toFixed(1)}
-            <small>GB/DAY RETURN</small>
+            <small>GB/DAY FLEET RETURN</small>
           </span>
         </div>
         <p className="hq-fineprint">
           Ground: {t.contact ? "contact window" : "waiting for contact"} ·
-          usable battery {t.batteryWh.toFixed(1)} Wh · stored{" "}
-          {t.storedGB.toFixed(2)} GB · Earth received {t.receivedGB.toFixed(2)}{" "}
+          usable battery / craft {t.batteryWh.toFixed(1)} Wh · fleet stored{" "}
+          {t.storedGB.toFixed(2)} GB · fleet Earth received {t.receivedGB.toFixed(2)}{" "}
           GB.
         </p>
         <p className="hq-fineprint">
@@ -94,7 +89,7 @@ export function LaunchOverlay({
           your actual design.
         </p>
         <div className="hq-playback-controls">
-          <button className="hq-outlined" disabled={done} onClick={onPlay}>
+          <button className="hq-outlined" disabled={done || (playing && time < 3)} onClick={onPlay}>
             {done
               ? "✓ COMPLETE"
               : playing
@@ -107,6 +102,7 @@ export function LaunchOverlay({
             <button
               className="hq-speed"
               key={n}
+              disabled={time < 3}
               aria-pressed={speed === n}
               onClick={() => onSpeed(n)}
             >
@@ -119,7 +115,7 @@ export function LaunchOverlay({
             VIEW SCIENCE REPORT <span>↗</span>
           </button>
         ) : (
-          <button className="hq-text-button" onClick={onSkip}>
+          <button className="hq-text-button" disabled={time < 3} onClick={onSkip}>
             SKIP TO EVALUATION ↗
           </button>
         )}

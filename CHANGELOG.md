@@ -1,5 +1,44 @@
 # Changelog
 
+## Documentation finalization — 0.1.12 retained
+
+Task date2026-11-14 (sandbox evidence timestamps2026-11-15). Reconciled README/current technical/source/security guides; added deployment runbook and official-requirement-based submission drafts with seven-slide content storyboard. Refreshed six screenshots and added four real application/report visuals. Preserved protected Design/PRD/Architecture and history; exact stale-baseline proposals are documented separately. No application code, dependencies, balancing, scoring, artwork or version change.
+
+Fresh114tests/0fail, lint/typecheck/build/balance and seven real-control mission/download/PDF checks pass. Audit remains open for moderate minimatch tooling advisory; artwork/SI eligibility, team/owner timezone, exact deployed revision and final public demo/submission require owner confirmation. No push, PR, release, deployment or submission performed. See [finalization report](docs/Finalization-Report.md).
+
+
+## 0.1.12 — final release blocker corrections (2026-11-14)
+
+- Unified group/finding summary aggregation through one policy: FAIL > WARNING > NOT EVALUATED > PASS; empty is NOT EVALUATED. Counts and individual reasons retained.
+- Labeled Weighted Performance Score and explained independent rounding in both result screens and PDF; Moon seed0 remains100/PARTIAL with44.9/45 science. No numerical gameplay/balance change.
+- Added a fixed version-aware schema1 reader, safe non-numeric/structural defaults and explicit unsupported/invalid handling without current-catalog fallback. Rejected raw saves are retained until explicit reset; snapshotless legacy dispatch preserved.
+- Added19 tests (114 total passing), including a frozen0.1.11-writer fixture. Lint/typecheck/build passed. Seven mission browser journeys and seven PDF bounds/summary/score checks passed in the documented compatibility environment.
+- No dependencies/artwork/Design/PRD/Architecture changes. Ownership confirmation still needed for supplied logo, report derivative, hero and lunar art; no legal clearance or publish/push/PR implied.
+- Evidence, defaults and limitations: [Post-Audit-Corrections.md](docs/Post-Audit-Corrections.md).
+
+## 0.1.11 — post-audit accuracy corrections (2026-11-14)
+
+- Corrected incomplete diagnostic aggregation, visible group/finding counts and shared UI/PDF reasons; readiness is not physical certification.
+- Removed separate ten-count; clarified Sun Earth-orbit observations, per-craft/fleet scopes and capped-lifetime projection.
+- Added optional captured run inputs/IDs and explicit legacy current-catalog reconstruction; equivalent assumption wiring preserves numeric policy/results.
+- Reclassified NASA/Quicksat conceptual sources, added field-level DATA_SOURCES, selected PDF provenance and rights/dependency register; added15 permanent standards.
+- Validation:95 tests, lint, typecheck, build; Moon desktop success/phone-sized loss browser flows/downloads;23-page PDF bounds/links. Scope/limits and protected-document proposals: docs/Post-Audit-Corrections.md.
+
+## Unreleased — MIT license (2026-11-14)
+
+- Added owner-approved MIT license, copyright 2026 Team NASA WARRIORS.
+- Updated README, contribution guide, citation metadata and documentation licensing guidance; retained third-party notices and unresolved asset-rights qualifications. No application or package-version change.
+
+## Unreleased — documentation standards (2026-11-14)
+
+- Reorganized README with verified implementation, team/deployment links, setup, screenshots, limitations and exact owner-supplied independence statement.
+- Added documentation index and focused gameplay/catalog/component/verification/simulation/PDF/mentor/testing/limitations/asset guides; reconciled current architecture while preserving its historical plan.
+- Updated resource and engineering registers with scoped retrieval evidence, implementation/test mappings and explicit authored-policy labels.
+- Added six actual optimized screenshots, contribution/conduct/security/citation files, issue forms and PR template. No license, private contact, funding link or CI claim invented.
+- Appended permanent documentation standards to AGENTS/Rules. No application behavior, protected Design/PRD, dependency or package version changes.
+- Validation and unresolved owner decisions: see docs/Documentation-Audit.md.
+
+
 ## 0.1.1 — 2026-11-14
 - Audited official challenge and supplied references; documented provenance limits and sequential engineering plan.
 - Migrated mission/component/launcher/orbit catalogs to static JSON behind existing exports. Each entry now discloses source scope, access date, confidence and numerical gameplay assumptions.
@@ -40,3 +79,23 @@
 - Added actual-state multipage PDF mission report download to both results screens, including branding, commander, components, balances, diagnostics, events, science, four segments, recommendations, sources and disclaimer. Approved pdf-lib1.17.1 only; no extra font dependency or external mission-data API.
 - Added report/outcome/gating tests and source/model documentation. Numerical outcomes remain model3; diagnostics are configuration checks, not invented live sensors.
 - Validation:60 tests, lint/build/diff/source-reference checks pass; Chromium desktop/tablet/phone mission flows and normal-motion HQ flow pass including six checks and actual PDF downloads. Eight seeded success/partial/launch-loss browser cases also pass reload/identity/download checks. Physical-device/audio listening and PDF accessibility certification remain outside executed validation.
+
+## 0.1.8 — 2026-11-14
+- Replace independent craft/path/ring coordinates with mission-aware target-relative clearance geometry, centered four-craft formation, tangent heading and continuous operations orbit.
+- Smooth bounded target arrival zoom with aspect-aware fit; protect flight camera from accidental user orbit/zoom.
+- Add three stationary spatial star shells with varied brightness, tint and size, capped for low-quality rendering.
+- Add deterministic clearance, continuity, camera projection and star distribution regressions; preserve models, launch animation and commissioning rules.
+
+## 0.1.9 — 2026-11-14
+- Show large centered 3, 2, 1, LIFTOFF before ascent in HQ and accessible launch playback; reuse existing flight clock and synthesized sound cues.
+- Lock preparation to 1× and prevent skip/repeated-start bypass; keep existing simulation events and commissioning gate intact.
+- Automatically guide first-time HQ visitors through eight real-control spotlights, with Next/Back, Skip/Escape, progress, background interaction lock, viewport/scroll tracking and reduced-motion support.
+- Remember completed/skipped tutorials locally, degrade gracefully when storage fails, and add Replay Tutorial to existing Settings.
+- Add countdown/order/interlock and tutorial persistence regressions. No runtime dependencies, model redesign or protected-document edits.
+
+## 0.1.10 — 2026-11-14
+- Fix desktop Hero CTA/statistics collision by using normal layout flow with reserved vertical separation; preserve content and mobile styling.
+- Upgrade mission PDF to a cover and ordered report sections with measured wrapping, true tables, repeating continuation headers, page numbers and clickable exact MissionX website links.
+- Add transparent black/orange PDF-only logo derived from supplied artwork; leave website asset unchanged.
+- Add a dedicated flight test review panel using shared real preflight and arrival test data, explicit failure reasons, review progress and final summaries; reuse the existing commissioning gate.
+- Add cross-mission test/PDF parity, warning/blocking and PDF pagination/link/wrapping regressions. No new project dependencies or engineering-formula changes.

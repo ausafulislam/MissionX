@@ -1,3 +1,4 @@
+import assumptions from "../data/assumptions.json";
 import { EVENT_OPTIONS } from "../data/events";
 import { getMission, getRocket } from "../data/catalog";
 import type { Design, MissionEvent, SegmentReport, Simulation } from "../types";
@@ -253,7 +254,7 @@ export function simulate(design: Design, seed: number): Simulation {
       "Your design met the science goal. Explore whether a lighter or less expensive configuration can return the same science.",
     );
   return {
-    modelVersion: 3,
+    modelVersion: assumptions.modelVersion,
     operations,
     seed,
     outcome,

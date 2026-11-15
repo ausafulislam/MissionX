@@ -1,3 +1,65 @@
+# MissionX architecture — current implementation
+
+Audited 2026-11-14 against package 0.1.10. This section takes precedence over the **historical plan** retained below. The old sample interfaces, proposed filenames, one-hero-scene limit and deployment assumptions are not current implementation contracts.
+
+## Runtime and routes
+
+- Next.js App Router, React, strict TypeScript and Tailwind CSS.
+- `/`: landing sections, GSAP motion and Lenis scroll.
+- `/hq`: client-side headquarters, station panels, procedural scene modules and compatibility fallback.
+- `/play`: flight-deck entry with `/play/goal`, `/play/build`, `/play/verify`, `/play/launch`, `/play/result`, `/play/debrief`.
+- `POST /api/mentor`: the sole application API route; optional OpenAI call with deterministic local fallback.
+- Route-level error/not-found boundaries support recovery. Browser-facing API calls are same-origin.
+
+## Source ownership
+
+| Location | Responsibility |
+|---|---|
+| `src/game/types.ts` | Actual shared TypeScript models; do not use historical example interfaces below |
+| `src/game/data/catalog.ts` | Typed facade over static missions/parts/rockets/orbits/setup JSON |
+| `src/game/data/assumptions.json` | Model version and disclosed educational coefficients |
+| `src/game/data/events.ts` | Authored incident options |
+| `src/game/engine/` | Resources, verification, seeded simulation, operations, lifecycle, diagnostics, telemetry, progression and mentor advice |
+| `src/game/store/mission-store.ts` | Current design, validated runs, history, hydration and diagnostic review count |
+| `src/game/store/commander-store.ts` | Local commander identity/preferences/progression |
+| `src/game/report/` | Report rows, measured page layout and pdf-lib output |
+| `src/game/audio/` | Gesture-created procedural score/effects and lifecycle management |
+| `src/game/onboarding/` | Versioned first-use tutorial |
+| `src/components/hq/world/` | Multiple procedural visual modules, fallback/device/focus handling |
+| `src/components/game/` | Flight-deck UI and shared diagnostic/report components |
+
+## Data flow
+
+```text
+Static catalogs → pure resources / verify / simulate / operate
+                             ↑                  ↓
+                       mission store ← validated run
+                             ↓
+                    HQ or /play presentation
+                             ↓
+                 diagnostics / mentor / PDF report
+```
+
+Simulation computes a result; playback presents it. `flight-lifecycle.ts` and `flight-tests.ts` are shared projections, not independent science engines. Arrival acknowledgment controls playback; it does not manufacture measurements or change scoring formulas.
+
+## Persistence and trust
+
+Mission saves use local storage key `missionx-flight-deck-v1`, guarded parsing, validated IDs and bounded history. Hydration recomputes saved results with the recorded model version (1, 2 or 3); legacy modules remain in the engine. Historical replay is not necessarily bit-for-bit archival because catalogs may be shared. Commander preferences are separate; no cloud account/database is implemented. Clearing browser data removes local progress.
+
+The mentor validates catalog IDs and optional unsigned 32-bit seed, limits streamed JSON to 12,000 bytes, and recomputes the result server-side. It sends no commander name to the provider. No application rate limiter is present; deployment abuse controls are an owner responsibility. See [Mentor](Mentor.md).
+
+## Presentation and deployment boundaries
+
+Canvas is client-side/lazy-loaded. Multiple HQ scenes are authorized by later commissions in AGENTS.md, superseding the historical one-scene rule. Reduced motion, keyboard/touch controls, compatibility rendering and gesture-only audio are implemented accommodations, not blanket accessibility certification. Fonts/images are local; there is no live NASA data dependency.
+
+`next.config.ts` enables cache components/partial prefetching and the Tailwind Turbopack loader. The supplied public deployment is https://missionx-black.vercel.app/. Vercel account settings, production branch and automatic preview configuration are not verified by repository source. `NEXT_PUBLIC_SITE_URL` is currently unused; PDF links are explicit. See [setup](../README.md#run-locally) and [Testing](Testing.md).
+
+---
+
+# Historical architecture plan and implementation appendices
+
+**Historical record, retained rather than rewritten:** the following content mixes original intentions and dated implementation notes. Claims such as `fallback-text.json`, planned function names, TypeScript-only catalogs, one hero scene and automatic Vercel previews are superseded or unverified. Use the current overview and actual source for implementation work.
+
 # Architecture: MissionX
 
 Describes the app flow, tech stack, folder structure, data models and how the pieces connect. Does not define visual design (see Design.md and runtime instructions).

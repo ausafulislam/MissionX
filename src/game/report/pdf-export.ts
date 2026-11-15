@@ -1,77 +1,48 @@
+import { PERFORMANCE_SCORE_LABEL, PERFORMANCE_SCORE_EXPLANATION } from './score-presentation';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { buildMissionReport } from './mission-report';
+import { ReportLayout, MISSIONX_URL } from './pdf-layout';
+import { runInputs, runInputLabel } from '../engine/run-snapshot';
+import { flightTestResults, testSummaryText } from '../engine/flight-tests';
+import { flightLifecycle } from '../engine/flight-lifecycle';
 import type { SavedRun } from '../types';
-/** Paginated vector text/tables. Unicode cells use browser font rasterization, not silent transliteration. */
-export async function createMissionPdf(run: SavedRun, logo?: Uint8Array) {
-    const pdf = await PDFDocument.create();
-    pdf.setTitle(`MissionX ${run.id}`);
-    pdf.setAuthor('Team NASA WARRIORS');
-    const font = await pdf.embedFont(StandardFonts.Helvetica), bold = await pdf.embedFont(StandardFonts.HelveticaBold);
-    let page = pdf.addPage([595, 842]), y = 780;
-    const orange = rgb(1, .416, .169), ink = rgb(.08, .08, .1);
-    const newPage = () => { page = pdf.addPage([595, 842]); y = 780; };
-    if (logo) {
-        const image = await pdf.embedPng(logo);
-        page.drawImage(image, { x: 42, y: 790, width: 95, height: Math.min(35, 95 * image.height / image.width) });
-        y = 765;
-    }
-    const text = async (value: string, x: number, width: number, size = 9, heavy = false) => {
-        const words = value.replace(/[\r\n]+/g, ' ').split(/\s+/);
-        let line = '';
-        const lines: string[] = [];
-        // Conservative wrap including unbroken URLs/long names.
-        const max = Math.max(10, Math.floor(width / (size)));
-        for (const word of words) {
-            for (let i = 0; i < word.length; i += max) {
-                const part = word.slice(i, i + max);
-                if ((line + ' ' + part).trim().length > max) {
-                    lines.push(line);
-                    line = part;
-                }
-                else
-                    line = (line + ' ' + part).trim();
-            }
-        }
-        if (line)
-            lines.push(line);
-        for (const l of lines) {
-            if (y < 62)
-                newPage();
-            if (/[^\x20-\x7e]/.test(l) && typeof document !== 'undefined') {
-                const c = document.createElement('canvas');
-                c.width = Math.ceil(width * 3);
-                c.height = 48;
-                const ctx = c.getContext('2d')!;
-                ctx.font = `${heavy ? 'bold ' : ''}${size * 3}px sans-serif`;
-                ctx.fillStyle = '#141419';
-                ctx.fillText(l, 0, size * 3);
-                const img = await pdf.embedPng(c.toDataURL('image/png'));
-                page.drawImage(img, { x, y: y - 4, width: width, height: 16 });
-            }
-            else
-                page.drawText(l.replace(/[^\x20-\x7e]/g, '?'), { x, y, size, font: heavy ? bold : font, color: ink });
-            y -= 14;
-        }
-    };
-    for (const section of buildMissionReport(run)) {
-        if (y < 160)
-            newPage();
-        page.drawRectangle({ x: 35, y: y - 7, width: 525, height: 25, color: orange });
-        await text(section.title.toUpperCase(), 43, 505, 11, true);
-        y -= 18;
-        for (const row of section.rows) {
-            if (y < 100)
-                newPage();
-            await text(row[0], 43, 505, 9, true);
-            await text(row.slice(1).join(' | '), 43, 505);
-            y -= 10;
-            page.drawLine({ start: { x: 43, y: y + 5 }, end: { x: 550, y: y + 5 }, thickness: .3, color: rgb(.8, .8, .82) });
-        }
-        y -= 15;
-        if (section.title.startsWith('A /'))
-            newPage();
-    }
-    const pages = pdf.getPages();
-    pages.forEach((p, i) => { p.drawText(`MISSIONX | EDUCATIONAL ESTIMATES | ${i + 1} / ${pages.length}`, { x: 43, y: 30, size: 8, font, color: ink }); });
-    return pdf.save();
+/** Actual run data, measured text wrapping and row-aware printer-friendly tables. */
+export async function createMissionPdf(run:SavedRun,logo?:Uint8Array,generatedAt=new Date()) {
+ const mission=runInputs(run).mission;
+ const pdf=await PDFDocument.create();pdf.setTitle(`MissionX Mission Report / ${mission.name}`);pdf.setAuthor('Team NASA WARRIORS');pdf.setCreationDate(generatedAt);
+ const font=await pdf.embedFont(StandardFonts.Helvetica),bold=await pdf.embedFont(StandardFonts.HelveticaBold);
+ const layout=new ReportLayout(pdf,font,bold),sections=buildMissionReport(run);
+ if(logo){const image=await pdf.embedPng(logo);const width=255,height=width*image.height/image.width;layout.page.drawImage(image,{x:42,y:755-height,width,height});layout.y=715-height;}
+ else layout.y=735;
+ await layout.coverText('MISSION REPORT',32,true);
+ await layout.coverText(mission.name,21,true);
+ await layout.coverText(`Mission type: ${flightLifecycle(run,0).destination} / ${mission.fleet}-spacecraft science mission`,11);
+ await layout.coverText(`Commander: ${run.commanderName??'Not recorded for this flight'}`,13,true);
+ await layout.coverText(`RESULT: ${run.result.outcome.toUpperCase()}`,19,true);
+ await layout.coverText(`${PERFORMANCE_SCORE_LABEL}: ${run.result.score} / 100`,12,true);
+ await layout.coverText(PERFORMANCE_SCORE_EXPLANATION,10);
+ await layout.coverText(`Report generated: ${generatedAt.toISOString()}\nFlight ID: ${run.id}\nModel: ${run.result.modelVersion??1}\nCompletion: ${run.completedAt??'Not recorded'}`,10);
+ await layout.coverText(runInputLabel(run),10);
+ const urlY=layout.y;await layout.coverText(MISSIONX_URL,11,true);layout.link(layout.page,42,urlY-3,layout.measure(MISSIONX_URL,11,true),16);
+ await layout.coverText('Independent educational simulation. Configuration evaluations are not hardware certification. No real navigation, RF or thermal measurements are claimed.',10);
+ layout.page.drawLine({start:{x:42,y:layout.y},end:{x:553,y:layout.y},thickness:3,color:rgb(1,.416,.169)});
+ const pairs=(indices:number[])=>indices.flatMap(i=>sections[i].rows.map(row=>[row[0],row.slice(1).join('\n')]));
+ await layout.table('01 / Mission overview',[...pairs([1]),sections[2].rows[0],sections[5].rows[0],sections[5].rows[3]],['Item','Mission information'],[155,356]);
+ await layout.table('02 / Spacecraft configuration',sections[3].rows.slice(1),sections[3].rows[0],[160,135,216]);
+ await layout.table('03 / Mission balance sheet',[...pairs([4]),...sections[2].rows.slice(1,4),...sections[5].rows.slice(1,3)],['Metric / check','Evaluated value, margin or warning'],[155,356]);
+ await layout.table('04 / Launch and mission timeline',[
+  ['Countdown / ascent','3, 2, 1 and LIFTOFF precede ascent at t=3 in compressed playback. This is the presentation schedule, not a recorded real-world launch.'],...pairs([6])
+ ,sections[5].rows[4],sections[2].rows.at(-1)!],['Milestone','Actual event / modeled schedule'],[155,356]);
+ const tests=flightTestResults(run,run.result.duration);
+ const testRows=[['Preflight summary',tests.preflightSummary.status,testSummaryText(tests.preflightSummary)],
+  ...tests.preflight.map(t=>[t.name,t.status,`${t.description}. ${t.evidence}`]),
+  ['Arrival summary',tests.arrivalSummary.status,testSummaryText(tests.arrivalSummary)],
+  ...tests.arrival.flatMap((t,i)=>[[t.name,t.status,t.description],
+   ...t.evidence.split('\n').map((line,j)=>[tests.diagnostics[i].findings[j].name,tests.diagnostics[i].findings[j].status,line])]),
+  ['Actual flight result',run.result.outcome.toUpperCase(),tests.failure?.description??run.result.segments[0].explanation]];
+ await layout.table('05 / Mission test results',testRows,['Test / finding','Status','Description, evaluated result and reason'],[132,79,300]);
+ await layout.table('06 / Science results and evaluation',pairs([8,9]),['Objective / segment','Result and performance explanation'],[155,356]);
+ await layout.table('07 / Final assessment',pairs([10,11]),['Assessment','Findings and next attempt recommendations'],[155,356]);
+ await layout.table('Sources and references',pairs([12]),['Reference','Original URL, scope and limitations'],[145,366]);
+ layout.finish();return pdf.save();
 }
