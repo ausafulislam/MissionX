@@ -19,7 +19,7 @@ export interface DiagnosticTest {
 }
 // Descriptive provenance only; not a source resolver or external measurement.
 const sourceIds = ["MISSIONX-EDUCATIONAL-ASSUMPTIONS"];
-export const aggregate = (findings: DiagnosticFinding[]): DiagnosticStatus => findings.some(f => f.status === "FAIL") ? "FAIL" : findings.some(f => f.status === "WARNING") ? "WARNING" : findings.length === 0 || findings.some(f => f.status === "NOT EVALUATED") ? "NOT EVALUATED" : "PASS";
+export const aggregate = (findings: ReadonlyArray<{ status: DiagnosticStatus }>): DiagnosticStatus => findings.some(f => f.status === "FAIL") ? "FAIL" : findings.some(f => f.status === "WARNING") ? "WARNING" : findings.length === 0 || findings.some(f => f.status === "NOT EVALUATED") ? "NOT EVALUATED" : "PASS";
 /** Configuration commissioning, not invented live sensor readings or EOL forecasts. */
 export function missionDiagnostics(run: SavedRun, time: number): DiagnosticTest[] {
     const eligible = flightLifecycle(run, time).arrived;

@@ -1,4 +1,5 @@
 "use client";
+import { PERFORMANCE_SCORE_LABEL, PERFORMANCE_SCORE_EXPLANATION } from "@/game/report/score-presentation";
 import { MissionReport } from "@/components/game/mission-report";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -60,7 +61,7 @@ export function ResultScreen() {
             <AnimatedScore value={r.score} />
             <small>/ 100</small>
           </strong>
-          <span>MISSION SCORE</span>
+          <span>{PERFORMANCE_SCORE_LABEL}</span>
         </div>
         <div className="result-statement">
           <span
@@ -87,6 +88,7 @@ export function ResultScreen() {
                 ? "Your mission returned useful science, but some goals were not fully achieved. The next design begins with what you learned."
                 : "The mission did not deliver its science objective. The report below explains what happened and how you can improve."}
           </p>
+          <p>{PERFORMANCE_SCORE_EXPLANATION}</p>
           <span className="technical">
             SEED {r.seed} · {getRocket(run.design.rocketId).name.toUpperCase()}{" "}
             · {getOrbit(run.design.orbitId).name.toUpperCase()}

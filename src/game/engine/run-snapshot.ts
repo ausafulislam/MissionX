@@ -2,7 +2,7 @@ import { getMission, getOrbit, getRocket, PARTS } from '../data/catalog';
 import assumptions from '../data/assumptions.json';
 import { resources } from './resources';
 import { verify } from './validation';
-import { simulate } from './simulation';
+import { readSchema1 } from './snapshot-schema-v1';
 import type { Design, SavedRun, Simulation } from '../types';
 
 export const CATALOG_VERSION = 'missionx-catalog-0.1.11';
@@ -32,45 +32,40 @@ export function captureRunSnapshot(design: Design, result: Simulation, capturedA
     capturedAt, payload, checksum: checksum(payload) };
 }
 type Captured = ReturnType<typeof currentRunInputs> & { design: Design; result: Simulation };
-// Shape validation plus finite/bounded JSON and corruption checksum. Local saves are not signed records.
-function matches(value: unknown, template: unknown): boolean {
-  if (typeof template === 'number') return typeof value === 'number' && Number.isFinite(value);
-  if (typeof template === 'string') return typeof value === 'string' && value.length <= 20000;
-  if (typeof template === 'boolean') return typeof value === 'boolean';
-  if (Array.isArray(template)) return Array.isArray(value) && value.length <= 500 &&
-    value.every(v => !template.length || template.some(t => matches(v, t)));
-  if (!template || typeof template !== 'object') return value === template;
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
-  return Object.entries(template).every(([key, t]) => key === 'blocking' || matches((value as Record<string, unknown>)[key], t));
-}
-const cache = new WeakMap<object, {payload: string; checksum: string; design: string; data: Captured}>();
-export function readRunSnapshot(value: unknown, design: Design): Captured | null {
-  if (!value || typeof value !== 'object') return null;
+export type SnapshotRead =
+  | { status: 'missing' }
+  | { status: 'unsupported'; schemaVersion: unknown }
+  | { status: 'invalid' }
+  | { status: 'valid'; data: Captured };
+/** Version dispatch never reconstructs a supplied snapshot with today's inputs. */
+export function inspectRunSnapshot(value: unknown, design: Design): SnapshotRead {
+  if (value === undefined) return {status:'missing'};
+  if (!value || typeof value !== 'object') return {status:'invalid'};
   const s = value as RunSnapshot;
-  if (s.schemaVersion !== 1 || typeof s.payload !== 'string' || s.payload.length > 150000 ||
-      typeof s.catalogVersion !== 'string' || s.catalogVersion.length > 100 ||
-      typeof s.assumptionsVersion !== 'string' || s.assumptionsVersion.length > 100 ||
-      !Number.isFinite(Date.parse(s.capturedAt)) || s.checksum !== checksum(s.payload)) return null;
-  const key = JSON.stringify(design), hit = cache.get(s);
-  if (hit?.payload === s.payload && hit.checksum === s.checksum && hit.design === key) return hit.data;
+  if (s.schemaVersion !== 1) return {status:'unsupported', schemaVersion:s.schemaVersion};
+  if (typeof s.payload !== 'string' || s.payload.length > 150000 ||
+      typeof s.catalogVersion !== 'string' || !s.catalogVersion.length || s.catalogVersion.length > 100 ||
+      typeof s.assumptionsVersion !== 'string' || !s.assumptionsVersion.length || s.assumptionsVersion.length > 100 ||
+      typeof s.capturedAt !== 'string' || !Number.isFinite(Date.parse(s.capturedAt)) || s.checksum !== checksum(s.payload)) return {status:'invalid'};
   try {
-    const data = JSON.parse(s.payload);
-    const template = { ...currentRunInputs(design), design, result: simulate(design, 5) };
-    if (!matches(data, template) || JSON.stringify(data.design) !== JSON.stringify(design) ||
-      data.mission.id !== design.missionId || data.rocket.id !== design.rocketId || data.orbit.id !== design.orbitId ||
-      data.parts.length !== design.partIds.length || !data.parts.every((p: {id: string}) => design.partIds.includes(p.id)) ||
-      !['success','partial','failed'].includes(data.result.outcome) || data.result.modelVersion !== 3 ||
-      data.result.events.some((e: {kind: string; severity: string}) => !['countdown','liftoff','separation','deployment','operations','storm','outage','fault','failure','complete'].includes(e.kind) || !['info','warning','failure'].includes(e.severity)) ||
-      [...data.verification.checks, ...data.result.requirements, ...data.result.segments].some((c: {status: string}) => !['pass','close','fail'].includes(c.status))) return null;
-    cache.set(s, {payload: s.payload, checksum: s.checksum, design: key, data});
-    return data as Captured;
-  } catch { return null; }
+    const data = readSchema1(JSON.parse(s.payload), design);
+    return data ? {status:'valid', data:data as Captured} : {status:'invalid'};
+  } catch { return {status:'invalid'}; }
+}
+export function readRunSnapshot(value: unknown, design: Design): Captured | null {
+  const read = inspectRunSnapshot(value, design);
+  return read.status === 'valid' ? read.data : null;
 }
 export function runInputs(run: SavedRun) {
-  return readRunSnapshot(run.snapshot, run.design) ?? currentRunInputs(run.design);
+  const read = inspectRunSnapshot(run.snapshot, run.design);
+  if (read.status === 'missing') return currentRunInputs(run.design);
+  if (read.status === 'valid') return read.data;
+  throw new Error(`Historical snapshot ${read.status}; report unavailable. Current-catalog reconstruction is not permitted for a supplied snapshot.`);
 }
 export function runInputLabel(run: SavedRun) {
-  return readRunSnapshot(run.snapshot, run.design)
+  const read = inspectRunSnapshot(run.snapshot, run.design);
+  if (read.status === 'unsupported' || read.status === 'invalid') return `Historical snapshot ${read.status}; original inputs unavailable to this reader. No current-catalog reconstruction performed.`;
+  return read.status === 'valid'
     ? `Captured at simulation: ${run.snapshot!.capturedAt}; catalog ${run.snapshot!.catalogVersion}; assumptions ${run.snapshot!.assumptionsVersion}. Results and calculated balances captured, not measured.`
     : 'Historical inputs unavailable: no valid snapshot. Balances and diagnostics reconstructed using the current catalog; legacy results are recomputed by the recorded engine model. Original historical values cannot be recovered.';
 }

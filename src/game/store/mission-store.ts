@@ -12,6 +12,7 @@ import { validDesign } from "../engine/schema";
 import type { Design, MissionId, SavedRun } from "../types";
 import { useCommander, validCommanderName } from "./commander-store";
 const KEY = "missionx-flight-deck-v1";
+const SNAPSHOT_WARNING = "A historical snapshot is invalid or uses an unsupported schema. That flight was not restored; current-catalog reconstruction was not performed. Original save retained; reset the workspace explicitly to resume saving.";
 const emptyDesign = (): Design => ({
   missionId: "moon",
   partIds: [],
@@ -109,8 +110,11 @@ export const useMissionStore = create<GameState>((set, get) => ({
       )
         throw new Error("Invalid save");
       const run = restoreRun(data.run);
+      const snapshotRejected = [data.run, ...data.history.slice(0,12)].some(
+        r => r && r.snapshot !== undefined && !readRunSnapshot(r.snapshot, r.design));
       set({
         hydrated: true,
+        ...(snapshotRejected ? {storageWarning:SNAPSHOT_WARNING} : {}),
         design: data.design,
         chosen: data.chosen === true,
         run,
@@ -238,10 +242,10 @@ export const useMissionStore = create<GameState>((set, get) => ({
       complete: false,
     }),
   reset: () =>
-    set({ chosen: false, design: emptyDesign(), run: null, complete: false }),
+    set({ chosen: false, design: emptyDesign(), run: null, complete: false, storageWarning: "" }),
 }));
 useMissionStore.subscribe((state) => {
-  if (!state.hydrated) return;
+  if (!state.hydrated || state.storageWarning === SNAPSHOT_WARNING) return;
   try {
     localStorage.setItem(
       KEY,

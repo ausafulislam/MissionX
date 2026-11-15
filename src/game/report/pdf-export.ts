@@ -1,3 +1,4 @@
+import { PERFORMANCE_SCORE_LABEL, PERFORMANCE_SCORE_EXPLANATION } from './score-presentation';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { buildMissionReport } from './mission-report';
 import { ReportLayout, MISSIONX_URL } from './pdf-layout';
@@ -18,6 +19,8 @@ export async function createMissionPdf(run:SavedRun,logo?:Uint8Array,generatedAt
  await layout.coverText(`Mission type: ${flightLifecycle(run,0).destination} / ${mission.fleet}-spacecraft science mission`,11);
  await layout.coverText(`Commander: ${run.commanderName??'Not recorded for this flight'}`,13,true);
  await layout.coverText(`RESULT: ${run.result.outcome.toUpperCase()}`,19,true);
+ await layout.coverText(`${PERFORMANCE_SCORE_LABEL}: ${run.result.score} / 100`,12,true);
+ await layout.coverText(PERFORMANCE_SCORE_EXPLANATION,10);
  await layout.coverText(`Report generated: ${generatedAt.toISOString()}\nFlight ID: ${run.id}\nModel: ${run.result.modelVersion??1}\nCompletion: ${run.completedAt??'Not recorded'}`,10);
  await layout.coverText(runInputLabel(run),10);
  const urlY=layout.y;await layout.coverText(MISSIONX_URL,11,true);layout.link(layout.page,42,urlY-3,layout.measure(MISSIONX_URL,11,true),16);

@@ -1,11 +1,13 @@
 import type { SavedRun } from '../types';
 import { runInputs } from './run-snapshot';
-import { missionDiagnostics, type DiagnosticStatus } from './diagnostics';
+import { aggregate, missionDiagnostics, type DiagnosticStatus } from './diagnostics';
 export interface FlightTestResult { id:string; name:string; status:DiagnosticStatus; description:string; evidence:string; }
 export function summarizeTests<T extends {status: DiagnosticStatus}>(tests: T[]) {
  const count=(status:DiagnosticStatus)=>tests.filter(t=>t.status===status).length;
  const summary={total:tests.length,passed:count('PASS'),failed:count('FAIL'),warnings:count('WARNING'),notEvaluated:count('NOT EVALUATED')};
- return {...summary,status:summary.failed?'BLOCKED':summary.notEvaluated?'NOT EVALUATED':summary.warnings?'READY WITH WARNINGS':'MISSION READY'};
+ const diagnosticStatus = aggregate(tests);
+ const labels = {FAIL:'BLOCKED', WARNING:'READY WITH WARNINGS', 'NOT EVALUATED':'NOT EVALUATED', PASS:'MISSION READY'} as const;
+ return {...summary,diagnosticStatus,status:labels[diagnosticStatus]};
 }
 /** Single presentation projection; never replaces engineering verification or sensor measurements. */
 export function flightTestResults(run:SavedRun,time:number) {
