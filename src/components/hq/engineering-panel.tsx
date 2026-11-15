@@ -13,15 +13,15 @@ export function ResourceStrip() {
   return (
     <div className="hq-resource-strip">
       {[
-        ["MASS", `${r.mass} / ${m.massLimit}`, r.mass <= m.massLimit],
-        ["BUDGET", `$${r.cost} / ${m.budget}M`, r.cost <= m.budget],
+        ["FLEET MASS", `${r.mass} / ${m.massLimit}`, r.mass <= m.massLimit],
+        ["FLEET COST", `$${r.cost} / ${m.budget}M`, r.cost <= m.budget],
         [
-          "POWER",
+          "POWER / CRAFT",
           `${r.consumption} / ${r.generation.toFixed(0)}W`,
           r.consumption <= r.generation,
         ],
         [
-          "DATA",
+          "FLEET DATA",
           `${r.data} / ${r.downlink.toFixed(0)} GB/d`,
           r.data <= r.downlink,
         ],
@@ -80,8 +80,8 @@ export function EngineeringPanel({
           : "Click installed components on the model to inspect them."}{" "}
         Drag to orbit. Pinch or scroll to inspect. Mass headroom{" "}
         {balance.massMarginPercent.toFixed(1)}%; EOL power headroom{" "}
-        {balance.powerMarginPercent.toFixed(1)}%; usable battery{" "}
-        {balance.batteryUsable.toFixed(0)} Wh; onboard memory {balance.storage}{" "}
+        {balance.powerMarginPercent.toFixed(1)}%; usable battery per spacecraft{" "}
+        {balance.batteryUsable.toFixed(0)} Wh; fleet onboard memory {balance.storage}{" "}
         GB. Remaining budget ${balance.budgetRemaining.toFixed(1)}M;{" "}
         {balance.risk} risk (gameplay heuristic).
       </p>
@@ -95,7 +95,7 @@ export function EngineeringPanel({
           );
         }}
       >
-        LOAD VERIFIED BASELINE ↗
+        LOAD AUTHORED BASELINE ↗
       </button>
       <div className="hq-category-list" aria-label="Subsystem catalog">
         {CATEGORIES.map((c) => (
@@ -148,7 +148,7 @@ export function EngineeringPanel({
       </div>
       {selected && (
         <div className="hq-inspection" aria-live="polite">
-          <span className="eyebrow">COMPONENT INSPECTION</span>
+          <span className="eyebrow">COMPONENT INSPECTION / PER SPACECRAFT</span>
           <h3>{selected.name}</h3>
           <p>
             {selected.description} {selected.limitations}

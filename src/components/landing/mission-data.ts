@@ -19,11 +19,11 @@ export const missions = [
     category: "HELIOPHYSICS",
     difficulty: "Intermediate",
     description:
-      "One star. Four perspectives. Build a coordinated constellation of small satellites to study our Sun.",
+      "One star. Four perspectives. Build a coordinated constellation of small satellites in Earth orbit to study our Sun.",
     objective:
       "Coordinate four satellites · Observe solar activity · Return science data",
-    distance: "1 AU",
-    destination: "THE SUN",
+    distance: "EARTH ORBIT",
+    destination: "SOLAR OBSERVATION TARGET",
   },
   {
     id: "mars",

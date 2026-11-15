@@ -1,23 +1,25 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { buildMissionReport } from './mission-report';
 import { ReportLayout, MISSIONX_URL } from './pdf-layout';
-import { getMission } from '../data/catalog';
+import { runInputs, runInputLabel } from '../engine/run-snapshot';
 import { flightTestResults, testSummaryText } from '../engine/flight-tests';
 import { flightLifecycle } from '../engine/flight-lifecycle';
 import type { SavedRun } from '../types';
 /** Actual run data, measured text wrapping and row-aware printer-friendly tables. */
 export async function createMissionPdf(run:SavedRun,logo?:Uint8Array,generatedAt=new Date()) {
- const pdf=await PDFDocument.create();pdf.setTitle(`MissionX Mission Report / ${getMission(run.design.missionId).name}`);pdf.setAuthor('Team NASA WARRIORS');pdf.setCreationDate(generatedAt);
+ const mission=runInputs(run).mission;
+ const pdf=await PDFDocument.create();pdf.setTitle(`MissionX Mission Report / ${mission.name}`);pdf.setAuthor('Team NASA WARRIORS');pdf.setCreationDate(generatedAt);
  const font=await pdf.embedFont(StandardFonts.Helvetica),bold=await pdf.embedFont(StandardFonts.HelveticaBold);
  const layout=new ReportLayout(pdf,font,bold),sections=buildMissionReport(run);
  if(logo){const image=await pdf.embedPng(logo);const width=255,height=width*image.height/image.width;layout.page.drawImage(image,{x:42,y:755-height,width,height});layout.y=715-height;}
  else layout.y=735;
  await layout.coverText('MISSION REPORT',32,true);
- await layout.coverText(getMission(run.design.missionId).name,21,true);
- await layout.coverText(`Mission type: ${flightLifecycle(run,0).destination} / ${getMission(run.design.missionId).fleet}-spacecraft science mission`,11);
+ await layout.coverText(mission.name,21,true);
+ await layout.coverText(`Mission type: ${flightLifecycle(run,0).destination} / ${mission.fleet}-spacecraft science mission`,11);
  await layout.coverText(`Commander: ${run.commanderName??'Not recorded for this flight'}`,13,true);
  await layout.coverText(`RESULT: ${run.result.outcome.toUpperCase()}`,19,true);
  await layout.coverText(`Report generated: ${generatedAt.toISOString()}\nFlight ID: ${run.id}\nModel: ${run.result.modelVersion??1}\nCompletion: ${run.completedAt??'Not recorded'}`,10);
+ await layout.coverText(runInputLabel(run),10);
  const urlY=layout.y;await layout.coverText(MISSIONX_URL,11,true);layout.link(layout.page,42,urlY-3,layout.measure(MISSIONX_URL,11,true),16);
  await layout.coverText('Independent educational simulation. Configuration evaluations are not hardware certification. No real navigation, RF or thermal measurements are claimed.',10);
  layout.page.drawLine({start:{x:42,y:layout.y},end:{x:553,y:layout.y},thickness:3,color:rgb(1,.416,.169)});

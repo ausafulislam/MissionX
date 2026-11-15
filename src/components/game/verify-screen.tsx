@@ -135,7 +135,7 @@ export function VerifyScreen() {
         <div>
           <h2 className="game-label">FLIGHT SEED</h2>
           <p>
-            The same design and seed reproduce the same events. Change the seed
+            The same design, seed and model/catalog versions reproduce the same events. Configuration checks are not physical health measurements. Change the seed
             to explore another flight.
           </p>
         </div>

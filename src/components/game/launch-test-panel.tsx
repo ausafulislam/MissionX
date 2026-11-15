@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { flightTestResults, testSummaryText } from '@/game/engine/flight-tests';
+import { flightLifecycle } from '@/game/engine/flight-lifecycle';
 import type { DiagnosticStatus } from '@/game/engine/diagnostics';
 import type { SavedRun } from '@/game/types';
 import { useMissionStore } from '@/game/store/mission-store';
@@ -9,7 +10,7 @@ import './launch-test-panel.css';
 const indicator=(s:DiagnosticStatus)=>s==='PASS'?'✓':s==='FAIL'?'×':s==='WARNING'?'!':'—';
 export function LaunchTestPanel({run,time}:{run:SavedRun;time:number}) {
  const model=flightTestResults(run,time),count=run.diagnosticsReviewed??0;
- const arrived=model.arrival.some(t=>t.status!=='NOT EVALUATED'),current=model.diagnostics[Math.min(count,5)];
+ const arrived=flightLifecycle(run,time).arrived,current=model.diagnostics[Math.min(count,5)];
  const root=useRef<HTMLElement>(null),list=useRef<HTMLUListElement>(null);
  const reviewing=time>0&&time<3,failureAt=model.failure?.at;
  const acknowledge=useMissionStore(s=>s.acknowledgeDiagnostic);
@@ -38,14 +39,14 @@ export function LaunchTestPanel({run,time}:{run:SavedRun;time:number}) {
    <h3>{count<6?`TEST ${count+1} OF 6 · ${current.name}`:'ARRIVAL TEST SUMMARY'}</h3>
    {count<6?<>
     <span className={`test-status status-${current.status.toLowerCase()}`}>{indicator(current.status)} {current.status}</span>
-    <p>Arrival configuration evaluation, not live sensor certification.</p>
+    <p>Arrival configuration evaluation, not live sensor certification. {current.findings.filter(f=>f.status==='NOT EVALUATED').length} findings NOT EVALUATED.</p>
     <progress aria-label="Arrival tests reviewed" value={count} max={6}/>
     {current.findings.map(f=><details key={f.id}><summary>{f.name} · {f.status}</summary><p>{f.evidence}</p><p>Impact: {f.impact}</p><p>Next design: {f.recommendation}</p></details>)}
     <button className="button" disabled={current.status==='FAIL'} onClick={()=>{missionAudio.play(current.status==='WARNING'?'warning':'notification');acknowledge();}}>CONTINUE {count===5?'TO SCIENCE OPERATIONS':`TO TEST ${count+2}`} ↗</button>
    </>:<>
     <p className="test-summary" data-test-summary="arrival">{testSummaryText(model.arrivalSummary)}</p>
     <p>Configuration review complete. Unmodeled measurements remain NOT EVALUATED; readiness is not hardware certification.</p>
-    {model.arrival.map(t=><p key={t.id}>{t.name}: <span className={`test-status status-${t.status.toLowerCase()}`}>{indicator(t.status)} {t.status}</span></p>)}
+    {model.diagnostics.map(t=><details key={t.id}><summary>{t.name}: {indicator(t.status)} {t.status} · {t.findings.filter(f=>f.status==='NOT EVALUATED').length} findings NOT EVALUATED</summary>{t.findings.map(f=><p key={f.id}><strong>{f.name}: {f.status}</strong> — {f.evidence} Impact: {f.impact} Next design: {f.recommendation}</p>)}</details>)}
    </>}
   </section>}
  </aside>;

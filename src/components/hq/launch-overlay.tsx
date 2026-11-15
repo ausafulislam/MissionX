@@ -71,17 +71,17 @@ export function LaunchOverlay({
             {t.altitude} km<small>ALTITUDE*</small>
           </span>
           <span>
-            {t.power.toFixed(0)} W<small>SOLAR + RESERVE</small>
+            {t.power.toFixed(0)} W<small>POWER / CRAFT</small>
           </span>
           <span>
             {t.data.toFixed(1)}
-            <small>GB/DAY RETURN</small>
+            <small>GB/DAY FLEET RETURN</small>
           </span>
         </div>
         <p className="hq-fineprint">
           Ground: {t.contact ? "contact window" : "waiting for contact"} ·
-          usable battery {t.batteryWh.toFixed(1)} Wh · stored{" "}
-          {t.storedGB.toFixed(2)} GB · Earth received {t.receivedGB.toFixed(2)}{" "}
+          usable battery / craft {t.batteryWh.toFixed(1)} Wh · fleet stored{" "}
+          {t.storedGB.toFixed(2)} GB · fleet Earth received {t.receivedGB.toFixed(2)}{" "}
           GB.
         </p>
         <p className="hq-fineprint">

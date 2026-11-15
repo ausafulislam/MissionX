@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import type { Design, Simulation } from "@/game/types";
 import { telemetry } from "@/game/engine/telemetry";
 import { getRocket } from "@/game/data/catalog";
+import { countdownLabel } from "@/game/engine/flight-lifecycle";
 import { FlightStatus } from "./flight-status";
 import { Destination } from "./destination";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
@@ -182,9 +183,7 @@ export function FlightScene({
         <span className="technical">
           T{" "}
           {time < 3
-            ? `−${Math.ceil(10*(1-time/3))
-                .toString()
-                .padStart(2, "0")}`
+            ? countdownLabel(time)
             : `+${Math.floor(time - 3)
                 .toString()
                 .padStart(2, "0")}`}
@@ -201,9 +200,6 @@ export function FlightScene({
           {t.phase?.label.toUpperCase()}
         </span>
       </div>
-      {time < 3 && (
-        <div className="countdown-number">{Math.ceil(10*(1-time/3))}</div>
-      )}
       {failed && (
         <div className="failure-overlay">
           <span>×</span>

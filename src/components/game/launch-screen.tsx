@@ -112,11 +112,11 @@ function LaunchPlayback() {
             {[
               ["ALTITUDE", `${t.altitude} km`],
               ["VELOCITY", `${t.velocity.toFixed(1)} km/s`],
-              ["SOLAR SUPPLY", `${t.power.toFixed(0)} W`],
-              ["USEFUL DOWNLINK", `${t.data.toFixed(1)} GB/d`],
-              ["USABLE BATTERY", `${t.batteryWh.toFixed(1)} Wh`],
-              ["ONBOARD DATA", `${t.storedGB.toFixed(2)} GB`],
-              ["EARTH RECEIVED", `${t.receivedGB.toFixed(2)} GB`],
+              ["POWER / CRAFT", `${t.power.toFixed(0)} W`],
+              ["FLEET DOWNLINK", `${t.data.toFixed(1)} GB/d`],
+              ["BATTERY / CRAFT", `${t.batteryWh.toFixed(1)} Wh`],
+              ["FLEET ONBOARD DATA", `${t.storedGB.toFixed(2)} GB`],
+              ["FLEET RECEIVED", `${t.receivedGB.toFixed(2)} GB`],
               ["GROUND WINDOW", t.contact ? "CONTACT" : "NO CONTACT"],
             ].map(([label, value]) => (
               <div key={label}>
@@ -175,7 +175,7 @@ function LaunchPlayback() {
           <div className="timeline-footer technical">
             CONFIGURATION LOCKED AT LAUNCH.
             <br />
-            SAME DESIGN + SEED = SAME FLIGHT.
+            SAME DESIGN + SEED + MODEL/CATALOG = SAME FLIGHT.
           </div>
         </aside>
       </div>

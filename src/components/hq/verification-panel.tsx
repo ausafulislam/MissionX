@@ -25,7 +25,7 @@ export function VerificationPanel({
       </h2>
       <div className={`hq-readiness ${v.ready ? "ready" : ""}`} role="status">
         {v.ready
-          ? "✓ FLIGHT CERTIFIED"
+          ? "✓ CONFIGURATION READY"
           : `! ${v.checks.filter((c) => c.status !== "pass").length} CHECKS REQUIRE ATTENTION`}
       </div>
       <h3 className="hq-section-label">LAUNCH VEHICLE</h3>
@@ -97,7 +97,7 @@ export function VerificationPanel({
         />
       </label>
       <p className="hq-fineprint">
-        Same design + seed = same flight events. Blocking requirements must
+        Same design + seed + model/catalog versions = same flight events. Configuration checks are not physical health measurements. Blocking requirements must
         pass. Warnings marked as accepted operational risks may reduce science
         return.
       </p>
