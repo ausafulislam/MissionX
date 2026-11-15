@@ -49,3 +49,7 @@ Prior phase records contain broader success/loss, phone/tablet, PDF-download and
 Validate all changed relative Markdown links, anchors, image paths and alt text. Verify catalog counts/units against JSON, formulas against functions/tests and source IDs against resource anchors. No Mermaid diagram is added; plain-text architecture diagrams avoid untested rendering claims. Static stack badges are not CI, license or coverage badges. No new GitHub workflow or funding file is introduced.
 
 See [scientific limits](Scientific-Limitations.md), [source register](RESOURCES.md) and [documentation audit](Documentation-Audit.md).
+
+## Correction release 0.1.11
+
+Fresh95-test/lint/typecheck/build and compatibility-mode browser/PDF checks, with precise scope and failed setup attempts, are recorded in [Post-Audit-Corrections.md](Post-Audit-Corrections.md). Older counts above describe earlier validation.

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.11 — post-audit accuracy corrections (2026-11-14)
+
+- Corrected incomplete diagnostic aggregation, visible group/finding counts and shared UI/PDF reasons; readiness is not physical certification.
+- Removed separate ten-count; clarified Sun Earth-orbit observations, per-craft/fleet scopes and capped-lifetime projection.
+- Added optional captured run inputs/IDs and explicit legacy current-catalog reconstruction; equivalent assumption wiring preserves numeric policy/results.
+- Reclassified NASA/Quicksat conceptual sources, added field-level DATA_SOURCES, selected PDF provenance and rights/dependency register; added15 permanent standards.
+- Validation:95 tests, lint, typecheck, build; Moon desktop success/phone-sized loss browser flows/downloads;23-page PDF bounds/links. Scope/limits and protected-document proposals: docs/Post-Audit-Corrections.md.
+
 ## Unreleased — MIT license (2026-11-14)
 
 - Added owner-approved MIT license, copyright 2026 Team NASA WARRIORS.

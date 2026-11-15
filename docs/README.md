@@ -44,3 +44,7 @@ These are useful development records, **not an assertion every original requirem
 [Contributing](../CONTRIBUTING.md) · [Conduct](../CODE_OF_CONDUCT.md) · [Security](../SECURITY.md) · [Citation](../CITATION.cff)
 
 Software and associated documentation use the [MIT License](../LICENSE). Third-party notices and unresolved asset rights remain documented separately. No private reporting address or funding channel is published.
+
+## Correction release 0.1.11
+
+[Parameter-level provenance](DATA_SOURCES.md) documents authored values and derived outputs; [post-audit corrections](Post-Audit-Corrections.md) records implementation, compatibility, checks and protected-document proposals. Source classification uses evidence of adoption, not similarity.

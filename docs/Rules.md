@@ -167,3 +167,21 @@ This additive policy preserves all preceding rules. The owner approved the docum
 - Documentation-only changes do **not** require a package version bump or release; this overrides only the unconditional patch-bump wording above for documentation-only tasks.
 - Validate relative links, anchors, screenshots, source IDs, diagrams and setup claims. Run Bun lint, typecheck, tests and build; report skipped external/browser checks honestly. Add automation only when it runs real supported commands; badges must not imply unexecuted CI.
 - Update CHANGELOG.md, docs/Memory.md and docs/Phases.md with actual work/evidence. Preserve application functionality, architecture boundaries, local fallback and accessibility accommodations.
+## Post-audit accuracy standards — 0.1.11 (additive owner instruction)
+
+Preserve all preceding rules; never edit `docs/Design.md`.
+1. Never claim NASA affiliation, endorsement, certification or validation without official evidence.
+2. Every external scientific source needs a verified purpose and traceable code relationship.
+3. Source URLs alone are not implementation evidence; similarity is not adoption evidence.
+4. Document provenance for each source-dependent numerical parameter.
+5. Label MissionX-authored values educational estimates; record unknown balancing rationale honestly.
+6. Document formula variables, units, assumptions and limitations.
+7. Keep conceptual references separate from implemented sources.
+8. Keep software dependencies/APIs separate from scientific references; identity/challenge pages are not engineering datasets.
+9. Mark unmodeled spacecraft properties NOT EVALUATED.
+10. PASS must never imply an unperformed physical measurement; incomplete groups cannot be plain PASS.
+11. PDF reports must share diagnostic data and actual mission state; distinguish captured, reconstructed and unavailable inputs and current metadata.
+12. Screenshots must depict actual application states and identify older-release captures.
+13. Respect third-party licensing and asset ownership; unknown permissions require confirmation.
+14. Documentation must match actual implementation, including historical limitations.
+15. `docs/Design.md` is permanently read-only. PRD/Architecture edits require exact proposal and approval.

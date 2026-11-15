@@ -30,6 +30,6 @@ These evaluate configuration evidence at the presentation arrival milestone, **n
 
 ## Consistent reporting
 
-`flightTestResults()` maps engine verification and diagnostics to PASS / WARNING / FAIL / NOT EVALUATED. `summarizeTests()` counts actual results; BLOCKED takes precedence over NOT EVALUATED, then warnings, then ready. HQ, flight deck and PDF use this shared projection. A summary label does not erase individual unmodeled findings.
+`flightTestResults()` maps engine verification and diagnostics to PASS / WARNING / FAIL / NOT EVALUATED. Group aggregation: FAIL > WARNING > NOT EVALUATED > PASS; PASS requires every finding evaluated/passed. A mixed WARNING/NOT EVALUATED group retains WARNING and shows missing count. `summarizeTests()` reports separate group and finding totals/pass/fail/warning/unevaluated counts; overall BLOCKED takes precedence over NOT EVALUATED, then warnings, then ready. HQ, flight deck and PDF use this shared projection. Individual reasons remain inspectable after review. Counts are finding instances, including checks reused in multiple groups, not unique subsystem measurements. Baseline arrival has four NOT EVALUATED groups and six NOT EVALUATED findings. CONFIGURATION READY in preflight means blocking checks passed, not flight certification. New-run checks come from captured inputs; legacy checks are labeled current-catalog reconstruction.
 
 Tests: `engine.test.ts`, `diagnostics.test.ts`, `flight-tests.test.ts`, `countdown.test.ts`. See [testing](Testing.md) and [simulation](Launch-and-Simulation.md).

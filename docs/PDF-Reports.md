@@ -10,7 +10,9 @@ The result screen's download action calls the report builder and browser-side pd
 
 Sections A–M cover mission identity, purpose, selected spacecraft, resource/power/data calculations, cost, orbit/trajectory caveats, actual event timeline, preflight/arrival test results, scientific outcome, four mission segments, improvements, recommendations and sources/independence.
 
-Missing historical identity/completion dates are disclosed, not invented. Numeric configuration findings come from current engine projections; legacy run calculations and current shared catalog values can differ. Report snapshots are educational records, not engineering certificates.
+Missing historical identity/completion dates are disclosed, not invented. New runs capture selected inputs, assumptions, calculated balances/checks and actual result in optional snapshot schema1. Reports/diagnostics use the captured context; captured values are authored/calculated, not measured. Catalog and assumption registry identifiers and capture date are printed. Legacy runs without valid snapshots reconstruct balances/checks using current catalogs and recorded engine dispatch; unavailable historical values are explicitly disclosed. Snapshotless v2 still shares current helpers. Current documentation/source descriptions and diagnostic aggregation are not archived historical reporting logic. Report snapshots are educational records, not engineering certificates.
+
+Parameter IDs/value/unit/authored provenance appear in the source table; [DATA_SOURCES.md](DATA_SOURCES.md) documents each field and its consumers. The UI and PDF use `flightTestResults()` for group and finding counts/reasons; NOT EVALUATED is never counted as PASS. Local bounded snapshots/checksums detect corruption, not deliberate forgery. No risky mandatory migration or old-input fabrication occurs.
 
 ## Layout and assets
 

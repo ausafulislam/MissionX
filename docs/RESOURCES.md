@@ -1,642 +1,181 @@
-# MissionX resource register
+# MissionX source register
 
-Central research register. Documentation reconciled 2026-11-14 against package 0.1.10; earlier review evidence is preserved below. Source IDs below are documentation identifiers; runtime metadata migration is **not implemented**. [Engineering references](ENGINEERING_REFERENCES.md) distinguish formulas from assumptions.
+[Documentation index](README.md) · [Formulas](ENGINEERING_REFERENCES.md) · [Field provenance](DATA_SOURCES.md) · [Rights](Asset-Attribution.md)
 
+Re-verified 2026-11-14 for 0.1.11. Access dates below mean retrieval of the stated sections, not execution of a linked tool or approval of reuse. This register supersedes earlier implementation/adaptation labels. No NASA/CSA numerical dataset or GMAT integration is established.
 
-## Documentation audit — 2026-11-14
+## Classification and evidence standard
 
-This is a **scoped retrieval audit**, not certification of sources, code or asset reuse. Original URLs, detailed provider fields, source IDs, mappings and prior review evidence remain in each resource record below. “Reached” means the named page/document content was returned, not that every linked tool/demo or chapter was validated. No unavailable page has been counted as reviewed. No agency artwork/code was copied for this task; current screenshot art is project UI.
+- **A Directly Implemented:** identifiable source-specific data/code/API/method actually used.
+- **B Adapted:** documented transformation of an identifiable source method into code; similarity alone is insufficient.
+- **C Conceptual Reference:** explicit educational reference, not proof of historical derivation.
+- **D Mentioned Only:** documentation/metadata mention without established contribution.
+- **E Not Used / Not Verified:** meaningful use or verification not established.
 
-| Existing source ID | Original URL | Sections reviewed in this documentation audit | Use / implementation mapping | Confidence and limits |
-|---|---|---|---|---|
-| NASA-SCIENCE-MISSIONS | https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf | Segments, Big Picture Process, ConOps, BioNutrients requirements/verification and examples; both returned chunks | Concept: goal-first flow, `validation.ts`, `simulation.ts` segment names | High for these concepts; not numeric catalog/scoring evidence |
-| NASA-GMAT | https://software.nasa.gov/software/GSC-19468-1 | Overview/software details, R2025a | Reference only: limitations comparison; no runtime GMAT | High for catalog description; no installation/solver validation |
-| NASA-JPL-CML | https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/44299 | Repository abstract, metadata and displayed CC0 terms | Reference only: concept maturity context | High for metadata; paper matrix not newly reviewed; file notices still matter |
-| NASA-MDL | https://etd.gsfc.nasa.gov/capabilities/integrated-design-center/mission-design-lab/ | Provides, study options, capabilities, disciplines | Reference only: multidisciplinary/professional scope in limitations | High for page; no MDL analysis integrated |
-| NASA-MISSION-VIZ | https://nasa.github.io/mission-viz/ | Web-app/tutorial index | Inspiration/reference only; HQ uses project procedural geometry | Medium; demos and reuse license not validated |
-| NASA-WEBB-GAME | https://science.nasa.gov/mission/webb/game-build-it-yourself/ | Build It Yourself learning-game introduction | Reference only: science-requirements-first learning context | High for introduction, not game execution; no content copied |
-| NASA-CUBESAT-101 | https://www3.nasa.gov/sites/default/files/atoms/files/nasa_csli_cubesat_101_508.pdf | Cover, acknowledgments, contents, beginning of introduction; limited PDF extraction | Reference only: process/lifecycle context in engineering docs | Limited new review; later chapters not newly reviewed; prior review evidence below |
-| NASA-SPACEAPPS-VR-2023 | https://www.spaceappschallenge.org/2023/challenges/visualize-a-space-mission-using-virtual-reality/ | Summary, background, objectives, potential considerations | Reference only: visualization context, not current challenge/VR feature | High for page; linked tools not executed |
-| CSA-DIGITAL-GAMES | https://www.asc-csa.gc.ca/eng/youth-educators/digital-games-and-activities.asp | Games/activity directory | Reference only: educational comparison | High for directory; individual games not tested |
+Each record has one primary category. Confidence concerns only the stated relationship/inspection, never NASA numerical validation. None of the nine proposed resources qualifies for A/B on current adoption evidence. The previous audit's B labels for the NASA presentation and Quicksat were too strong: code/reference prose establishes conceptual citation, not historical adoption or formula derivation.
 
-The source-ID spelling in this summary must match the anchors below; see each record for provider-specific terms. Linking does not authorize embedded third-party material, logos or code reuse. All nine URLs above returned content during the audit; this does not establish permanent availability.
+## Scientific and mission references — nine proposed resources
 
-### Other existing sources and team identity
-
-- Reached https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/ (summary, background, objectives and considerations): current challenge context only; no mandate that optional multiplayer be implemented.
-- Reached https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/ supplied by the owner: NASA WARRIORS, Karachi, Pakistan, Universal Event and Space Mission Design Game. This is participant-submitted content, not independently reviewed NASA endorsement. No member names/roles or awards inferred. Used in README and CITATION.cff. Reference/link only; not permission to copy the team image.
-- Reached existing Quicksat power and satellite-initialization guide beginnings: case/EOL inputs, panels, consumption-file context, mission/requirements/equipment concepts. Prior fuller review evidence remains below. Community source, not NASA; no numerical coefficients or code adopted. Referenced by `resources.ts`/`operations.ts` explanation, not a runtime library.
-- LRO/PUNCH/MRO context pages, the community skill guide and framework-library resources retain their prior verification scope below. They were not all re-fetched in this pass. Do not interpret old access dates as a fresh link check.
-- pdf-lib APIs/license were inspected locally in prior implementation work. This pass documents the existing integration; no claim of a new full upstream API review.
-- Font license sidecars and project asset history were inspected locally. Original logo redistribution terms remain unresolved; see [asset attribution](Asset-Attribution.md).
-- Badge image hosts and every external link in historical documents were not exhaustively network-validated. No CI/status/license badge is claimed.
-
-### Current independence statement
-
-MissionX is an independent educational project created by Team NASA WARRIORS. It is not affiliated with, endorsed by, or sponsored by NASA or any other government space agency. NASA and other organization names, resources, and references are acknowledged for their respective educational or informational contributions. Their inclusion does not imply endorsement.
-
-The older independence text and “pending UI” notes below are historical records. This documentation task does not modify the application's footer or PDF copy.
-
-## Interpretation and scope
-- Implemented means the named concept/link is actually used at the listed location, not that software or all source methods are integrated.
-- Confidence concerns the narrow stated support; it never transfers to invented numbers. High = directly reviewed primary content; Medium = limited/secondary conceptual evidence; Low = unresolved evidence or non-authoritative context.
-- Access dates record known retrieval, not publication date. Prior audit evidence is identified explicitly. Missing evidence is not a successful link check.
-- Catalog masses, costs, power, data, lifetimes, orbit factors, reliability and science points are authored teaching inputs unless a future parameter-level record proves otherwise.
-- No external text, code or artwork is reproduced here beyond titles/short terminology. Linking is not permission to reuse assets. Provider/file terms must be checked before copying.
-
-## Independence disclaimer
-MissionX is an independent educational project created by Team NASA WARRIORS for the NASA International Space Apps Challenge 2026. It is not affiliated with, endorsed by, or sponsored by NASA or any other space agency. NASA is not responsible for information contained on non-U.S. Government websites.
-
-Existing user-facing disclaimer remains unchanged. Full credits copy awaits the separately approved UI task. A link implies no provider endorsement.
-
-## Research resources
+All nine original URLs returned content in this correction pass on 2026-11-14. Section headings are used where extraction does not preserve reliable page numbers; no page numbers are invented.
 
 <a id="NASA-SCIENCE-MISSIONS"></a>
-### Resource: Design and Develop Science Missions
-
-- **Source ID:** `NASA-SCIENCE-MISSIONS`
-- **Provider:** NASA; Julie Levri
-- **Resource type:** Official NASA presentation
-- **Official URL:** https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Slides headed mission segments, Big Picture Process, Role of ConOps, and BioNutrients requirements/verification
-- **Purpose:** Explain goals, requirements, verification and Launch/Space/Ground/User segments.
-- **Why MissionX uses it:** Four segment names and goal-first workflow; conceptual attribution only.
-- **Implementation location:** src/game/data/{missions,parts,rockets,orbits}.json; src/game/engine/{validation,simulation}.ts; src/components/game/source-note.tsx.
-- **Related files/components:** src/game/data/{missions,parts,rockets,orbits}.json; src/game/engine/{validation,simulation}.ts; src/components/game/source-note.tsx.
-- **Supported feature or calculation:** Four segment names and goal-first workflow; conceptual attribution only.
-- **Implementation status:** Implemented
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** High
-- **Limitations:** Presentation retrieved in two chunks during approval audit. Numeric catalog values and scoring are NOT sourced from it.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Presentation retrieved in two chunks during approval audit. Numeric catalog values and scoring are NOT sourced from it.
+### NASA-SCIENCE-MISSIONS — C Conceptual Reference
+- **Provider/title:** NASA, Julie Levri; *Design and Develop Science Missions*, March 26, 2025, Access to Space for All / Systems Engineering Webinar Series.
+- **Original URL:** https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf (original supplied query variant: https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf?emrc=a454cf).
+- **Reviewed:** mission-segment definitions, Big Picture Process, Role of ConOps, BioNutrients mission-segment example (returned first chunk).
+- **Actual relationship/code:** current conceptual citation in `src/game/report/mission-report.ts`; four result segment names in `simulation.ts`, requirements in `validation.ts` correspond to named ideas. No independently established historical transformation; not category B.
+- **Data/formulas:** none sourced numerically. Catalog values now identify MissionX authorship, not this URL.
+- **Limits/rights/confidence:** High for named content and conceptual correspondence; historical adoption unknown. Reference only; embedded third-party material and agency branding require item-specific rights review.
 
 <a id="NASA-GMAT"></a>
-### Resource: General Mission Analysis Tool (GMAT) R2025a
-
-- **Source ID:** `NASA-GMAT`
-- **Provider:** NASA Technology Transfer; Goddard and collaborators
-- **Resource type:** Official software catalog
-- **Official URL:** https://software.nasa.gov/software/GSC-19468-1
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Overview and software details
-- **Purpose:** Contrast real mission design/optimization/navigation with schematic MissionX trajectories.
-- **Why MissionX uses it:** Scope/limitations explanation; no GMAT calculations or runtime integration.
-- **Implementation location:** docs/RESOURCES.md; docs/ENGINEERING_REFERENCES.md, Orbit section.
-- **Related files/components:** docs/RESOURCES.md; docs/ENGINEERING_REFERENCES.md, Orbit section.
-- **Supported feature or calculation:** Scope/limitations explanation; no GMAT calculations or runtime integration.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** High
-- **Limitations:** Catalog page verified; manuals, solver methods, download and numerical execution not verified.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Catalog page verified; manuals, solver methods, download and numerical execution not verified.
+### NASA-GMAT — D Mentioned Only
+- **Provider/title:** NASA Software Catalog; *General Mission Analysis Tool (GMAT) Version R2025a*, GSC-19468-1.
+- **URL:** https://software.nasa.gov/software/GSC-19468-1
+- **Reviewed:** complete catalog overview/software details.
+- **Relationship/code:** documentation comparison only. No GMAT dependency, process, solver, trajectory import, API or output file found. `journey-geometry.ts` is authored scene geometry.
+- **Limits/rights/confidence:** High for catalog/no integration distinction. GMAT not installed/executed; do not infer a particular code license from “open source” on a catalog page. No software reused.
 
 <a id="NASA-JPL-CML"></a>
-### Resource: Space mission concept development using concept maturity levels
-
-- **Source ID:** `NASA-JPL-CML`
-- **Provider:** Wessen, Borden, Ziemer, Kwok; JPL / Caltech
-- **Resource type:** Conference paper in JPL Open Repository
-- **Official URL:** https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/44299
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Paper introduction and Section II; linked PDF https://dataverse.jpl.nasa.gov/api/access/datafile/50237
-- **Purpose:** Explain feasibility, trade-space exploration and remaining concept work.
-- **Why MissionX uses it:** Maturity vocabulary only; no official CML rating or score mapping.
-- **Implementation location:** docs/RESOURCES.md; proposed future verification/report feedback (not implemented).
-- **Related files/components:** docs/RESOURCES.md; proposed future verification/report feedback (not implemented).
-- **Supported feature or calculation:** Maturity vocabulary only; no official CML rating or score mapping.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** High
-- **Limitations:** Repository and beginning of paper verified; full CML matrix not reviewed. Repository displays CC0; check file notices before reproducing material.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. See explicit file/license qualification above.
-- **Verification status:** Repository and beginning of paper verified; full CML matrix not reviewed. Repository displays CC0; check file notices before reproducing material.
+### NASA-JPL-CML — D Mentioned Only
+- **Provider/title:** Wessen, Borden, Ziemer, Kwok; JPL/Caltech Open Repository; *Space mission concept development using concept maturity levels* (2013), repository version 2.0.
+- **URL:** https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/44299
+- **Linked paper:** https://dataverse.jpl.nasa.gov/api/access/datafile/50237
+- **Reviewed:** repository abstract/metadata, CML 1–4 description, displayed terms. Full paper/matrix not newly read.
+- **Relationship/code:** reference only in documentation; no CML matrix, scoring or rating in engine.
+- **Limits/rights/confidence:** High for metadata; limited for paper. Repository displays CC0; file-specific notices still require review before reproduction.
 
 <a id="NASA-MDL"></a>
-### Resource: Mission Design Lab
-
-- **Source ID:** `NASA-MDL`
-- **Provider:** NASA Goddard Engineering and Technology Directorate
-- **Resource type:** Official agency capability page
-- **Official URL:** https://etd.gsfc.nasa.gov/capabilities/integrated-design-center/mission-design-lab/
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** What MDL Provides; study options; capabilities; disciplines
-- **Purpose:** Explain multidisciplinary feasibility and coupled trades including ground, cost and end-of-mission.
-- **Why MissionX uses it:** Professional-analysis context, not specific probabilities or budgets.
-- **Implementation location:** docs/RESOURCES.md; proposed future mentor/verification explanations.
-- **Related files/components:** docs/RESOURCES.md; proposed future mentor/verification explanations.
-- **Supported feature or calculation:** Professional-analysis context, not specific probabilities or budgets.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** High
-- **Limitations:** Page verified; includes website-update funding notice. No MDL tool, study or professional certification integrated.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Page verified; includes website-update funding notice. No MDL tool, study or professional certification integrated.
+### NASA-MDL — D Mentioned Only
+- **Provider/title:** NASA Goddard ETD; *Mission Design Lab*.
+- **URL:** https://etd.gsfc.nasa.gov/capabilities/integrated-design-center/mission-design-lab/
+- **Reviewed:** What MDL Provides, study options, capabilities, disciplines; complete page.
+- **Relationship/code:** professional-analysis comparison, not imported MDL tools, studies, cost estimates or certification. Documentation only.
+- **Limits/rights/confidence:** High for page. Do not infer adoption from generic mass/power/data trades. Reference only; image rights not granted by linking.
 
 <a id="NASA-MISSION-VIZ"></a>
-### Resource: Web-based Space Mission Visualization
-
-- **Source ID:** `NASA-MISSION-VIZ`
-- **Provider:** NASA mission-viz project
-- **Resource type:** Agency-hosted demonstrations/tutorial index
-- **Official URL:** https://nasa.github.io/mission-viz/
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Web-Apps and Tutorials, Earth–Moon and elliptical orbit descriptions
-- **Purpose:** Inform future schematic spatial explanations.
-- **Why MissionX uses it:** Visualization inspiration only.
-- **Implementation location:** docs/RESOURCES.md; possible future existing flight scene captions, subject to approval.
-- **Related files/components:** docs/RESOURCES.md; possible future existing flight scene captions, subject to approval.
-- **Supported feature or calculation:** Visualization inspiration only.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** Medium
-- **Limitations:** Index verified, interactive demos not validated. https://github.com/nasa/mission-viz/blob/main/LICENSE returned missing-file content; reuse license unresolved. No code/assets copied.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. See explicit file/license qualification above.
-- **Verification status:** Index verified, interactive demos not validated. https://github.com/nasa/mission-viz/blob/main/LICENSE returned missing-file content; reuse license unresolved. No code/assets copied.
+### NASA-MISSION-VIZ — D Mentioned Only
+- **Provider/title:** NASA mission-viz; *Web-based Space Mission Visualization*.
+- **URL:** https://nasa.github.io/mission-viz/
+- **Reviewed:** complete apps/tutorial index; linked demos not executed.
+- **Relationship/code:** historical descriptive ID in unused `src/game/data/flight-stages.json`; reference in docs. Runtime uses Three.js procedural geometry, not established NASA code reuse.
+- **Limits/rights/confidence:** High for index/no imported implementation, unknown historical influence. Prior `https://github.com/nasa/mission-viz/blob/main/LICENSE` lookup was missing-file content, not proof of no repository license. No reuse clearance claimed.
 
 <a id="NASA-WEBB-GAME"></a>
-### Resource: Build It Yourself: A Learning Game About Telescopes
-
-- **Source ID:** `NASA-WEBB-GAME`
-- **Provider:** NASA Science / Webb
-- **Resource type:** Official educational game page
-- **Official URL:** https://science.nasa.gov/mission/webb/game-build-it-yourself/
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Learning objective; Playing Hints; accessibility and transcript links
-- **Purpose:** Relate scientific objectives to instruments and unsuitable combinations.
-- **Why MissionX uses it:** Science-first game-design reference; no copied game UI or scoring.
-- **Implementation location:** docs/RESOURCES.md; proposed mission/instrument explanations.
-- **Related files/components:** docs/RESOURCES.md; proposed mission/instrument explanations.
-- **Supported feature or calculation:** Science-first game-design reference; no copied game UI or scoring.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** High
-- **Limitations:** Page content verified; embedded game not played and transcript PDFs not fully reviewed. Its 2013 education review does not apply to MissionX.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Page content verified; embedded game not played and transcript PDFs not fully reviewed. Its 2013 education review does not apply to MissionX.
+### NASA-WEBB-GAME — D Mentioned Only
+- **Provider/title:** NASA Science/Webb; *Build It Yourself: A Learning Game About Telescopes*.
+- **URL:** https://science.nasa.gov/mission/webb/game-build-it-yourself/
+- **Reviewed:** learning-game introduction in returned chunk 2: science choice drives wavelength/instrument/optics choices.
+- **Relationship/code:** documentation reference. Similar goal-first gameplay is not proof of adoption; no specific game code/content reused.
+- **Limits/rights/confidence:** High for introduction; game not played, full mechanics not compared. Reference only; game/asset terms not reviewed for reuse.
 
 <a id="NASA-CUBESAT-101"></a>
-### Resource: CubeSat 101: Basic Concepts and Processes for First-Time CubeSat Developers
-
-- **Source ID:** `NASA-CUBESAT-101`
-- **Provider:** NASA CubeSat Launch Initiative; contributors listed in guide
-- **Resource type:** Official NASA guide, October 2017
-- **Official URL:** https://www3.nasa.gov/sites/default/files/atoms/files/nasa_csli_cubesat_101_508.pdf
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Accessible Chapter 2 material: §§2.1–2.3; contents lists §2.10 p22, §2.11 p23, §2.12 p25 and later reports
-- **Purpose:** Context for concept development, feasibility, ground readiness and non-hardware costs.
-- **Why MissionX uses it:** Development-process context, not numerical battery or part specifications.
-- **Implementation location:** docs/Engineering-Audit.md; docs/RESOURCES.md; proposed subsystem/readiness explanations.
-- **Related files/components:** docs/Engineering-Audit.md; docs/RESOURCES.md; proposed subsystem/readiness explanations.
-- **Supported feature or calculation:** Development-process context, not numerical battery or part specifications.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** Medium
-- **Limitations:** Only first 30 PDF pages available to extraction. TOC references are not proof later text was read. CubeSat-specific guidance is not universal spacecraft qualification. Review third-party image credits before reuse.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Only first 30 PDF pages available to extraction. TOC references are not proof later text was read. CubeSat-specific guidance is not universal spacecraft qualification. Review third-party image credits before reuse.
+### NASA-CUBESAT-101 — D Mentioned Only
+- **Provider/title:** NASA CubeSat Launch Initiative; *CubeSat 101: Basic Concepts and Processes for First-Time CubeSat Developers* (2017).
+- **URL:** https://www3.nasa.gov/sites/default/files/atoms/files/nasa_csli_cubesat_101_508.pdf
+- **Reviewed:** introduction, §1.1 CubeSats, beginning §1.2 in returned chunk 1; PDF extraction limited to first 30 pages. TOC entries are not proof of chapter review.
+- **Relationship/code:** process reference only; `bus-cube` has authored mass/payload/life, no U-size/dispenser/interface conformity implementation.
+- **Limits/rights/confidence:** High for inspected content, incomplete guide review. Third-party image credits apply; not universal spacecraft qualification or a source for battery factors.
 
 <a id="NASA-SPACEAPPS-VR-2023"></a>
-### Resource: Visualize a Space Mission Using Virtual Reality
-
-- **Source ID:** `NASA-SPACEAPPS-VR-2023`
-- **Provider:** NASA International Space Apps Challenge
-- **Resource type:** Official past challenge page
-- **Official URL:** https://www.spaceappschallenge.org/2023/challenges/visualize-a-space-mission-using-virtual-reality/
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Background; Objectives; Potential Considerations
-- **Purpose:** Connect mission concept, orbital path and timeline for beginners.
-- **Why MissionX uses it:** Educational visualization inspiration; not orbital formulas.
-- **Implementation location:** docs/RESOURCES.md; possible future timeline caption work.
-- **Related files/components:** docs/RESOURCES.md; possible future timeline caption work.
-- **Supported feature or calculation:** Educational visualization inspiration; not orbital formulas.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** High
-- **Limitations:** Substantive challenge text verified. No VR implementation, assets or external visualization library adopted.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Substantive challenge text verified. No VR implementation, assets or external visualization library adopted.
+### NASA-SPACEAPPS-VR-2023 — D Mentioned Only
+- **Provider/title:** NASA International Space Apps Challenge; *Visualize a Space Mission Using Virtual Reality* (2023).
+- **URL:** https://www.spaceappschallenge.org/2023/challenges/visualize-a-space-mission-using-virtual-reality/
+- **Reviewed:** summary/background/objectives/potential considerations.
+- **Relationship/code:** past challenge context only; no WebXR, VR, GMAT or X3D integration. Ordinary browser 3D is not VR implementation.
+- **Limits/rights/confidence:** High for text/no integration; suggested tools not executed. Reference only, not permission to copy artwork.
 
 <a id="CSA-DIGITAL-GAMES"></a>
-### Resource: Digital games and activities
+### CSA-DIGITAL-GAMES — D Mentioned Only
+- **Provider/title:** Canadian Space Agency; *Digital games and activities*.
+- **URL:** https://www.asc-csa.gc.ca/eng/youth-educators/digital-games-and-activities.asp
+- **Reviewed:** complete directory, including RADARSAT/OSIRIS-REx/Exploring Earth descriptions.
+- **Relationship/code:** education reference only; no CSA activity, imagery or data integrated.
+- **Limits/rights/confidence:** High for directory; individual games not played or source-compared. CSA is not NASA. Individual activities may have separate terms.
 
-- **Source ID:** `CSA-DIGITAL-GAMES`
-- **Provider:** Canadian Space Agency (CSA)
-- **Resource type:** Official agency education index
-- **Official URL:** https://www.asc-csa.gc.ca/eng/youth-educators/digital-games-and-activities.asp
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** RADARSAT, Exploring Earth and OSIRIS-REx activity descriptions
-- **Purpose:** Explain how observations serve real users and decisions.
-- **Why MissionX uses it:** Application-oriented learning inspiration.
-- **Implementation location:** docs/RESOURCES.md; proposed future result-learning copy.
-- **Related files/components:** docs/RESOURCES.md; proposed future result-learning copy.
-- **Supported feature or calculation:** Application-oriented learning inspiration.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** Medium
-- **Limitations:** Index verified; games not played or evaluated. CSA is not NASA; individual activity terms require review before reuse.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Index verified; games not played or evaluated. CSA is not NASA; individual activity terms require review before reuse.
+## Other scientific mission context
 
-<a id="NASA-SPACEAPPS-GAME-2026"></a>
-### Resource: Space Mission Design Game
-
-- **Source ID:** `NASA-SPACEAPPS-GAME-2026`
-- **Provider:** NASA International Space Apps Challenge
-- **Resource type:** Official challenge page
-- **Official URL:** https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Integrated mission design, simulation and educational explanations
-- **Purpose:** Scope the integrated mission-design learning loop.
-- **Why MissionX uses it:** Challenge scope only, not numerical engineering evidence.
-- **Implementation location:** docs/Engineering-Audit.md; existing /play and /hq workflow.
-- **Related files/components:** docs/Engineering-Audit.md; existing /play and /hq workflow.
-- **Supported feature or calculation:** Challenge scope only, not numerical engineering evidence.
-- **Implementation status:** Implemented
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** High
-- **Limitations:** Earlier audit records both chunks retrieved on this date; not freshly re-fetched in documentation task. No certification or endorsement.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Earlier audit records both chunks retrieved on this date; not freshly re-fetched in documentation task. No certification or endorsement.
-
-<a id="COMMUNITY-QUICKSAT-POWER"></a>
-### Resource: Set up a power budget
-
-- **Source ID:** `COMMUNITY-QUICKSAT-POWER`
-- **Provider:** egemenimre / Quicksat contributors
-- **Resource type:** Community technical guide
-- **Official URL:** https://github.com/egemenimre/quicksat/blob/master/docs/guides/power/set_up_a_power_budget.md
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Mode loads, EOL inputs, usable battery, charge/discharge and energy balance
-- **Purpose:** Distinguish average supply, stored energy and operating loads.
-- **Why MissionX uses it:** Conceptual budgeting reference; no copied implementation or adopted numeric factors.
-- **Implementation location:** src/game/engine/{resources,operations}.ts; docs/Engineering-Audit.md.
-- **Related files/components:** src/game/engine/{resources,operations}.ts; docs/Engineering-Audit.md.
-- **Supported feature or calculation:** Conceptual budgeting reference; no copied implementation or adopted numeric factors.
-- **Implementation status:** Implemented
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** Medium
-- **Limitations:** Earlier audit records both chunks reviewed; not freshly fetched in this task. Not a NASA standard; no universal 0.98 retention or 0.95 efficiency justified. License not checked for reuse; no code copied.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. See explicit file/license qualification above.
-- **Verification status:** Earlier audit records both chunks reviewed; not freshly fetched in this task. Not a NASA standard; no universal 0.98 retention or 0.95 efficiency justified. License not checked for reuse; no code copied.
-
-<a id="COMMUNITY-QUICKSAT-SIZING"></a>
-### Resource: Initialise a satellite
-
-- **Source ID:** `COMMUNITY-QUICKSAT-SIZING`
-- **Provider:** egemenimre / Quicksat contributors
-- **Resource type:** Community technical guide
-- **Official URL:** https://github.com/egemenimre/quicksat/blob/master/docs/guides/sizing/initialise_a_satellite.md
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Mass sums, data production, contacts and finite mass memory
-- **Purpose:** Explain coupled resource sizing and contact-gap memory.
-- **Why MissionX uses it:** Conceptual rate×duration and capacity sizing, adapted to simplified GB/day inputs.
-- **Implementation location:** src/game/engine/{resources,operations}.ts.
-- **Related files/components:** src/game/engine/{resources,operations}.ts.
-- **Supported feature or calculation:** Conceptual rate×duration and capacity sizing, adapted to simplified GB/day inputs.
-- **Implementation status:** Implemented
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** Medium
-- **Limitations:** Earlier audit records both chunks reviewed; not freshly fetched here. No real contact schedule or RF performance verified; reuse license not reviewed.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. See explicit file/license qualification above.
-- **Verification status:** Earlier audit records both chunks reviewed; not freshly fetched here. No real contact schedule or RF performance verified; reuse license not reviewed.
-
-<a id="COMMUNITY-MISSION-ARCHITECT"></a>
-### Resource: Mission Architect skill guide
-
-- **Source ID:** `COMMUNITY-MISSION-ARCHITECT`
-- **Provider:** devideamax / aerospace-team contributors
-- **Resource type:** Third-party community AI planning guide
-- **Official URL:** https://github.com/devideamax/aerospace-team/blob/main/skills/mission-architect/SKILL.md
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Integrated mission planning and segment/subsystem context
-- **Purpose:** Historical planning context only.
-- **Why MissionX uses it:** No numerical rule, code or percentage adopted.
-- **Implementation location:** docs/Engineering-Audit.md.
-- **Related files/components:** docs/Engineering-Audit.md.
-- **Supported feature or calculation:** No numerical rule, code or percentage adopted.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** Low
-- **Limitations:** Earlier audit reports chunks 0/1 reviewed. Not a space agency, authoritative standard or flight-engineering validation; licensing not checked for copying.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Earlier audit reports chunks 0/1 reviewed. Not a space agency, authoritative standard or flight-engineering validation; licensing not checked for copying.
+These are **C Conceptual Reference**, not numerical sources. Provider: NASA Science. Substantive mission-page sections were reviewed in the preceding read-only audit; not re-fetched in this correction pass. Confidence high for theme, no performance equivalence. Runtime relationship: `missions.json` reference links → result UI; no data ingestion. Reference only; linked images not copied or licensed here.
 
 <a id="NASA-LRO"></a>
-### Resource: Lunar Reconnaissance Orbiter
-
-- **Source ID:** `NASA-LRO`
-- **Provider:** NASA Science
-- **Resource type:** Official mission page
-- **Official URL:** https://science.nasa.gov/mission/lro/
-- **Accessed date:** Not substantively verified; LRO/PUNCH retrieval attempted 2026-11-14; MRO not retrieved
-- **Relevant section/page:** Mission overview; substantive section verification pending
-- **Purpose:** Offer a real-mission comparison, not claim identical spacecraft.
-- **Why MissionX uses it:** Outbound educational comparison link only; no numerical specification supported.
-- **Implementation location:** src/game/data/missions.json reference; existing result screens.
-- **Related files/components:** src/game/data/missions.json reference; existing result screens.
-- **Supported feature or calculation:** Outbound educational comparison link only; no numerical specification supported.
-- **Implementation status:** Implemented
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** Low
-- **Limitations:** Link is present in implementation. LRO/PUNCH prior extraction was navigation-only; MRO remains unverified. Do not infer instrument specs, fleet equivalence or performance.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Link is present in implementation. LRO/PUNCH prior extraction was navigation-only; MRO remains unverified. Do not infer instrument specs, fleet equivalence or performance.
-
+- **NASA-LRO:** *Lunar Reconnaissance Orbiter*, https://science.nasa.gov/mission/lro/ — mapping/LOLA context; prior audit reviewed mission/science text.
 <a id="NASA-PUNCH"></a>
-### Resource: PUNCH
-
-- **Source ID:** `NASA-PUNCH`
-- **Provider:** NASA Science
-- **Resource type:** Official mission page
-- **Official URL:** https://science.nasa.gov/mission/punch/
-- **Accessed date:** Not substantively verified; LRO/PUNCH retrieval attempted 2026-11-14; MRO not retrieved
-- **Relevant section/page:** Mission overview; substantive section verification pending
-- **Purpose:** Offer a real-mission comparison, not claim identical spacecraft.
-- **Why MissionX uses it:** Outbound educational comparison link only; no numerical specification supported.
-- **Implementation location:** src/game/data/missions.json reference; existing result screens.
-- **Related files/components:** src/game/data/missions.json reference; existing result screens.
-- **Supported feature or calculation:** Outbound educational comparison link only; no numerical specification supported.
-- **Implementation status:** Implemented
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** Low
-- **Limitations:** Link is present in implementation. LRO/PUNCH prior extraction was navigation-only; MRO remains unverified. Do not infer instrument specs, fleet equivalence or performance.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Link is present in implementation. LRO/PUNCH prior extraction was navigation-only; MRO remains unverified. Do not infer instrument specs, fleet equivalence or performance.
-
+- **NASA-PUNCH:** *PUNCH*, https://science.nasa.gov/mission/punch/ — four-spacecraft solar observations from Earth orbit; prior audit reviewed Key Questions/A New View. MissionX's identical craft are not a PUNCH hardware model.
 <a id="NASA-MRO"></a>
-### Resource: Mars Reconnaissance Orbiter
+- **NASA-MRO:** *Mars Reconnaissance Orbiter*, https://science.nasa.gov/mission/mars-reconnaissance-orbiter/ — Mars imaging/mineral/water themes; prior audit reviewed overview/key facts/science text. No actual MRO specifications adopted.
 
-- **Source ID:** `NASA-MRO`
-- **Provider:** NASA Science
-- **Resource type:** Official mission page
-- **Official URL:** https://science.nasa.gov/mission/mars-reconnaissance-orbiter/
-- **Accessed date:** Not substantively verified; LRO/PUNCH retrieval attempted 2026-11-14; MRO not retrieved
-- **Relevant section/page:** Mission overview; substantive section verification pending
-- **Purpose:** Offer a real-mission comparison, not claim identical spacecraft.
-- **Why MissionX uses it:** Outbound educational comparison link only; no numerical specification supported.
-- **Implementation location:** src/game/data/missions.json reference; existing result screens.
-- **Related files/components:** src/game/data/missions.json reference; existing result screens.
-- **Supported feature or calculation:** Outbound educational comparison link only; no numerical specification supported.
-- **Implementation status:** Implemented
-- **Adaptation or simplification:** MissionX uses its own simplified static, seeded model; no numerical authority beyond the supported scope is inferred.
-- **Confidence:** Low
-- **Limitations:** Link is present in implementation. LRO/PUNCH prior extraction was navigation-only; MRO remains unverified. Do not infer instrument specs, fleet equivalence or performance.
-- **Usage and licensing notes:** Reference/link only; no agency endorsement. Do not assume embedded third-party content is reusable; check item-specific terms before reuse.
-- **Verification status:** Link is present in implementation. LRO/PUNCH prior extraction was navigation-only; MRO remains unverified. Do not infer instrument specs, fleet equivalence or performance.
+## Engineering and educational references
+
+<a id="COMMUNITY-QUICKSAT-POWER"></a>
+### COMMUNITY-QUICKSAT-POWER — C Conceptual Reference
+- **Provider/title:** egemenimre / Quicksat contributors; *Set up a power budget*.
+- **URL:** https://github.com/egemenimre/quicksat/blob/master/docs/guides/power/set_up_a_power_budget.md
+- **Accessed/reviewed:** 2026-11-14; returned chunk 1, §§5–8 battery/conditioning/budget checks.
+- **Actual relationship:** explicit conceptual citation in report/engineering docs. `resources.ts` and `operations.ts` use locally written accounting; no Quicksat import or demonstrated historical derivation. Matching efficiencies are not attribution proof.
+- **Limits/rights/confidence:** High for inspected text, unknown adoption; no numerical coefficients established as copied. Reuse license not cleared; a missing uppercase LICENSE path is not proof of no license.
+
+<a id="COMMUNITY-QUICKSAT-SIZING"></a>
+### COMMUNITY-QUICKSAT-SIZING — C Conceptual Reference
+- **Provider/title:** egemenimre / Quicksat contributors; *Initialise a satellite*.
+- **URL:** https://github.com/egemenimre/quicksat/blob/master/docs/guides/sizing/initialise_a_satellite.md
+- **Accessed/reviewed:** 2026-11-14; returned chunk 1, dataflow inputs, mass configuration, loading/checking sections.
+- **Relationship:** explicit reading link in `operations-note.tsx`/report; contacts/rates/storage concepts only. No imported Python library or proof MissionX's rate×duration formula derives from this guide.
+- **Limits/rights/confidence:** High for content, historical adoption unknown. No Quicksat delta-v/agility capability implied; reuse licensing unverified.
+
+<a id="COMMUNITY-MISSION-ARCHITECT"></a>
+### COMMUNITY-MISSION-ARCHITECT — D Mentioned Only
+- **Provider/title:** IDEAMAX Skills Factory / devideamax; *Mission Architect skill guide*.
+- **URL:** https://github.com/devideamax/aerospace-team/blob/main/skills/mission-architect/SKILL.md
+- **Reviewed:** front matter/role/overview in prior audit; not re-fetched this pass. Historical planning reference in `Engineering-Audit.md` only.
+- **Limits/rights/confidence:** Not an agency/validated standard. Front matter says generated guide, “MIT + Attribution”; preserve required notice if reuse later occurs. No numerical adoption established; low confidence on historical influence.
 
 <a id="MISSIONX-EDUCATIONAL-ASSUMPTIONS"></a>
-### Resource: MissionX authored educational model
+### MISSIONX-EDUCATIONAL-ASSUMPTIONS — A Directly Implemented local rules (not external scientific authority)
+- **Provider:** MissionX contributors; repository https://github.com/ausafulislam/MissionX
+- **Reviewed:** actual catalogs, `resources/validation/operations/simulation/diagnostics`, 2026-11-14.
+- **Relationship:** locally authored inputs, calculations and gameplay policies. See [field provenance](DATA_SOURCES.md).
+- **Limits:** original numerical balancing rationale not recorded; high confidence in code inventory, no claim of physical validation. Code/docs MIT where project owns rights; assets retain separate terms.
 
-- **Source ID:** `MISSIONX-EDUCATIONAL-ASSUMPTIONS`
-- **Provider:** Team NASA WARRIORS / MissionX project contributors
-- **Resource type:** Local authored assumptions and game rules; not external scientific evidence
-- **Official URL:** No external authority. Repository: https://github.com/ausafulislam/MissionX
-- **Accessed date:** 2026-11-14 local code inspection
-- **Relevant section/page:** [Engineering rule and parameter inventory](ENGINEERING_REFERENCES.md), all estimate/policy sections.
-- **Purpose:** Make unsupported numerical choices visible and replaceable.
-- **Why MissionX uses it:** Existing teaching model needs bounded, deterministic trade-offs without pretending to be flight software.
-- **Implementation location:** `src/game/data/`; `src/game/engine/`.
-- **Related files/components:** `assumptions.json`, `events.ts`, `resources.ts`, `validation.ts`, `operations.ts`, `simulation.ts`, `telemetry.ts`, `progression.ts`.
-- **Supported feature or calculation:** Authorship provenance only for numerical inputs, schedules, policies and scoring; not independent scientific validation.
-- **Implementation status:** Implemented
-- **Adaptation or simplification:** Identical fleet craft; flat rates; finite battery/memory; synthetic contacts; representative EOL campaign; heuristic life/science/risk.
-- **Confidence:** Low
-- **Limitations:** Original rationale for individual numeric choices was not recorded. Documentation must not retroactively invent a rationale; sensitivity/convergence work remains pending.
-- **Usage and licensing notes:** Project-authored rules; repository ownership/license should be checked before external reuse. No NASA-derived numerical approval.
-- **Verification status:** Code inspected; dimensional accounting and current tests support internal consistency, not realism. Exact inventories below.
+## Participation and identity — not engineering sources
 
-## Implementation-tool references (not scientific evidence)
-These README-linked tools support the implementation stack, not mission parameters. Their API/license review is outside the completed science-source verification. Each is reference-only for this research register; actual libraries are installed as recorded in package.json. No documentation-site artwork/code copied by this task.
+- **SPACEAPPS-2026 — C Conceptual Reference:** NASA Space Apps, *Space Mission Design Game*, https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/ . Prior audit reviewed challenge objectives/background; not newly fetched here. Matches scope, not numerical requirements or mandatory multiplayer. Confidence high for scope, no endorsement. Reference-only rights.
+- **TEAM-NASA-WARRIORS — D Mentioned Only:** participant-submitted team page, https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/ . Prior audit reviewed identity/about/user-generated-content notice; not freshly fetched here. README/CITATION identity context only, not engineering evidence or asset permission.
 
-### Resource: Bun documentation
-- **Source ID:** `TOOL-BUN`
-- **Provider:** Bun
-- **Resource type:** Implementation-tool documentation
-- **Official URL:** https://bun.sh/
-- **Accessed date:** Not verified in this task
-- **Relevant section/page:** Specific API sections not inventoried; pending future code-change research.
-- **Purpose:** Identify existing development tooling, not scientific authority.
-- **Why MissionX uses it:** Existing stack documentation linked from README.
-- **Implementation location:** package.json; bun.lock.
-- **Related files/components:** package.json; bun.lock.
-- **Supported feature or calculation:** Implementation infrastructure only; no scientific calculation.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** No technical methods adopted by this documentation task.
-- **Confidence:** Low
-- **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
-- **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
-- **Verification status:** Reference found locally; external verification pending.
+## Software dependencies and APIs — not scientific sources
 
-### Resource: Next.js / Vercel documentation
-- **Source ID:** `TOOL-NEXT`
-- **Provider:** Next.js / Vercel
-- **Resource type:** Implementation-tool documentation
-- **Official URL:** https://nextjs.org/
-- **Accessed date:** Not verified in this task
-- **Relevant section/page:** Specific API sections not inventoried; pending future code-change research.
-- **Purpose:** Identify existing development tooling, not scientific authority.
-- **Why MissionX uses it:** Existing stack documentation linked from README.
-- **Implementation location:** src/app; next.config.ts.
-- **Related files/components:** src/app; next.config.ts.
-- **Supported feature or calculation:** Implementation infrastructure only; no scientific calculation.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** No technical methods adopted by this documentation task.
-- **Confidence:** Low
-- **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
-- **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
-- **Verification status:** Reference found locally; external verification pending.
+Actual packages/API use is **A Directly Implemented** unless noted. Verification: local imports/package metadata and lock, 2026-11-14; confidence high for integration, not a complete upstream API/license audit. See [attribution](Asset-Attribution.md) for exact versions/terms.
 
-### Resource: TypeScript / Microsoft documentation
-- **Source ID:** `TOOL-TYPESCRIPT`
-- **Provider:** TypeScript / Microsoft
-- **Resource type:** Implementation-tool documentation
-- **Official URL:** https://www.typescriptlang.org/
-- **Accessed date:** Not verified in this task
-- **Relevant section/page:** Specific API sections not inventoried; pending future code-change research.
-- **Purpose:** Identify existing development tooling, not scientific authority.
-- **Why MissionX uses it:** Existing stack documentation linked from README.
-- **Implementation location:** tsconfig.json; src/**/*.ts.
-- **Related files/components:** tsconfig.json; src/**/*.ts.
-- **Supported feature or calculation:** Implementation infrastructure only; no scientific calculation.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** No technical methods adopted by this documentation task.
-- **Confidence:** Low
-- **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
-- **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
-- **Verification status:** Reference found locally; external verification pending.
+| Provider/tool | Original URL | Actual code relationship / reviewed evidence |
+|---|---|---|
+| Three.js / contributors | https://threejs.org/ | `world/`, Vector3/Quaternion/PerspectiveCamera; local installed API inspected |
+| Three.js math/camera reference | https://github.com/mrdoob/three.js/blob/r187/src/math/Quaternion.js ; https://github.com/mrdoob/three.js/blob/r187/src/cameras/PerspectiveCamera.js | `journey-geometry.ts`; URLs retained, not re-fetched |
+| pmndrs / React Three Fiber & Drei | https://r3f.docs.pmnd.rs/ | Canvas/hooks/helpers in `world.tsx`; local imports |
+| Hopding / pdf-lib | https://github.com/Hopding/pdf-lib ; https://github.com/Hopding/pdf-lib/blob/master/src/api/PDFPage.ts | `pdf-export.ts`, `pdf-layout.ts`; local API/imports |
+| Vercel / Next.js | https://nextjs.org/ | App Router/API route; installed use-client guide reviewed |
+| Meta/contributors / React | https://github.com/facebook/react | components/hooks; local imports |
+| pmndrs / Zustand | https://zustand.docs.pmnd.rs/ | mission/commander stores |
+| GSAP / Webflow | https://gsap.com/ | UI motion; license https://gsap.com/standard-license retrieved 2026-11-14 |
+| darkroom.engineering / Lenis | https://lenis.darkroom.engineering/ | landing motion only |
+| OpenAI API | https://api.openai.com/v1/chat/completions | conditional POST in `/api/mentor`, server-only key; no live provider test, no aerospace data authority |
+| Tailwind Labs | https://tailwindcss.com/ | CSS/Turbopack config, local package |
+| Microsoft / TypeScript | https://www.typescriptlang.org/ | compilation/types, local config |
+| Bun / tooling | https://bun.sh/ | package scripts/packageManager; developer tool, not shipped science data |
 
-### Resource: Tailwind Labs documentation
-- **Source ID:** `TOOL-TAILWIND`
-- **Provider:** Tailwind Labs
-- **Resource type:** Implementation-tool documentation
-- **Official URL:** https://tailwindcss.com/
-- **Accessed date:** Not verified in this task
-- **Relevant section/page:** Specific API sections not inventoried; pending future code-change research.
-- **Purpose:** Identify existing development tooling, not scientific authority.
-- **Why MissionX uses it:** Existing stack documentation linked from README.
-- **Implementation location:** src/app/globals.css; package.json.
-- **Related files/components:** src/app/globals.css; package.json.
-- **Supported feature or calculation:** Implementation infrastructure only; no scientific calculation.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** No technical methods adopted by this documentation task.
-- **Confidence:** Low
-- **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
-- **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
-- **Verification status:** Reference found locally; external verification pending.
+Documentation homepages above are identifying links, not claims their complete contents were read. No new dependencies were installed.
 
-### Resource: GSAP documentation
-- **Source ID:** `TOOL-GSAP`
-- **Provider:** GSAP
-- **Resource type:** Implementation-tool documentation
-- **Official URL:** https://gsap.com/
-- **Accessed date:** Not verified in this task
-- **Relevant section/page:** Specific API sections not inventoried; pending future code-change research.
-- **Purpose:** Identify existing development tooling, not scientific authority.
-- **Why MissionX uses it:** Existing stack documentation linked from README.
-- **Implementation location:** src/hooks; src/components motion.
-- **Related files/components:** src/hooks; src/components motion.
-- **Supported feature or calculation:** Implementation infrastructure only; no scientific calculation.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** No technical methods adopted by this documentation task.
-- **Confidence:** Low
-- **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
-- **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
-- **Verification status:** Reference found locally; external verification pending.
+## Accessibility / interaction guidance
 
-### Resource: Darkroom Engineering documentation
-- **Source ID:** `TOOL-LENIS`
-- **Provider:** Darkroom Engineering
-- **Resource type:** Implementation-tool documentation
-- **Official URL:** https://lenis.darkroom.engineering/
-- **Accessed date:** Not verified in this task
-- **Relevant section/page:** Specific API sections not inventoried; pending future code-change research.
-- **Purpose:** Identify existing development tooling, not scientific authority.
-- **Why MissionX uses it:** Existing stack documentation linked from README.
-- **Implementation location:** landing smooth-scroll wrapper.
-- **Related files/components:** landing smooth-scroll wrapper.
-- **Supported feature or calculation:** Implementation infrastructure only; no scientific calculation.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** No technical methods adopted by this documentation task.
-- **Confidence:** Low
-- **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
-- **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
-- **Verification status:** Reference found locally; external verification pending.
+**W3C-ARIA-DIALOG — C Conceptual Reference.** W3C APG, https://github.com/w3c/aria-practices/blob/main/content/patterns/dialog-modal/dialog-modal-pattern.html . Prior audit reviewed modal inertness, focus containment/return; local `focus-guard.tsx` and `tutorial-tour.tsx` implement corresponding patterns, but historical adoption is not proven. Not scientific evidence or accessibility certification; current pass did not re-fetch. Review W3C terms before copying examples.
 
-### Resource: Three.js contributors documentation
-- **Source ID:** `TOOL-THREE`
-- **Provider:** Three.js contributors
-- **Resource type:** Implementation-tool documentation
-- **Official URL:** https://threejs.org/
-- **Accessed date:** Not verified in this task
-- **Relevant section/page:** Specific API sections not inventoried; pending future code-change research.
-- **Purpose:** Identify existing development tooling, not scientific authority.
-- **Why MissionX uses it:** Existing stack documentation linked from README.
-- **Implementation location:** src/components/hq/world.
-- **Related files/components:** src/components/hq/world.
-- **Supported feature or calculation:** Implementation infrastructure only; no scientific calculation.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** No technical methods adopted by this documentation task.
-- **Confidence:** Low
-- **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
-- **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
-- **Verification status:** Reference found locally; external verification pending.
+## Assets and creative resources
 
-### Resource: Poimandres documentation
-- **Source ID:** `TOOL-R3F`
-- **Provider:** Poimandres
-- **Resource type:** Implementation-tool documentation
-- **Official URL:** https://r3f.docs.pmnd.rs/
-- **Accessed date:** Not verified in this task
-- **Relevant section/page:** Specific API sections not inventoried; pending future code-change research.
-- **Purpose:** Identify existing development tooling, not scientific authority.
-- **Why MissionX uses it:** Existing stack documentation linked from README.
-- **Implementation location:** src/components/hq/world.
-- **Related files/components:** src/components/hq/world.
-- **Supported feature or calculation:** Implementation infrastructure only; no scientific calculation.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** No technical methods adopted by this documentation task.
-- **Confidence:** Low
-- **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
-- **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
-- **Verification status:** Reference found locally; external verification pending.
+Bundled fonts are **A Directly Implemented** assets: Barlow https://github.com/jpt/barlow ; Inter https://github.com/rsms/inter ; Space Grotesk https://github.com/floriankarsten/space-grotesk ; IBM Plex Mono (IBM copyright in bundled notice). Local OFL files reviewed 2026-11-14; upstream binaries not hash-verified. Notices refer to https://scripts.sil.org/OFL . Images/logos: unknown rights requiring owner confirmation; no NASA imagery provenance inferred. Models/textures/audio are procedural code; see [asset register](Asset-Attribution.md).
 
-### Resource: Zustand / Poimandres documentation
-- **Source ID:** `TOOL-ZUSTAND`
-- **Provider:** Zustand / Poimandres
-- **Resource type:** Implementation-tool documentation
-- **Official URL:** https://zustand.docs.pmnd.rs/
-- **Accessed date:** Not verified in this task
-- **Relevant section/page:** Specific API sections not inventoried; pending future code-change research.
-- **Purpose:** Identify existing development tooling, not scientific authority.
-- **Why MissionX uses it:** Existing stack documentation linked from README.
-- **Implementation location:** src/game/store.
-- **Related files/components:** src/game/store.
-- **Supported feature or calculation:** Implementation infrastructure only; no scientific calculation.
-- **Implementation status:** Reference only
-- **Adaptation or simplification:** No technical methods adopted by this documentation task.
-- **Confidence:** Low
-- **Limitations:** Documentation URL content and package licenses not verified here; do not treat this record as license approval.
-- **Usage and licensing notes:** Installed package license and version-specific docs must be checked before reuse/change.
-- **Verification status:** Reference found locally; external verification pending.
+## Metadata scope and history
 
-## Cinematic foundation usage amendment — 0.1.6
-- `NASA-SCIENCE-MISSIONS`: existing verified requirements/verification concepts now inform `src/game/engine/diagnostics.ts`; no claim of NASA test procedures or sensor measurements.
-- `NASA-MISSION-VIZ`: remains reference-only for visuals. Mentioned by planned presentation metadata; no propagator/code/assets integrated.
-- `MISSIONX-EDUCATIONAL-ASSUMPTIONS`: implemented lifecycle/status policies in `flight-lifecycle.ts`, `diagnostics.ts` and static `flight-stages.json`. Exact assumptions and tests in ENGINEERING_REFERENCES.md. Static IDs resolve to this register; this is not the broader parameter-level catalog migration.
-- Verification basis is the preceding approved audit and its recorded source review; no new external numerical evidence or fresh link verification claimed. Commander/timestamp capture is local application metadata, not a sourced engineering measurement.
+- `flight-stages.json` retains historical `sourceIds` descriptively; not imported, not timing control.
+- Diagnostic source IDs name local authored rules only; they are descriptive strings, not a resolver, measurement source or scientific validation.
+- Catalog source metadata now says authored and links the repository, not an unrelated NASA numerical authority. The prior NASA concept link remains documented above and in Git history.
+- PDF lists current source descriptions separately from captured/reconstructed parameter values. Source-register IDs do not control calculations.
+- Prior resource register/audit records are historical evidence, not stronger proof of adoption. No external-source resolver was invented.
 
-<a id="TOOL-PDF-LIB"></a>
-### Resource: pdf-lib
-- **Source ID:** `TOOL-PDF-LIB`
-- **Provider:** Andrew Dillon / Hopding and contributors
-- **Resource type:** Open-source PDF generation library, implementation reference only
-- **Official URL:** https://github.com/Hopding/pdf-lib
-- **Accessed date:** 2026-11-14
-- **Relevant section/page:** Repository overview; installed1.17.1 API/types and LICENSE.md inspected; document/page/font/PNG/save APIs exercised by tests.
-- **Purpose:** Generate direct multipage PDF downloads in browser without uploading flight data.
-- **Why MissionX uses it:** Owner explicitly approved pdf-lib after native print limitations were explained.
-- **Implementation location:** src/game/report/pdf-export.ts
-- **Related files/components:** mission-report.ts; components/game/mission-report.tsx; mission-report.test.ts
-- **Supported feature or calculation:** PDF formatting, PNG embedding, standard fonts and serialization; no scientific authority.
-- **Implementation status:** Implemented
-- **Adaptation or simplification:** Application handles wrapping/pagination; Unicode lines rasterized with browser fonts to avoid an unapproved font dependency. ASCII remains vector text; Unicode raster lines are not searchable text.
-- **Confidence:** High
-- **Limitations:** Browser/system font glyph coverage varies; not PDF/UA certified. No external font dependency added. Headless unit export replaces unsupported non-ASCII with question marks; user-facing browser export uses raster lines.
-- **Usage and licensing notes:** Installed MIT license ©2019 Andrew Dillon; retain distributed license notices. No NASA assets copied; existing MissionX logo embedded.
-- **Verification status:** Repository overview retrieved, installed license/types inspected; unit roundtrip and browser downloads tested. Full repository documentation not reviewed.
-
-## Cinematic integration usage amendment — v0.1.7
-- NASA-SCIENCE-MISSIONS supports requirements/verification and four report segments in the shared diagnostic/report modules, not simulated sensor or navigation certification.
-- NASA-MISSION-VIZ remains visualization reference only; continuous procedural scene/path implementation is original. No assets/code copied and no propagator integrated.
-- MISSIONX-EDUCATIONAL-ASSUMPTIONS supports authored scene geometry, camera interpolation, compressed clocks, load presentation and commissioning gate. These are not sourced distances/travel times.
-- Quicksat references retain the previously reviewed conceptual budgeting scope in the report. Numerical coefficients and performance tables remain MissionX estimates.
-- src/game/report/mission-report.ts maps only these genuinely relevant engineering references into the downloaded report; TOOL-PDF-LIB is an implementation dependency, not scientific evidence.
-
-### Resource: Three.js scene geometry primitives — journey refinement
-- Source ID: `THREE-JOURNEY-GEOMETRY`; provider: Three.js contributors; software reference, not scientific evidence.
-- Original URLs: https://github.com/mrdoob/three.js/blob/r187/src/math/Quaternion.js and https://github.com/mrdoob/three.js/blob/r187/src/cameras/PerspectiveCamera.js
-- Reviewed 2026-11-14: installed three 0.187.0 source headers/methods for normalized quaternion rotations, vector transforms and perspective camera/FOV. Local package review; remote pages not fetched. Existing MIT dependency, no copied code/artwork.
-- Use: `src/components/hq/world/journey-{geometry,stars}.tsx` (geometry is `.ts`), launch-world and world camera. Original vector geometry, fit calculation and seeded point shells; no external assets.
-- All scene units, model envelope 4, margin 1.2, five-second travel, zoom padding and star counts are authored visual assumptions. Confidence: high for software API, no claim of physical orbital validity or agency endorsement.
-
-<a id="W3C-APG-MODAL-TOUR"></a>
-### Resource: WAI-ARIA Authoring Practices — Dialog (Modal) Pattern
-- **Source ID:** `W3C-APG-MODAL-TOUR`
-- **Provider/type:** W3C WAI / accessibility implementation guidance, not a space-science source.
-- **Original URL:** https://github.com/w3c/aria-practices/blob/main/content/patterns/dialog-modal/dialog-modal-pattern.html
-- **Access:** 2026-11-14, GitHub source rendering chunk 0; About This Pattern and Keyboard Interaction reviewed (not every example or later note).
-- **Concept used:** inert background, focus inside dialog, contained Tab/Shift+Tab navigation, Escape to close, labelled modal.
-- **Implementation:** `src/components/hq/tutorial-tour.tsx`, existing `focus-guard.tsx`, HQ integration. Original code and text; no example code, artwork or source text copied, no new dependency. Guidance is not certification; screen-reader/device audit remains outstanding.
-- **Confidence:** high for reviewed interaction guidance; browser keyboard/viewport checks do not prove universal assistive-technology support.
-
-#### 0.1.9 authored presentation decisions
-`MISSIONX-EDUCATIONAL-ASSUMPTIONS`: three 0.8-second numeric beats plus 0.6-second LIFTOFF hold fit the existing t=3 ascent event, replacing the prior stretched T−10 display. Countdown uses the flight clock, with no separate timer; speed/skip are unavailable before ascent. Existing original synthesized audio is reused. Tour prose explains actual implemented controls; it is not a new mission rule or certification. Versioned local completion/skip status is browser-only; no telemetry service or account.
-
-### 0.1.10 presentation/report source review
-- **TOOL-PDF-LIB** (existing approved MIT dependency, 1.17.1): reviewed installed `src/api/PDFFont.ts` width measurement, `PDFPage` drawing APIs and `src/core/structures/PDFPageLeaf.ts` annotation registration, plus `LICENSE.md` (Copyright 2019 Andrew Dillon). Original source URL https://github.com/Hopding/pdf-lib/blob/master/src/api/PDFPage.ts retrieved 2026-11-14; first web chunk was mostly repository metadata, so technical evidence is the installed source review, not a claim to have read all remote chunks. Used in `src/game/report/pdf-{layout,export}.ts` for measured wrapping, tables, pagination, image placement and URI annotations. Original layout implementation, no external PDF template copied.
-- **MISSIONX-EDUCATIONAL-ASSUMPTIONS**: `flight-tests.ts` only projects existing `verify` and `missionDiagnostics` outputs; no engineering equations, probabilities, thresholds or outcomes changed. Numeric display is rounded to at most three decimals. Countdown-driven progress means review of already calculated preflight checks, not simulated sensor execution.
-- **Owner-supplied brand/URL**: original local `public/images/logo.png` inspected (2172×724 RGBA; corner alpha 0; artwork white including X). Alpha-projected columns separate the X/swoosh at x=1530 after N ends at x=1505. `scripts/pdf-logo.ts` derives `logo-report.png` using existing Sharp, retaining alpha/shape, trimming transparent padding and recoloring only lettering to #141419 and X/swoosh to #ff6a2b. This implements the owner's requested PDF palette; it is not an orange variant discovered in the original file. Original website asset unchanged. Official site URL exactly as supplied: https://missionx-black.vercel.app/ — no independent agency relationship implied.
-- Existing NASA/Quicksat references in report remain narrow conceptual sources with original URLs; report does not certify hardware, record sensor measurements, or invent scientific discoveries.
+MissionX is an independent educational project created by Team NASA WARRIORS for the NASA International Space Apps Challenge 2026. It is not affiliated with, endorsed by, or sponsored by NASA or any other space agency. NASA is not responsible for information contained on non-U.S. Government websites.

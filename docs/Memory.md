@@ -207,3 +207,14 @@ Validation: 79 tests pass (19 new geometry/star checks), lint and production bui
 
 ## 2026-11-14 — owner-approved MIT license
 Added root LICENSE (standard MIT text), copyright 2026 Team NASA WARRIORS. Updated current README, CONTRIBUTING, CITATION.cff, docs index/asset attribution and historical audit follow-up; changelog records the decision. Third-party font/dependency licenses and unresolved artwork ownership/trademark rights remain separate. No application, protected Design/PRD/Architecture or package-version change. Validation passed: lint, typecheck, 89 tests (0 failures), production build, 176 local documentation references and git diff --check. Private reporting contacts and asset-rights confirmation remain owner decisions.
+
+
+## 0.1.11 — post-audit accuracy corrections (2026-11-14)
+
+- Corrected incomplete diagnostic aggregation, visible group/finding counts and shared UI/PDF reasons; readiness is not physical certification.
+- Removed separate ten-count; clarified Sun Earth-orbit observations, per-craft/fleet scopes and capped-lifetime projection.
+- Added optional captured run inputs/IDs and explicit legacy current-catalog reconstruction; equivalent assumption wiring preserves numeric policy/results.
+- Reclassified NASA/Quicksat conceptual sources, added field-level DATA_SOURCES, selected PDF provenance and rights/dependency register; added15 permanent standards.
+- Validation:95 tests, lint, typecheck, build; Moon desktop success/phone-sized loss browser flows/downloads;23-page PDF bounds/links. Scope/limits and protected-document proposals: docs/Post-Audit-Corrections.md.
+
+No PRD/Architecture/Design edits, new dependency, numeric model/score change or mandatory save migration. Legacy original inputs and artwork ownership remain unavailable/unconfirmed. Full evidence and follow-up: [Post-Audit-Corrections.md](Post-Audit-Corrections.md).

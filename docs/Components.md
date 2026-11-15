@@ -25,7 +25,7 @@ Parts carry mass (kg), cost (million USD), draw/generation (W), battery (Wh), da
 - `src/components/hq`: station UI; `hq/world`: procedural canvas scenes and fallback handling.
 - `src/components/game`: flight-deck screens and shared checks, diagnostics, report and mentor panels.
 - `src/game/engine/flight-tests.ts`: common preflight/arrival presentation projection.
-- `src/game/report`: source-derived report content and measured PDF layout.
+- `src/game/report`: saved/captured-input report content and measured PDF layout.
 - `src/game/audio`: original procedural Web Audio score/effects; no downloaded music assets.
 - `src/game/onboarding`: first-use tutorial definitions and state validation.
 

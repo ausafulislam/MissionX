@@ -1,11 +1,11 @@
 # MissionX engineering references
 
-Current model 3, package 0.1.10; documentation reconciled 2026-11-14. This is a description of **existing code**, not newly validated flight engineering. [Source register](RESOURCES.md) supplies provider, original URL, access/review scope and restrictions for every source ID. Historical algorithms are separate below.
+Current model 3, package 0.1.11; documentation reconciled 2026-11-14. This is a description of **existing code**, not newly validated flight engineering. [Source register](RESOURCES.md) supplies provider, original URL, access/review scope and restrictions for every source ID. Historical algorithms are separate below.
 
 
 ## Current implementation reconciliation — documentation pass
 
-The formulas below were checked against `resources.ts`, `validation.ts`, `operations.ts`, `simulation.ts`, `flight-lifecycle.ts`, `diagnostics.ts` and `flight-tests.ts`. No scientific input, formula or test expectation changed in this task. Any earlier “UI pending” statement is historical: the six-review gate and shared preflight/arrival results are now connected to HQ, flight deck and PDF (implementation through 0.1.10).
+The formulas below were checked against `resources.ts`, `validation.ts`, `operations.ts`, `simulation.ts`, `flight-lifecycle.ts`, `diagnostics.ts` and `flight-tests.ts`. No scientific magnitude or scoring formula changed; diagnostic status expectations were corrected. Any earlier “UI pending” statement is historical: the six-review gate and shared preflight/arrival results are now connected to HQ, flight deck and PDF (implementation through 0.1.10).
 
 ### Traceability to guides and tests
 
@@ -23,13 +23,23 @@ Test names here refer to repository files, not external scientific validation. C
 
 ### Explicit numerical policies
 
-`assumptions.json`: modelVersion 3; solarAnnualRetention 0.98; batteryUsableFraction 0.8; batteryDischargeEfficiency 0.95; batteryChargeEfficiency 0.95; groundReceptionEfficiency 1; representativeDays 4; stepsPerOrbit 48; advisoryMarginPercent 10. The 10% headroom rule is also literal in existing verification code; this documentation does not claim all constants have been centralized.
+`assumptions.json`: modelVersion 3; solarAnnualRetention 0.98; batteryUsableFraction 0.8; batteryDischargeEfficiency 0.95; batteryChargeEfficiency 0.95; groundReceptionEfficiency 1; representativeDays 4; stepsPerOrbit 48; advisoryMarginPercent 10. The headroom/risk rules now consume advisoryMarginPercent; simulation result identifiers consume modelVersion. Other score/event literals are not centralized.
 
 `simulation.ts`: score weights 0.50 / 0.35 / 0.15; efficiency offset 0.55; failure science threshold 0.5 of target; success availability tolerance 1e-9. All are authored educational policies. Readiness accepts only PASS or explicitly nonblocking checks. Nonzero inadequate data/storage becomes a warning; not every CLOSE result is safe to launch.
 
 `operations.ts`: scienceFraction = min(1, Earth-received GB / (planned fleet GB/day × representative days)), or 0 for no planned data. Generated/transmitted/received are not interchangeable; overflow and onboard backlog receive no science credit. Lifetime fraction is applied separately in `simulate()`. Four-day rates are extrapolated with 30-day months and capped achieved/required life, not integrated across a full changing campaign.
 
 No catalog magnitude, degradation factor, risk threshold, countdown interval, score weight or schematic travel time is attributed to NASA/CSA/JPL/Quicksat. Missing original selection rationales remain unresolved. See [resource audit](RESOURCES.md) for scope and reuse limits.
+
+## Correction addendum — 0.1.11
+
+Parameter records: [DATA_SOURCES.md](DATA_SOURCES.md). NASA presentation and Quicksat are category C conceptual references, not proven method derivations; no numerical source is inferred from formula similarity.
+
+**Diagnostics (`diagnostics.ts`, `flight-tests.ts`):** any FAIL → FAIL; else any WARNING → WARNING; else any NOT EVALUATED (or empty group) → NOT EVALUATED; else PASS. Group and finding counts are separate; repeated checks in different groups count as separate finding instances. WARNING plus unmodeled findings retains WARNING and discloses unevaluated count. Baseline arrival: four unevaluated groups, six unevaluated finding instances; this is not physical health testing. Six review acknowledgments permit playback, not certification.
+
+**History (`run-snapshot.ts`):** report inputs use captured values when valid, otherwise explicitly current-catalog reconstruction. Existing save schema/key unchanged, optional snapshot schema1; new snapshots include catalog/assumption identifiers. Captured results are finite/shape checked with a corruption checksum, not signed or tamper-proof. Current aggregation and documentation metadata may evolve; no old diagnostics/source metadata version is fabricated. Tests: corrections.test.ts, save-model.test.ts, flight-tests.test.ts, report tests.
+
+**Scope:** fleet mass/cost/data/memory/downlink; per-craft power/battery/part specs. Countdown overlay reads the existing flight clock with no timer; FlightScene reads the same label and no longer renders an independent ten-count. Existing controller intervals clean up on effect teardown. Tests cover shared timing, gate and display source.
 
 ## Evidence and notation
 
@@ -55,11 +65,11 @@ Implementation: `src/game/engine/resources.ts`; constraints in `validation.ts`. 
 | Budget remaining | mission budget − cost | Derived $M; no cost uncertainty distribution | balance.test.ts |
 | Design lifetime | minimum installed part lifetime, or 0 with no parts | Authored weakest-part policy, not reliability distribution | engine.test.ts short-life case |
 
-NASA CubeSat 101 §§2.2–2.3 discusses funding/feasibility and non-hardware cost considerations (accessible review only): https://www3.nasa.gov/sites/default/files/atoms/files/nasa_csli_cubesat_101_508.pdf, [NASA-CUBESAT-101](RESOURCES.md#NASA-CUBESAT-101). It does **not** supply MissionX costs or justify applying CubeSat requirements to all craft.
+Historical review notes cited CubeSat process/funding context; the current correction pass reviewed only introduction/§1.1/beginning §1.2, not a fresh chapter-2 verification: https://www3.nasa.gov/sites/default/files/atoms/files/nasa_csli_cubesat_101_508.pdf, [NASA-CUBESAT-101](RESOURCES.md#NASA-CUBESAT-101). It does **not** supply MissionX costs or justify applying CubeSat requirements to all craft.
 
 ## Electrical power and energy
 
-Implementation: `resources.ts`, `operations.ts`. Conceptual source: Quicksat power guide above. All numeric factors are authored estimates; values inventoried below. Outputs remain per spacecraft, not fleet totals.
+Implementation: `resources.ts`, `operations.ts`. Conceptual reading: Quicksat power guide above; historical derivation not established. All numeric factors are authored estimates; values inventoried below. Outputs remain per spacecraft, not fleet totals.
 
 | Parameter/output | Formula, units and inputs | Assumptions/limits | Test method |
 |---|---|---|---|
@@ -122,7 +132,7 @@ Implementation: `simulation.ts`, `src/game/data/events.ts`, `operations.ts`. All
 - Storm: power 0.75, data 0.88, lifetime 0.94. Protected computer substitutes 0.94/0.97/1. Storm lasts one orbit from hour48; lifetime factor affects final achieved-life heuristic.
 - Outage: power1, dataFactor0.72, life1; radio-relay changes dataFactor to0.95. Here dataFactor determines blackout duration 24×(1−factor) h from hour48; it does **not** directly multiply generated observations.
 - Fault: power1, data0.76, life0.72. Data factor persists after hour48.
-- Stable event: all factors1; capacity constraints can still lose data despite current event copy promising planned return. Copy correction pending.
+- Stable event: all factors1; capacity constraints can still lose data. Copy explicitly states those limits.
 - Achieved life=round(shortest installed life×event lifetime factor,1) months if launched, else0. Not calculated from accumulated radiation/battery wear.
 - Risk label: high if mass/power margin<0 or cost>budget; moderate if min(mass,power margin)<10%; otherwise low. Ignores downlink/storage/battery/launcher uncertainty; not a probability or complete mission risk assessment.
 
@@ -130,7 +140,7 @@ Tests: `engine.test.ts` seeded success/partial/failure, protected computer, tran
 
 ## Verification and science/scoring
 
-Implementation: `validation.ts`, `simulation.ts`. NASA-SCIENCE-MISSIONS supports requirement/verification process and segment labels; NASA-WEBB-GAME is only a studied science-first design reference. The following rules are **MissionX policies**.
+Implementation: `validation.ts`, `simulation.ts`. NASA-SCIENCE-MISSIONS is a conceptual citation for requirement/verification process and segment labels; historical adoption is not proven. NASA-WEBB-GAME remains mentioned only, not an implemented source. The following rules are **MissionX policies**.
 
 - Numeric pass: actual≤target for maxima, actual≥target for minima. Nonpassing ratio actual/target (minimum) or target/actual (maximum) ≥0.9 gives internal `close`, otherwise `fail`; zero denominators have explicit code branches. UI says WARNING, not verified flight readiness.
 - Four requirements: fleet mass cap, budget cap, science points minimum, lifetime minimum.
@@ -150,13 +160,13 @@ Tests: `engine.test.ts`, `balance.test.ts`, `operations.test.ts`, `schema.test.t
 
 `progression.ts`: each unique evaluated run earns20+score XP, even failed runs; ranks at150/500/1200 XP. Achievements: first evaluation; launch segment pass; success outcome; score≥90 and engineering≥95; successful positive power headroom<25% supply; positive science at all3 destinations. These are authored engagement rules, not qualifications. Award ID history capped2048. Tested in `progression.test.ts`.
 
-Mission store retains12 runs, 2MB save guard, validated design/model dispatch and recomputed results; UI clock/speed/skip never determines outcomes. Schema tests and `save-model.test.ts` address persistence/tamper handling. Mentor fallback uses engine summaries; generated AI advice is not a validated engineering source.
+Mission store retains12 runs and a 2MB save guard. New runs capture bounded inputs/balances/checks/results; snapshotless legacy runs use validated design/model dispatch and recomputed results; UI clock/speed/skip never determines outcomes. Schema tests and `save-model.test.ts` address persistence/tamper handling. Mentor fallback uses engine summaries; generated AI advice is not a validated engineering source.
 
 ## Historical models and unresolved work
 
-`engine/legacy-v1/` preserves original resource/validation/simulation algorithms. `legacy-v2.ts` preserves intermediate simulation but imports current resource/validation code: exact historic-v2 isolation is **not guaranteed**. Catalog changes can also affect old model recomputation. Existing v1/current tests are not proof all historical designs reproduce bit-for-bit. No history algorithms changed here.
+`engine/legacy-v1/` preserves original resource/validation/simulation algorithms. `legacy-v2.ts` preserves intermediate simulation but imports current resource/validation code: exact historic-v2 isolation is **not guaranteed**. Catalog changes can also affect old model recomputation. Existing v1/current tests are not proof all historical designs reproduce bit-for-bit. Legacy algorithms remain; new captured results are retained rather than recomputed from current catalogs.
 
-Pending approval/work: parameter-level catalog IDs, scientific explanation review, metadata coverage tests, step-size convergence, initial-state sensitivity, charge-loss-aware feasibility, event-copy correction, unused/duplicated constants, complete mission-page verification and later CubeSat chapters. No official CML rating, RF link budget, propulsion, thermal, navigation, end-of-mission disposal or professional cost/risk model exists.
+Pending approval/work: external scientific explanation review, step-size convergence, initial-state sensitivity, charge-loss-aware feasibility, event-copy correction, remaining literal policies, complete mission-page verification and later CubeSat chapters. No official CML rating, RF link budget, propulsion, thermal, navigation, end-of-mission disposal or professional cost/risk model exists.
 
 ## Static parameter inventory
 
@@ -242,14 +252,14 @@ Field units in column order: dimensionless; fraction; h; fraction. Source: MISSI
 | stepsPerOrbit | 48 | steps/orbit |
 | advisoryMarginPercent | 10 | % |
 
-`advisoryMarginPercent` currently exists in JSON but risk/verification also hard-code10. Event factors are inventoried in Risk above, including TypeScript overrides. `setup.json` category hints and starter part IDs are authored educational selections, not sourced optimal designs. Mission difficulty labels are authored descriptors, not validated difficulty measurements.
+`advisoryMarginPercent` now controls risk and verification headroom at the unchanged value10. Event factors are inventoried in Risk above, including TypeScript overrides. `setup.json` category hints and starter part IDs are authored educational selections, not sourced optimal designs. Mission difficulty labels are authored descriptors, not validated difficulty measurements.
 
 ## Cinematic foundation (v0.1.6; UI integration pending)
-`flight-lifecycle.ts` maps existing model3 playback into preparation(0), ascent(3), upper-ascent(8), deployment/journey(13), commissioning/operations(18), evaluation(30). `flight-stages.json` records authored presentation stages/source IDs. No extra physics events or scoring changes. Deployment must actually be present and operations event reached before schematic arrival; failed launch remains lost at every later requested time. Sun Watch destination is Earth orbit/solar observations, never a flight to the Sun. Ten displayed countdown ticks map to existing three playback seconds; this is a planned compressed presentation, not an elapsed ten-second physical countdown. Scene/audio integration remains pending.
+`flight-lifecycle.ts` maps existing model3 playback into preparation(0), ascent(3), upper-ascent(8), deployment/journey(13), commissioning/operations(18), evaluation(30). `flight-stages.json` records authored presentation stages/source IDs. No extra physics events or scoring changes. Deployment must actually be present and operations event reached before schematic arrival; failed launch remains lost at every later requested time. Sun Watch destination is Earth orbit/solar observations, never a flight to the Sun. Countdown uses shared 3–2–1 and LIFTOFF over three playback seconds; scene/audio are connected. flight-stages.json is descriptive, not runtime timing.
 
-`diagnostics.ts` emits six sets of configuration findings: health, power, communications, orbit/navigation, instrument compatibility, readiness. Before arrival every status is NOT EVALUATED. After arrival PASS means an existing configuration check passes, WARNING means a nonblocking modeled deficit, FAIL means a blocking check. Subsystem installation is explicitly not measured health. Thermal/propulsion, actual navigation/insertion accuracy, calibration and RF antenna performance remain NOT EVALUATED. Aggregate prioritizes FAIL, WARNING, any PASS, otherwise NOT EVALUATED; mixed test results retain unassessed individual findings. No campaign-total data is passed off as arrival-time measurements. `canOperate` additionally requires commissioning acknowledgement; actual shared playback/UI gating is not yet wired.
+`diagnostics.ts` emits six sets of configuration findings: health, power, communications, orbit/navigation, instrument compatibility, readiness. Before arrival every status is NOT EVALUATED. After arrival PASS means an existing configuration check passes, WARNING means a nonblocking modeled deficit, FAIL means a blocking check. Subsystem installation is explicitly not measured health. Thermal/propulsion, actual navigation/insertion accuracy, calibration and RF antenna performance remain NOT EVALUATED. Aggregate prioritizes FAIL, WARNING, NOT EVALUATED, then PASS only for fully evaluated findings; mixed groups expose missing counts. No campaign-total data is passed off as arrival-time measurements. `canOperate` additionally requires commissioning acknowledgement; shared playback/UI gating is wired.
 
-Source IDs: NASA-SCIENCE-MISSIONS (requirements and verification concept only); NASA-MISSION-VIZ (schematic visualization reference only); MISSIONX-EDUCATIONAL-ASSUMPTIONS (all timing/status aggregation rules). No source supports these timing values as flight dynamics. `diagnostics.test.ts` tests all destinations and terminal launch failures; existing tests retain power/data/compatibility/outcome coverage.
+Historical stage metadata IDs: NASA-SCIENCE-MISSIONS and NASA-MISSION-VIZ are descriptive references only, not imported runtime data. Diagnostic findings now identify only MISSIONX-EDUCATIONAL-ASSUMPTIONS (authored status rules). No source supports these timing values as flight dynamics. `diagnostics.test.ts` tests all destinations and terminal launch failures; existing tests retain power/data/compatibility/outcome coverage.
 
 `SavedRun` now optionally captures validated commanderName on launch from the existing local profile, and completedAt on first finish. Commander profile hydrates before capture, including /play. Subsequent identity edits do not rename old flights. Legacy missing fields stay absent; invalid names/dates are discarded on restore. These metadata do not affect seeded simulation. Completion timestamp means player playback evaluation acknowledgement, not physical mission arrival/lifetime. Save tests verify persistence, idempotent finish and legacy absence.
 
@@ -275,8 +285,8 @@ Tests sample all missions at .005-second intervals through travel/operations, he
 - Tour uses four dimming regions and a spotlight, original modal text, background inertness and existing focus containment. Targets are measured/clipped to scrolling ancestors; resize/scroll observers/listeners are cleaned up. Completion/skip stored as `{version:1,status}` under `missionx-hq-tutorial-v1`; unavailable storage degrades to page-session dismissal, so persistence across reload cannot be promised when storage is blocked.
 
 ## 0.1.10 presentation-only test/report consolidation
-`flightTestResults(run,time)` derives ordered preflight rows from existing `verify` checks and arrival groups/findings from existing `missionDiagnostics`. Required non-pass checks display FAIL; nonblocking non-pass checks display WARNING. `summarizeTests` counts PASS/FAIL/WARNING/NOT EVALUATED, with blocked/unperformed taking precedence over readiness. UI and report consume the same names, statuses, explanations and summaries. Preflight and arrival totals are separate to avoid counting group findings as extra completed tests. A successful configuration does not imply successful seeded launch; a launch-loss banner/event remains distinct and arrival is NOT EVALUATED.
+`flightTestResults(run,time)` derives ordered preflight rows from existing `verify` checks and arrival groups/findings from existing `missionDiagnostics`. Required non-pass checks display FAIL; nonblocking non-pass checks display WARNING. `summarizeTests` counts PASS/FAIL/WARNING/NOT EVALUATED, with blocked/unperformed taking precedence over readiness. UI and report consume the same names, statuses, explanations and summaries. Preflight and arrival are separate; correction0.1.11 additionally reports finding-instance counts, never conflating them with group counts. A successful configuration does not imply successful seeded launch; a launch-loss banner/event remains distinct and arrival is NOT EVALUATED.
 
 Preflight checks already execute synchronously before flight. Their three-second progressive visual review uses the current flight clock and is labelled as review, not pretend live testing. Arrival groups advance only through existing acknowledgement state; original six-review operations gate and critical-failure behavior are unchanged. A small scoped panel scroll makes the active review/summary visible without moving the scene/HUD or adding an independent execution timer. Native progress and reduced-motion styles are presentation-only.
 
-PDF uses existing report data grouped into cover, overview, configuration, balance, timeline, tests, science/segments, assessment and sources. Table text wraps by measured font/canvas width; rows stay together when they fit a fresh page and oversized rows continue with repeated section/column headers. Diagnostic findings have individual rows so a large group does not strand half a page. All pages carry a clickable exact owner URL and page numbers. Reports are not fixed to nine pages: detailed specimens currently span 17 pages. No fabricated missing values or empty filler pages are added. Browser Unicode still uses system-font rasterization; glyph coverage/searchability and tagged-PDF accessibility remain limitations without the separately approved font/accessibility work.
+PDF uses existing report data grouped into cover, overview, configuration, balance, timeline, tests, science/segments, assessment and sources. Table text wraps by measured font/canvas width; rows stay together when they fit a fresh page and oversized rows continue with repeated section/column headers. Diagnostic findings have individual rows so a large group does not strand half a page. All pages carry a clickable exact owner URL and page numbers. Reports are not fixed to a page count; parameter provenance adds pages depending on selected parts and text wrapping. No fabricated missing values or empty filler pages are added. Browser Unicode still uses system-font rasterization; glyph coverage/searchability and tagged-PDF accessibility remain limitations without the separately approved font/accessibility work.

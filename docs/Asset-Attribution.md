@@ -1,21 +1,76 @@
-# Assets, attribution and rights
+# Assets, dependencies, attribution and rights
 
-[Documentation index](README.md)
+[Documentation index](README.md) · [Source categories](RESOURCES.md)
 
-Audited 2026-11-14. The owner subsequently approved the [MIT License](../LICENSE) for MissionX software and associated documentation, copyright © 2026 Team NASA WARRIORS. Third-party fonts/dependencies retain their own terms. MIT licensing does not establish ownership of third-party material or grant trademark rights; unresolved artwork provenance remains recorded, not treated as public domain.
+Inspected 2026-11-14, release0.1.11. Preserve the existing [MIT LICENSE](../LICENSE): project software/docs copyright2026 Team NASA WARRIORS. MIT does not establish third-party ownership, asset permission or trademark rights. This register is not legal clearance or an exhaustive deployment SBOM.
 
-| Asset | Evidence/provenance | License / unresolved rights |
+## Images and creative assets
+
+| Asset | Evidence | Rights/status |
 |---|---|---|
-| `public/images/logo.png` | Existing owner-supplied MissionX artwork; preserved unchanged | Owner confirmation of redistribution/branding terms pending |
-| `public/images/logo-report.png` | Recolored/trimmed derivative of the same logo; see `scripts/pdf-logo.ts` | Inherits unresolved underlying artwork rights |
-| `public/images/orbital-hero.png`, `lunar-mission.png` | Project Memory records original AI-generated cinematic illustrations, not NASA photography | No separate asset license granted; creation history is not a legal warranty |
-| `docs/images/*.webp` | Actual running-app screenshots captured for this task; see gallery | Depict project UI/artwork; underlying rights still apply |
-| `public/fonts/barlow*.ttf` | Barlow Condensed, sourced from google/fonts per project history | Bundled `barlow.ttf.LICENSE.txt` (SIL OFL) |
-| `public/fonts/inter.ttf` | Inter, self-hosted | Bundled `inter.ttf.LICENSE.txt` (SIL OFL) |
-| `public/fonts/mono*.ttf` | IBM Plex Mono, self-hosted | Bundled `mono.ttf.LICENSE.txt` (SIL OFL) |
-| `public/fonts/space.ttf` | Space Grotesk, self-hosted | Bundled `space.ttf.LICENSE.txt` (SIL OFL) |
-| HQ/world geometry and audio | Procedural application code and synthesized Web Audio; no downloaded models/music found in public assets | Project software code: MIT; no downloaded audio/model rights implied |
+| `public/images/logo.png` | Existing supplied artwork, unchanged | **Unknown / Requires owner confirmation** of creator and redistribution permission |
+| `public/images/logo-report.png` | Recolored/trimmed derivative via `scripts/pdf-logo.ts` | Inherits unknown underlying logo rights |
+| `public/images/orbital-hero.png` | Existing cinematic raster; earlier Memory describes AI generation, not independently verified ownership | **Unknown / Requires owner confirmation** |
+| `public/images/lunar-mission.png` | Actual existing lunar raster; earlier creation history not a rights grant | **Unknown / Requires owner confirmation** |
+| `lunar-closeup.png` named in audit/request | No file with this name exists in current repository; likely refers to lunar-mission.png, owner to confirm | Unknown; no replacement/removal made |
+| `docs/images/*.webp` | Actual app captures; gallery documents release/conditions | Underlying UI/artwork rights apply; screenshots are not hardware 3D proof |
+| `src/app/icon.svg`; inline SVG/Unicode/CSS icons | Local X icon and UI source; no imported icon pack found | Local implementation under project license where owned; no agency insignia added |
+| HQ/world spacecraft/rocket/architecture | Primitive geometry in `world/`; no GLTF/OBJ/FBX asset import | Procedural project code, not NASA models |
+| Planets/stars | Canvas textures/authored polygons/craters and deterministic star generators | Procedural code, not NASA texture/astronomical datasets |
+| Audio/music | `audio-manager.ts`, `score.ts`: oscillators/noise, chord/cue arrays; no bundled recordings | Procedural project code; no external recording rights inferred; original authorship not independently certified |
 
-For exact font conditions, retain/read the original license sidecars in `public/fonts/`; do not remove copyright notices. npm packages retain their respective licenses; this document is not an exhaustive dependency legal audit.
+No visual assets were removed/replaced. Do not add NASA logos, seals or insignia implying endorsement. Agency pages may contain third-party images with separate rights.
 
-NASA/CSA/JPL references are links/concept attribution, not copied agency imagery or permission to use insignia. Third-party notices embedded in agency publications may have different terms. The Space Apps team page is participant-generated content. No agency partnership/endorsement is implied. See [source register](RESOURCES.md) and the [independence disclaimer](../README.md#independence-disclaimer).
+## Fonts — bundled notices retained
+
+| Family | Local files | Provider evidence / original project | Terms |
+|---|---|---|---|
+| Barlow | barlow.ttf, -600, -700, -900 | Barlow Project Authors, https://github.com/jpt/barlow | `public/fonts/barlow.ttf.LICENSE.txt`, SIL OFL1.1 |
+| Inter | inter.ttf | Inter Project Authors, https://github.com/rsms/inter | inter.ttf.LICENSE.txt, SIL OFL1.1 |
+| IBM Plex Mono | mono.ttf, mono-500.ttf | IBM Corp.; reserved name Plex in bundled notice | mono.ttf.LICENSE.txt, SIL OFL1.1 |
+| Space Grotesk | space.ttf | Space Grotesk Project Authors, https://github.com/floriankarsten/space-grotesk | space.ttf.LICENSE.txt, SIL OFL1.1 |
+
+Loaded locally with `next/font/local`; no remote font request. Notices inspected, upstream binary hashes not independently compared. Retain font copyright/license; modified reserved names need appropriate permission. OFL is not replaced by repository MIT.
+
+## Direct software dependencies
+
+Local package metadata/lock/imports inspected. All original package authors retain their rights; installed versions are not a future version guarantee.
+
+| Dependency | Installed version | Provider / source | License / usage |
+|---|---|---|---|
+| next | 16.4.6 | Vercel, https://github.com/vercel/next.js | MIT; routing/server |
+| react / react-dom | 19.3.0 | Meta/contributors, https://github.com/facebook/react | MIT; UI |
+| three | .187.0 | Three.js contributors, https://github.com/mrdoob/three.js | MIT; scene/math |
+| @react-three/fiber | 9.8.2 | pmndrs, https://github.com/pmndrs/react-three-fiber | MIT; renderer |
+| @react-three/drei | 10.7.9 | pmndrs, https://github.com/pmndrs/drei | MIT; helpers |
+| zustand | 5.1.0 | pmndrs, https://github.com/pmndrs/zustand | MIT; local stores |
+| pdf-lib | 1.17.1 | Hopding, https://github.com/Hopding/pdf-lib | MIT; report export |
+| lenis | 1.3.27 | darkroom.engineering, https://github.com/darkroomengineering/lenis | MIT; landing scrolling |
+| gsap | 3.15.1 | GSAP/Webflow, https://github.com/greensock/GSAP | GSAP Standard No Charge license, **not MIT** |
+| @gsap/react | 2.1.2 | GSAP, https://github.com/greensock/react | Points to GSAP standard license |
+
+GSAP terms https://gsap.com/standard-license retrieved 2026-11-14 (redirected standard license page; effective April30 2025, modified May30 2025). Permitted website/application uses remain subject to restrictions, including specified competing visual-animation-builder uses. Preserve notices; do not claim all dependencies are unrestricted MIT. Future use changes need terms review.
+
+## Tooling and APIs
+
+Tailwind/Turbopack4.3.3, ESLint9.39.5, eslint-config-next16.4.6 and installed DefinitelyTyped packages declare MIT; TypeScript5.9.3 declares Apache-2.0. Bun1.3.14 is the configured tool; its entire bundled third-party distribution has not been audited here. No new dependencies installed.
+
+Optional OpenAI Chat Completions request is server-side in `/api/mentor`; no OpenAI SDK dependency is installed. Service terms/privacy/billing are separate from code licensing; no live provider validation or aerospace authority implied.
+
+## Material transitive review items
+
+Installed manifest scan in the preceding audit covered405 packages, not shipped bundles. Local reinspection of applicable license declarations supports the items below; dependency inclusion does not prove browser shipping.
+
+| Package(s) | Declared terms | Review action |
+|---|---|---|
+| sharp .35.5 | Apache-2.0 | Native image pipeline and logo script; preserve applicable notices |
+| @img/sharp-libvips Linux variants | LGPL-3.0-or-later | Review native distribution and source/relinking obligations for actual artifacts |
+| lightningcss and Linux variants | MPL-2.0 | Review file-level/source obligations when distributing |
+| axe-core | MPL-2.0 | Tooling presence is not completed accessibility certification |
+| caniuse-lite | CC-BY-4.0 | Dataset attribution review |
+| pako | MIT AND Zlib | Preserve both applicable notices |
+| argparse | Python-2.0 | Preserve applicable license |
+| webgl-constants | manifest missing license field; local LICENSE is MIT, Tim van Scherpenzeel2019 | Do not misreport as unlicensed based only on manifest |
+| three-stdlib, maath, three-mesh-bvh, @pdf-lib/standard-fonts, @pdf-lib/upng | MIT declarations | Retain notices; full transitive closure still needs artifact review |
+
+Pending owner decisions: artwork identity/rights, actual redistribution targets, and whether to commission a full shipped-artifact license/SBOM review. Referencing NASA/JPL/CSA or a participant team page grants neither endorsement nor asset permission.

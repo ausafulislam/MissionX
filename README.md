@@ -47,7 +47,7 @@ It is designed for students aged 12–18, educators and space enthusiasts. No ac
 - Six sequential arrival configuration reviews shared by HQ and the flight deck; a failed launch never receives arrival credit.
 - Science, engineering and efficiency score breakdown; Launch / Space / Ground / User explanations.
 - Local commander preferences, progression, saved runs and debrief/comparison tools.
-- Downloadable sectioned PDF reports with configuration, checks, outcomes and source caveats.
+- Downloadable sectioned PDF reports with parameter IDs, shared diagnostic group/finding counts, captured new-run inputs and explicit legacy-reconstruction caveats.
 - Deterministic local mentor; optional server-side remote advice with fallback.
 - Gesture-enabled procedural audio, reduced-motion controls and WebGL compatibility fallback.
 
@@ -79,7 +79,7 @@ Sun Watch observes the Sun **from Earth orbit**; it does not fly to the Sun. Rea
 
 ## Screenshots
 
-Actual local application captures at 1440 × 1000, 2026-11-14. HQ screenshots use the application's **WebGL compatibility mode** and reduced motion; they are not proof of hardware 3D performance. Images are optimized, not fabricated. [Capture details and gallery](docs/images/README.md).
+Actual local application captures at 1440 × 1000, 2026-11-14, before correction release 0.1.11. They show real earlier UI; readiness/status labels have since been corrected. HQ screenshots use the application's **WebGL compatibility mode** and reduced motion; they are not proof of hardware 3D performance. Images are optimized, not fabricated. [Capture details and gallery](docs/images/README.md).
 
 | Build | Verify |
 |---|---|
@@ -153,9 +153,11 @@ The store and screens call the engine; the engine does not import the UI. See [c
 
 ## Scientific scope and sources
 
-NASA's mission-design presentation supports the goal-first workflow and four mission segments. Other agency, academic and community links provide specific conceptual context. They do **not** supply MissionX's fictional part prices, reliability values, science points, scoring weights or synthetic orbit factors.
+MissionX uses locally authored educational parameters, not NASA numerical validation. Diagnostics evaluate configured requirements, not real spacecraft health; incomplete findings remain NOT EVALUATED with group/finding counts. The journey is schematic. MissionX does not use GMAT internally and is neither NASA-certified nor NASA-endorsed.
 
-The operations model integrates four representative end-of-life days with 48 steps per orbit, finite memory, energy limitations and synthetic contact windows. It is not a trajectory, thermal, radiation, propulsion or RF solver. Sources, formulas, units, evidence confidence and unresolved rationale are separated in [the resource register](docs/RESOURCES.md) and [engineering references](docs/ENGINEERING_REFERENCES.md).
+NASA's mission-design presentation is a conceptual reference for mission segments and requirements. Historical adoption of its method is not established. Quicksat is conceptual reading, not proven formula derivation. Other agency/community links have individually scoped classifications. They do **not** supply MissionX's fictional part prices, reliability values, science points, scoring weights or synthetic orbit factors.
+
+The operations model integrates four representative end-of-life days with 48 steps per orbit, finite memory, energy limitations and synthetic contact windows. It is not a trajectory, thermal, radiation, propulsion or RF solver. Sources, formulas, units, evidence confidence and unresolved rationale are separated in [the resource register](docs/RESOURCES.md) and [engineering references](docs/ENGINEERING_REFERENCES.md), with [field-level provenance](docs/DATA_SOURCES.md).
 
 ## Documentation
 

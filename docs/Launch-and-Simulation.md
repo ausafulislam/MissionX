@@ -16,7 +16,9 @@
 
 `operate()` in `operations.ts` uses four representative end-of-life days and 48 steps per orbit. Synthetic midpoint sunlight/contact schedules drive energy and data flow. It begins with full usable battery and empty onboard data, includes charging/discharging losses, limits memory, and records generated, transmitted, received, remaining and lost data. Energy shortfalls reduce instrument duty. This is not a continuous orbit solution or validated full-duration campaign.
 
-Campaign totals extrapolate representative daily rates over achieved/required life using 30-day months. Stationary EOL conditions, initial battery state and timestep choices are limitations; convergence and sensitivity studies are not claimed.
+Campaign totals extrapolate representative daily rates over min(achieved life, required life) using 30-day months. Stationary EOL conditions, initial battery state and timestep choices are limitations; convergence and sensitivity studies are not claimed.
+
+One overlay per active route reads `countdownLabel()` from the existing flight clock. FlightScene no longer has an independent ten-count. Three .8-second beats and a .6-second LIFTOFF hold precede ascent at3 seconds. Controllers clean up their single interval; countdown component has no timer. Sun Watch deploys into Earth orbit for solar observations.
 
 ## Science and score
 
