@@ -12,7 +12,7 @@ for(const missionId of ['moon','sun','mars'] as const)test(`${missionId}: panel/
   assert.ok(report.some(r=>r[1]===testSummaryText(model.preflightSummary)));
   assert.ok(report.some(r=>r[1]===testSummaryText(model.arrivalSummary)));
   if(run.result.duration===7){assert.equal(model.arrivalSummary.notEvaluated,6);assert.ok(model.failure);}
-  else {assert.equal(model.arrivalSummary.failed,0);assert.equal(model.arrivalSummary.notEvaluated,0);}
+  else {assert.equal(model.arrivalSummary.failed,0);assert.equal(model.arrivalSummary.notEvaluated,4);assert.equal(model.arrivalSummary.findings.notEvaluated,6);}
  }
 });
 test('blocking errors and accepted warnings cannot become hardcoded PASS',()=>{

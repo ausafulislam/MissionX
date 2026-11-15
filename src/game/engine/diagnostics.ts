@@ -1,6 +1,5 @@
-import { getOrbit, PARTS } from "../data/catalog";
+import { runInputs } from "./run-snapshot";
 import type { Check, SavedRun } from "../types";
-import { verify } from "./validation";
 import { flightLifecycle } from "./flight-lifecycle";
 export type DiagnosticStatus = "PASS" | "WARNING" | "FAIL" | "NOT EVALUATED";
 export interface DiagnosticFinding {
@@ -18,12 +17,13 @@ export interface DiagnosticTest {
     status: DiagnosticStatus;
     findings: DiagnosticFinding[];
 }
-const sourceIds = ["MISSIONX-EDUCATIONAL-ASSUMPTIONS", "NASA-SCIENCE-MISSIONS"];
-const aggregate = (findings: DiagnosticFinding[]): DiagnosticStatus => findings.some(f => f.status === "FAIL") ? "FAIL" : findings.some(f => f.status === "WARNING") ? "WARNING" : findings.some(f => f.status === "PASS") ? "PASS" : "NOT EVALUATED";
+// Descriptive provenance only; not a source resolver or external measurement.
+const sourceIds = ["MISSIONX-EDUCATIONAL-ASSUMPTIONS"];
+export const aggregate = (findings: DiagnosticFinding[]): DiagnosticStatus => findings.some(f => f.status === "FAIL") ? "FAIL" : findings.some(f => f.status === "WARNING") ? "WARNING" : findings.length === 0 || findings.some(f => f.status === "NOT EVALUATED") ? "NOT EVALUATED" : "PASS";
 /** Configuration commissioning, not invented live sensor readings or EOL forecasts. */
 export function missionDiagnostics(run: SavedRun, time: number): DiagnosticTest[] {
     const eligible = flightLifecycle(run, time).arrived;
-    const verification = verify(run.design);
+    const { verification, parts: PARTS, orbit } = runInputs(run);
     const check = (id: string): DiagnosticFinding => {
         const c: Check | undefined = verification.checks.find(c => c.id === id);
         return { id, name: c?.label ?? id, status: !eligible || !c ? "NOT EVALUATED" : c.status === "pass" ? "PASS" : c.blocking === false ? "WARNING" : "FAIL", evidence: !eligible ? "Mission-phase arrival has not been reached; commissioning was not performed." : c ? `${c.reason} Configuration calculation, not an in-flight sensor measurement.` : "No modeled check is available.", impact: c?.status === "pass" ? "Configured requirement is satisfied; flight performance is not guaranteed." : c?.reason ?? "No modeled evidence for this subsystem.", recommendation: c?.status === "pass" ? "Retain this capability when evaluating other design changes." : c?.reason ?? "Additional modeling or external analysis is required.", sourceIds: [...sourceIds] };
@@ -37,7 +37,7 @@ export function missionDiagnostics(run: SavedRun, time: number): DiagnosticTest[
     const tests = [
         test("health", "Spacecraft configuration health", [hardware("power", "Electrical power hardware"), hardware("battery", "Battery hardware"), hardware("communications", "Communications hardware"), hardware("computer", "Onboard computer"), hardware("attitude", "Attitude hardware"), check("payload"), missing("propulsion", "Propulsion health"), missing("thermal", "Thermal status")]),
         test("power", "Power system diagnostics", [check("power"), check("battery"), check("power-margin")]),
-        test("communications", "Communication diagnostics", [hardware("communications", "Radio installation"), check("data"), check("storage"), { ...missing("contact", "Ground contact readiness"), evidence: eligible ? `${getOrbit(run.design.orbitId).contact * 100}% authored contact fraction. Synthetic scheduled access; no arrival-time link acquisition measurement.` : "Arrival not reached; no contact test performed." }, missing("antenna", "RF antenna compatibility")]),
+        test("communications", "Communication diagnostics", [hardware("communications", "Radio installation"), check("data"), check("storage"), { ...missing("contact", "Ground contact readiness"), evidence: eligible ? `${orbit.contact * 100}% authored contact fraction. Synthetic scheduled access; no arrival-time link acquisition measurement.` : "Arrival not reached; no contact test performed." }, missing("antenna", "RF antenna compatibility")]),
         test("navigation", "Orbit and navigation diagnostics", [check("orbit"), check("launch-orbit"), missing("orbit-solution", "Measured insertion and navigation accuracy")]),
         test("instruments", "Scientific instrument diagnostics", [check("payload"), check("parts"), check("dependencies"), missing("calibration", "Instrument health and calibration")]),
     ];

@@ -3,7 +3,7 @@ export interface SourceInfo {
   url: string;
   parameter: string;
   accessed: string;
-  confidence: "concept-only" | "verified";
+  confidence: "concept-only" | "verified" | "authored";
   simplification: string;
 }
 export type MissionId = "moon" | "sun" | "mars";
@@ -200,6 +200,7 @@ export interface Simulation {
   lessons: string[];
 }
 export interface SavedRun {
+  snapshot?: import("./engine/run-snapshot").RunSnapshot;
   diagnosticsReviewed?: number;
   commanderName?: string;
   completedAt?: string;

@@ -1,15 +1,15 @@
 import type { SavedRun } from '../types';
-import { verify } from './validation';
+import { runInputs } from './run-snapshot';
 import { missionDiagnostics, type DiagnosticStatus } from './diagnostics';
 export interface FlightTestResult { id:string; name:string; status:DiagnosticStatus; description:string; evidence:string; }
-export function summarizeTests(tests: FlightTestResult[]) {
+export function summarizeTests<T extends {status: DiagnosticStatus}>(tests: T[]) {
  const count=(status:DiagnosticStatus)=>tests.filter(t=>t.status===status).length;
  const summary={total:tests.length,passed:count('PASS'),failed:count('FAIL'),warnings:count('WARNING'),notEvaluated:count('NOT EVALUATED')};
  return {...summary,status:summary.failed?'BLOCKED':summary.notEvaluated?'NOT EVALUATED':summary.warnings?'READY WITH WARNINGS':'MISSION READY'};
 }
 /** Single presentation projection; never replaces engineering verification or sensor measurements. */
 export function flightTestResults(run:SavedRun,time:number) {
- const verification=verify(run.design);
+ const verification=runInputs(run).verification;
  const number=(value:number)=>Number(value.toFixed(3)).toString();
  const preflight:FlightTestResult[]=verification.checks.map(c=>({id:c.id,name:c.label,
   status:c.status==='pass'?'PASS':c.blocking===false?'WARNING':'FAIL',
@@ -20,8 +20,10 @@ export function flightTestResults(run:SavedRun,time:number) {
   description:'Arrival configuration diagnostics; not hardware certification.',
   evidence:t.findings.map(f=>`${f.name} / ${f.status}: ${f.evidence} Impact: ${f.impact} Next design: ${f.recommendation}`).join('\n')}));
  const failure=run.result.events.find(e=>e.kind==='failure'&&e.at<=time);
- return {preflight,arrival,diagnostics,preflightSummary:summarizeTests(preflight),arrivalSummary:summarizeTests(arrival),failure};
+ const arrivalSummary = {...summarizeTests(arrival), findings: summarizeTests(diagnostics.flatMap(t=>t.findings))};
+ return {preflight,arrival,diagnostics,preflightSummary:summarizeTests(preflight),arrivalSummary,failure};
 }
-export function testSummaryText(s:ReturnType<typeof summarizeTests>) {
- return `${s.total} tests | ${s.passed} PASS | ${s.failed} FAIL | ${s.warnings} WARNING | ${s.notEvaluated} NOT EVALUATED | ${s.status}`;
+export function testSummaryText(s:ReturnType<typeof summarizeTests> & {findings?: ReturnType<typeof summarizeTests>}) {
+ const counts=(v:ReturnType<typeof summarizeTests>)=>`${v.total} total | ${v.passed} PASS | ${v.failed} FAIL | ${v.warnings} WARNING | ${v.notEvaluated} NOT EVALUATED`;
+ return `Test groups: ${counts(s)} | ${s.status}` + (s.findings ? `; Findings: ${counts(s.findings)}` : '');
 }
