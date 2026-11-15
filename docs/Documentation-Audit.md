@@ -2,6 +2,8 @@
 
 [Documentation index](README.md)
 
+> **License follow-up:** After this audit, the owner approved MIT. Root `LICENSE` now licenses software and associated documentation to that extent; current licensing guidance and citation metadata are updated. The audit below records the earlier documentation task. Private reporting contacts and artwork-rights confirmation remain unresolved.
+
 ## Scope and findings
 
 Owner approved the read-only audit/plan before edits, including reconciliation of Architecture while retaining history, and supplied the verified [NASA WARRIORS team page](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/). No application redesign or functionality change is included.

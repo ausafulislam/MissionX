@@ -5,7 +5,7 @@ Thank you for helping make mission-design trade-offs understandable. Read the [R
 ## Before you start
 
 - Open an issue for substantial features, science/model changes or documentation gaps. Agree scope before new layouts, dependencies, external services or protected-document edits.
-- This repository currently has **no root license**. Do not assume an open-source grant or submit material you cannot legally share. License/asset rights require owner clarification before redistribution.
+- MissionX software and associated documentation use the [MIT License](LICENSE). Submit only material you have the right to contribute under those terms. Preserve third-party notices; the MIT license does not resolve ownership or trademark rights for external assets.
 - Follow the [code of conduct](CODE_OF_CONDUCT.md). Never put secrets, private saves or vulnerability details in public issues; see [security](SECURITY.md).
 
 ## Local workflow

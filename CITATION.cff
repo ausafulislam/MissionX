@@ -2,6 +2,7 @@ cff-version: 1.2.0
 message: "If you reference MissionX, please cite this software using this metadata."
 title: "MissionX: Design. Simulate. Learn."
 type: software
+license: MIT
 authors:
   - name: "Team NASA WARRIORS"
     website: "https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/"
@@ -12,4 +13,4 @@ keywords:
   - education
   - space-mission-design
   - simulation
-# No DOI, release date, individual authors, or license asserted without verification.
+# No DOI, release date, or individual authors asserted without verification.

@@ -43,4 +43,4 @@ These are useful development records, **not an assertion every original requirem
 
 [Contributing](../CONTRIBUTING.md) · [Conduct](../CODE_OF_CONDUCT.md) · [Security](../SECURITY.md) · [Citation](../CITATION.cff)
 
-No root license has been approved. No private reporting address or funding channel is published.
+Software and associated documentation use the [MIT License](../LICENSE). Third-party notices and unresolved asset rights remain documented separately. No private reporting address or funding channel is published.

@@ -2,7 +2,7 @@
 
 [Documentation index](README.md)
 
-Audited 2026-11-14. **No repository-wide license is approved.** Dependency licenses and agency reference links do not grant rights to MissionX branding/code/artwork. Unknown ownership is recorded, not treated as public domain.
+Audited 2026-11-14. The owner subsequently approved the [MIT License](../LICENSE) for MissionX software and associated documentation, copyright © 2026 Team NASA WARRIORS. Third-party fonts/dependencies retain their own terms. MIT licensing does not establish ownership of third-party material or grant trademark rights; unresolved artwork provenance remains recorded, not treated as public domain.
 
 | Asset | Evidence/provenance | License / unresolved rights |
 |---|---|---|
@@ -14,7 +14,7 @@ Audited 2026-11-14. **No repository-wide license is approved.** Dependency licen
 | `public/fonts/inter.ttf` | Inter, self-hosted | Bundled `inter.ttf.LICENSE.txt` (SIL OFL) |
 | `public/fonts/mono*.ttf` | IBM Plex Mono, self-hosted | Bundled `mono.ttf.LICENSE.txt` (SIL OFL) |
 | `public/fonts/space.ttf` | Space Grotesk, self-hosted | Bundled `space.ttf.LICENSE.txt` (SIL OFL) |
-| HQ/world geometry and audio | Procedural application code and synthesized Web Audio; no downloaded models/music found in public assets | No repository-wide license selected |
+| HQ/world geometry and audio | Procedural application code and synthesized Web Audio; no downloaded models/music found in public assets | Project software code: MIT; no downloaded audio/model rights implied |
 
 For exact font conditions, retain/read the original license sidecars in `public/fonts/`; do not remove copyright notices. npm packages retain their respective licenses; this document is not an exhaustive dependency legal audit.
 

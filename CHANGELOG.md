@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased — MIT license (2026-11-14)
+
+- Added owner-approved MIT license, copyright 2026 Team NASA WARRIORS.
+- Updated README, contribution guide, citation metadata and documentation licensing guidance; retained third-party notices and unresolved asset-rights qualifications. No application or package-version change.
+
 ## Unreleased — documentation standards (2026-11-14)
 
 - Reorganized README with verified implementation, team/deployment links, setup, screenshots, limitations and exact owner-supplied independence statement.

@@ -203,3 +203,7 @@ Validation: 79 tests pass (19 new geometry/star checks), lint and production bui
 - Existing public font license sidecars reviewed. Existing history identifies orbital/lunar images as AI-generated, not NASA photography. Logo rights still unresolved; see Asset-Attribution.md.
 - Validation: lint/typecheck pass; 89 tests across17 files, 0fail; balance and production build pass. Balance first failed because sandbox Bun was not on PATH, then passed with existing .tools path. Local docs links checked; exhaustive external/badge validation, live AI, hardware/audio and tagged-PDF certification not claimed.
 - Files created/changed and final evidence are listed in Documentation-Audit.md. No src/public/package/lockfile/PRD/Design edits, no release/version bump. Next owner decisions: license, confidential reporting contacts and asset redistribution rights.
+
+
+## 2026-11-14 — owner-approved MIT license
+Added root LICENSE (standard MIT text), copyright 2026 Team NASA WARRIORS. Updated current README, CONTRIBUTING, CITATION.cff, docs index/asset attribution and historical audit follow-up; changelog records the decision. Third-party font/dependency licenses and unresolved artwork ownership/trademark rights remain separate. No application, protected Design/PRD/Architecture or package-version change. Validation passed: lint, typecheck, 89 tests (0 failures), production build, 176 local documentation references and git diff --check. Private reporting contacts and asset-rights confirmation remain owner decisions.

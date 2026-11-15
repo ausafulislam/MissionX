@@ -175,7 +175,7 @@ Known limits include synthetic orbit/contact inputs, simplified single-incident 
 
 ## License and attribution
 
-**No repository-wide license has been selected.** Public visibility is not an open-source license grant. Do not assume permission to redistribute code, branding or artwork. Fonts carry their own bundled notices. See [asset attribution and unresolved rights](docs/Asset-Attribution.md). No NASA insignia or endorsement badge is supplied.
+MissionX software and associated documentation are licensed under the [MIT License](LICENSE), copyright © 2026 Team NASA WARRIORS. Retain the copyright and permission notice when redistributing copies or substantial portions. Third-party fonts and dependencies retain their own licenses. The software license does not establish ownership of third-party material or grant trademark/agency endorsement rights; see [asset attribution and unresolved rights](docs/Asset-Attribution.md). No NASA insignia or endorsement badge is supplied.
 
 ## Independence disclaimer
 

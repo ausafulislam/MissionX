@@ -261,3 +261,7 @@ Desktop Hero stats moved into normal flex flow with reserved CTA spacing; mobile
 
 ## Documentation standards — owner-approved 2026-11-14
 Documentation-only commission: approved audit/plan and team URL integrated. Current architecture reconciled with original plan retained; Design/PRD untouched. README, current guides, source/formula registers, actual screenshot gallery and repository policies/templates prepared. No runtime change, dependency, license selection, CI workflow or version bump. Lint/types/89 tests/balance/build passed; browser seed-5 Moon compatibility journey completed with six reviews and no page errors. Full evidence/file list and unresolved license/private-contact/asset-rights decisions: [Documentation-Audit.md](Documentation-Audit.md).
+
+
+## 2026-11-14 — owner-approved MIT license
+Added root LICENSE (standard MIT text), copyright 2026 Team NASA WARRIORS. Updated current README, CONTRIBUTING, CITATION.cff, docs index/asset attribution and historical audit follow-up; changelog records the decision. Third-party font/dependency licenses and unresolved artwork ownership/trademark rights remain separate. No application, protected Design/PRD/Architecture or package-version change. Validation passed: lint, typecheck, 89 tests (0 failures), production build, 176 local documentation references and git diff --check. Private reporting contacts and asset-rights confirmation remain owner decisions.
