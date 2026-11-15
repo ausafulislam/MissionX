@@ -254,3 +254,6 @@ Existing HQ refinement only: shared clearance-safe schematic trajectory/operatio
 
 ### 2026-11-14 — countdown and first-use guidance (0.1.9)
 Owner-authorized targeted refinement, not a redesign. Added shared visible launch countdown/interlock, eight-step real-control HQ spotlight tour, versioned completion/skip and Settings replay. Preserved current station panels/models, engine outcomes and six-check commissioning. Desktop/phone complete functional journeys and responsive tour checked in Chromium compatibility mode; actual hardware WebGL/audio/screen-reader sign-off remains separate.
+
+### 2026-11-14 — targeted Hero / PDF / launch-test presentation (0.1.10)
+Desktop Hero stats moved into normal flex flow with reserved CTA spacing; mobile layout unchanged. Printer-friendly, sectioned PDF with supplied-artwork black/orange transparent logo, clickable exact site URL, measured tables/pagination. Shared real preflight/arrival result projection drives the dedicated launch test panel and PDF; no calculation, gate or outcome changes. Desktop/tablet/phone Hero and successful/lost-launch functional flows/downloads checked; physical WebGL/audio and tagged-PDF certification remain unverified.

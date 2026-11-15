@@ -11,7 +11,7 @@ export function MissionReport({ run }: {
     const [busy, setBusy] = useState(false), [error, setError] = useState('');
     return <section className="mission-report"><p>COMMANDER {run.commanderName ?? 'Not recorded'} · {run.result.outcome.toUpperCase()} · {run.result.score}/100 · {flightLifecycle(run, 0).destination}</p><p>Achieved requirements: {run.result.requirements.filter(c => c.status === 'pass').map(c => c.label).join(', ') || 'None'}. Unmet requirements: {run.result.requirements.filter(c => c.status !== 'pass').map(c => c.label).join(', ') || 'None'}.</p><p>Fleet mass {balance.mass} kg · EOL power headroom {balance.powerMarginPercent.toFixed(1)}% per spacecraft · Earth-received return {run.result.returnedData} GB/day. {run.result.science} science points; scientific usefulness is a gameplay proxy.</p><button className="button" disabled={busy} onClick={async () => { setBusy(true); setError(''); try {
         const { createMissionPdf } = await import('@/game/report/pdf-export');
-        const response = await fetch('/images/logo.png');
+        const response = await fetch('/images/logo-report.png');
         const logo = response.ok ? new Uint8Array(await response.arrayBuffer()) : undefined;
         const bytes = await createMissionPdf(run, logo);
         const url = URL.createObjectURL(new Blob([new Uint8Array(bytes)], { type: 'application/pdf' }));

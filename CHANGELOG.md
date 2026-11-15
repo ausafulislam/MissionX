@@ -53,3 +53,10 @@
 - Automatically guide first-time HQ visitors through eight real-control spotlights, with Next/Back, Skip/Escape, progress, background interaction lock, viewport/scroll tracking and reduced-motion support.
 - Remember completed/skipped tutorials locally, degrade gracefully when storage fails, and add Replay Tutorial to existing Settings.
 - Add countdown/order/interlock and tutorial persistence regressions. No runtime dependencies, model redesign or protected-document edits.
+
+## 0.1.10 — 2026-11-14
+- Fix desktop Hero CTA/statistics collision by using normal layout flow with reserved vertical separation; preserve content and mobile styling.
+- Upgrade mission PDF to a cover and ordered report sections with measured wrapping, true tables, repeating continuation headers, page numbers and clickable exact MissionX website links.
+- Add transparent black/orange PDF-only logo derived from supplied artwork; leave website asset unchanged.
+- Add a dedicated flight test review panel using shared real preflight and arrival test data, explicit failure reasons, review progress and final summaries; reuse the existing commissioning gate.
+- Add cross-mission test/PDF parity, warning/blocking and PDF pagination/link/wrapping regressions. No new project dependencies or engineering-formula changes.
