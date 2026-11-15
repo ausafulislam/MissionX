@@ -27,3 +27,7 @@ The PDF is not certified tagged/accessible, archival, digitally signed or suitab
 ### 0.1.12
 
 PDF cover labels Weighted Performance Score and explains independent rounding;100 can coexist with PARTIAL. Schema1 reads use a fixed contract. Supplied invalid/unsupported snapshots stop report generation instead of rebuilding inputs; only absent snapshots use disclosed reconstruction. Shared summaries prioritize warnings over missing findings while printing both counts. Defaults/limits: [correction record](Post-Audit-Corrections.md).
+
+## Current visual/evidence
+
+[Actual0.1.12 PDF cover preview](images/pdf-report.webp) was rendered from a real completed Moon seed5 run. Fresh seven-report parser checks cover Moon partial/success/loss and Sun/Mars success/loss:23/23/24 pages respectively, score explanation/shared counts/text bounds/site links passed. No full print/Unicode/tagged accessibility certification. Report export is client-local, not an official competition submission upload.

@@ -6,7 +6,7 @@ MissionX is an independent educational space mission design game. It is not a NA
 
 ## Modeled educational relationships
 
-Static authored mass/cost/science/lifetime; simplified EOL array power; per-spacecraft energy and usable battery; synthetic repeating eclipse/contact cycles; finite fleet memory, transmission/reception; seeded launch/event risk; score policy and configuration review. Current simulation model remains 3. No scientific magnitudes or score weights were changed by correction release 0.1.11.
+Static authored mass/cost/science/lifetime; simplified EOL array power; per-spacecraft energy and usable battery; synthetic repeating eclipse/contact cycles; finite fleet memory, transmission/reception; seeded launch/event risk; score policy and configuration review. Current simulation model remains 3. No scientific magnitudes or score weights were changed by correction releases0.1.11/0.1.12 or this documentation finalization.
 
 ## Not modeled / NOT EVALUATED
 
@@ -42,3 +42,7 @@ Agency/community source links are conceptual or historical references, not numer
 ### 0.1.12 snapshot/score clarification
 
 Fixed schema1 validation is independent of current catalog/assumption structure. Future optional fields do not become required by changing today’s data; required historical numeric fields remain required. Invalid/unsupported supplied snapshots fail closed, with a storage warning and retained raw save, not reconstructed reports. This is not a permanent executable archive. Weighted Performance Score is rounded independently of outcome;100 does not imply all objectives were achieved.
+
+## Submission honesty
+
+No learning-effectiveness study, external scientific validation, award eligibility or legal asset clearance is established. Official NASA-resource use is conceptual, not ingested numerical data. Full SI-use/originality and artwork permissions/markings must be confirmed by the owner; see [official requirements](../submission/OFFICIAL_REQUIREMENTS.md). Local demo functionality must not be described as a verified deployment of this commit.

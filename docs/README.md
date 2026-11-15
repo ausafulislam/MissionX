@@ -1,12 +1,14 @@
 # MissionX documentation
 
-Current documentation baseline: package **0.1.10**, audited 2026-11-14. These guides describe implemented behavior; planned work is labeled explicitly. Start with the [project README](../README.md).
+Current documentation baseline: package **0.1.12**, finalized for owner review2026-11-14. These guides describe implemented behavior; planned work is labeled explicitly. Start with the [project README](../README.md).
+
+**Start here:** [Finalization report](Finalization-Report.md) · [Deployment runbook](Deployment.md) · [Submission drafts/checklist](../submission/README.md). Architecture/PRD are protected historical baselines; current behavior is in the README, component map, corrections and guides below. No deployment/submission is claimed.
 
 ## Current guides
 
 | Guide | Read for |
 |---|---|
-| [Architecture](Architecture.md) | Routes, module ownership, state and deployment boundaries |
+| [Architecture](Architecture.md) | Protected historical baseline (intro0.1.10); use Components/README for current module flow |
 | [Gameplay](Gameplay.md) | Complete player loop, saves and settings |
 | [Missions](Missions.md) | Exact mission inputs, launchers and orbit compatibility |
 | [Components](Components.md) | Part categories and UI module responsibilities |
@@ -45,6 +47,6 @@ These are useful development records, **not an assertion every original requirem
 
 Software and associated documentation use the [MIT License](../LICENSE). Third-party notices and unresolved asset rights remain documented separately. No private reporting address or funding channel is published.
 
-## Correction release 0.1.11
+## Provenance and correction releases0.1.11–0.1.12
 
 [Parameter-level provenance](DATA_SOURCES.md) documents authored values and derived outputs; [post-audit corrections](Post-Audit-Corrections.md) records implementation, compatibility, checks and protected-document proposals. Source classification uses evidence of adoption, not similarity.

@@ -1,5 +1,12 @@
 # Changelog
 
+## Documentation finalization — 0.1.12 retained
+
+Task date2026-11-14 (sandbox evidence timestamps2026-11-15). Reconciled README/current technical/source/security guides; added deployment runbook and official-requirement-based submission drafts with seven-slide content storyboard. Refreshed six screenshots and added four real application/report visuals. Preserved protected Design/PRD/Architecture and history; exact stale-baseline proposals are documented separately. No application code, dependencies, balancing, scoring, artwork or version change.
+
+Fresh114tests/0fail, lint/typecheck/build/balance and seven real-control mission/download/PDF checks pass. Audit remains open for moderate minimatch tooling advisory; artwork/SI eligibility, team/owner timezone, exact deployed revision and final public demo/submission require owner confirmation. No push, PR, release, deployment or submission performed. See [finalization report](docs/Finalization-Report.md).
+
+
 ## 0.1.12 — final release blocker corrections (2026-11-14)
 
 - Unified group/finding summary aggregation through one policy: FAIL > WARNING > NOT EVALUATED > PASS; empty is NOT EVALUATED. Counts and individual reasons retained.

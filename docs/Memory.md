@@ -12,8 +12,8 @@ Keep entries short. Newest entries on top in each log section.
 - **Team:** NASA WARRIORS
 - **Package manager:** bun
 - **Stack:** Next.js (App Router), TypeScript, Tailwind, GSAP, Three.js (React Three Fiber), Lenis, Zustand
-- **Deadline:** 15 Nov 2026, 11:59 PM (local time). Aim to submit early.
-- **Current phase:** Engineering completion in progress; operations controls/difficulty/comparison presentation await owner design direction.
+- **Deadline:** guide says15Nov2026,23:59; Universal Event uses Team Owner residence timezone, not assumed Karachi timezone. Confirm live form.
+- **Current phase:**0.1.12 professional finalization prepared; submission/deployment/rights and eligibility await owner confirmation. Earlier task queues below are historical.
 - **Last updated:** 2026-11-14 UTC
 
 ## Status by phase
@@ -31,11 +31,14 @@ Keep entries short. Newest entries on top in each log section.
 | 8 Result screen | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
 | 9 AI mentor | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
 | 10 Polish and quality | Done | See Implementation.md and Game-QA.md; remote AI live service not required. |
-| 11 Submission | Not started | |
+| 11 Submission | In progress | Draft package complete; actual submission/public short demo/rights/team/deploy still owner-operated. |
 
 Status values: Not started, In progress, Done, Blocked.
 
 ## Done log
+
+- 2026-11-14 finalization: README/current guides, deployment runbook, submission drafts/7-slide storyboard, ten real visuals and all-doc audit prepared.114tests/0fail, lint/typecheck/build/balance pass;7browser journeys/7PDF checks pass. Moderate minimatch tooling advisory remains open; no dependency/source/balance/artwork/protected-doc changes. No push/PR/deploy/submission. Current disposition and exact manual gates: [Finalization report](Finalization-Report.md). Environment timestamps2026-11-15 are recorded separately.
+
 
 - 2026-11-14: Completed owner-requested cinematic landing page. Original logo reused; orbital and lunar assets generated locally. Added responsive navigation, five-stage keyboard-accessible tabs, mission briefing dialogs, interactive illustrative resource monitor, mission segments, final CTA and footer. GSAP/useGSAP + ScrollTrigger and ticker-synced Lenis with full cleanup and reduced-motion media queries. No engine existed and none was overwritten.
 

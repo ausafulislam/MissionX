@@ -1,5 +1,7 @@
 # MissionX educational engineering model
 
+> **Finalization reader note (0.1.12):** this is a historical record, not the current test count or task queue. Diagnostic precedence, weighted-score copy, captured-input/schema1 reading, authored provenance and stable-event copy were subsequently corrected. Current evidence/remaining work: [Finalization-Report.md](Finalization-Report.md), [Testing.md](Testing.md), [Post-Audit-Corrections.md](Post-Audit-Corrections.md). Earlier claims of pending work apply only to their recorded phase.
+
 > **Historical implementation/validation record.** Statements and check counts below apply to the recorded phase, not a new test execution. Use the [documentation index](README.md), [current architecture](Architecture.md) and [current testing record](Testing.md) for the present baseline. Original evidence is preserved.
 
 The current authoritative rule inventory is [ENGINEERING_REFERENCES.md](ENGINEERING_REFERENCES.md). The source/provider/verification register is [RESOURCES.md](RESOURCES.md). These consolidate the former chronological model notes; game behavior has not changed in v0.1.5.

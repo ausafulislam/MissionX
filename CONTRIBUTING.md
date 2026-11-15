@@ -37,3 +37,7 @@ Use `bun run balance` when assessing catalog/engine changes. Do not add dependen
 Use the PR template: explain purpose, files/behavior affected, evidence, screenshots when UI changes, checks run and unresolved limits. Screenshots must come from the running app and identify compatibility/reduced-motion settings. No fabricated metrics, badges, endpoints or endorsements. Maintainer review does not imply scientific certification.
 
 No commit/push/release is required merely to propose an issue. Do not claim a release or deployment until it actually occurs.
+
+## Finalization handoff
+
+Use [current testing evidence](docs/Testing.md), [deployment runbook](docs/Deployment.md) and [submission gates](submission/SUBMISSION_CHECKLIST.md). Preserve fixed schema readers when evolving optional fields; do not regenerate old snapshots from current assumptions. AI-assisted contributions must carry accurate disclosures; see official SI rules before preparing competition artifacts. Review the open tooling advisory in SECURITY.md rather than treating lint as a vulnerability scan.

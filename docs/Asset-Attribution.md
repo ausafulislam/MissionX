@@ -87,3 +87,10 @@ No artwork was changed by the final software corrections. For each item, confirm
 5. `docs/images/*.webp` — application screenshots inherit any restrictions of the artwork above; not an independent clearance.
 
 Status for the underlying supplied art remains **Unknown / Requires owner confirmation**. Repository MIT and passing software tests do not establish legal clearance.
+
+
+## Official submission/SI gate — finalization
+
+The freshly retrieved [Submission Guide](https://www.spaceappschallenge.org/resources/project-submission-guide/) requires visible watermarks on SI-generated images/video, descriptive/metadata acknowledgement for generated audio/code/data, and forbids generated NASA branding. Earlier Memory records say orbital/lunar art was generated locally; full creator/tool/license/idea history and required markings are not verified. AI-assisted code/docs were used in this session. Owner must reconcile **all** prior work and permissions before agreeing originality/legal terms. No logo/artwork was replaced or marked here, per preservation constraint; current screenshots inherit those unresolved issues. [Official requirements](../submission/OFFICIAL_REQUIREMENTS.md).
+
+Existing local font families carry SIL OFL notices; dependencies retain their own notices. GSAP's custom license is not MIT. No dependency/source-image redistribution right follows merely from a package being installed or NASA linking a page. No legal clearance or complete transitive license certification is claimed.

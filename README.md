@@ -1,97 +1,135 @@
-<p align="center"><img src="public/images/logo.png" alt="MissionX" width="360" /></p>
+<p align="center"><img src="public/images/logo.png" alt="MissionX" width="340"></p>
 
 # MissionX — Design. Simulate. Learn.
 
-**An educational space-mission design game by [Team NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/), Karachi, Pakistan, for the NASA International Space Apps Challenge 2026.**
+**Design a spacecraft. Balance the trade-offs. Learn from the mission.**
 
-[![Next.js 16.4.6](https://img.shields.io/badge/Next.js-16.4.6-black)](https://nextjs.org/docs)
-[![Bun 1.3.14](https://img.shields.io/badge/Bun-1.3.14-f9f1e1)](https://bun.sh/docs)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6)](tsconfig.json)
+MissionX is an educational browser game by **NASA WARRIORS**, developed for the **2026 NASA International Space Apps Challenge**, *Space Mission Design Game*. The event theme is **The Next Frontier**; it is not the challenge's title. Players connect science objectives, spacecraft components, resource constraints and mission outcomes through an interactive mission-design loop.
 
-[**Play MissionX**](https://missionx-black.vercel.app/) · [Documentation](docs/README.md) · [Team page](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/) · [Report a bug](https://github.com/ausafulislam/MissionX/issues/new?template=bug_report.yml)
+**Version:** 0.1.12 · **Status:** implemented demonstration candidate; final public-submission approval is pending. The software checks pass, but artwork/AI-content compliance, final demo, team eligibility and deployment of this exact revision still need confirmation. A dependency audit also has an open moderate tooling advisory. See the [finalization report](docs/Finalization-Report.md).
 
-![MissionX landing page with mission-design introduction and launch controls](docs/images/missionx-landing.webp)
+[Submission package](submission/PROJECT_OVERVIEW.md) · [Demo guide](submission/DEMO_GUIDE.md) · [Documentation](docs/README.md) · [Deployment](docs/Deployment.md)
 
-## Contents
+[Existing public site](https://missionx-black.vercel.app/) · [Repository](https://github.com/ausafulislam/MissionX) · [Team page](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)
 
-- [Why MissionX?](#why-missionx)
-- [Implemented features](#implemented-features)
-- [How to play](#how-to-play)
-- [Mission catalog](#mission-catalog)
-- [Screenshots](#screenshots)
-- [Run locally](#run-locally)
-- [Environment](#environment)
-- [Development and checks](#development-and-checks)
-- [Architecture](#architecture)
-- [Scientific scope and sources](#scientific-scope-and-sources)
-- [Documentation](#documentation)
-- [Team and participation](#team-and-participation)
-- [Limitations and future work](#limitations-and-future-work)
-- [License and attribution](#license-and-attribution)
-- [Independence disclaimer](#independence-disclaimer)
+The public landing page was reachable during finalization, but showed older Sun wording. **Its deployed revision is not verified as 0.1.12.** Local evidence below refers to this repository, not a claimed production rollout.
 
-## Why MissionX?
+## See the application
 
-Space engineering trade-offs can stay abstract when students encounter spacecraft, launchers, power and communications as separate topics. MissionX connects them in one playable loop: select a science goal, assemble a spacecraft, verify its resources, launch a seeded mission, and learn from the returned science and segment report.
+Actual **0.1.12** captures from a local production build. HQ selection/countdown/diagnostics use compatibility mode; the journey image uses **SwiftShader software WebGL**, not a physical GPU. Builder/results use the semantic flight deck. Images are screenshots, not generated mockups. Underlying artwork rights and any required AI-content markings remain unresolved. [All ten visuals and capture conditions](docs/images/README.md).
 
-It is designed for students aged 12–18, educators and space enthusiasts. No account, payment or remote AI service is required for gameplay.
+![MissionX landing page](docs/images/missionx-landing.webp)
 
-## Implemented features
+| Configure and budget | Verify and launch |
+|---|---|
+| ![Actual spacecraft builder and live resource balance](docs/images/spacecraft-builder.webp) | ![Shared three-second countdown in HQ compatibility mode](docs/images/launch-countdown.webp) |
 
-- Three scenarios: Moon Mapping, Sun Watch and Mars Orbiter.
-- 26 catalog parts across eight categories, three fictional launch services and six orbit configurations.
-- Live mass, budget, power, battery, storage, downlink, science and lifetime calculations.
-- Typed verification with blocking failures and disclosed nonblocking operational risks.
-- 3D-first headquarters at `/hq`, first-use guidance, and a semantic flight-deck alternative at `/play`.
-- Seeded launch reliability and events; representative end-of-life energy/data operations.
-- Six sequential arrival configuration reviews shared by HQ and the flight deck; a failed launch never receives arrival credit.
-- Science, engineering and efficiency score breakdown; Launch / Space / Ground / User explanations.
-- Local commander preferences, progression, saved runs and debrief/comparison tools.
-- Downloadable sectioned PDF reports with parameter IDs, shared diagnostic group/finding counts, captured new-run inputs and explicit legacy-reconstruction caveats.
-- Deterministic local mentor; optional server-side remote advice with fallback.
-- Gesture-enabled procedural audio, reduced-motion controls and WebGL compatibility fallback.
+| Schematic journey | Understand the result |
+|---|---|
+| ![Actual Moon arrival rendered with software WebGL](docs/images/mission-journey.webp) | ![Weighted Performance Score with independent-rounding explanation](docs/images/mission-result.webp) |
 
-These are implementation descriptions, not claims of universal accessibility, device performance or scientific validation.
+## What is implemented
 
-## How to play
+| Capability | Current behavior |
+|---|---|
+| Mission selection | Moon Mapping, Sun Watch and Mars Orbiter; measurable mass, budget, science and lifetime requirements |
+| Spacecraft builder | 26 authored parts across eight categories, compatibility/dependency checks, fictional launcher and synthetic orbit selection |
+| Live engineering balance | Fleet mass/cost/data/storage/downlink; per-spacecraft solar generation/load and battery reserve; weakest-component life |
+| Configuration verification | Blocking requirements plus explicit accepted warnings; this is not spacecraft certification |
+| Launch lifecycle | Shared 3–2–1/LIFTOFF clock, seeded launch risk, schematic 3D journey, event timeline and pause/speed/skip controls |
+| Operations and diagnostics | Finite energy/memory and received-data accounting; six sequential configuration reviews with visible NOT EVALUATED findings |
+| Evaluation | SUCCESS, PARTIAL or FAILED; science/engineering/efficiency contributions and **Weighted Performance Score** |
+| History and reports | Browser-local archive/comparison, captured new-run inputs, legacy reconstruction disclosure, detailed review and downloadable PDF |
+| Guidance | First-use HQ tour, replay/settings, deterministic local mentor and optional remote AI advice |
+| Presentation | HQ procedural 3D, semantic `/play` alternative, compatibility mode, reduced motion and gesture-enabled procedural audio |
 
-**Goal → Build → Verify → Launch → Result**
+**Not implemented:** multiplayer, cloud accounts/sync, leaderboard, Urdu localization, GMAT, live NASA APIs, real orbital propagation, measured subsystem health or an offline-installable PWA. Remote AI is optional and unverified live in this environment; gameplay does not require it. Device/accessibility coverage is limited, not certified.
 
-1. Choose a mission and inspect its mass, budget, science and lifetime requirements.
-2. Select parts, launcher and science orbit. Use a verified baseline to explore a known viable configuration, then compare alternatives.
-3. Resolve blocking checks. Nonzero downlink/storage deficits may be accepted as warnings; they can reduce actual science return.
-4. Start countdown. Successful deployment leads to schematic arrival and six configuration reviews before science operations. Playback time is compressed, not physical travel time.
-5. Read the result, inspect lost/received data and segment explanations, download the report, and redesign.
+## How it works
 
-See [gameplay](docs/Gameplay.md), [verification](docs/Verification.md), [simulation](docs/Launch-and-Simulation.md) and [PDF reports](docs/PDF-Reports.md).
+**GOAL → BUILD → VERIFY → LAUNCH → RESULT**
 
-## Mission catalog
+1. **Goal:** choose a destination and inspect requirements. Sun Watch observes the Sun **from Earth orbit**; it does not travel to the Sun.
+2. **Build:** select components or load the authored baseline. Watch coupled mass, power, cost, battery and data consequences.
+3. **Verify:** choose a compatible launch service/orbit; resolve blocking checks. Warnings are disclosed risks, not successful physical tests.
+4. **Launch:** choose a seed and start countdown. A launch loss has no arrival credit. Successful deployment reaches six configuration reviews before science playback continues.
+5. **Result:** inspect outcomes, unmet requirements, received/lost data and recommendations. Export the PDF, compare runs and redesign.
 
-All numbers below are **authored educational scenario inputs**, not real mission specifications. Budget includes parts for the fleet and one launch.
+A rounded weighted score of **100 does not necessarily mean every objective was achieved**. Moon baseline seed 0 returns 44.9/45 science points, score 100 and **PARTIAL**. Outcomes remain distinct from score rounding. [Rules and limitations](docs/Launch-and-Simulation.md).
 
-| Mission | Fleet | Mass limit | Budget (million USD) | Science target (points) | Lifetime (months) |
+### Educational mission inputs
+
+All values are **MissionX-authored educational estimates**, not NASA mission specifications. Budgets include fleet parts and one launch.
+
+| Mission | Fleet | Mass limit | Budget ($M) | Science target | Required life |
 |---|---:|---:|---:|---:|---:|
-| Moon Mapping | 1 | 550 kg | 85 | 45 | 12 |
-| Sun Watch | 4 identical craft | 1,000 kg | 180 | 160 | 12 |
-| Mars Orbiter | 1 | 900 kg | 170 | 75 | 24 |
+| Moon Mapping | 1 | 550 kg | 85 | 45 points | 12 months |
+| Sun Watch | 4 identical craft | 1,000 kg | 180 | 160 points | 12 months |
+| Mars Orbiter | 1 | 900 kg | 170 | 75 points | 24 months |
 
-Sun Watch observes the Sun **from Earth orbit**; it does not fly to the Sun. Real mission links are educational context, not numeric catalog sources. [Catalog details](docs/Missions.md).
+[Full catalog](docs/Missions.md) · [Field-level provenance](docs/DATA_SOURCES.md)
 
-## Screenshots
+## Technology and architecture
 
-Actual local application captures at 1440 × 1000, 2026-11-14, before correction release 0.1.11. They show real earlier UI; readiness/status labels have since been corrected. HQ screenshots use the application's **WebGL compatibility mode** and reduced motion; they are not proof of hardware 3D performance. Images are optimized, not fabricated. [Capture details and gallery](docs/images/README.md).
-
-| Build | Verify |
+| Layer | Actual implementation |
 |---|---|
-| ![Flight-deck builder with baseline component catalog and resource summary](docs/images/spacecraft-builder.webp) | ![Prelaunch verification with requirement checks and flight seed](docs/images/design-verification.webp) |
+| Framework/UI | Next.js 16.4.6 App Router, React/React DOM 19.3, strict TypeScript |
+| Styling/motion | Tailwind 4, scoped CSS, GSAP; Lenis on the landing page |
+| 3D/audio | Three.js, React Three Fiber/Drei; procedural Web Audio |
+| State/storage | Zustand; validated browser-local saves/preferences, no application database |
+| Educational engine | Pure TypeScript budgeting, checks, seeded events and representative operations; not a physics SDK |
+| Reporting | pdf-lib, shared engine-derived report content and measured layout |
+| Optional AI | Server-side OpenAI Chat Completions HTTP request; no SDK, deterministic fallback |
+| Quality/deployment | Bun test runner, ESLint, TypeScript, Next build; existing Vercel URL, no tracked provider configuration |
 
-| Arrival review | Result |
-|---|---|
-| ![First of six arrival configuration reviews with modeled and unmodeled findings](docs/images/arrival-diagnostics.webp) | ![Completed Moon Mapping mission report with score and returned science](docs/images/mission-result.webp) |
+```text
+Landing / HQ / semantic flight deck
+       │ design + actions                 explicit mentor request
+       ▼                                          │
+Zustand stores ──► catalogs + pure engine            ▼
+       │          resources → verify → simulate   /api/mentor
+       │                        │                 validate/recompute
+       ▼                        ▼                 local or optional AI
+schema-1 captured inputs + actual result
+       │
+       ├──► shared diagnostic projection → UI review/counts
+       └──► report content → printable review + PDF
+```
 
-## Run locally
+```text
+src/app/                 landing, /hq, /play/*, POST /api/mentor
+src/components/          landing/layout, HQ/world, flight-deck/shared panels
+src/game/data/           static catalogs and authored assumptions
+src/game/engine/         resources, verification, operations, simulation,
+                         diagnostics, lifecycle, legacy models, snapshot reader
+src/game/store/          mission records and commander preferences/progression
+src/game/report/         parameter provenance, score copy, report/PDF layout
+src/game/audio/          procedural score/effects and lifecycle
+src/game/onboarding/     tour definitions and versioned state
+public/                  existing artwork and local licensed fonts
+docs/                    current guides, provenance, history and evidence
+submission/              judge-facing drafts and manual submission checklist
+```
 
-Install [Bun 1.3.14](https://bun.sh/docs/installation), then:
+```mermaid
+flowchart TD
+  UI[Landing / HQ / Flight deck] --> Store[Zustand browser-local state]
+  Store --> Engine[Catalogs: resources / verify / simulate]
+  Engine --> Snap[Captured inputs + actual result]
+  Snap --> Diag[Shared diagnostic projection]
+  Diag --> Review[UI report + PDF content/layout]
+  UI --> API[Explicit POST /api/mentor]
+  API --> Local[Validate / recompute / local fallback]
+  Local --> Optional[Optional server-side provider]
+```
+
+The engine does not import UI. Saves are local educational records, not authentication or signed telemetry. Valid schema-1 reports use captured inputs/results; snapshotless legacy saves explicitly reconstruct using current catalogs and recorded model dispatch. Supplied invalid/unknown snapshots fail closed and retain original stored data until explicit reset. Reports still use current explanatory metadata/diagnostic logic; snapshots are **not permanent executable archives**. [Current module map](docs/Components.md) · [Protected architecture baseline](docs/Architecture.md) · [Corrections](docs/Post-Audit-Corrections.md)
+
+<a id="run-locally"></a>
+
+## Installation and setup
+
+Use **Bun 1.3.14** (`packageManager`), Git and a modern browser. Install Bun using its [official instructions](https://bun.sh/docs/installation); the installer itself was not run during this task. Next's installed package declares Node >=20.9 if using a Node-based hosting runtime; verify your provider's supported runtime separately.
 
 ```sh
 git clone https://github.com/ausafulislam/MissionX.git
@@ -100,89 +138,53 @@ bun install --frozen-lockfile
 bun run dev --hostname 0.0.0.0
 ```
 
-Open `http://localhost:3000`. For a production server:
+Open `http://localhost:3000` locally. In a hosted sandbox use its public preview URL. This task verified frozen installation in the existing checkout, not a separate fresh-clone machine.
 
 ```sh
+bun run test
+bun run lint
+bun run typecheck
+bun run balance
 bun run build
 bun run start --hostname 0.0.0.0
 ```
 
-For hosted previews, use the preview's public address rather than localhost. Browser requests to the mentor use a same-origin relative URL. The public deployment is [missionx-black.vercel.app](https://missionx-black.vercel.app/); deployment account settings and automatic preview rules are not established by this repository.
+`balance` explores authored seeded designs; its percentages are not aerospace reliability or learner-outcome measurements. [Exact executed checks](docs/Testing.md).
 
-## Environment
+### Configuration
 
-No environment file is needed for ordinary play. Optionally copy `.env.example` to `.env.local` and configure:
+No environment file is needed for normal gameplay/local advice. Optionally copy `.env.example` to `.env.local` (ignored by Git):
 
-| Variable | Actual use |
+| Variable | Purpose |
 |---|---|
-| `MENTOR_API_KEY` | Server-only key for `api.openai.com`; never expose it to the browser. |
-| `MENTOR_MODEL` | Optional remote model; defaults to `gpt-4o-mini`. Provider availability is not guaranteed. |
-| `NEXT_PUBLIC_SITE_URL` | Present in the example but currently unused in source; setting it does not change canonical metadata or PDF links. |
+| `MENTOR_API_KEY` | Server-only optional provider key; never use a `NEXT_PUBLIC_` key |
+| `MENTOR_MODEL` | Optional model; defaults to `gpt-4o-mini`; provider availability is not guaranteed |
+| `NEXT_PUBLIC_SITE_URL` | Reserved/unused in current source; does not configure metadata, domains or PDF links |
 
-Only an explicit mentor request uses the remote service when configured; design/checks/result are sent, not commander identity. Missing key, timeout or provider failure uses local advice. An initial application load still requires the server/assets: “no AI required” does not mean an offline-installable PWA. [Mentor/privacy details](docs/Mentor.md).
+Only explicit mentor requests can send design/checks/recomputed result to the provider, not commander identity. Missing key/provider failure falls back locally. The route has size/seed/catalog validation and timeout but **no rate limiter**; leave the key unset until deployment abuse/cost controls are reviewed. Live provider access was not tested. [API/privacy](docs/Mentor.md) · [Security](SECURITY.md)
 
-## Development and checks
+## Deployment and production checks
 
-Use Bun only; do not add dependencies without owner approval.
+Use the Next.js framework integration, `bun install --frozen-lockfile` and `bun run build`. No static-export or standalone output is configured; the mentor needs a server route. Do not upload `.next` as a static website. Hosting settings, domains, rollback, snapshot backup and smoke checks are in [Deployment.md](docs/Deployment.md). **No deployment was performed by this finalization task.**
 
-```sh
-bun run lint
-bun run typecheck
-bun test
-bun run balance
-bun run build
-```
+The dependency audit currently reports moderate **GHSA-g3hv-75wg-m249** in transitive `minimatch@10.2.6` through TypeScript/ESLint tooling. No dependency upgrade or forced override was made. Maintainer review/remediation or documented risk acceptance remains open.
 
-`balance` explores seeded designs; it is not a scientific certification or a guarantee that random configurations succeed. Browser journeys and screenshots use separate local QA tooling, not an advertised package script. [Testing and limitations](docs/Testing.md).
+## Scientific scope and credits
 
-## Architecture
+NASA's *Design and Develop Science Missions* is an explicit conceptual reference for mission segments/requirements; historical method adoption and numerical derivation are not established. GMAT, CML, MDL, Mission Viz, Webb/CubeSat and CSA pages are separately classified references, not integrated solvers or copied parameters. No catalog magnitude is attributed to NASA. [Source register](docs/RESOURCES.md) · [Formulas](docs/ENGINEERING_REFERENCES.md)
 
-Next.js App Router + React + strict TypeScript, Tailwind CSS, GSAP, React Three Fiber/Drei/Three.js, Zustand and pdf-lib. Lenis is limited to the landing experience. No application database or authentication system is implemented.
+The model uses four representative EOL days, 48 steps/orbit, synthetic sunlight/contact windows, authored launch/event probabilities and simplified stationary lifetime extrapolation. It cannot establish real navigation, RF, propulsion, thermal, structural or calibrated instrument health. PASS means a modeled configuration check passed; unmodeled properties remain **NOT EVALUATED**. Physical-device GPU/audio, full assistive-technology review and independent scientific validation remain outstanding. [Scientific limitations](docs/Scientific-Limitations.md)
 
-```text
-src/app/                 landing, HQ, /play routes, mentor API
-src/components/          landing/layout, HQ/world and flight-deck UI
-src/game/data/           static JSON catalogs and authored assumptions
-src/game/engine/         pure calculations, verification, simulation, diagnostics
-src/game/store/          validated local saves and commander preferences
-src/game/audio/          procedural Web Audio score and effects
-src/game/report/         report content, measured layout and PDF export
-```
+Created by **NASA WARRIORS**, Karachi, Pakistan; the public participant page identifies **Universal Event**. Member names/roles, eligibility and final approvals need owner confirmation. No awards or institutional endorsements are claimed.
 
-The store and screens call the engine; the engine does not import the UI. See [current architecture](docs/Architecture.md).
+## License, contribution and submission
 
-## Scientific scope and sources
+Project-owned software/docs use the [MIT License](LICENSE), copyright 2026 Team NASA WARRIORS. Third-party code/fonts retain their own terms, including GSAP's custom license and SIL OFL fonts. Supplied artwork is **Unknown / Requires owner confirmation**; MIT is not an artwork rights grant. [Full attribution and checklist](docs/Asset-Attribution.md).
 
-MissionX uses locally authored educational parameters, not NASA numerical validation. Diagnostics evaluate configured requirements, not real spacecraft health; incomplete findings remain NOT EVALUATED with group/finding counts. The journey is schematic. MissionX does not use GMAT internally and is neither NASA-certified nor NASA-endorsed.
+The official submission guide requires AI/SI disclosures and markings. AI-assisted development occurred in this session; the team must reconcile full code/art/audio history and any required image/video watermarks **before** attesting originality/permission. No artwork was modified to claim compliance.
 
-NASA's mission-design presentation is a conceptual reference for mission segments and requirements. Historical adoption of its method is not established. Quicksat is conceptual reading, not proven formula derivation. Other agency/community links have individually scoped classifications. They do **not** supply MissionX's fictional part prices, reliability values, science points, scoring weights or synthetic orbit factors.
-
-The operations model integrates four representative end-of-life days with 48 steps per orbit, finite memory, energy limitations and synthetic contact windows. It is not a trajectory, thermal, radiation, propulsion or RF solver. Sources, formulas, units, evidence confidence and unresolved rationale are separated in [the resource register](docs/RESOURCES.md) and [engineering references](docs/ENGINEERING_REFERENCES.md), with [field-level provenance](docs/DATA_SOURCES.md).
-
-## Documentation
-
-Start at the [documentation index](docs/README.md). It separates current guides, research registers, historical implementation records and protected planning/design documents.
-
-## Team and participation
-
-Built by **[Team NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**, Karachi, Pakistan, for the NASA International Space Apps Challenge 2026, challenge **Space Mission Design Game**, Universal Event. The linked Space Apps page is participant-submitted content, not an agency endorsement. No individual roles, awards or member identities are asserted here.
-
-See [contributing](CONTRIBUTING.md), [code of conduct](CODE_OF_CONDUCT.md), [security](SECURITY.md) and [citation metadata](CITATION.cff). There is currently no published private reporting contact; do not disclose vulnerabilities or personal information in public issues.
-
-## Limitations and future work
-
-Known limits include synthetic orbit/contact inputs, simplified single-incident operations, shared current catalog inputs in some historical replays, no independent convergence/sensitivity study, and no tagged-PDF accessibility certification. Full physical-device WebGL/audio and screen-reader validation remain separate checks.
-
-**Planned, not implemented or promised:** parameter-level source-ID migration, deeper scientific model review, convergence studies and broader device/accessibility testing. Earlier PRD stretch ideas (such as multiplayer, leaderboard or Urdu localization) are not current features.
-
-## License and attribution
-
-MissionX software and associated documentation are licensed under the [MIT License](LICENSE), copyright © 2026 Team NASA WARRIORS. Retain the copyright and permission notice when redistributing copies or substantial portions. Third-party fonts and dependencies retain their own licenses. The software license does not establish ownership of third-party material or grant trademark/agency endorsement rights; see [asset attribution and unresolved rights](docs/Asset-Attribution.md). No NASA insignia or endorsement badge is supplied.
+[Contributing](CONTRIBUTING.md) · [Conduct](CODE_OF_CONDUCT.md) · [Security](SECURITY.md) · [Citation](CITATION.cff) · [Submission checklist](submission/SUBMISSION_CHECKLIST.md)
 
 ## Independence disclaimer
 
-MissionX is an independent educational project created by Team NASA WARRIORS. It is not affiliated with, endorsed by, or sponsored by NASA or any other government space agency. NASA and other organization names, resources, and references are acknowledged for their respective educational or informational contributions. Their inclusion does not imply endorsement.
-
-### Score and saved-run interpretation (0.1.12)
-
-Weighted Performance Score is rounded independently of mission outcome:100 does not necessarily mean every objective was achieved. Inspect SUCCESS/PARTIAL/FAILED and unmet requirements. Schema1 reports use captured inputs; unsupported/corrupt supplied snapshots are not silently reconstructed. Snapshotless legacy saves remain explicitly current-catalog reconstructions. See [final corrections](docs/Post-Audit-Corrections.md).
+MissionX is an independent educational project created for learning and demonstration purposes. It is not affiliated with, endorsed by, or an official product of NASA.

@@ -166,7 +166,7 @@ Mission store retains12 runs and a 2MB save guard. New runs capture bounded inpu
 
 `engine/legacy-v1/` preserves original resource/validation/simulation algorithms. `legacy-v2.ts` preserves intermediate simulation but imports current resource/validation code: exact historic-v2 isolation is **not guaranteed**. Catalog changes can also affect old model recomputation. Existing v1/current tests are not proof all historical designs reproduce bit-for-bit. Legacy algorithms remain; new captured results are retained rather than recomputed from current catalogs.
 
-Pending approval/work: external scientific explanation review, step-size convergence, initial-state sensitivity, charge-loss-aware feasibility, event-copy correction, remaining literal policies, complete mission-page verification and later CubeSat chapters. No official CML rating, RF link budget, propulsion, thermal, navigation, end-of-mission disposal or professional cost/risk model exists.
+Pending approval/work: external scientific explanation review, step-size convergence, initial-state sensitivity, charge-loss-aware feasibility, remaining literal policies, complete mission-page verification and later CubeSat chapters. No official CML rating, RF link budget, propulsion, thermal, navigation, end-of-mission disposal or professional cost/risk model exists.
 
 ## Static parameter inventory
 
@@ -254,7 +254,7 @@ Field units in column order: dimensionless; fraction; h; fraction. Source: MISSI
 
 `advisoryMarginPercent` now controls risk and verification headroom at the unchanged value10. Event factors are inventoried in Risk above, including TypeScript overrides. `setup.json` category hints and starter part IDs are authored educational selections, not sourced optimal designs. Mission difficulty labels are authored descriptors, not validated difficulty measurements.
 
-## Cinematic foundation (v0.1.6; UI integration pending)
+## Historical cinematic foundation (v0.1.6; integration was pending at that time)
 `flight-lifecycle.ts` maps existing model3 playback into preparation(0), ascent(3), upper-ascent(8), deployment/journey(13), commissioning/operations(18), evaluation(30). `flight-stages.json` records authored presentation stages/source IDs. No extra physics events or scoring changes. Deployment must actually be present and operations event reached before schematic arrival; failed launch remains lost at every later requested time. Sun Watch destination is Earth orbit/solar observations, never a flight to the Sun. Countdown uses shared 3–2–1 and LIFTOFF over three playback seconds; scene/audio are connected. flight-stages.json is descriptive, not runtime timing.
 
 `diagnostics.ts` emits six sets of configuration findings: health, power, communications, orbit/navigation, instrument compatibility, readiness. Before arrival every status is NOT EVALUATED. After arrival PASS means an existing configuration check passes, WARNING means a nonblocking modeled deficit, FAIL means a blocking check. Subsystem installation is explicitly not measured health. Thermal/propulsion, actual navigation/insertion accuracy, calibration and RF antenna performance remain NOT EVALUATED. Aggregate prioritizes FAIL, WARNING, NOT EVALUATED, then PASS only for fully evaluated findings; mixed groups expose missing counts. No campaign-total data is passed off as arrival-time measurements. `canOperate` additionally requires commissioning acknowledgement; shared playback/UI gating is wired.
@@ -294,3 +294,21 @@ PDF uses existing report data grouped into cover, overview, configuration, balan
 ## 0.1.12 software-only correction
 
 Fixed schema1 wire reader no longer calls current simulation/catalogs for shape validation; safe optional defaults and unsupported-snapshot retention are documented in [Post-Audit-Corrections.md](Post-Audit-Corrections.md). No formulas changed. Weighted score rounding is independent of outcome;100 is not an assertion of all requirements passing.
+
+
+## Finalization verification — no engineering changes
+
+Version0.1.12 rechecked2026-11-14. The complete formula/catalog tables above remain authored educational policy. Current parameter records: [DATA_SOURCES](DATA_SOURCES.md). Source URLs/sections/rights/confidence: [RESOURCES](RESOURCES.md). No category was upgraded based on similarity.
+
+| Concept | Implementation evidence | External relationship / confidence |
+|---|---|---|
+| Goal/requirements and four mission segments | `validation.ts`, `simulation.ts` LAUNCH/SPACE/GROUND/USER, report reference row | NASA Design PDF “What segments…”/“Big Picture Process,” exact URL in RESOURCES; C conceptual, high correspondence confidence, historical adoption unknown |
+| Mass, fleet budget, weakest-part life | `resources.ts`, `validation.ts` | Local authored sums/minimum; no external numerical source, high code-trace confidence/physical accuracy unverified |
+| EOL generation, battery and representative energy | `resources.ts`, `operations.ts`, assumptions.json | Authored factors; Quicksat guides conceptual reading only, not coefficient derivation; no validated hardware prediction |
+| Data generation/contact/memory/reception | `resources.ts`, `operations.ts` | Synthetic contacts/idealized reception, authored policy; no RF link/antenna model |
+| Launch reliability/events/score | `simulation.ts`, events.ts | Seeded fictional probabilities and reward policy, no agency statistical source; score independently rounded |
+| Orbit/3D journey | `flight-lifecycle.ts`, journey-geometry.ts | Authored geometry; Mission Viz/GMAT are reference comparisons, no integrated code or ephemeris |
+| Verification/readiness/diagnostics | `validation.ts`, `diagnostics.ts`, `flight-tests.ts` | Authored configuration rules; empty/unmodeled remains unevaluated, no CML/hardware certification |
+| Historical report provenance | snapshot-schema-v1.ts, mission-store.ts, report modules | Local schema/educational record, not a scientific reference or executable archive |
+
+Current validation evidence and remaining convergence/sensitivity limits are in [Testing](Testing.md) and [Scientific limitations](Scientific-Limitations.md); passing software tests is not external scientific validation.

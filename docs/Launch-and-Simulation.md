@@ -33,3 +33,5 @@ Source: `simulation.ts`, `resources.ts`, `operations.ts`; all weights/thresholds
 - Failed: launch loss or science below half target. Success: all four final mission requirements pass and energy availability is at least `1 − 1e−9`. Other completed cases are partial.
 
 Launch / Space / Ground / User segment explanations describe specific criteria; they are not four separately awarded scores. Actual Earth-received observations earn science credit, not reaching a destination illustration. See [engineering references](ENGINEERING_REFERENCES.md) for conservation formulas and test mappings.
+
+Weighted Performance Score is not an all-objectives pass flag. Moon baseline seed0 remains44.9/45 science,100 weighted score,PARTIAL because score rounding is independent of final requirement statuses. Weights/thresholds are unchanged. All diagnostics summaries use the shared severity policy, including empty NOT EVALUATED.

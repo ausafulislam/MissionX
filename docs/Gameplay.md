@@ -21,3 +21,7 @@ Progress, runs, commander identity and preferences are local to the browser. Hyd
 Audio starts only after a user gesture. Mute/music/effects settings and reduced motion are preferences, not inputs to the scientific result. Identical design/seed/model inputs reproduce engine results; current shared catalogs can affect historical replay.
 
 See [missions](Missions.md), [parts](Components.md), [verification](Verification.md) and [simulation](Launch-and-Simulation.md).
+
+## Current0.1.12 record and score behavior
+
+Weighted Performance Score is independently rounded:100 can coexist with PARTIAL. Inspect actual unmet requirements. New runs capture inputs/results for reports; only absent snapshots use disclosed current-catalog reconstruction. Invalid/unsupported supplied snapshots warn and retain raw storage rather than silently replaying. [Snapshot/report details](Post-Audit-Corrections.md) · [Current checks](Testing.md).

@@ -30,3 +30,12 @@ Parts carry mass (kg), cost (million USD), draw/generation (W), battery (Wh), da
 - `src/game/onboarding`: first-use tutorial definitions and state validation.
 
 Do not duplicate resource, diagnostic or scoring rules in UI components. The current architecture lives in [Architecture](Architecture.md); catalog values are not a bill of materials for real hardware.
+
+
+## Current module/data boundary map — 0.1.12
+
+`catalog.ts` exposes JSON; `resources.ts` budgets the selected design; `validation.ts` checks it; `simulation.ts` uses seeded events and `operations.ts` for actual educational outcomes. `mission-store.ts` owns design/run/history and captures schema1. `commander-store.ts` owns local identity/preferences/progression; tutorial state has its own versioned key. No server database or authenticated identity exists.
+
+`run-snapshot.ts` dispatches missing/valid/invalid/unsupported records; `snapshot-schema-v1.ts` validates a fixed wire contract rather than live catalog shape. Snapshotless legacy models remain explicit current-catalog reconstructions. Current catalog-ID removal is not solved by the fixed reader.
+
+`diagnostics.ts`/`flight-tests.ts` project captured checks/findings into one shared severity/count policy for LaunchTestPanel, MissionReport and PDF. `score-presentation.ts` supplies shared explanation, not scoring logic. PDF generation is lazy/client-local with measured layout and same-origin logo; no report upload endpoint. `/api/mentor` alone accepts optional remote advice requests; it validates/recomputes and fails back locally. See [README tree](../README.md#technology-and-architecture), [deployment](Deployment.md), [snapshot contract](Post-Audit-Corrections.md). Protected Architecture has an older baseline; exact update proposals are in [finalization report](Finalization-Report.md).

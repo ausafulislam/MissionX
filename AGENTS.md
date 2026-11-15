@@ -1,5 +1,7 @@
 # MissionX
 
+> **Current finalization scope (2026-11-14):** preserve implemented0.1.12, no redesign/balance/dependency changes; historical landing-only/unavailable-CTA commissions below have been superseded. Existing code is playable. Design is read-only; PRD/Architecture edits still need exact approval. No push/PR/release. Current evidence/manual submission gates: [docs/Finalization-Report.md](docs/Finalization-Report.md). Preserve earlier policies/history.
+
 MissionX is an interactive space mission design game built by Team NASA WARRIORS for the NASA Space Apps Challenge 2026.
 
 Before doing anything, read these files in order: docs/PRD.md, docs/Architecture.md, docs/Rules.md, docs/Phases.md, docs/Design.md, docs/Memory.md. Then work only on the current phase listed in docs/Phases.md.

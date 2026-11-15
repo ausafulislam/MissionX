@@ -1,5 +1,7 @@
 # Rules: MissionX
 
+> **Current finalization scope (2026-11-14):** preserve implemented0.1.12, no redesign/balance/dependency changes; historical landing-only/unavailable-CTA commissions below have been superseded. Existing code is playable. Design is read-only; PRD/Architecture edits still need exact approval. No push/PR/release. Current evidence/manual submission gates: [Finalization-Report.md](Finalization-Report.md). Preserve earlier policies/history.
+
 Boundaries for the AI agent. Follow these on every task.
 
 ---

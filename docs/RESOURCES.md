@@ -137,7 +137,7 @@ These are **C Conceptual Reference**, not numerical sources. Provider: NASA Scie
 
 ## Participation and identity — not engineering sources
 
-- **SPACEAPPS-2026 — C Conceptual Reference:** NASA Space Apps, *Space Mission Design Game*, https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/ . Prior audit reviewed challenge objectives/background; not newly fetched here. Matches scope, not numerical requirements or mandatory multiplayer. Confidence high for scope, no endorsement. Reference-only rights.
+- **SPACEAPPS- 2026 — C Conceptual Reference:** NASA Space Apps, *Space Mission Design Game*, https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/ . Prior audit reviewed challenge objectives/background; not newly fetched here. Matches scope, not numerical requirements or mandatory multiplayer. Confidence high for scope, no endorsement. Reference-only rights.
 - **TEAM-NASA-WARRIORS — D Mentioned Only:** participant-submitted team page, https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/ . Prior audit reviewed identity/about/user-generated-content notice; not freshly fetched here. README/CITATION identity context only, not engineering evidence or asset permission.
 
 ## Software dependencies and APIs — not scientific sources
@@ -179,3 +179,18 @@ Bundled fonts are **A Directly Implemented** assets: Barlow https://github.com/j
 - Prior resource register/audit records are historical evidence, not stronger proof of adoption. No external-source resolver was invented.
 
 MissionX is an independent educational project created by Team NASA WARRIORS for the NASA International Space Apps Challenge 2026. It is not affiliated with, endorsed by, or sponsored by NASA or any other space agency. NASA is not responsible for information contained on non-U.S. Government websites.
+
+
+## Finalization retrieval and competition-resource update — 2026-11-14
+
+Re-retrieved all nine supplied original targets for the finalization task: NASA Design first PDF chunk (segments/process/ConOps), GMAT full catalog, JPL CML first metadata/abstract chunk (not full paper), MDL full page, Mission Viz full index (no demos), Webb chunk2 learning-game introduction, CubeSat chunk1 introduction/§1.1/start1.2,2023 VR first chunk and CSA full activity directory. This does not enlarge the original scientific review beyond the named sections. Primary classifications above remain unchanged; no NASA numerical dataset/solver/API integration is established.
+
+### Space Apps resources — administrative, not engineering inputs
+
+- 2026 theme page https://www.spaceappschallenge.org/2026/ — The Next Frontier verified; event theme, not selected challenge title.
+- 2026 selected challenge https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/ — both chunks, objectives/potential considerations; collaborative modes are optional, MissionX remains single-player.
+- Submission Guide https://www.spaceappschallenge.org/resources/project-submission-guide/ — all3 chunks; required public demo≤7slides or≤30seconds, form fields, NASA-resource requirement, SI disclosures/watermarks and attestations. No eligibility/compliance grant inferred.
+- Judging Guide https://www.spaceappschallenge.org/resources/judging-awards-guide/ — first chunk, eligibility and criteria; complete legal/award analysis not claimed.
+- Team page https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/ — full returned About page; participant-generated identity/Universal Event, no verified roster/endorsement.
+
+Actual use: [submission preparation](../submission/OFFICIAL_REQUIREMENTS.md), README identity and human checklist; no runtime ingestion. Rights: referenced, no agency images copied. Confidence high for retrieved instructions; owner must verify live form, full legal terms, timezone/member eligibility and originality/permissions before submitting. See also [Asset-Attribution](Asset-Attribution.md): SI-generated-image watermark rules may require owner action, not silent artwork editing.

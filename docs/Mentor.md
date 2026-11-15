@@ -28,3 +28,7 @@ This is a schema illustration, not a launch-ready design. Use actual catalog IDs
 The payload includes sanitized design, recomputed checks/result and fallback advice, **not commander identity or browser history**. Provider terms/data handling apply to those submitted fields. Rendering uses plain text. No rate limiter/authentication is implemented; deployments should consider abuse/cost controls before enabling a paid key.
 
 `NEXT_PUBLIC_SITE_URL` is present in `.env.example` but unused; it is not needed for this API. Never use a NEXT_PUBLIC variable for secrets. Do not commit `.env.local` or keys. See [security](../SECURITY.md) and `tests/mentor-api.test.ts`.
+
+## Finalization availability
+
+Local advice and mocked provider errors/malformed responses passed fresh tests. Live OpenAI access was NOT TESTED; no credentials were requested or printed. Default demo/deployment recommendation is no key until rate limiting/billing/privacy are reviewed. The route recomputes from current catalog+seed, not a historical snapshot; mentor advice must not be treated as historical-report provenance. No NASA API or scientific authority is involved.

@@ -417,3 +417,8 @@ Every field in `Resources` is derived from the selected captured inputs, not an 
 ## Snapshot and source-metadata boundary
 
 New store-launched runs capture selected mission/parts/rocket/orbit, assumptions, calculated resources/checks and simulation result. Serialized payload plus corruption checksum is optional under the existing save schema; no old save is assigned fabricated original inputs. Snapshotless legacy runs reconstruct using current catalogs and recorded model dispatch; report labels this explicitly. Current source descriptions and diagnostics aggregation are current reporting logic, not archived historical metadata. No physical measurement exists in these captures.
+
+
+### Finalization cross-check — package0.1.12
+
+Numeric tables/units and consumer paths were rechecked against the unchanged JSON/TypeScript catalogs; no numerical data origin changed. Catalog and assumption registry identifiers intentionally remain0.1.11. Authored originals' balancing date/rationale remains unknown. `snapshot-schema-v1.ts` is now the fixed schema reader: optional note gets an explicit historical-unavailable string; omitted verification `blocking` defaults true (existing required-check meaning); no missing required numeric value is filled from current catalogs. Unknown supplied schemas fail closed. Weighted Performance Score/outcome remain separate, as documented in [corrections](Post-Audit-Corrections.md). Version identifiers are bookkeeping, not NASA dataset versions.

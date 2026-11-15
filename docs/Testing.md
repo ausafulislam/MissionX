@@ -2,6 +2,29 @@
 
 [Documentation index](README.md)
 
+## Finalization results — current0.1.12
+
+Task date2026-11-14. Sandbox/test/PDF clock reported2026-11-15; those observed timestamps are preserved, not silently backdated. Earlier sections below are historical counts, not conflicting current results.
+
+| Check | Result / limits |
+|---|---|
+| Frozen install | PASSED, existing checkout,427 installs/494 packages, no changes; separate fresh-machine clone not tested |
+| Bun tests | PASSED114/0 across19files; snapshot/legacy reader, diagnostics/score, mentor mocked cases included |
+| Lint/typecheck/Next production build | PASSED |
+| Balance | PASSED; Moon395 verified249/112/34, Sun138 verified (77/54/7), Mars28 verified (7/5/16) success/partial/failure; authored diagnostic only |
+| Browser mission loop | PASSED7 real-control HQ compatibility journeys: Moon0 partial,5 success,43 loss; Sun/Mars5 success/43 loss; report download and score explanation; no page/console errors in these runs |
+| Phone/desktop | Above loss runs390×844, success/partial1440×900; additional capture1440×1000. Not physical devices |
+| Software WebGL | PASSED Moon arrival with active non-lost WebGL2/ANGLE SwiftShader; no physical-GPU performance proof |
+| PDF parser | PASSED7 reports, Moon/Sun23pages, Mars24; every text bound and fixed-site link, weighted-score explanation; generated directly from legacy-shaped runs to exercise disclosed reconstruction |
+| Current-run capture/PDF | PASSED actual UI-created snapshot result, screenshot and generated23-page cover preview |
+| Local Markdown links | Checked after final edits; exact count/result in finalization report |
+| External sources | Nine supplied sources and official/team pages retrieved with scoped review; public landing reachable but deployment revision unverified. Not an exhaustive historical-link crawl |
+| Dependency audit | FAILED/open: moderate minimatch10.2.6 GHSA-g3hv-75wg-m249, dev-tool chain; no dependency override |
+| Live remote AI | NOT TESTED; deterministic fallback and mocked errors pass |
+| Physical GPU/audio, Safari/iOS/Android, screen reader/PDF-UA, paper print | NOT TESTED in this pass; manual sign-off required |
+
+No app source, balance, score weights or dependencies changed in this finalization. Fresh QA uses existing ignored Playwright/Sparticuz/pdfjs/canvas tooling; app dependencies were not added. Historical onboarding/mobile/warning matrix below is explicitly prior evidence unless a fresh result above names it.
+
 ## Reproducible project checks
 
 Use the pinned Bun version (1.3.14), committed lockfile and existing dependencies. No application dependencies were added for documentation.

@@ -1,6 +1,8 @@
 # Phases: MissionX
 
-**Current owner directive (2026-11-14):** execute the complete application phase across original phases 2–10. The previous landing-only scope is complete. Current implementation/validation checklist: [Implementation.md](Implementation.md). Deployment and event submission remain owner-operated Phase 11 tasks.
+**Historical implementation directive (2026-11-14):** execute the complete application phase across original phases 2–10. The previous landing-only scope is complete. Current implementation/validation checklist: [Implementation.md](Implementation.md). Deployment and event submission remain owner-operated Phase 11 tasks.
+
+**Current finalization:**0.1.12 app preserved. README/guides, deployment and submission drafts prepared; tests/browsers/PDF checked. Phase11 remains incomplete until owner resolves rights/SI, roster/timezone, tooling advisory, public short demo and exact production revision, then submits. [Current report](Finalization-Report.md). Universal deadline uses Team Owner residence timezone.
 
 Build in small phases. Work only on the current phase. Mark a phase done only when its "Done when" list is complete, then update `Memory.md`.
 
