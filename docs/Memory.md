@@ -37,6 +37,8 @@ Status values: Not started, In progress, Done, Blocked.
 
 ## Done log
 
+- 2026-11-14 README restructuring: root README now contains judge-facing project story, all missions, 16 scoped research/interaction mappings, actual architecture/module/tree/engine/provenance/environment explanations, existing screenshot gallery and linked official team mentions. Fresh114 tests/0 failures plus lint/typecheck/build/diff pass; 23 Markdown paths, 208 grouped inline paths and 28 internal anchors checked. GitHub GFM preview checked; badge-image fetches blocked, client-side Mermaid/physical-device/browser/PDF runs not repeated. Only README and required change/progress records touched; no source/data/dependency/protected-doc/version changes, push/PR/deploy/release/submission. Next: owner reviews README and existing rights/SI/eligibility/demo/deployment/advisory gates.
+
 - 2026-11-14 finalization: README/current guides, deployment runbook, submission drafts/7-slide storyboard, ten real visuals and all-doc audit prepared.114tests/0fail, lint/typecheck/build/balance pass;7browser journeys/7PDF checks pass. Moderate minimatch tooling advisory remains open; no dependency/source/balance/artwork/protected-doc changes. No push/PR/deploy/submission. Current disposition and exact manual gates: [Finalization report](Finalization-Report.md). Environment timestamps2026-11-15 are recorded separately.
 
 

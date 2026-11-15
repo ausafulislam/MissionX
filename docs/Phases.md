@@ -290,3 +290,8 @@ No PRD/Architecture/Design edits, new dependency, numeric model/score change or 
 - Evidence, defaults and limitations: [Post-Audit-Corrections.md](Post-Audit-Corrections.md).
 
 Files: engine diagnostics/flight-tests/run-snapshot/new snapshot-schema-v1/release-blockers.test + frozen fixture; mission-store; score-presentation/report/PDF; result screens/compact report; package/README and current snapshot/attribution docs. Next: owner confirms artwork rights and decides release; no push/PR/release.
+
+
+### 2026-11-14 — root README restructuring (documentation only)
+
+Reconciled the root entry point with current0.1.12 source: missions/build/verification/results, research-vs-integration mapping, module tree, architecture/engine, provenance/limits, environment/setup, existing visuals and linked team credit. Fresh114 tests/0fail, lint/typecheck/build and diff checks pass; source/link/GFM checks bounded explicitly. README plus CHANGELOG/Memory/this progress record only; protected files/app/dependencies/version unchanged. No publication or submission; Phase11 owner gates remain open.

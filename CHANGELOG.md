@@ -1,5 +1,10 @@
 # Changelog
 
+## README restructuring — 2026-11-14 (0.1.12 unchanged)
+
+- Rebuilt the root README as a judge-facing entry point: navigation, missions/player flow, 16 research/interaction references with scoped resource-to-code mappings, architecture/engine, grouped real-file inventory, provenance/limits, optional environment setup and existing real screenshots. All full team-name occurrences link to the official team page.
+- Reopened the named sources and official context pages; retained unproven adoption/integration boundaries. Fresh114 tests/0 failures, lint/typecheck/build and diff checks pass. GitHub GFM preview accepts tables/images/Mermaid enrichment; live Shields images and final client-side Mermaid rendering are not verified. Earlier browser/PDF evidence stays labeled historical. No app/data/dependency/artwork/protected-document/version changes or publication operations.
+
 ## Documentation finalization — 0.1.12 retained
 
 Task date2026-11-14 (sandbox evidence timestamps2026-11-15). Reconciled README/current technical/source/security guides; added deployment runbook and official-requirement-based submission drafts with seven-slide content storyboard. Refreshed six screenshots and added four real application/report visuals. Preserved protected Design/PRD/Architecture and history; exact stale-baseline proposals are documented separately. No application code, dependencies, balancing, scoring, artwork or version change.
