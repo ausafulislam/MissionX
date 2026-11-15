@@ -1,4 +1,5 @@
 "use client";
+import { countdownLabel } from "@/game/engine/flight-lifecycle";
 import { useEffect, useRef } from "react";
 import { missionAudio, type Sound } from "@/game/audio/audio-manager";
 import type { SavedRun } from "@/game/types";
@@ -8,6 +9,9 @@ export function useFlightAudio(
   playing: boolean,
   active = true,
 ) {
+  useEffect(() => {
+    if(active && run && playing && time === 0) missionAudio.play("countdown");
+  }, [active, run, playing, time]);
   const previous = useRef({ id: "", time: -0.1 });
   useEffect(() => {
     if (!active || !run) return;
@@ -48,7 +52,7 @@ export function useFlightAudio(
     if (
       playing &&
       time < 3 &&
-      Math.floor(time / 0.3) !== Math.floor(Math.max(-0.3, from) / 0.3)
+      countdownLabel(time) !== countdownLabel(from) && countdownLabel(time) !== "LIFTOFF!"
     )
       missionAudio.play("countdown");
     if (playing && from < 2 && time >= 2) missionAudio.play("ignition");

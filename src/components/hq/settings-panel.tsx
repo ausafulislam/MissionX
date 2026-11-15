@@ -7,11 +7,13 @@ export function SettingsPanel({
   onIdentity,
   onReset,
   fullscreen,
+  onReplayTutorial,
 }: {
   onClose: () => void;
   onIdentity: () => void;
   onReset: () => void;
   fullscreen: boolean;
+  onReplayTutorial: () => void;
 }) {
   const s = useCommander(),
     p = s.preferences,
@@ -41,6 +43,8 @@ export function SettingsPanel({
           <em>EXPERIENCE.</em>
         </h2>
         <div className="settings-scroll">
+          <h3>GUIDED HELP</h3>
+          <button className="hq-outlined" onClick={onReplayTutorial}>Replay Tutorial</button>
           <h3>AUDIO SYSTEMS</h3>
           {(["master", "music", "effects"] as const).map((key) => (
             <label className="hq-range" key={key}>

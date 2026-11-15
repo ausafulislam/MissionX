@@ -103,6 +103,7 @@ export function VerificationPanel({
       </p>
       <button
         className="button"
+        data-tour-launch
         disabled={!v.ready || !valid}
         onClick={() => onLaunch(Number(seed))}
       >

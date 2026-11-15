@@ -125,3 +125,8 @@ Results include **DOWNLOAD MISSION REPORT**, a local, multipage PDF with your re
 
 ### Journey clearance and arrival (0.1.8)
 HQ flights now share a mission-specific clearance path and operations orbit, tangent-aligned spacecraft, a bounded target-arrival zoom, and stationary depth-layer stars. Sun Watch remains an Earth-orbit fleet observing the distant Sun. Existing rocket/models, mission rules and six-check commissioning gate are unchanged. These are compressed educational visuals, not flight dynamics.
+
+### First-time guidance and countdown (0.1.9)
+After HQ finishes loading and you enter your display name, an eight-step spotlight tour explains the existing planning, builder, balance, rocket/orbit, verification, launch and results controls. It previews panels without changing your design. Next/Back navigate the tour; Skip or Escape exits. Completion and skip are remembered locally. Replay it from **Settings → Replay Tutorial**; when storage is blocked, dismissal lasts only for the current page session.
+
+HQ and the accessible flight deck now show a large **3 → 2 → 1 → LIFTOFF!** before ascent. The three beats take 0.8 seconds each, followed by a 0.6-second liftoff hold, using the existing three-second preparation clock. Playback speed and skip are locked until ascent; repeated start clicks cannot create another sequence. Existing synthesized audio respects your audio settings, and reduced-motion mode removes the number/tour animations.

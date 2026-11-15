@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useMissionStore } from '@/game/store/mission-store';
 import { missionDiagnostics } from '@/game/engine/diagnostics';
+import { countdownLabel } from '@/game/engine/flight-lifecycle';
 import { flightLifecycle } from '@/game/engine/flight-lifecycle';
 import { missionAudio } from '@/game/audio/audio-manager';
 import { getMission, PARTS } from '@/game/data/catalog';
@@ -23,7 +24,7 @@ export function CommissioningPanel({ run, time }: {
         return null;
     return <div ref={ref} className="commissioning-panel">
  <p>COMMANDER {run.commanderName ?? 'Not recorded'} · {life.destination}</p>
- {time < 3 ? <h3>T − {life.countdown}</h3> : <p>◎ {life.stage.toUpperCase().replaceAll('-', ' ')} · Journey {Math.round(life.journeyProgress * 100)}%</p>}
+ {time < 3 ? <h3>{countdownLabel(time) === "LIFTOFF!" ? "LIFTOFF!" : `T − ${life.countdown}`}</h3> : <p>◎ {life.stage.toUpperCase().replaceAll('-', ' ')} · Journey {Math.round(life.journeyProgress * 100)}%</p>}
  <p aria-live="polite">{life.stage === 'preparation' ? 'Launch control ready. Ignition precedes liftoff.' : life.stage === 'ascent' ? 'Launch vehicle ascending from Earth.' : life.stage === 'upper-ascent' ? 'Booster separation; upper stage continues the schematic ascent.' : life.stage === 'journey' ? `Spacecraft deployed. Following the schematic path to ${life.destination}.` : life.stage === 'commissioning' ? 'Destination phase reached. Mission control begins configuration diagnostics.' : life.stage === 'operations' ? 'Commissioning reviewed. Instruments observe the selected target.' : 'Flight evaluation complete. Review received science and engineering results.'}</p>
  <p className="hq-fineprint">Schematic geometry and compressed journey. No measured navigation solution.</p>
  {life.arrived && count < 6 && <section aria-live="polite"><h3>TEST {count + 1} OF 6 · {current.name}</h3><strong>{current.status}</strong><p>Mission phase reached. Configuration commissioning—not live sensor certification.</p>{current.findings.map(f => <details key={f.id}><summary>{f.name} · {f.status}</summary><p>{f.evidence}</p><p>Impact: {f.impact}</p><p>Next design: {f.recommendation}</p></details>)}<button className="button" disabled={current.status === 'FAIL'} onClick={() => { missionAudio.play(current.status === 'WARNING' ? 'warning' : 'notification'); acknowledge(); }}>CONTINUE {count === 5 ? 'TO SCIENCE OPERATIONS' : `TO TEST ${count + 2}`} ↗</button></section>}

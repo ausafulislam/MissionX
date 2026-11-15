@@ -586,3 +586,16 @@ These README-linked tools support the implementation stack, not mission paramete
 - Reviewed 2026-11-14: installed three 0.187.0 source headers/methods for normalized quaternion rotations, vector transforms and perspective camera/FOV. Local package review; remote pages not fetched. Existing MIT dependency, no copied code/artwork.
 - Use: `src/components/hq/world/journey-{geometry,stars}.tsx` (geometry is `.ts`), launch-world and world camera. Original vector geometry, fit calculation and seeded point shells; no external assets.
 - All scene units, model envelope 4, margin 1.2, five-second travel, zoom padding and star counts are authored visual assumptions. Confidence: high for software API, no claim of physical orbital validity or agency endorsement.
+
+<a id="W3C-APG-MODAL-TOUR"></a>
+### Resource: WAI-ARIA Authoring Practices — Dialog (Modal) Pattern
+- **Source ID:** `W3C-APG-MODAL-TOUR`
+- **Provider/type:** W3C WAI / accessibility implementation guidance, not a space-science source.
+- **Original URL:** https://github.com/w3c/aria-practices/blob/main/content/patterns/dialog-modal/dialog-modal-pattern.html
+- **Access:** 2026-11-14, GitHub source rendering chunk 0; About This Pattern and Keyboard Interaction reviewed (not every example or later note).
+- **Concept used:** inert background, focus inside dialog, contained Tab/Shift+Tab navigation, Escape to close, labelled modal.
+- **Implementation:** `src/components/hq/tutorial-tour.tsx`, existing `focus-guard.tsx`, HQ integration. Original code and text; no example code, artwork or source text copied, no new dependency. Guidance is not certification; screen-reader/device audit remains outstanding.
+- **Confidence:** high for reviewed interaction guidance; browser keyboard/viewport checks do not prove universal assistive-technology support.
+
+#### 0.1.9 authored presentation decisions
+`MISSIONX-EDUCATIONAL-ASSUMPTIONS`: three 0.8-second numeric beats plus 0.6-second LIFTOFF hold fit the existing t=3 ascent event, replacing the prior stretched T−10 display. Countdown uses the flight clock, with no separate timer; speed/skip are unavailable before ascent. Existing original synthesized audio is reused. Tour prose explains actual implemented controls; it is not a new mission rule or certification. Versioned local completion/skip status is browser-only; no telemetry service or account.

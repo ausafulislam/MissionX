@@ -46,3 +46,10 @@
 - Smooth bounded target arrival zoom with aspect-aware fit; protect flight camera from accidental user orbit/zoom.
 - Add three stationary spatial star shells with varied brightness, tint and size, capped for low-quality rendering.
 - Add deterministic clearance, continuity, camera projection and star distribution regressions; preserve models, launch animation and commissioning rules.
+
+## 0.1.9 — 2026-11-14
+- Show large centered 3, 2, 1, LIFTOFF before ascent in HQ and accessible launch playback; reuse existing flight clock and synthesized sound cues.
+- Lock preparation to 1× and prevent skip/repeated-start bypass; keep existing simulation events and commissioning gate intact.
+- Automatically guide first-time HQ visitors through eight real-control spotlights, with Next/Back, Skip/Escape, progress, background interaction lock, viewport/scroll tracking and reduced-motion support.
+- Remember completed/skipped tutorials locally, degrade gracefully when storage fails, and add Replay Tutorial to existing Settings.
+- Add countdown/order/interlock and tutorial persistence regressions. No runtime dependencies, model redesign or protected-document edits.

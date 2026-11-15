@@ -1,4 +1,5 @@
 "use client";
+import { LaunchCountdown } from "./launch-countdown";
 import { JourneyMap } from "./journey-map";
 import { CommissioningPanel } from "@/components/game/commissioning-panel";
 import { advanceFlight } from "@/game/engine/flight-lifecycle";
@@ -25,7 +26,7 @@ function LaunchPlayback() {
   useEffect(() => {
     if (!playing || !run || done) return;
     const timer = setInterval(
-      () => setTime((t) => advanceFlight(run,t,0.1*speed)),
+      () => setTime((t) => advanceFlight(run,t,0.1*(t<3?1:speed))),
       100,
     );
     return () => clearInterval(timer);
@@ -41,6 +42,7 @@ function LaunchPlayback() {
     event = t.phase;
   return (
     <section className="game-screen">
+      <LaunchCountdown time={time} playing={playing}/>
       <ScreenHeading
         number="04"
         eyebrow={`LIVE MISSION / SEED ${result.seed}`}
@@ -56,8 +58,8 @@ function LaunchPlayback() {
           <div className="flight-controls game-panel">
             <button
               className="game-secondary"
-              disabled={done}
-              onClick={() => setPlaying(!playing)}
+              disabled={done || (playing && time < 3)}
+              onClick={() => time < 3 ? setPlaying(true) : setPlaying(p=>!p)}
             >
               {done
                 ? "✓ PLAYBACK COMPLETE"
@@ -71,6 +73,7 @@ function LaunchPlayback() {
               {[1, 2, 4].map((n) => (
                 <button
                   key={n}
+                  disabled={time < 3}
                   aria-pressed={speed === n}
                   onClick={() => setSpeed(n)}
                 >
@@ -80,7 +83,7 @@ function LaunchPlayback() {
             </div>
             <button
               className="flight-skip"
-              disabled={done}
+              disabled={done || time < 3}
               onClick={() => {
                 setTime(advanceFlight(run,time,0,true));
                 setPlaying(false);

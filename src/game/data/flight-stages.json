@@ -1,7 +1,7 @@
 {
   "sourceIds": ["MISSIONX-EDUCATIONAL-ASSUMPTIONS", "NASA-SCIENCE-MISSIONS", "NASA-MISSION-VIZ"],
   "note": "Authored presentation timing, not flight dynamics. Maps onto existing model playback; commissioning is a presentation gate at operation start, not a new physics event.",
-  "countdownSeconds": 10,
+  "countdownSeconds": 3,
   "stages": [
     {"id":"preparation","at":0,"title":"Earth launch preparation"},
     {"id":"ascent","at":3,"title":"Atmospheric ascent"},

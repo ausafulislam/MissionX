@@ -251,3 +251,6 @@ Connected HQ continuous launch/journey and mission-specific arrival, flight-deck
 
 ### 2026-11-14 — targeted journey polish (0.1.8)
 Existing HQ refinement only: shared clearance-safe schematic trajectory/operations orbit, target-aware arrival zoom, tangent attitude and bounded three-layer stable starfield. Original rocket, planets, UI placement and engine retained. Automated geometry plus engine regression checked; final visual/device sign-off remains manual.
+
+### 2026-11-14 — countdown and first-use guidance (0.1.9)
+Owner-authorized targeted refinement, not a redesign. Added shared visible launch countdown/interlock, eight-step real-control HQ spotlight tour, versioned completion/skip and Settings replay. Preserved current station panels/models, engine outcomes and six-check commissioning. Desktop/phone complete functional journeys and responsive tour checked in Chromium compatibility mode; actual hardware WebGL/audio/screen-reader sign-off remains separate.
