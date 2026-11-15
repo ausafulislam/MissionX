@@ -724,3 +724,19 @@ Project-owned software and associated documentation are provided under the **[MI
 [Contributing](CONTRIBUTING.md) · [Code of Conduct](CODE_OF_CONDUCT.md) · [Security](SECURITY.md) · [Citation](CITATION.cff) · [Documentation index](docs/README.md) · [Submission checklist](submission/SUBMISSION_CHECKLIST.md)
 
 **Owner handoff:** resolve rights/SI and advisory review, verify team/terms/timezone, publish a compliant public short demo, deploy/verify the intended revision if authorized, then submit and retain confirmation. A GitHub README, saved draft or deployed landing page alone is not a completed Space Apps submission.
+
+## Our Team
+
+**NASA WARRIORS** developed MissionX for the **NASA Space Apps Challenge 2026**, responding to the **Space Mission Design Game** challenge. Based in Karachi, Pakistan, the team brings a shared interest in space and education to an interactive exploration of mission-design trade-offs.
+
+**[Meet NASA WARRIORS on the official Space Apps team page →](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**
+
+### Team identity
+
+The public participant page lists NASA WARRIORS under the Universal Event. The repository's existing logo assets are MissionX project wordmarks; an identifiable NASA WARRIORS team logo needs to be provided before it can be displayed here.
+
+### Team members
+
+Individual member names, official roles, MissionX responsibilities and professional profile links are awaiting team confirmation. The available public page and project records do not establish a verified roster, so no individual names or contributions are attributed here.
+
+*Through MissionX, NASA WARRIORS brings its shared interest in space and education into a collaborative learning project.*
