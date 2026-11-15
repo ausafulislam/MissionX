@@ -2529,3 +2529,12 @@
   animation: none !important;
   transition: none !important;
 }
+/* Approved commissioning/report content stays in existing mission panel. */
+.hq-launch-events{max-height:82vh;overflow:auto;overscroll-behavior:contain}
+.commissioning-panel,.mission-report{padding:12px 0;overflow-wrap:anywhere;max-width:100%}
+.commissioning-panel details,.mission-report details{padding:8px 0;border-bottom:1px solid #26262b}
+.commissioning-panel summary,.mission-report summary{cursor:pointer;line-height:1.5}
+.commissioning-panel section{padding:12px;border:1px solid #ff6a2b}
+.commissioning-panel h3{font-size:16px;line-height:1.4}
+.commissioning-panel p,.mission-report p{line-height:1.5}
+.commissioning-panel .button,.mission-report .button{white-space:normal;max-width:100%;font-size:12px}

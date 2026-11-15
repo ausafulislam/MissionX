@@ -1,4 +1,7 @@
 "use client";
+import { JourneyMap } from "./journey-map";
+import { CommissioningPanel } from "@/components/game/commissioning-panel";
+import { advanceFlight } from "@/game/engine/flight-lifecycle";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useMissionStore } from "@/game/store/mission-store";
@@ -22,7 +25,7 @@ function LaunchPlayback() {
   useEffect(() => {
     if (!playing || !run || done) return;
     const timer = setInterval(
-      () => setTime((t) => Math.min(run.result.duration, t + 0.1 * speed)),
+      () => setTime((t) => advanceFlight(run,t,0.1*speed)),
       100,
     );
     return () => clearInterval(timer);
@@ -47,6 +50,8 @@ function LaunchPlayback() {
       />
       <div className="launch-layout">
         <div>
+          <CommissioningPanel run={run} time={time} />
+          <JourneyMap run={run} time={time} />
           <FlightScene design={run.design} result={result} time={time} />
           <div className="flight-controls game-panel">
             <button
@@ -77,7 +82,7 @@ function LaunchPlayback() {
               className="flight-skip"
               disabled={done}
               onClick={() => {
-                setTime(result.duration);
+                setTime(advanceFlight(run,time,0,true));
                 setPlaying(false);
               }}
             >
@@ -96,8 +101,8 @@ function LaunchPlayback() {
                   : "◎"}
             </span>
             <div>
-              <h2>{event?.label}</h2>
-              <p>{event?.description}</p>
+              <h2>{time>=18&&(run.diagnosticsReviewed??0)<6?'ARRIVAL / COMMISSIONING':event?.label}</h2>
+              <p>{time>=18&&(run.diagnosticsReviewed??0)<6?'Complete the six configuration checks before science playback.':event?.description}</p>
             </div>
           </div>
           <div className="flight-telemetry">
@@ -106,6 +111,10 @@ function LaunchPlayback() {
               ["VELOCITY", `${t.velocity.toFixed(1)} km/s`],
               ["SOLAR SUPPLY", `${t.power.toFixed(0)} W`],
               ["USEFUL DOWNLINK", `${t.data.toFixed(1)} GB/d`],
+              ["USABLE BATTERY", `${t.batteryWh.toFixed(1)} Wh`],
+              ["ONBOARD DATA", `${t.storedGB.toFixed(2)} GB`],
+              ["EARTH RECEIVED", `${t.receivedGB.toFixed(2)} GB`],
+              ["GROUND WINDOW", t.contact ? "CONTACT" : "NO CONTACT"],
             ].map(([label, value]) => (
               <div key={label}>
                 <span className="technical">{label}</span>
@@ -147,14 +156,14 @@ function LaunchPlayback() {
                 </span>
                 <h3>
                   {time >= e.at
-                    ? e.label
+                    ? (e.kind==="operations"&&(run.diagnosticsReviewed??0)<6?"Arrival / commissioning":e.label)
                     : i === result.events.length - 1
                       ? "Mission evaluation"
                       : "Awaiting flight event"}
                 </h3>
                 <p>
                   {time >= e.at
-                    ? e.description
+                    ? (e.kind==="operations"&&(run.diagnosticsReviewed??0)<6?"Complete configuration checks before science playback.":e.description)
                     : "Mission control is monitoring the flight."}
                 </p>
               </div>

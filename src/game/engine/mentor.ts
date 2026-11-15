@@ -5,7 +5,11 @@ export function mentorAdvice(
   result?: Simulation | null,
 ): string {
   const { checks, resources: r } = verify(design);
-  const failed = checks.filter((c) => c.status !== "pass");
+  const failed = checks
+    .filter((c) => c.status !== "pass")
+    .sort(
+      (a, b) => Number(a.blocking === false) - Number(b.blocking === false),
+    );
   const actions: Record<string, string> = {
     mass: "Try a lighter structure or remove optional instruments.",
     budget:
@@ -16,6 +20,8 @@ export function mentorAdvice(
       "Use longer-life structure, battery and computer options; the shortest-lived component limits the craft.",
     power: "Select a larger solar array or reduce instrument power demand.",
     battery: "Install a higher-capacity battery to cover operations in shadow.",
+    storage:
+      "Choose a computer with more mass memory to preserve observations between contacts.",
     data: "Upgrade your radio to send more science back during short ground contacts.",
   };
   if (failed.length)

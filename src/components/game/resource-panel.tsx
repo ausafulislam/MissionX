@@ -95,9 +95,31 @@ export function ResourcePanel({ design }: { design: Design }) {
         ))}
         <div className="resource-extra">
           <span>
-            BATTERY RESERVE{" "}
+            MASS / EOL POWER MARGIN
             <strong>
-              {r.battery.toFixed(0)} / {r.batteryNeeded.toFixed(0)} Wh required
+              {r.massMarginPercent.toFixed(1)}% /{" "}
+              {r.powerMarginPercent.toFixed(1)}%
+            </strong>
+          </span>
+          <span>
+            ONBOARD STORAGE
+            <strong>
+              {r.storage.toFixed(1)} GB / {r.storageNeeded.toFixed(2)} GB
+              between contacts
+            </strong>
+          </span>
+          <span>
+            REMAINING BUDGET / RISK
+            <strong>
+              ${r.budgetRemaining.toFixed(1)}M / {r.risk.toUpperCase()}{" "}
+              (heuristic)
+            </strong>
+          </span>
+          <span>
+            USABLE BATTERY RESERVE{" "}
+            <strong>
+              {r.batteryUsable.toFixed(0)} / {r.batteryNeeded.toFixed(0)} Wh
+              required
             </strong>
           </span>
           <span>

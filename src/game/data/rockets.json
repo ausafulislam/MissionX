@@ -1,0 +1,70 @@
+[
+  {
+    "id": "swift",
+    "name": "Swift Light",
+    "capacity": 600,
+    "cost": 18,
+    "reliability": 0.96,
+    "orbits": [
+      "lunar",
+      "earth",
+      "sso"
+    ],
+    "description": "Fictional gameplay service, not a real provider specification. Small payloads, modest cost. Reaches Earth and lunar orbit.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Launch segment role; fictional services, not actual provider vehicles.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "id": "atlas",
+    "name": "Atlas Medium",
+    "capacity": 1600,
+    "cost": 35,
+    "reliability": 0.975,
+    "orbits": [
+      "earth",
+      "lunar",
+      "solar",
+      "sso",
+      "geo"
+    ],
+    "description": "Fictional gameplay service, not a real provider specification. Flexible medium-lift service for constellations and lunar missions.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Launch segment role; fictional services, not actual provider vehicles.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "id": "horizon",
+    "name": "Horizon Heavy",
+    "capacity": 2600,
+    "cost": 58,
+    "reliability": 0.985,
+    "orbits": [
+      "earth",
+      "lunar",
+      "solar",
+      "mars",
+      "sso",
+      "geo"
+    ],
+    "description": "Fictional gameplay service, not a real provider specification. Heavy-lift deep-space service. The only Mars-capable option.",
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Launch segment role; fictional services, not actual provider vehicles.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  }
+]

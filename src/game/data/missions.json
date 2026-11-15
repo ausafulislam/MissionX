@@ -1,0 +1,89 @@
+[
+  {
+    "id": "moon",
+    "name": "Moon Mapping",
+    "subtitle": "DISCOVER OUR NEAREST UNKNOWN",
+    "description": "Trace the lunar surface from orbit. Build a mapping spacecraft that can turn ancient craters into new discoveries.",
+    "difficulty": "Beginner",
+    "fleet": 1,
+    "massLimit": 550,
+    "budget": 85,
+    "scienceTarget": 45,
+    "lifetimeTarget": 12,
+    "objectives": [
+      "Map lunar terrain with a camera",
+      "Return useful surface imagery",
+      "Operate through orbital shadow periods"
+    ],
+    "reference": {
+      "name": "Lunar Reconnaissance Orbiter",
+      "url": "https://science.nasa.gov/mission/lro/"
+    },
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Scientific objective and four-segment mission lifecycle.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "id": "sun",
+    "name": "Sun Watch",
+    "subtitle": "ONE STAR. FOUR PERSPECTIVES.",
+    "description": "Coordinate four identical small satellites to observe the solar corona. Balance a constellation, not just one spacecraft.",
+    "difficulty": "Intermediate",
+    "fleet": 4,
+    "massLimit": 1000,
+    "budget": 180,
+    "scienceTarget": 160,
+    "lifetimeTarget": 12,
+    "objectives": [
+      "Deploy four coordinated satellites",
+      "Observe the Sun with a coronagraph",
+      "Downlink a combined solar dataset"
+    ],
+    "reference": {
+      "name": "PUNCH",
+      "url": "https://science.nasa.gov/mission/punch/"
+    },
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Scientific objective and four-segment mission lifecycle.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  },
+  {
+    "id": "mars",
+    "name": "Mars Orbiter",
+    "subtitle": "ENGINEER FOR THE LONG JOURNEY",
+    "description": "Send an orbiter to a world of unanswered questions. Survive weaker sunlight and the challenge of deep-space communications.",
+    "difficulty": "Advanced",
+    "fleet": 1,
+    "massLimit": 900,
+    "budget": 170,
+    "scienceTarget": 75,
+    "lifetimeTarget": 24,
+    "objectives": [
+      "Image Mars and study its surface",
+      "Sustain operations in weaker sunlight",
+      "Return data over a deep-space link"
+    ],
+    "reference": {
+      "name": "Mars Reconnaissance Orbiter",
+      "url": "https://science.nasa.gov/mission/mars-reconnaissance-orbiter/"
+    },
+    "source": {
+      "title": "NASA \u2014 Design and Develop Science Missions",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf",
+      "parameter": "Scientific objective and four-segment mission lifecycle.",
+      "accessed": "2026-11-14",
+      "confidence": "concept-only",
+      "simplification": "Source supports mission-design concepts, NOT these numbers. All masses, costs ($M USD), power, data, lifetimes, reliability and orbit factors are authored MissionX gameplay estimates; not flight specifications."
+    }
+  }
+]

@@ -1,0 +1,74 @@
+{
+  "categories": [
+    {
+      "id": "structure",
+      "name": "Structure",
+      "hint": "The frame that protects and supports every subsystem."
+    },
+    {
+      "id": "power",
+      "name": "Power",
+      "hint": "Solar arrays produce energy; distance and eclipse reduce it."
+    },
+    {
+      "id": "battery",
+      "name": "Battery",
+      "hint": "Stored energy keeps instruments alive in shadow."
+    },
+    {
+      "id": "communications",
+      "name": "Communications",
+      "hint": "A downlink sends collected science back to Earth."
+    },
+    {
+      "id": "computer",
+      "name": "Computer",
+      "hint": "The flight computer coordinates the spacecraft."
+    },
+    {
+      "id": "attitude",
+      "name": "Attitude control",
+      "hint": "Pointing control keeps antennas and instruments on target."
+    },
+    {
+      "id": "camera",
+      "name": "Camera",
+      "hint": "Higher resolution produces more science and more data."
+    },
+    {
+      "id": "science",
+      "name": "Science instruments",
+      "hint": "Combine instruments to meet your mission science objective."
+    }
+  ],
+  "starters": {
+    "moon": [
+      "bus-light",
+      "solar-compact",
+      "battery-small",
+      "radio-basic",
+      "computer-basic",
+      "attitude-basic",
+      "camera-map"
+    ],
+    "sun": [
+      "bus-light",
+      "solar-compact",
+      "battery-small",
+      "radio-basic",
+      "computer-basic",
+      "attitude-basic",
+      "coronagraph"
+    ],
+    "mars": [
+      "bus-deep",
+      "solar-deep",
+      "battery-large",
+      "radio-relay",
+      "computer-rad",
+      "attitude-deep",
+      "camera-hires",
+      "spectrometer"
+    ]
+  }
+}

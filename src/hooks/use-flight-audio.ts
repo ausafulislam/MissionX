@@ -48,7 +48,7 @@ export function useFlightAudio(
     if (
       playing &&
       time < 3 &&
-      Math.floor(time) !== Math.floor(Math.max(-1, from))
+      Math.floor(time / 0.3) !== Math.floor(Math.max(-0.3, from) / 0.3)
     )
       missionAudio.play("countdown");
     if (playing && from < 2 && time >= 2) missionAudio.play("ignition");

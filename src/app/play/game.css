@@ -2570,3 +2570,9 @@
 .mission-switch-confirm .game-secondary {
   font-size: 9px;
 }
+/* Existing mission panel integration: shared accessible controls and report. */
+.commissioning-panel,.mission-report{padding:16px 0;overflow-wrap:anywhere;max-width:100%}
+.commissioning-panel details,.mission-report details{padding:8px 0;border-bottom:1px solid #26262b}
+.commissioning-panel summary,.mission-report summary{cursor:pointer;line-height:1.5}
+.commissioning-panel section{max-height:48vh;overflow:auto;padding:12px;border:1px solid #ff6a2b}
+.journey-map{margin:12px 0;color:#f5f5f2}.journey-map svg{width:100%;height:auto}.journey-map figcaption{font-size:12px}

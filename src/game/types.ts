@@ -1,3 +1,11 @@
+export interface SourceInfo {
+  title: string;
+  url: string;
+  parameter: string;
+  accessed: string;
+  confidence: "concept-only" | "verified";
+  simplification: string;
+}
 export type MissionId = "moon" | "sun" | "mars";
 export type Category =
   | "structure"
@@ -9,9 +17,14 @@ export type Category =
   | "camera"
   | "science";
 export interface Part {
+  requiresAny?: string[];
+  payloadLimit?: number;
+  source: SourceInfo;
   id: string;
   name: string;
   category: Category;
+  storage: number;
+  limitations: string;
   mass: number;
   cost: number;
   draw: number;
@@ -25,6 +38,7 @@ export interface Part {
   description: string;
 }
 export interface Mission {
+  source: SourceInfo;
   id: MissionId;
   name: string;
   subtitle: string;
@@ -39,6 +53,7 @@ export interface Mission {
   reference: { name: string; url: string };
 }
 export interface Rocket {
+  source: SourceInfo;
   id: string;
   name: string;
   capacity: number;
@@ -48,6 +63,7 @@ export interface Rocket {
   description: string;
 }
 export interface Orbit {
+  source: SourceInfo;
   id: string;
   name: string;
   missions: MissionId[];
@@ -64,6 +80,15 @@ export interface Design {
   orbitId: string;
 }
 export interface Resources {
+  nominalGeneration: number;
+  batteryUsable: number;
+  storage: number;
+  storageNeeded: number;
+  massMarginPercent: number;
+  powerMarginPercent: number;
+  budgetRemaining: number;
+  risk: "low" | "moderate" | "high";
+
   mass: number;
   cost: number;
   generation: number;
@@ -82,6 +107,7 @@ export interface Check {
   id: string;
   label: string;
   status: CheckStatus;
+  blocking?: boolean;
   actual: number;
   target: number;
   unit: string;
@@ -119,7 +145,44 @@ export interface SegmentReport {
   status: CheckStatus;
   explanation: string;
 }
+export interface OperationsSample {
+  hour: number;
+  batteryWh: number;
+  storedGB: number;
+  generatedGB: number;
+  transmittedGB: number;
+  receivedGB: number;
+  contact: boolean;
+  sunlight: boolean;
+}
+export interface OperationsReport {
+  solarGeneratedWh: number;
+  loadServedWh: number;
+  chargeLossWh: number;
+  spilledWh: number;
+  initialBatteryWh: number;
+  finalBatteryWh: number;
+
+  days: number;
+  generatedGB: number;
+  transmittedGB: number;
+  receivedGB: number;
+  remainingGB: number;
+  lostGB: number;
+  groundLostGB: number;
+  batteryMinWh: number;
+  brownoutHours: number;
+  availability: number;
+  averageDeliveredPower: number;
+  contacts: number;
+  samples: OperationsSample[];
+  campaignGeneratedGB: number;
+  campaignReceivedGB: number;
+  scienceFraction: number;
+}
 export interface Simulation {
+  operations?: OperationsReport;
+  modelVersion?: number;
   seed: number;
   outcome: Outcome;
   score: number;
@@ -137,6 +200,9 @@ export interface Simulation {
   lessons: string[];
 }
 export interface SavedRun {
+  diagnosticsReviewed?: number;
+  commanderName?: string;
+  completedAt?: string;
   id: string;
   createdAt: string;
   design: Design;

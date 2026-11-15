@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { MISSIONS, getMission } from "@/game/data/catalog";
 import { useMissionStore } from "@/game/store/mission-store";
 import { ScreenHeading } from "./game-shell";
+import { SourceNote } from "./source-note";
 import { Destination } from "./destination";
 import type { MissionId } from "@/game/types";
 export function GoalScreen() {
@@ -114,6 +115,7 @@ export function GoalScreen() {
           </div>
           <div className="overview-details">
             <p>{m.description}</p>
+            <SourceNote source={m.source} />
             <div className="goal-requirements">
               {requirements.map(([label, value]) => (
                 <div key={label}>

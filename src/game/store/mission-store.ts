@@ -1,10 +1,15 @@
 "use client";
 import { create } from "zustand";
 import { ORBITS, PARTS, ROCKETS, STARTERS } from "../data/catalog";
+import { simulate as simulateLegacy } from "../engine/legacy-v1/simulation";
+import { verify as verifyLegacy } from "../engine/legacy-v1/validation";
+import { simulate as simulateV2 } from "../engine/legacy-v2";
 import { simulate } from "../engine/simulation";
 import { verify } from "../engine/validation";
+import { missionDiagnostics } from "../engine/diagnostics";
 import { validDesign } from "../engine/schema";
 import type { Design, MissionId, SavedRun } from "../types";
+import { useCommander, validCommanderName } from "./commander-store";
 const KEY = "missionx-flight-deck-v1";
 const emptyDesign = (): Design => ({
   missionId: "moon",
@@ -24,18 +29,34 @@ function restoreRun(value: unknown): SavedRun | null {
     typeof r.createdAt !== "string" ||
     !Number.isFinite(Date.parse(r.createdAt)) ||
     !result ||
+    (result.modelVersion !== undefined &&
+      ![1, 2, 3].includes(result.modelVersion as number)) ||
     typeof result.seed !== "number" ||
     !Number.isInteger(result.seed) ||
     result.seed < 0 ||
     result.seed > 4294967295 ||
-    !verify(r.design).ready
+    !(
+      result.modelVersion === 3
+        ? verify(r.design)
+        : result.modelVersion === 2
+          ? verify(r.design)
+          : verifyLegacy(r.design)
+    ).ready
   )
     return null;
   return {
     id: r.id,
     createdAt: r.createdAt,
+    diagnosticsReviewed: typeof r.diagnosticsReviewed === "number" ? Math.max(0,Math.min(6,Math.floor(r.diagnosticsReviewed))) : 0,
+    ...(typeof r.commanderName === "string" && validCommanderName(r.commanderName) ? {commanderName:r.commanderName.trim()} : {}),
+    ...(typeof r.completedAt === "string" && Number.isFinite(Date.parse(r.completedAt)) && Date.parse(r.completedAt)>=Date.parse(r.createdAt) ? {completedAt:r.completedAt} : {}),
     design: r.design,
-    result: simulate(r.design, result.seed),
+    result:
+      result.modelVersion === 3
+        ? simulate(r.design, result.seed)
+        : result.modelVersion === 2
+          ? simulateV2(r.design, result.seed)
+          : simulateLegacy(r.design, result.seed),
   };
 }
 interface GameState {
@@ -54,6 +75,7 @@ interface GameState {
   setOrbit: (id: string) => void;
   launch: (seed: number) => boolean;
   finish: () => void;
+  acknowledgeDiagnostic: () => void;
   redesign: () => void;
   restore: (run: SavedRun) => void;
   reset: () => void;
@@ -74,7 +96,7 @@ export const useMissionStore = create<GameState>((set, get) => ({
         set({ hydrated: true });
         return;
       }
-      if (raw.length > 250000) throw new Error("Save too large");
+      if (raw.length > 2000000) throw new Error("Save too large");
       const data = JSON.parse(raw);
       if (
         data.version !== 1 ||
@@ -167,11 +189,13 @@ export const useMissionStore = create<GameState>((set, get) => ({
       seed > 4294967295
     )
       return false;
+    useCommander.getState().hydrate();
     const timestamp = new Date().toISOString();
     set({
       run: {
         id: `${Date.now()}-${seed}`,
         createdAt: timestamp,
+        ...(validCommanderName(useCommander.getState().name) ? {commanderName:useCommander.getState().name.trim()} : {}),
         design: { ...design, partIds: [...design.partIds] },
         result: simulate(design, seed),
       },
@@ -179,10 +203,19 @@ export const useMissionStore = create<GameState>((set, get) => ({
     });
     return true;
   },
+  acknowledgeDiagnostic: () => {
+    const run=get().run;if(!run)return;
+    const tests=missionDiagnostics(run,18);
+    const index=run.diagnosticsReviewed??0;
+    if(index>=6||tests[index].status==='FAIL')return;
+    set({run:{...run,diagnosticsReviewed:index+1}});
+  },
   finish: () => {
-    const run = get().run;
-    if (!run) return;
+    const saved = get().run;
+    if (!saved) return;
+    const run = {...saved, completedAt:saved.completedAt??new Date().toISOString()};
     set({
+      run,
       complete: true,
       history: [run, ...get().history.filter((r) => r.id !== run.id)].slice(
         0,

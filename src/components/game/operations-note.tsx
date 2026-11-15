@@ -1,0 +1,74 @@
+import type { Simulation } from "@/game/types";
+export function OperationsNote({ result }: { result: Simulation }) {
+  const o = result.operations;
+  if (!o)
+    return (
+      <p>
+        Archived model {result.modelVersion ?? 1}: this flight predates the
+        time-step operations model. Restore the design to run a new comparison.
+      </p>
+    );
+  return (
+    <details>
+      <summary>OPERATIONS LEDGER & SCORING MODEL</summary>
+      <p>
+        Model {result.modelVersion}. Four-day representative end-of-life
+        campaign, extrapolated over achieved life (30 days/month). Energy is per
+        spacecraft; data totals cover the fleet. Generated{" "}
+        {o.generatedGB.toFixed(2)} GB → transmitted {o.transmittedGB.toFixed(2)}{" "}
+        GB → Earth received {o.receivedGB.toFixed(2)} GB. Still onboard{" "}
+        {o.remainingGB.toFixed(2)} GB; storage overflow {o.lostGB.toFixed(2)}{" "}
+        GB; ground loss {o.groundLostGB.toFixed(2)} GB. Extrapolated campaign
+        reception {o.campaignReceivedGB.toFixed(0)} GB. Only received data earns
+        science credit.
+      </p>
+      <p>
+        Science = payload points × received fraction of planned data ×
+        achieved/required lifetime (capped at 1). Score = 50% science attainment
+        + 35% power/lifetime engineering + 15% budget efficiency weighted by
+        delivered science. Launch loss scores zero. Event probabilities: storm
+        25%, ground outage 25%, instrument fault 25%, stable 25%; these are
+        gameplay choices, not real flight statistics.
+      </p>
+      <p>
+        Contact and eclipse windows are simplified inputs, not propagation or RF
+        link predictions. EOL retention 98%/year; usable battery 80% × 95%
+        discharge efficiency; charge efficiency 95%. Mass/power margin and
+        storage checks are explained before launch.{" "}
+        <a
+          href="https://github.com/egemenimre/quicksat/blob/master/docs/guides/sizing/initialise_a_satellite.md"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Data/storage concepts ↗
+        </a>
+      </p>
+      <p>
+        Energy ledger per spacecraft: initial usable battery{" "}
+        {o.initialBatteryWh.toFixed(1)} Wh + solar{" "}
+        {o.solarGeneratedWh.toFixed(1)} Wh = served loads{" "}
+        {o.loadServedWh.toFixed(1)} Wh + final battery{" "}
+        {o.finalBatteryWh.toFixed(1)} Wh + charge loss{" "}
+        {o.chargeLossWh.toFixed(1)} Wh + unused solar {o.spilledWh.toFixed(1)}{" "}
+        Wh.
+      </p>
+      <ul>
+        {result.requirements.map((c) => (
+          <li key={c.id}>
+            {c.label}: {c.status === "pass" ? "PASS" : "NOT MET"}. {c.reason}
+          </li>
+        ))}
+      </ul>
+      <ol>
+        {o.samples.map((s, i) => (
+          <li key={i}>
+            Hour {s.hour.toFixed(2)} · {s.sunlight ? "sunlight" : "eclipse"} ·{" "}
+            {s.contact ? "ground contact" : "no contact"} · battery{" "}
+            {s.batteryWh.toFixed(1)} Wh · memory {s.storedGB.toFixed(2)} GB ·
+            received {s.receivedGB.toFixed(2)} GB
+          </li>
+        ))}
+      </ol>
+    </details>
+  );
+}

@@ -1,4 +1,5 @@
 "use client";
+import { SourceNote } from "@/components/game/source-note";
 import { MISSIONS, getMission } from "@/game/data/catalog";
 import { useMissionStore } from "@/game/store/mission-store";
 import type { MissionId } from "@/game/types";
@@ -36,6 +37,7 @@ export function PlanningPanel({
       </span>
       <h3 className="station-title">{m.name}</h3>
       <p>{m.description}</p>
+      <SourceNote source={m.source} />
       <div className="hq-requirement-grid">
         {[
           ["MASS LIMIT", `${m.massLimit} kg`],

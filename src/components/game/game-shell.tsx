@@ -35,8 +35,8 @@ export function GameShell({ children }: { children: ReactNode }) {
             : "/play/goal";
     else if (!["goal", "debrief"].includes(step) && !state.chosen)
       redirect = "/play/goal";
-    else if (["launch", "result"].includes(step) && !state.run)
-      redirect = "/play/verify";
+    else if (step === "result" && !state.run) redirect = "/play/build";
+    else if (step === "launch" && !state.run) redirect = "/play/verify";
     else if (step === "result" && !state.complete) redirect = "/play/launch";
   }
   const hydrate = state.hydrate;

@@ -68,7 +68,7 @@ function CameraDirector({
       planning: [-9 + index * 1.15, 4.5, 3],
       engineering: [13, 5.5, 3],
       verification: [13, 4.5, 12],
-      launch: orbital ? [11, 7, 14] : [12, 7, 15],
+      launch: orbital ? [14, 11, 22] : [12, 7 + Math.max(0,time-3)*.6, 15],
       results: [-13, 5.5, 12],
       archive: [1, 4, 16],
     };
@@ -78,7 +78,7 @@ function CameraDirector({
       planning: [-7.8 + index * 0.9, 1.9, -4],
       engineering: [8, 2, -4],
       verification: [8, 1.7, 4],
-      launch: orbital ? [1, 1, 0] : [1, Math.min(9, time < 3 ? 2.2 : 3.4), 0],
+      launch: orbital ? [2, 7-Math.min(1,(time-13)/5)*3, -1] : [0, 2.2+Math.max(0,time-3)*1.05, 0],
       results: [-6.5, 2.1, 4],
       archive: [0.8, 2, 8],
     };

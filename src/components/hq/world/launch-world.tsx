@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import type { SavedRun } from "@/game/types";
@@ -32,7 +32,7 @@ function Rocket({
     if (rocket.current) {
       rocket.current.position.y =
         time < 3 ? 0 : Math.min(12, (time - 3) * 1.15);
-      rocket.current.rotation.z = failure ? 0.28 : 0;
+      rocket.current.rotation.z = failure ? 0.28 : !reduced && time>=2 && time<3 ? Math.sin(time*90)*0.006 : 0;
     }
     if (stage.current) {
       stage.current.position.y = time >= 8 ? -(time - 8) * 1.8 : 0;
@@ -157,143 +157,35 @@ export function LaunchWorld({
   low: boolean;
   reduced: boolean;
 }) {
-  const orbitGroup = useRef<THREE.Group>(null);
-  useFrame((_, delta) => {
-    if (orbitGroup.current && !reduced)
-      orbitGroup.current.rotation.y += Math.min(delta, 0.05) * 0.07;
-  });
-  const data = telemetry(run.design, run.result, time),
-    failed = run.result.events.some(
-      (e) => e.kind === "failure" && e.at <= time,
-    ),
-    orbital = time >= 13 && !failed;
-  return (
-    <>
-      <color attach="background" args={[orbital ? "#020611" : "#071525"]} />
-      <ambientLight intensity={orbital ? 1.5 : 0.9} />
-      <hemisphereLight args={["#b4d5eb", "#203c46", 2]} />
-      <directionalLight position={[4, 12, 4]} intensity={4} color="#ffe3c7" />
-      {orbital ? (
-        <>
-          <SpaceParticles count={low ? 100 : 450} motion={!reduced} />
-          <Planet
-            kind={
-              run.design.missionId === "sun" ? "earth" : run.design.missionId
-            }
-            radius={4.1}
-            position={[-0.6, -1, -2]}
-            quality={!low}
-            motion={!reduced}
-          />
-          <OrbitRing radius={6.4} rotation={[0.9, 0.2, 0.2]} />
-          <group ref={orbitGroup}>
-            {Array.from({ length: data.fleet }, (_, i) => (
-              <group
-                key={i}
-                position={[-2 + i * 1.7, 3 + Math.sin(i) * 0.4, 3 - i * 0.5]}
-                rotation={[0.3, 0.3 + i, 0]}
-              >
-                <SpacecraftModel
-                  design={run.design}
-                  reduced
-                  scale={data.fleet === 4 ? 0.35 : 0.65}
-                />
-              </group>
-            ))}
-          </group>
-          {data.phase?.severity === "warning" && (
-            <pointLight position={[0, 5, 3]} color="#ff8d42" intensity={15} />
-          )}
-        </>
-      ) : (
-        <>
-          <fog attach="fog" args={["#122337", 25, 80]} />
-          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.2, 0]}>
-            <planeGeometry args={[160, 160]} />
-            <meshStandardMaterial color="#253e47" roughness={0.93} />
-          </mesh>
-          <mesh position={[0, -0.1, 0]}>
-            <cylinderGeometry args={[4, 4, 0.3, 48]} />
-            <meshStandardMaterial
-              color="#697780"
-              metalness={0.4}
-              roughness={0.65}
-            />
-          </mesh>
-          <Rocket time={time} run={run} reduced={reduced} />
-          {!failed && <ExhaustCloud time={time} low={low} reduced={reduced} />}
-          <group position={[-2, 0, -1]}>
-            {[0, 1, 2, 3, 4, 5, 6].map((y) => (
-              <group key={y} position={[0, y * 1.1, 0]}>
-                <mesh>
-                  <boxGeometry args={[1.1, 0.12, 1]} />
-                  <meshStandardMaterial
-                    color="#78828a"
-                    metalness={0.7}
-                    roughness={0.5}
-                  />
-                </mesh>
-                {[-0.48, 0.48].map((x) => (
-                  <mesh key={x} position={[x, 0.5, 0]}>
-                    <boxGeometry args={[0.1, 1.1, 0.8]} />
-                    <meshStandardMaterial
-                      color="#4d5e70"
-                      metalness={0.6}
-                      roughness={0.5}
-                    />
-                  </mesh>
-                ))}
-              </group>
-            ))}
-            <mesh position={[1.2, 5, 0]}>
-              <boxGeometry args={[1.4, 0.12, 0.15]} />
-              <meshStandardMaterial color="#738595" />
-            </mesh>
-          </group>
-          {[-7, 7].map((x) => (
-            <mesh key={x} position={[x, 1.5, -5]}>
-              <boxGeometry args={[3, 3, 6]} />
-              <meshStandardMaterial
-                color="#52616b"
-                metalness={0.3}
-                roughness={0.8}
-              />
-            </mesh>
-          ))}
-          {time >= 2 && time < 8 && !failed && (
-            <pointLight
-              position={[0, Math.min(12, (time - 3) * 1.15), 0]}
-              color="#ff9145"
-              intensity={35}
-              distance={12}
-            />
-          )}
-          <Planet
-            kind="earth"
-            radius={30}
-            position={[4, -35, -40]}
-            quality={!low}
-            motion={false}
-          />
-          {failed && (
-            <group position={[0, 7, 0]}>
-              <mesh>
-                <sphereGeometry args={[1.4, 24, 16]} />
-                <meshBasicMaterial color="#ff7731" transparent opacity={0.8} />
-              </mesh>
-              <mesh scale={1.8}>
-                <sphereGeometry args={[1.4, 16, 12]} />
-                <meshBasicMaterial
-                  color="#8f3325"
-                  wireframe
-                  transparent
-                  opacity={0.3}
-                />
-              </mesh>
-            </group>
-          )}
-        </>
-      )}
-    </>
-  );
+  const progress=Math.max(0,Math.min(1,(time-13)/5)),ascent=Math.max(0,Math.min(1,(time-3)/10));
+  const data=telemetry(run.design,run.result,time),failed=run.result.events.some(e=>e.kind==='failure'&&e.at<=time),deployed=time>=13&&!failed;
+  const curve=useMemo(()=>new THREE.CatmullRomCurve3([new THREE.Vector3(0,12,0),new THREE.Vector3(-1,11,-3),new THREE.Vector3(2,7,-2),new THREE.Vector3(5,3,0)]),[]);
+  const line=useMemo(()=>new THREE.BufferGeometry().setFromPoints(curve.getPoints(80)),[curve]);
+  const trajectory=useMemo(()=>new THREE.Line(line,new THREE.LineBasicMaterial({color:"#ff6a2b",transparent:true,opacity:.6})),[line]);
+  useEffect(()=>()=>{line.dispose();trajectory.material.dispose();},[line,trajectory]);
+  const craft=curve.getPoint(progress); if(time>18&&(run.diagnosticsReviewed??0)>=6){craft.x+=Math.sin((time-18)*.4)*1.2;craft.z+=Math.cos((time-18)*.4)-1;} const background=new THREE.Color('#3a6b8b').lerp(new THREE.Color('#020611'),ascent);
+  return <>
+    <color attach="background" args={[background]} />
+    <ambientLight intensity={1.3}/><hemisphereLight args={['#b4d5eb','#203c46',1.6]}/><directionalLight position={[4,12,4]} intensity={4} color="#ffe3c7"/>
+    {time>=8&&<SpaceParticles count={low?90:300} motion={false}/>}
+    <group position={[0,-ascent*20,0]} visible={time<13}>
+      <mesh rotation={[-Math.PI/2,0,0]} position={[0,-.2,0]}><planeGeometry args={[80,80]}/><meshStandardMaterial color="#253e47" roughness={.93} transparent opacity={Math.max(0,1-Math.max(0,ascent-.2)/.35)} depthWrite={false}/></mesh>
+      <mesh position={[0,-.1,0]}><cylinderGeometry args={[4,4,.3,32]}/><meshStandardMaterial color="#697780"/></mesh>
+      <group position={[-2,0,-1]}>{Array.from({length:7},(_,y)=><group key={y} position={[0,y*1.1,0]}><mesh><boxGeometry args={[1.1,.12,1]}/><meshStandardMaterial color="#78828a"/></mesh>{[-.48,.48].map(x=><mesh key={x} position={[x,.5,0]}><boxGeometry args={[.1,1.1,.8]}/><meshStandardMaterial color="#4d5e70"/></mesh>)}</group>)}</group>
+      {!failed&&<ExhaustCloud time={time} low={low} reduced={reduced}/>}
+    </group>
+    <group visible={!deployed}><Rocket time={time} run={run} reduced={reduced}/></group>
+    {time>=2&&time<8&&!failed&&<pointLight position={[0,Math.max(0,(time-3)*1.15),0]} color="#ff9145" intensity={30} distance={16}/>}
+    <group visible={time>=8&&(run.design.missionId!=="sun"||time<13)} position={[-8,-32+ascent*29,-15]} scale={Math.max(.001,Math.min(1,(time-8)/5))}><Planet kind="earth" radius={4} quality={!low} motion={false}/></group>
+    {!failed&&time>=11&&<>
+      {run.design.missionId!=='sun'?<group position={[7,1,-3]} scale={Math.max(.01,Math.min(1,(time-11)/7))}><Planet kind={run.design.missionId} radius={3} quality={!low} motion={false}/></group>:<><Planet kind="earth" radius={3} position={[7,0,-4]} quality={!low} motion={false}/><Planet kind="sun" radius={1.8} position={[-9,9,-15]} quality={false} motion={false}/></>}
+      <primitive object={trajectory}/>
+    </>}
+    {deployed&&<>
+      <group position={craft.toArray()} rotation={[.2,progress*.7,0]}>{Array.from({length:data.fleet},(_,i)=><group key={i} position={[i*1.1,Math.sin(i)*.4,0]}><SpacecraftModel design={run.design} reduced scale={data.fleet===4?.28:.55}/></group>)}</group>
+      {time>=18&&<group position={[7,1,-3]}><OrbitRing radius={3.7} rotation={[1.1,.2,.2]}/></group>}
+      {time>18&&(run.diagnosticsReviewed??0)>=6&&<mesh position={[6,2,-1]} rotation={[.7,0,-.7]}><coneGeometry args={[.8,3,16,1,true]}/><meshBasicMaterial color={data.contact?'#65caa5':'#ff6a2b'} transparent opacity={.13} depthWrite={false} side={THREE.DoubleSide}/></mesh>}
+    </>}
+    {failed&&<mesh position={[0,5,0]}><sphereGeometry args={[1.4,16,12]}/><meshBasicMaterial color="#ff7731" transparent opacity={.6}/></mesh>}
+  </>;
 }

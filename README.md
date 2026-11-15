@@ -112,3 +112,13 @@ Implementation/QA evidence and known limitations: [docs/HQ-Implementation.md](do
 
 ### Connected game feel
 Both `/hq` and `/play` now share original scene-specific procedural music and action sounds, live engineering feedback, synchronized launch audio/status, animated scores and earned-flight result reveals. The engine remains separate and unchanged apart from a terminal-failure telemetry correction. Current game typography is Space Grotesk/Inter with neutral black surfaces and orange/status feedback. See [docs/Game-Feel-Upgrade.md](docs/Game-Feel-Upgrade.md) for implementation and QA boundaries. No added dependencies or audio downloads are required.
+
+### Engineering and ground operations (v0.1.3)
+Catalogs now use static JSON with expandable source/estimate notes. Preflight includes EOL power, usable eclipse battery, normalized margins and computer memory. Blocking requirements must pass; positive-capacity downlink/storage warnings can be flown to explore reduced science return.
+
+The seeded simulation tracks battery, sunlight/eclipses, finite storage, contact windows and generated → transmitted → Earth-received science. Data still onboard or discarded earns no credit. Open the existing result report's **Operations Ledger & Scoring Model** for the trace, assumptions and causal explanations. Historical flights retain their original model; restore/redesign to compare with a new run. Layouts and branding are unchanged. Exact simplified model and source review: [docs/Engineering.md](docs/Engineering.md), [docs/Engineering-Audit.md](docs/Engineering-Audit.md).
+
+### Cinematic mission playback and PDF report
+Both `/hq` and `/play` now stop at the destination phase for six sequential configuration diagnostic reviews before science playback. Skip cannot bypass the reviews. HQ shows a schematic Earth ascent and mission-specific journey; Sun Watch stays in Earth orbit. Timing, scales and trajectories are educational visual compression, not flight dynamics.
+
+Results include **DOWNLOAD MISSION REPORT**, a local, multipage PDF with your recorded commander identity, selected components, engineering balances, tests/events, received science, recommendations and sources. No mission data upload is required. Missing historical identity/date and unmodeled sensor/navigation results are labeled, not invented. Unicode report lines use browser fonts; PDF accessibility and universal glyph coverage are not certified.

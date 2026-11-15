@@ -1,4 +1,5 @@
 "use client";
+import { CommissioningPanel } from "@/components/game/commissioning-panel";
 import type { SavedRun } from "@/game/types";
 import { FlightStatus } from "@/components/game/flight-status";
 import { telemetry } from "@/game/engine/telemetry";
@@ -49,22 +50,23 @@ export function LaunchOverlay({
         {time < 3 && (
           <span className="hq-countdown">
             T −{" "}
-            {Math.ceil(3 - time)
+            {Math.ceil(10 * (1-time/3))
               .toString()
               .padStart(2, "0")}
           </span>
         )}
       </div>
       <section className="hq-launch-events">
+        <CommissioningPanel run={run} time={time} />
         <span className="eyebrow">FLIGHT EVENT / {Math.floor(time)}s</span>
-        <h2 aria-live="polite">{t.phase?.label}</h2>
-        <p>{t.phase?.description}</p>
+        <h2 aria-live="polite">{time>=18&&(run.diagnosticsReviewed??0)<6?'ARRIVAL / COMMISSIONING':t.phase?.label}</h2>
+        <p>{time>=18&&(run.diagnosticsReviewed??0)<6?'Schematic destination phase reached. Complete configuration diagnostics before science playback.':t.phase?.description}</p>
         <FlightStatus result={run.result} time={time} />
         <ol>
           {run.result.events.map((e) => (
             <li className={time >= e.at ? "reached" : ""} key={e.at}>
               <span>{time >= e.at ? "✓" : "○"}</span>
-              {time >= e.at ? e.label : "Awaiting flight event"}
+              {time >= e.at ? (e.kind==="operations"&&(run.diagnosticsReviewed??0)<6?"Arrival / commissioning":e.label) : "Awaiting flight event"}
               <small>{e.at}s</small>
             </li>
           ))}
@@ -81,6 +83,12 @@ export function LaunchOverlay({
             <small>GB/DAY RETURN</small>
           </span>
         </div>
+        <p className="hq-fineprint">
+          Ground: {t.contact ? "contact window" : "waiting for contact"} ·
+          usable battery {t.batteryWh.toFixed(1)} Wh · stored{" "}
+          {t.storedGB.toFixed(2)} GB · Earth received {t.receivedGB.toFixed(2)}{" "}
+          GB.
+        </p>
         <p className="hq-fineprint">
           * Schematic altitude and compressed time. Resources and outcomes use
           your actual design.
