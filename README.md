@@ -122,3 +122,6 @@ The seeded simulation tracks battery, sunlight/eclipses, finite storage, contact
 Both `/hq` and `/play` now stop at the destination phase for six sequential configuration diagnostic reviews before science playback. Skip cannot bypass the reviews. HQ shows a schematic Earth ascent and mission-specific journey; Sun Watch stays in Earth orbit. Timing, scales and trajectories are educational visual compression, not flight dynamics.
 
 Results include **DOWNLOAD MISSION REPORT**, a local, multipage PDF with your recorded commander identity, selected components, engineering balances, tests/events, received science, recommendations and sources. No mission data upload is required. Missing historical identity/date and unmodeled sensor/navigation results are labeled, not invented. Unicode report lines use browser fonts; PDF accessibility and universal glyph coverage are not certified.
+
+### Journey clearance and arrival (0.1.8)
+HQ flights now share a mission-specific clearance path and operations orbit, tangent-aligned spacecraft, a bounded target-arrival zoom, and stationary depth-layer stars. Sun Watch remains an Earth-orbit fleet observing the distant Sun. Existing rocket/models, mission rules and six-check commissioning gate are unchanged. These are compressed educational visuals, not flight dynamics.

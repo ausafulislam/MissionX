@@ -248,3 +248,6 @@ Approved sequence: lifecycle/identity/diagnostics → continuous journey → int
 
 ## Cinematic commission — visible integration v0.1.7
 Connected HQ continuous launch/journey and mission-specific arrival, flight-deck schematic, sequential commissioning gate/review and results PDF download. Commander/completion snapshot retained. All previously approved main systems are connected to the UI; no further approval pause. No real navigation/thermal/RF certification. See Memory for executed tests and remaining physical-device/PDF-accessibility limits.
+
+### 2026-11-14 — targeted journey polish (0.1.8)
+Existing HQ refinement only: shared clearance-safe schematic trajectory/operations orbit, target-aware arrival zoom, tangent attitude and bounded three-layer stable starfield. Original rocket, planets, UI placement and engine retained. Automated geometry plus engine regression checked; final visual/device sign-off remains manual.

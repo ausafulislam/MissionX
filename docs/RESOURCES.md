@@ -579,3 +579,10 @@ These README-linked tools support the implementation stack, not mission paramete
 - MISSIONX-EDUCATIONAL-ASSUMPTIONS supports authored scene geometry, camera interpolation, compressed clocks, load presentation and commissioning gate. These are not sourced distances/travel times.
 - Quicksat references retain the previously reviewed conceptual budgeting scope in the report. Numerical coefficients and performance tables remain MissionX estimates.
 - src/game/report/mission-report.ts maps only these genuinely relevant engineering references into the downloaded report; TOOL-PDF-LIB is an implementation dependency, not scientific evidence.
+
+### Resource: Three.js scene geometry primitives — journey refinement
+- Source ID: `THREE-JOURNEY-GEOMETRY`; provider: Three.js contributors; software reference, not scientific evidence.
+- Original URLs: https://github.com/mrdoob/three.js/blob/r187/src/math/Quaternion.js and https://github.com/mrdoob/three.js/blob/r187/src/cameras/PerspectiveCamera.js
+- Reviewed 2026-11-14: installed three 0.187.0 source headers/methods for normalized quaternion rotations, vector transforms and perspective camera/FOV. Local package review; remote pages not fetched. Existing MIT dependency, no copied code/artwork.
+- Use: `src/components/hq/world/journey-{geometry,stars}.tsx` (geometry is `.ts`), launch-world and world camera. Original vector geometry, fit calculation and seeded point shells; no external assets.
+- All scene units, model envelope 4, margin 1.2, five-second travel, zoom padding and star counts are authored visual assumptions. Confidence: high for software API, no claim of physical orbital validity or agency endorsement.

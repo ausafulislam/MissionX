@@ -6,7 +6,8 @@ import type { SavedRun } from "@/game/types";
 import { telemetry } from "@/game/engine/telemetry";
 import { SpacecraftModel } from "./spacecraft-model";
 import { OrbitRing, Planet } from "./planet";
-import { SpaceParticles } from "./architecture";
+import { JourneyStars } from "./journey-stars";
+import { journeyGeometry, journeyPose, smoothArrival } from "./journey-geometry";
 function Rocket({
   time,
   run,
@@ -157,17 +158,20 @@ export function LaunchWorld({
   low: boolean;
   reduced: boolean;
 }) {
-  const progress=Math.max(0,Math.min(1,(time-13)/5)),ascent=Math.max(0,Math.min(1,(time-3)/10));
+  const ascent=Math.max(0,Math.min(1,(time-3)/10));
   const data=telemetry(run.design,run.result,time),failed=run.result.events.some(e=>e.kind==='failure'&&e.at<=time),deployed=time>=13&&!failed;
-  const curve=useMemo(()=>new THREE.CatmullRomCurve3([new THREE.Vector3(0,12,0),new THREE.Vector3(-1,11,-3),new THREE.Vector3(2,7,-2),new THREE.Vector3(5,3,0)]),[]);
-  const line=useMemo(()=>new THREE.BufferGeometry().setFromPoints(curve.getPoints(80)),[curve]);
+  const geometry=useMemo(()=>journeyGeometry(run.design.missionId),[run.design.missionId]);
+  const operating=time>18&&(run.diagnosticsReviewed??0)>=6;
+  const pose=journeyPose(geometry,time,operating);
+  const line=useMemo(()=>new THREE.BufferGeometry().setFromPoints(
+    Array.from({length:129},(_,i)=>journeyPose(geometry,13+i/128*5,false).position)),[geometry]);
   const trajectory=useMemo(()=>new THREE.Line(line,new THREE.LineBasicMaterial({color:"#ff6a2b",transparent:true,opacity:.6})),[line]);
   useEffect(()=>()=>{line.dispose();trajectory.material.dispose();},[line,trajectory]);
-  const craft=curve.getPoint(progress); if(time>18&&(run.diagnosticsReviewed??0)>=6){craft.x+=Math.sin((time-18)*.4)*1.2;craft.z+=Math.cos((time-18)*.4)-1;} const background=new THREE.Color('#3a6b8b').lerp(new THREE.Color('#020611'),ascent);
+  const background=new THREE.Color('#3a6b8b').lerp(new THREE.Color('#020611'),ascent);
   return <>
     <color attach="background" args={[background]} />
     <ambientLight intensity={1.3}/><hemisphereLight args={['#b4d5eb','#203c46',1.6]}/><directionalLight position={[4,12,4]} intensity={4} color="#ffe3c7"/>
-    {time>=8&&<SpaceParticles count={low?90:300} motion={false}/>}
+    <JourneyStars low={low} opacity={smoothArrival((time-7)/6)}/>
     <group position={[0,-ascent*20,0]} visible={time<13}>
       <mesh rotation={[-Math.PI/2,0,0]} position={[0,-.2,0]}><planeGeometry args={[80,80]}/><meshStandardMaterial color="#253e47" roughness={.93} transparent opacity={Math.max(0,1-Math.max(0,ascent-.2)/.35)} depthWrite={false}/></mesh>
       <mesh position={[0,-.1,0]}><cylinderGeometry args={[4,4,.3,32]}/><meshStandardMaterial color="#697780"/></mesh>
@@ -178,14 +182,24 @@ export function LaunchWorld({
     {time>=2&&time<8&&!failed&&<pointLight position={[0,Math.max(0,(time-3)*1.15),0]} color="#ff9145" intensity={30} distance={16}/>}
     <group visible={time>=8&&(run.design.missionId!=="sun"||time<13)} position={[-8,-32+ascent*29,-15]} scale={Math.max(.001,Math.min(1,(time-8)/5))}><Planet kind="earth" radius={4} quality={!low} motion={false}/></group>
     {!failed&&time>=11&&<>
-      {run.design.missionId!=='sun'?<group position={[7,1,-3]} scale={Math.max(.01,Math.min(1,(time-11)/7))}><Planet kind={run.design.missionId} radius={3} quality={!low} motion={false}/></group>:<><Planet kind="earth" radius={3} position={[7,0,-4]} quality={!low} motion={false}/><Planet kind="sun" radius={1.8} position={[-9,9,-15]} quality={false} motion={false}/></>}
+      {run.design.missionId!=='sun'?<group position={geometry.target.toArray()} scale={Math.max(.01,Math.min(1,(time-11)/7))}><Planet kind={run.design.missionId} radius={3} quality={!low} motion={false}/></group>:<><Planet kind="earth" radius={3} position={geometry.target.toArray()} quality={!low} motion={false}/><Planet kind="sun" radius={1.8} position={[-9,9,-15]} quality={false} motion={false}/></>}
       <primitive object={trajectory}/>
     </>}
     {deployed&&<>
-      <group position={craft.toArray()} rotation={[.2,progress*.7,0]}>{Array.from({length:data.fleet},(_,i)=><group key={i} position={[i*1.1,Math.sin(i)*.4,0]}><SpacecraftModel design={run.design} reduced scale={data.fleet===4?.28:.55}/></group>)}</group>
-      {time>=18&&<group position={[7,1,-3]}><OrbitRing radius={3.7} rotation={[1.1,.2,.2]}/></group>}
-      {time>18&&(run.diagnosticsReviewed??0)>=6&&<mesh position={[6,2,-1]} rotation={[.7,0,-.7]}><coneGeometry args={[.8,3,16,1,true]}/><meshBasicMaterial color={data.contact?'#65caa5':'#ff6a2b'} transparent opacity={.13} depthWrite={false} side={THREE.DoubleSide}/></mesh>}
+      <group position={pose.position.toArray()} quaternion={pose.rotation}>{geometry.offsets.map((offset,i)=><group key={i} position={offset.toArray()}><SpacecraftModel design={run.design} reduced scale={geometry.modelScale}/></group>)}</group>
+      {time>=18&&<group position={geometry.target.toArray()} quaternion={geometry.orbitRotation}><OrbitRing radius={geometry.orbitRadius}/></group>}
+      {operating&&<ObservationCue craft={pose.position} target={geometry.target} contact={data.contact}/>}
+
     </>}
     {failed&&<mesh position={[0,5,0]}><sphereGeometry args={[1.4,16,12]}/><meshBasicMaterial color="#ff7731" transparent opacity={.6}/></mesh>}
   </>;
+}
+
+function ObservationCue({craft,target,contact}:{craft:THREE.Vector3;target:THREE.Vector3;contact:boolean}) {
+  const direction=target.clone().sub(craft), length=direction.length();
+  return <mesh position={craft.clone().addScaledVector(direction,.4).toArray()}
+    quaternion={new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),direction.normalize())}>
+    <cylinderGeometry args={[.04,.55,length*.8,12,1,true]}/>
+    <meshBasicMaterial color={contact?'#65caa5':'#ff6a2b'} transparent opacity={.12} depthWrite={false} side={THREE.DoubleSide}/>
+  </mesh>;
 }

@@ -7,6 +7,7 @@ import * as THREE from "three";
 import type { Design, SavedRun } from "@/game/types";
 import type { Station } from "../types";
 import { Headquarters } from "./headquarters";
+import { journeyGeometry, journeyCamera } from "./journey-geometry";
 import { LaunchWorld } from "./launch-world";
 export interface WorldProps {
   station: Station;
@@ -68,7 +69,7 @@ function CameraDirector({
       planning: [-9 + index * 1.15, 4.5, 3],
       engineering: [13, 5.5, 3],
       verification: [13, 4.5, 12],
-      launch: orbital ? [14, 11, 22] : [12, 7 + Math.max(0,time-3)*.6, 15],
+      launch: [12, 7 + Math.max(0,time-3)*.6, 15],
       results: [-13, 5.5, 12],
       archive: [1, 4, 16],
     };
@@ -78,14 +79,16 @@ function CameraDirector({
       planning: [-7.8 + index * 0.9, 1.9, -4],
       engineering: [8, 2, -4],
       verification: [8, 1.7, 4],
-      launch: orbital ? [2, 7-Math.min(1,(time-13)/5)*3, -1] : [0, 2.2+Math.max(0,time-3)*1.05, 0],
+      launch: [0, 2.2+Math.max(0,time-3)*1.05, 0],
       results: [-6.5, 2.1, 4],
       archive: [0.8, 2, 8],
     };
-    goal.current.set(...positions[station]);
-    target.current.set(...targets[station]);
+    if(station === "launch" && orbital){
+      const pose=journeyCamera(journeyGeometry(design.missionId),time,size.width/size.height);
+      goal.current.copy(pose.position);target.current.copy(pose.lookAt);
+    }else{goal.current.set(...positions[station]);target.current.set(...targets[station]);}
     moving.current = true;
-  }, [station, design.missionId, view, orbital, time]);
+  }, [station, design.missionId, view, orbital, time, size.width, size.height]);
   useFrame((_, delta) => {
     if (!controls.current || !moving.current) return;
     const speed = reduced ? 1 : 1 - Math.exp(-Math.min(delta, 0.1) * 2.7);
@@ -103,8 +106,10 @@ function CameraDirector({
       ref={controls}
       makeDefault
       enablePan={false}
+      enableRotate={station !== "launch"}
+      enableZoom={station !== "launch"}
       minDistance={3}
-      maxDistance={38}
+      maxDistance={station === "launch" ? 160 : 38}
       minPolarAngle={0.3}
       maxPolarAngle={1.48}
       rotateSpeed={0.35 * sensitivity}
@@ -112,7 +117,7 @@ function CameraDirector({
       enableDamping
       dampingFactor={0.08}
       onStart={() => {
-        moving.current = false;
+        if(station !== "launch") moving.current = false;
       }}
     />
   );

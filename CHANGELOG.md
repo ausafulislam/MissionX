@@ -40,3 +40,9 @@
 - Added actual-state multipage PDF mission report download to both results screens, including branding, commander, components, balances, diagnostics, events, science, four segments, recommendations, sources and disclaimer. Approved pdf-lib1.17.1 only; no extra font dependency or external mission-data API.
 - Added report/outcome/gating tests and source/model documentation. Numerical outcomes remain model3; diagnostics are configuration checks, not invented live sensors.
 - Validation:60 tests, lint/build/diff/source-reference checks pass; Chromium desktop/tablet/phone mission flows and normal-motion HQ flow pass including six checks and actual PDF downloads. Eight seeded success/partial/launch-loss browser cases also pass reload/identity/download checks. Physical-device/audio listening and PDF accessibility certification remain outside executed validation.
+
+## 0.1.8 — 2026-11-14
+- Replace independent craft/path/ring coordinates with mission-aware target-relative clearance geometry, centered four-craft formation, tangent heading and continuous operations orbit.
+- Smooth bounded target arrival zoom with aspect-aware fit; protect flight camera from accidental user orbit/zoom.
+- Add three stationary spatial star shells with varied brightness, tint and size, capped for low-quality rendering.
+- Add deterministic clearance, continuity, camera projection and star distribution regressions; preserve models, launch animation and commissioning rules.
