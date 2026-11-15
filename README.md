@@ -1,139 +1,182 @@
-# MissionX
+<p align="center"><img src="public/images/logo.png" alt="MissionX" width="360" /></p>
 
-**Design it. Launch it. Learn why.**
+# MissionX — Design. Simulate. Learn.
 
-MissionX is an interactive game where students design, launch and run a complete space mission, balancing budget, mass, power and data, then learn why it succeeded or failed.
+**An educational space-mission design game by [Team NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/), Karachi, Pakistan, for the NASA International Space Apps Challenge 2026.**
 
-## NASA Space Apps Challenge 2026
+[![Next.js 16.4.6](https://img.shields.io/badge/Next.js-16.4.6-black)](https://nextjs.org/docs)
+[![Bun 1.3.14](https://img.shields.io/badge/Bun-1.3.14-f9f1e1)](https://bun.sh/docs)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6)](tsconfig.json)
 
-Built by **Team NASA WARRIORS** for the [NASA Space Apps Challenge 2026](https://www.spaceappschallenge.org/), under the challenge **Space Mission Design Game**.
+[**Play MissionX**](https://missionx-black.vercel.app/) · [Documentation](docs/README.md) · [Team page](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/) · [Report a bug](https://github.com/ausafulislam/MissionX/issues/new?template=bug_report.yml)
 
-## Tech Stack
+![MissionX landing page with mission-design introduction and launch controls](docs/images/missionx-landing.webp)
 
-- [Next.js](https://nextjs.org/) (App Router)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [GSAP](https://gsap.com/)
-- [Three.js](https://threejs.org/) with [React Three Fiber](https://r3f.docs.pmnd.rs/)
-- [Lenis](https://lenis.darkroom.engineering/)
-- [Zustand](https://zustand.docs.pmnd.rs/)
-- [bun](https://bun.sh/)
+## Contents
 
-## Getting Started
+- [Why MissionX?](#why-missionx)
+- [Implemented features](#implemented-features)
+- [How to play](#how-to-play)
+- [Mission catalog](#mission-catalog)
+- [Screenshots](#screenshots)
+- [Run locally](#run-locally)
+- [Environment](#environment)
+- [Development and checks](#development-and-checks)
+- [Architecture](#architecture)
+- [Scientific scope and sources](#scientific-scope-and-sources)
+- [Documentation](#documentation)
+- [Team and participation](#team-and-participation)
+- [Limitations and future work](#limitations-and-future-work)
+- [License and attribution](#license-and-attribution)
+- [Independence disclaimer](#independence-disclaimer)
 
-```bash
-bun install
-bun dev
+## Why MissionX?
+
+Space engineering trade-offs can stay abstract when students encounter spacecraft, launchers, power and communications as separate topics. MissionX connects them in one playable loop: select a science goal, assemble a spacecraft, verify its resources, launch a seeded mission, and learn from the returned science and segment report.
+
+It is designed for students aged 12–18, educators and space enthusiasts. No account, payment or remote AI service is required for gameplay.
+
+## Implemented features
+
+- Three scenarios: Moon Mapping, Sun Watch and Mars Orbiter.
+- 26 catalog parts across eight categories, three fictional launch services and six orbit configurations.
+- Live mass, budget, power, battery, storage, downlink, science and lifetime calculations.
+- Typed verification with blocking failures and disclosed nonblocking operational risks.
+- 3D-first headquarters at `/hq`, first-use guidance, and a semantic flight-deck alternative at `/play`.
+- Seeded launch reliability and events; representative end-of-life energy/data operations.
+- Six sequential arrival configuration reviews shared by HQ and the flight deck; a failed launch never receives arrival credit.
+- Science, engineering and efficiency score breakdown; Launch / Space / Ground / User explanations.
+- Local commander preferences, progression, saved runs and debrief/comparison tools.
+- Downloadable sectioned PDF reports with configuration, checks, outcomes and source caveats.
+- Deterministic local mentor; optional server-side remote advice with fallback.
+- Gesture-enabled procedural audio, reduced-motion controls and WebGL compatibility fallback.
+
+These are implementation descriptions, not claims of universal accessibility, device performance or scientific validation.
+
+## How to play
+
+**Goal → Build → Verify → Launch → Result**
+
+1. Choose a mission and inspect its mass, budget, science and lifetime requirements.
+2. Select parts, launcher and science orbit. Use a verified baseline to explore a known viable configuration, then compare alternatives.
+3. Resolve blocking checks. Nonzero downlink/storage deficits may be accepted as warnings; they can reduce actual science return.
+4. Start countdown. Successful deployment leads to schematic arrival and six configuration reviews before science operations. Playback time is compressed, not physical travel time.
+5. Read the result, inspect lost/received data and segment explanations, download the report, and redesign.
+
+See [gameplay](docs/Gameplay.md), [verification](docs/Verification.md), [simulation](docs/Launch-and-Simulation.md) and [PDF reports](docs/PDF-Reports.md).
+
+## Mission catalog
+
+All numbers below are **authored educational scenario inputs**, not real mission specifications. Budget includes parts for the fleet and one launch.
+
+| Mission | Fleet | Mass limit | Budget (million USD) | Science target (points) | Lifetime (months) |
+|---|---:|---:|---:|---:|---:|
+| Moon Mapping | 1 | 550 kg | 85 | 45 | 12 |
+| Sun Watch | 4 identical craft | 1,000 kg | 180 | 160 | 12 |
+| Mars Orbiter | 1 | 900 kg | 170 | 75 | 24 |
+
+Sun Watch observes the Sun **from Earth orbit**; it does not fly to the Sun. Real mission links are educational context, not numeric catalog sources. [Catalog details](docs/Missions.md).
+
+## Screenshots
+
+Actual local application captures at 1440 × 1000, 2026-11-14. HQ screenshots use the application's **WebGL compatibility mode** and reduced motion; they are not proof of hardware 3D performance. Images are optimized, not fabricated. [Capture details and gallery](docs/images/README.md).
+
+| Build | Verify |
+|---|---|
+| ![Flight-deck builder with baseline component catalog and resource summary](docs/images/spacecraft-builder.webp) | ![Prelaunch verification with requirement checks and flight seed](docs/images/design-verification.webp) |
+
+| Arrival review | Result |
+|---|---|
+| ![First of six arrival configuration reviews with modeled and unmodeled findings](docs/images/arrival-diagnostics.webp) | ![Completed Moon Mapping mission report with score and returned science](docs/images/mission-result.webp) |
+
+## Run locally
+
+Install [Bun 1.3.14](https://bun.sh/docs/installation), then:
+
+```sh
+git clone https://github.com/ausafulislam/MissionX.git
+cd MissionX
+bun install --frozen-lockfile
+bun run dev --hostname 0.0.0.0
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
+Open `http://localhost:3000`. For a production server:
 
-## Build
+```sh
+bun run build
+bun run start --hostname 0.0.0.0
+```
 
-```bash
+For hosted previews, use the preview's public address rather than localhost. Browser requests to the mentor use a same-origin relative URL. The public deployment is [missionx-black.vercel.app](https://missionx-black.vercel.app/); deployment account settings and automatic preview rules are not established by this repository.
+
+## Environment
+
+No environment file is needed for ordinary play. Optionally copy `.env.example` to `.env.local` and configure:
+
+| Variable | Actual use |
+|---|---|
+| `MENTOR_API_KEY` | Server-only key for `api.openai.com`; never expose it to the browser. |
+| `MENTOR_MODEL` | Optional remote model; defaults to `gpt-4o-mini`. Provider availability is not guaranteed. |
+| `NEXT_PUBLIC_SITE_URL` | Present in the example but currently unused in source; setting it does not change canonical metadata or PDF links. |
+
+Only an explicit mentor request uses the remote service when configured; design/checks/result are sent, not commander identity. Missing key, timeout or provider failure uses local advice. An initial application load still requires the server/assets: “no AI required” does not mean an offline-installable PWA. [Mentor/privacy details](docs/Mentor.md).
+
+## Development and checks
+
+Use Bun only; do not add dependencies without owner approval.
+
+```sh
+bun run lint
+bun run typecheck
+bun test
+bun run balance
 bun run build
 ```
+
+`balance` explores seeded designs; it is not a scientific certification or a guarantee that random configurations succeed. Browser journeys and screenshots use separate local QA tooling, not an advertised package script. [Testing and limitations](docs/Testing.md).
+
+## Architecture
+
+Next.js App Router + React + strict TypeScript, Tailwind CSS, GSAP, React Three Fiber/Drei/Three.js, Zustand and pdf-lib. Lenis is limited to the landing experience. No application database or authentication system is implemented.
+
+```text
+src/app/                 landing, HQ, /play routes, mentor API
+src/components/          landing/layout, HQ/world and flight-deck UI
+src/game/data/           static JSON catalogs and authored assumptions
+src/game/engine/         pure calculations, verification, simulation, diagnostics
+src/game/store/          validated local saves and commander preferences
+src/game/audio/          procedural Web Audio score and effects
+src/game/report/         report content, measured layout and PDF export
+```
+
+The store and screens call the engine; the engine does not import the UI. See [current architecture](docs/Architecture.md).
+
+## Scientific scope and sources
+
+NASA's mission-design presentation supports the goal-first workflow and four mission segments. Other agency, academic and community links provide specific conceptual context. They do **not** supply MissionX's fictional part prices, reliability values, science points, scoring weights or synthetic orbit factors.
+
+The operations model integrates four representative end-of-life days with 48 steps per orbit, finite memory, energy limitations and synthetic contact windows. It is not a trajectory, thermal, radiation, propulsion or RF solver. Sources, formulas, units, evidence confidence and unresolved rationale are separated in [the resource register](docs/RESOURCES.md) and [engineering references](docs/ENGINEERING_REFERENCES.md).
 
 ## Documentation
 
-- [docs/PRD.md](docs/PRD.md) — Product requirements, missions, gameplay loop, scope and submission checklist.
-- [docs/Architecture.md](docs/Architecture.md) — Tech stack, routes, folder structure, data models and engine contracts.
-- [docs/Rules.md](docs/Rules.md) — Agent boundaries, code/design/tech rules and the definition of done.
-- [docs/Phases.md](docs/Phases.md) — Build phases, goals and the current phase to work on.
-- [docs/Design.md](docs/Design.md) — Historical design baseline; current landing specification is [design.md](design.md).
-- [docs/Memory.md](docs/Memory.md) — Living progress log: status, decisions, risks and next steps.
+Start at the [documentation index](docs/README.md). It separates current guides, research registers, historical implementation records and protected planning/design documents.
 
-AI agents should start from [AGENTS.md](AGENTS.md).
+## Team and participation
 
-## Team
+Built by **[Team NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**, Karachi, Pakistan, for the NASA International Space Apps Challenge 2026, challenge **Space Mission Design Game**, Universal Event. The linked Space Apps page is participant-submitted content, not an agency endorsement. No individual roles, awards or member identities are asserted here.
 
-**Team NASA WARRIORS**
+See [contributing](CONTRIBUTING.md), [code of conduct](CODE_OF_CONDUCT.md), [security](SECURITY.md) and [citation metadata](CITATION.cff). There is currently no published private reporting contact; do not disclose vulnerabilities or personal information in public issues.
 
-## Disclaimer
+## Limitations and future work
 
-Not affiliated with or endorsed by NASA.
+Known limits include synthetic orbit/contact inputs, simplified single-incident operations, shared current catalog inputs in some historical replays, no independent convergence/sensitivity study, and no tagged-PDF accessibility certification. Full physical-device WebGL/audio and screen-reader validation remain separate checks.
 
-## Cinematic landing page (November 2026)
+**Planned, not implemented or promised:** parameter-level source-ID migration, deeper scientific model review, convergence studies and broader device/accessibility testing. Earlier PRD stretch ideas (such as multiplayer, leaderboard or Urdu localization) are not current features.
 
-The landing page uses the original logo, self-hosted Google Fonts, original generated orbital imagery, GSAP/ScrollTrigger and Lenis. See [design.md](design.md) for the current owner-approved design system and the product requirements below for scope. The legacy docs remain available as project history.
+## License and attribution
 
-No new application dependencies were needed. GSAP, @gsap/react and Lenis were already declared. No environment variables are required for the landing page. The complete game is now implemented: landing briefings link to mission selection and the six-screen flight deck. Engineering resource numbers are illustrative only.
+**No repository-wide license has been selected.** Public visibility is not an open-source license grant. Do not assume permission to redistribute code, branding or artwork. Fonts carry their own bundled notices. See [asset attribution and unresolved rights](docs/Asset-Attribution.md). No NASA insignia or endorsement badge is supplied.
 
-Validation:
-```bash
-bun run lint
-bunx tsc --noEmit
-bun run build
-```
+## Independence disclaimer
 
-## Full game application
-
-Routes: `/play` resumes locally; `/play/goal`, `/play/build`, `/play/verify`, `/play/launch`, `/play/result`, `/play/debrief`. Game code follows existing `src/game/data`, `src/game/engine`, `src/game/store`; screens live in `src/components/game`. All engineering values are simplified educational estimates, not flight calculations.
-
-```bash
-bun test
-bun run lint
-bun x tsc --noEmit
-bun run build
-```
-
-Local progress and up to 12 runs are stored in the browser. No account, database or keys required. New Mission clears the active design while retaining history. HQ Settings provides a confirmed full local-data reset.
-
-Optional mentor environment: `MENTOR_API_KEY`, `MENTOR_MODEL` (default `gpt-4o-mini`). Server-only OpenAI-compatible completion at api.openai.com; no client keys. Missing service/key/network uses deterministic local recommendations. The deployment environment must allow the provider host to enable remote advice. No remote service is required for gameplay.
-
-Implementation checklist: [docs/Implementation.md](docs/Implementation.md). QA scope and limitations: [docs/Game-QA.md](docs/Game-QA.md). Catalog balance probe: `bun run balance`.
-
-
-### Source map
-- `src/components/game/` — six screens and reusable flight-deck UI
-- `src/game/data/` — typed component, mission, launcher, orbit and event catalogs
-- `src/game/engine/` — resource calculations, verification, seeded outcomes, scoring, telemetry, mentor and tests
-- `src/game/store/` — guarded Zustand state and versioned local saves
-- `src/app/api/mentor/` — optional server-only AI with deterministic fallback
-- `scripts/balance.ts` — repeatable catalog balance diagnostics
-- `tests/mentor-api.test.ts` — request validation, mocked provider and offline fallback tests
-
-Exact model and caveats: [docs/Engineering.md](docs/Engineering.md). All six game screens reuse the landing's original MissionX branding and four-font system. No runtime dependencies were added for this phase.
-
-## Product requirements (migrated from the retired product-definition document)
-MissionX is an independent educational browser game for students ages 12–18, educators and space enthusiasts, by Team NASA WARRIORS for the NASA International Space Apps Challenge 2026. It is not affiliated with or endorsed by NASA. The established landing remains unchanged visually. The scientific journey remains GOAL → BUILD → VERIFY → LAUNCH → RESULT, with saved-run debrief/comparison. Moon Mapping, four-identical-satellite Sun Watch and Mars Orbiter each have numeric mass, budget, science and lifetime requirements. Parts, batteries, communications, launcher, orbit and seeded events determine outcomes. All values are simplified educational estimates. No registration, unnecessary personal data, payments or cloud account is required. Local saves and deterministic mentor advice work without external services.
-
-## Phase 03 — immersive headquarters
-The primary entry is `/hq`: device/orientation handling → real module/asset initialization → commander identity → cinematic menu → interactive 3D headquarters. Five stations connect mission planning, spacecraft assembly, preflight/launch control, results and archive. The existing `/play` screens remain an accessible, low-resource flight-deck alternative and preserve existing saves. Display name, settings and earned progression are local-only. Original procedural geometry/textures and Web Audio synthesis avoid unlicensed assets and broken external URLs. Three.js, R3F and Drei are already installed; no extra rendering, physics or audio dependency is needed.
-
-### Headquarters controls and local data
-- Click a 3D station sign/platform or use the bottom station dock. Drag to inspect, scroll/pinch to zoom, **Reset View** to return; station side panels can be minimized. Every mission/engineering action also has a keyboard/touch control.
-- Choose a mission, install a verified baseline or assemble catalog parts, pass **every** preflight check, and initiate a seeded flight. Start/pause/speed/skip playback from the launch console. Results and archive use actual engine returns.
-- Settings independently control master/music/effects, graphics, reduced motion and camera sensitivity. English is the only installed language. Fullscreen/orientation/audio are optional browser capabilities, never prerequisites for play.
-- `missionx-commander-v1` stores your display name, preferences and earned progression; the existing flight-deck key stores your design and up to 12 flights. New Mission retains history; **Settings → Reset all local game data** removes both after confirmation. No data is sent to an account or analytics service.
-- Development: `bun dev --hostname 0.0.0.0`; production: `bun run build && bun run start --hostname 0.0.0.0`. No new environment variables are needed for HQ.
-
-Implementation/QA evidence and known limitations: [docs/HQ-Implementation.md](docs/HQ-Implementation.md). The 3D launch is schematic, not a physically accurate flight calculation. Hardware performance, human audio listening and Safari/iOS/Android release checks remain necessary.
-
-### Connected game feel
-Both `/hq` and `/play` now share original scene-specific procedural music and action sounds, live engineering feedback, synchronized launch audio/status, animated scores and earned-flight result reveals. The engine remains separate and unchanged apart from a terminal-failure telemetry correction. Current game typography is Space Grotesk/Inter with neutral black surfaces and orange/status feedback. See [docs/Game-Feel-Upgrade.md](docs/Game-Feel-Upgrade.md) for implementation and QA boundaries. No added dependencies or audio downloads are required.
-
-### Engineering and ground operations (v0.1.3)
-Catalogs now use static JSON with expandable source/estimate notes. Preflight includes EOL power, usable eclipse battery, normalized margins and computer memory. Blocking requirements must pass; positive-capacity downlink/storage warnings can be flown to explore reduced science return.
-
-The seeded simulation tracks battery, sunlight/eclipses, finite storage, contact windows and generated → transmitted → Earth-received science. Data still onboard or discarded earns no credit. Open the existing result report's **Operations Ledger & Scoring Model** for the trace, assumptions and causal explanations. Historical flights retain their original model; restore/redesign to compare with a new run. Layouts and branding are unchanged. Exact simplified model and source review: [docs/Engineering.md](docs/Engineering.md), [docs/Engineering-Audit.md](docs/Engineering-Audit.md).
-
-### Cinematic mission playback and PDF report
-Both `/hq` and `/play` now stop at the destination phase for six sequential configuration diagnostic reviews before science playback. Skip cannot bypass the reviews. HQ shows a schematic Earth ascent and mission-specific journey; Sun Watch stays in Earth orbit. Timing, scales and trajectories are educational visual compression, not flight dynamics.
-
-Results include **DOWNLOAD MISSION REPORT**, a local, multipage PDF with your recorded commander identity, selected components, engineering balances, tests/events, received science, recommendations and sources. No mission data upload is required. Missing historical identity/date and unmodeled sensor/navigation results are labeled, not invented. Unicode report lines use browser fonts; PDF accessibility and universal glyph coverage are not certified.
-
-### Journey clearance and arrival (0.1.8)
-HQ flights now share a mission-specific clearance path and operations orbit, tangent-aligned spacecraft, a bounded target-arrival zoom, and stationary depth-layer stars. Sun Watch remains an Earth-orbit fleet observing the distant Sun. Existing rocket/models, mission rules and six-check commissioning gate are unchanged. These are compressed educational visuals, not flight dynamics.
-
-### First-time guidance and countdown (0.1.9)
-After HQ finishes loading and you enter your display name, an eight-step spotlight tour explains the existing planning, builder, balance, rocket/orbit, verification, launch and results controls. It previews panels without changing your design. Next/Back navigate the tour; Skip or Escape exits. Completion and skip are remembered locally. Replay it from **Settings → Replay Tutorial**; when storage is blocked, dismissal lasts only for the current page session.
-
-HQ and the accessible flight deck now show a large **3 → 2 → 1 → LIFTOFF!** before ascent. The three beats take 0.8 seconds each, followed by a 0.6-second liftoff hold, using the existing three-second preparation clock. Playback speed and skip are locked until ascent; repeated start clicks cannot create another sequence. Existing synthesized audio respects your audio settings, and reduced-motion mode removes the number/tour animations.
-
-### Stable Hero, mission report and test review (0.1.10)
-Desktop landing statistics now occupy normal layout space below the CTA/credit group instead of competing with it inside a fixed-height Hero. Content, artwork, typography and mobile layout remain unchanged.
-
-Downloaded reports have a dedicated identity cover, overview, configuration tables, balance sheet, actual event timeline, shared test results, science/four-segment evaluation, assessment and references. Sections paginate to fit their actual content, with repeated headers, page numbers and clickable **https://missionx-black.vercel.app/** links on the cover and every footer. The PDF-only logo uses the supplied artwork with black lettering and an orange X on transparency; the website logo is unchanged.
-
-Launch now includes a dedicated mission-control test panel inside the existing flight panel. Calculated preflight checks are progressively **reviewed**, not falsely presented as live sensors or delayed calculations. The six existing arrival reviews remain the operations gate. PASS/FAIL/WARNING and NOT EVALUATED evidence/summaries come from the same projection used by the PDF. Passing configuration checks cannot guarantee launch success; a lost launch does not receive fabricated arrival diagnostics.
+MissionX is an independent educational project created by Team NASA WARRIORS. It is not affiliated with, endorsed by, or sponsored by NASA or any other government space agency. NASA and other organization names, resources, and references are acknowledged for their respective educational or informational contributions. Their inclusion does not imply endorsement.

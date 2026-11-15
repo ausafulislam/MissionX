@@ -1,5 +1,7 @@
 # Phase 03 — immersive headquarters
 
+> **Historical implementation/validation record.** Statements and check counts below apply to the recorded phase, not a new test execution. Use the [documentation index](README.md), [current architecture](Architecture.md) and [current testing record](Testing.md) for the present baseline. Original evidence is preserved.
+
 ## Delivered
 - [x] Desktop START requests fullscreen directly from the gesture, then enters `/hq`. Phones/tablets receive an orientation preparation screen in portrait; Continue attempts fullscreen then landscape lock, with unrestricted portrait continuation. Unsupported/rejected APIs do not block play. Navigation cleanup unlocks orientation, exits fullscreen and closes audio.
 - [x] Initialization reports five **completed tasks**, not simulated download percentage: local profile, engine verification, lazy world module, logo decode, first rendered frame (or explicit compatibility mode). Procedural textures are generated locally. There is no remote asset manifest/download.

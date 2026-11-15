@@ -1,5 +1,7 @@
 # Complete application implementation checklist
 
+> **Historical implementation/validation record.** Statements and check counts below apply to the recorded phase, not a new test execution. Use the [documentation index](README.md), [current architecture](Architecture.md) and [current testing record](Testing.md) for the present baseline. Original evidence is preserved.
+
 ## Audit — completed before coding
 - Landing, branded logo, four font families, original imagery, motion and shared styles are complete.
 - Existing game folders contain only .gitkeep: no engine, store, catalogs, game pages or mentor endpoint.

@@ -1,6 +1,35 @@
 # MissionX engineering references
 
-Current model 3, package 0.1.5; inspected 2026-11-14. This is a description of **existing code**, not newly validated flight engineering. [Source register](RESOURCES.md) supplies provider, original URL, access/review scope and restrictions for every source ID. Historical algorithms are separate below.
+Current model 3, package 0.1.10; documentation reconciled 2026-11-14. This is a description of **existing code**, not newly validated flight engineering. [Source register](RESOURCES.md) supplies provider, original URL, access/review scope and restrictions for every source ID. Historical algorithms are separate below.
+
+
+## Current implementation reconciliation — documentation pass
+
+The formulas below were checked against `resources.ts`, `validation.ts`, `operations.ts`, `simulation.ts`, `flight-lifecycle.ts`, `diagnostics.ts` and `flight-tests.ts`. No scientific input, formula or test expectation changed in this task. Any earlier “UI pending” statement is historical: the six-review gate and shared preflight/arrival results are now connected to HQ, flight deck and PDF (implementation through 0.1.10).
+
+### Traceability to guides and tests
+
+| Subject | Actual entry points | Tests / documentation |
+|---|---|---|
+| Mass/cost/power/battery/storage | `resources()`, `selectedParts()` in resources.ts | engine.test.ts, balance.test.ts; [catalog](Missions.md) |
+| Blocking checks and disclosed risks | `verify()`, `numericCheck()`, `missionRequirements()` in validation.ts | engine.test.ts, balance.test.ts; [verification](Verification.md) |
+| Four-day finite-energy/memory integration | `operate()` in operations.ts | operations.test.ts; [limits](Scientific-Limitations.md) |
+| Seeded events, science, lifetime, scores | `simulate()`, `seededRandom()` in simulation.ts | engine.test.ts, operations.test.ts, save-model.test.ts; [simulation](Launch-and-Simulation.md) |
+| Arrival eligibility and six-review gate | `flightLifecycle()`, `advanceFlight()`, `missionDiagnostics()` | diagnostics.test.ts, countdown.test.ts |
+| Shared PASS/WARNING/FAIL/NOT EVALUATED projection | `flightTestResults()`, `summarizeTests()` | flight-tests.test.ts; report content tests |
+| Report content and PDF layout | `buildMissionReport()`, pdf-layout.ts, pdf-export.ts | mission-report.test.ts, pdf-layout.test.ts; [PDF guide](PDF-Reports.md) |
+
+Test names here refer to repository files, not external scientific validation. Current test execution is recorded in [Testing](Testing.md); historical results below remain dated evidence.
+
+### Explicit numerical policies
+
+`assumptions.json`: modelVersion 3; solarAnnualRetention 0.98; batteryUsableFraction 0.8; batteryDischargeEfficiency 0.95; batteryChargeEfficiency 0.95; groundReceptionEfficiency 1; representativeDays 4; stepsPerOrbit 48; advisoryMarginPercent 10. The 10% headroom rule is also literal in existing verification code; this documentation does not claim all constants have been centralized.
+
+`simulation.ts`: score weights 0.50 / 0.35 / 0.15; efficiency offset 0.55; failure science threshold 0.5 of target; success availability tolerance 1e-9. All are authored educational policies. Readiness accepts only PASS or explicitly nonblocking checks. Nonzero inadequate data/storage becomes a warning; not every CLOSE result is safe to launch.
+
+`operations.ts`: scienceFraction = min(1, Earth-received GB / (planned fleet GB/day × representative days)), or 0 for no planned data. Generated/transmitted/received are not interchangeable; overflow and onboard backlog receive no science credit. Lifetime fraction is applied separately in `simulate()`. Four-day rates are extrapolated with 30-day months and capped achieved/required life, not integrated across a full changing campaign.
+
+No catalog magnitude, degradation factor, risk threshold, countdown interval, score weight or schematic travel time is attributed to NASA/CSA/JPL/Quicksat. Missing original selection rationales remain unresolved. See [resource audit](RESOURCES.md) for scope and reuse limits.
 
 ## Evidence and notation
 

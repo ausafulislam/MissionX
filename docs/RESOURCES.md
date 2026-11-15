@@ -1,6 +1,41 @@
 # MissionX resource register
 
-Central research register. Updated 2026-11-14 for v0.1.5. Source IDs below are documentation identifiers; runtime metadata migration is **not implemented**. [Engineering references](ENGINEERING_REFERENCES.md) distinguish formulas from assumptions.
+Central research register. Documentation reconciled 2026-11-14 against package 0.1.10; earlier review evidence is preserved below. Source IDs below are documentation identifiers; runtime metadata migration is **not implemented**. [Engineering references](ENGINEERING_REFERENCES.md) distinguish formulas from assumptions.
+
+
+## Documentation audit — 2026-11-14
+
+This is a **scoped retrieval audit**, not certification of sources, code or asset reuse. Original URLs, detailed provider fields, source IDs, mappings and prior review evidence remain in each resource record below. “Reached” means the named page/document content was returned, not that every linked tool/demo or chapter was validated. No unavailable page has been counted as reviewed. No agency artwork/code was copied for this task; current screenshot art is project UI.
+
+| Existing source ID | Original URL | Sections reviewed in this documentation audit | Use / implementation mapping | Confidence and limits |
+|---|---|---|---|---|
+| NASA-SCIENCE-MISSIONS | https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf | Segments, Big Picture Process, ConOps, BioNutrients requirements/verification and examples; both returned chunks | Concept: goal-first flow, `validation.ts`, `simulation.ts` segment names | High for these concepts; not numeric catalog/scoring evidence |
+| NASA-GMAT | https://software.nasa.gov/software/GSC-19468-1 | Overview/software details, R2025a | Reference only: limitations comparison; no runtime GMAT | High for catalog description; no installation/solver validation |
+| NASA-JPL-CML | https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/44299 | Repository abstract, metadata and displayed CC0 terms | Reference only: concept maturity context | High for metadata; paper matrix not newly reviewed; file notices still matter |
+| NASA-MDL | https://etd.gsfc.nasa.gov/capabilities/integrated-design-center/mission-design-lab/ | Provides, study options, capabilities, disciplines | Reference only: multidisciplinary/professional scope in limitations | High for page; no MDL analysis integrated |
+| NASA-MISSION-VIZ | https://nasa.github.io/mission-viz/ | Web-app/tutorial index | Inspiration/reference only; HQ uses project procedural geometry | Medium; demos and reuse license not validated |
+| NASA-WEBB-GAME | https://science.nasa.gov/mission/webb/game-build-it-yourself/ | Build It Yourself learning-game introduction | Reference only: science-requirements-first learning context | High for introduction, not game execution; no content copied |
+| NASA-CUBESAT-101 | https://www3.nasa.gov/sites/default/files/atoms/files/nasa_csli_cubesat_101_508.pdf | Cover, acknowledgments, contents, beginning of introduction; limited PDF extraction | Reference only: process/lifecycle context in engineering docs | Limited new review; later chapters not newly reviewed; prior review evidence below |
+| NASA-SPACEAPPS-VR-2023 | https://www.spaceappschallenge.org/2023/challenges/visualize-a-space-mission-using-virtual-reality/ | Summary, background, objectives, potential considerations | Reference only: visualization context, not current challenge/VR feature | High for page; linked tools not executed |
+| CSA-DIGITAL-GAMES | https://www.asc-csa.gc.ca/eng/youth-educators/digital-games-and-activities.asp | Games/activity directory | Reference only: educational comparison | High for directory; individual games not tested |
+
+The source-ID spelling in this summary must match the anchors below; see each record for provider-specific terms. Linking does not authorize embedded third-party material, logos or code reuse. All nine URLs above returned content during the audit; this does not establish permanent availability.
+
+### Other existing sources and team identity
+
+- Reached https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/ (summary, background, objectives and considerations): current challenge context only; no mandate that optional multiplayer be implemented.
+- Reached https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/ supplied by the owner: NASA WARRIORS, Karachi, Pakistan, Universal Event and Space Mission Design Game. This is participant-submitted content, not independently reviewed NASA endorsement. No member names/roles or awards inferred. Used in README and CITATION.cff. Reference/link only; not permission to copy the team image.
+- Reached existing Quicksat power and satellite-initialization guide beginnings: case/EOL inputs, panels, consumption-file context, mission/requirements/equipment concepts. Prior fuller review evidence remains below. Community source, not NASA; no numerical coefficients or code adopted. Referenced by `resources.ts`/`operations.ts` explanation, not a runtime library.
+- LRO/PUNCH/MRO context pages, the community skill guide and framework-library resources retain their prior verification scope below. They were not all re-fetched in this pass. Do not interpret old access dates as a fresh link check.
+- pdf-lib APIs/license were inspected locally in prior implementation work. This pass documents the existing integration; no claim of a new full upstream API review.
+- Font license sidecars and project asset history were inspected locally. Original logo redistribution terms remain unresolved; see [asset attribution](Asset-Attribution.md).
+- Badge image hosts and every external link in historical documents were not exhaustively network-validated. No CI/status/license badge is claimed.
+
+### Current independence statement
+
+MissionX is an independent educational project created by Team NASA WARRIORS. It is not affiliated with, endorsed by, or sponsored by NASA or any other government space agency. NASA and other organization names, resources, and references are acknowledged for their respective educational or informational contributions. Their inclusion does not imply endorsement.
+
+The older independence text and “pending UI” notes below are historical records. This documentation task does not modify the application's footer or PDF copy.
 
 ## Interpretation and scope
 - Implemented means the named concept/link is actually used at the listed location, not that software or all source methods are integrated.

@@ -1,5 +1,7 @@
 # MissionX educational engineering model
 
+> **Historical implementation/validation record.** Statements and check counts below apply to the recorded phase, not a new test execution. Use the [documentation index](README.md), [current architecture](Architecture.md) and [current testing record](Testing.md) for the present baseline. Original evidence is preserved.
+
 The current authoritative rule inventory is [ENGINEERING_REFERENCES.md](ENGINEERING_REFERENCES.md). The source/provider/verification register is [RESOURCES.md](RESOURCES.md). These consolidate the former chronological model notes; game behavior has not changed in v0.1.5.
 
 ## Current model 3

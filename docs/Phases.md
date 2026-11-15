@@ -257,3 +257,7 @@ Owner-authorized targeted refinement, not a redesign. Added shared visible launc
 
 ### 2026-11-14 — targeted Hero / PDF / launch-test presentation (0.1.10)
 Desktop Hero stats moved into normal flex flow with reserved CTA spacing; mobile layout unchanged. Printer-friendly, sectioned PDF with supplied-artwork black/orange transparent logo, clickable exact site URL, measured tables/pagination. Shared real preflight/arrival result projection drives the dedicated launch test panel and PDF; no calculation, gate or outcome changes. Desktop/tablet/phone Hero and successful/lost-launch functional flows/downloads checked; physical WebGL/audio and tagged-PDF certification remain unverified.
+
+
+## Documentation standards — owner-approved 2026-11-14
+Documentation-only commission: approved audit/plan and team URL integrated. Current architecture reconciled with original plan retained; Design/PRD untouched. README, current guides, source/formula registers, actual screenshot gallery and repository policies/templates prepared. No runtime change, dependency, license selection, CI workflow or version bump. Lint/types/89 tests/balance/build passed; browser seed-5 Moon compatibility journey completed with six reviews and no page errors. Full evidence/file list and unresolved license/private-contact/asset-rights decisions: [Documentation-Audit.md](Documentation-Audit.md).

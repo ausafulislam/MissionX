@@ -152,3 +152,18 @@ A feature is not complete until implementation and research documentation are bo
 MissionX is an independent educational project created by Team NASA WARRIORS for the NASA International Space Apps Challenge 2026. It is not affiliated with, endorsed by, or sponsored by NASA or any other space agency. NASA is not responsible for information contained on non-U.S. Government websites.
 
 Preserve the existing user-facing disclaimer. Distinguish NASA, CSA, academic, commercial and community providers. Review item-specific rights before reuse; do not copy without permission or compatible terms. Full disclaimer in the user-facing credits area is pending the separately approved UI task, not implemented by this policy update.
+
+
+## Documentation and repository standards — owner-approved 2026-11-14
+
+This additive policy preserves all preceding rules. The owner approved the documentation plan and Architecture reconciliation; `docs/Design.md` remains read-only and PRD changes still require approval.
+
+- Maintain README and docs index as accurate entry points; distinguish current behavior, historical plans and proposed work. Prefer existing filenames; avoid case-conflicting duplicates.
+- Documentation must trace features/formulas/commands/env/API descriptions to actual code and tests. No invented metrics, endpoints, author identities, badges, releases or successful checks.
+- Capture screenshots from the real application; record viewport, date, compatibility/reduced-motion settings and limitations. Optimize without fabricating UI; include meaningful alt text.
+- Maintain original resource URLs, access dates, reviewed sections, implementation mapping, use type, confidence, adaptations and licensing status. Retrieval alone is not scientific or reuse validation.
+- Preserve exact independence language supplied by the owner in current documentation. Agency/team-page links imply no endorsement or asset permission.
+- No root license, private reporting address, funding link or third-party rights grant may be invented. Record unresolved decisions and obtain owner approval.
+- Documentation-only changes do **not** require a package version bump or release; this overrides only the unconditional patch-bump wording above for documentation-only tasks.
+- Validate relative links, anchors, screenshots, source IDs, diagrams and setup claims. Run Bun lint, typecheck, tests and build; report skipped external/browser checks honestly. Add automation only when it runs real supported commands; badges must not imply unexecuted CI.
+- Update CHANGELOG.md, docs/Memory.md and docs/Phases.md with actual work/evidence. Preserve application functionality, architecture boundaries, local fallback and accessibility accommodations.

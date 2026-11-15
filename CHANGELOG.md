@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased — documentation standards (2026-11-14)
+
+- Reorganized README with verified implementation, team/deployment links, setup, screenshots, limitations and exact owner-supplied independence statement.
+- Added documentation index and focused gameplay/catalog/component/verification/simulation/PDF/mentor/testing/limitations/asset guides; reconciled current architecture while preserving its historical plan.
+- Updated resource and engineering registers with scoped retrieval evidence, implementation/test mappings and explicit authored-policy labels.
+- Added six actual optimized screenshots, contribution/conduct/security/citation files, issue forms and PR template. No license, private contact, funding link or CI claim invented.
+- Appended permanent documentation standards to AGENTS/Rules. No application behavior, protected Design/PRD, dependency or package version changes.
+- Validation and unresolved owner decisions: see docs/Documentation-Audit.md.
+
+
 ## 0.1.1 — 2026-11-14
 - Audited official challenge and supplied references; documented provenance limits and sequential engineering plan.
 - Migrated mission/component/launcher/orbit catalogs to static JSON behind existing exports. Each entry now discloses source scope, access date, confidence and numerical gameplay assumptions.

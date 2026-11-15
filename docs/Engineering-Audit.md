@@ -1,5 +1,7 @@
 # Engineering implementation audit — 2026-11-14
 
+> **Historical implementation/validation record.** Statements and check counts below apply to the recorded phase, not a new test execution. Use the [documentation index](README.md), [current architecture](Architecture.md) and [current testing record](Testing.md) for the present baseline. Original evidence is preserved.
+
 ## Scope / boundaries
 Read AGENTS and existing docs, current typed catalogs, resource/verification/simulation/schema/telemetry engines, persistence and existing HQ + six-screen flow. Preserve layouts and branding. No edits to PRD.md, Architecture.md or docs/Design.md. New panels require owner design instructions; content can be added to existing card/report slots. No dependencies or runtime external services added.
 

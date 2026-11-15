@@ -1,5 +1,7 @@
 # Game QA
 
+> **Historical implementation/validation record.** Statements and check counts below apply to the recorded phase, not a new test execution. Use the [documentation index](README.md), [current architecture](Architecture.md) and [current testing record](Testing.md) for the present baseline. Original evidence is preserved.
+
 25 automated regression tests across three files pass. Provider tests mock success, HTTP failure and network failure; no live paid service was called.
 
 Engine regression suite: `bun test`. Lint: `bun run lint`. Types: `bun run typecheck`. Production: `bun run build`.
