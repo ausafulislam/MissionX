@@ -4,7 +4,7 @@
 
 **Design a spacecraft. Balance the trade-offs. Learn from the mission.**
 
-MissionX is a single-player educational browser game by **[NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**. Choose a science goal, assemble a spacecraft, balance its resources, verify the configuration, launch a repeatable seeded mission and discover why it succeeded, partially succeeded or failed.
+MissionX is a single-player educational browser game. Choose a science goal, assemble a spacecraft, balance its resources, verify the configuration, launch a repeatable seeded mission and discover why it succeeded, partially succeeded or failed.
 
 [![Version 0.1.12](https://img.shields.io/badge/version-0.1.12-orange)](package.json)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
@@ -49,8 +49,8 @@ The public URL is an existing deployment, **not proof that this repository revis
 - [Screenshots and visual demonstrations](#screenshots-and-visual-demonstrations)
 - [Credits and attribution](#credits-and-attribution)
 - [Independence disclaimer](#independence-disclaimer)
-- [Team information](#team-information)
 - [License and participation](#license-and-participation)
+- [Our Team](#our-team)
 
 ## Challenge and team context
 
@@ -59,7 +59,6 @@ The public URL is an existing deployment, **not proof that this repository revis
 | Event | [2026 NASA International Space Apps Challenge](https://www.spaceappschallenge.org/2026/), November 14–15 |
 | Selected challenge | [Space Mission Design Game](https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/) |
 | Event theme | **The Next Frontier** — the event theme, not the challenge title |
-| Team | **[NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**, Karachi, Pakistan; public page lists Universal Event |
 | Implemented response | A complete single-player design/resource/simulation/evaluation loop; the challenge's suggested collaborative mode is not implemented |
 | Participation evidence | Public team content is participant-generated, not NASA review, endorsement or proof of a completed submission |
 
@@ -265,7 +264,7 @@ The “related code” column identifies a real correspondence or disclosure bou
 
 ### Competition and software references are different evidence
 
-The five official administrative pages linked in [challenge context](#challenge-and-team-context)—2026 event, selected challenge, team, Submission Guide and Judging Guide—inform scope, identity and submission drafts, **not engine numbers**. Their actual local consumers are `submission/OFFICIAL_REQUIREMENTS.md`, `TEAM_INFORMATION.md`, `SUBMISSION_CHECKLIST.md` and this README. Member eligibility, full legal acceptance and final submission were not authenticated or performed here.
+The five official administrative pages linked in [challenge context](#challenge-and-team-context) and [Our Team](#our-team)—2026 event, selected challenge, team, Submission Guide and Judging Guide—inform scope, identity and submission drafts, **not engine numbers**. Their actual local consumers are `submission/OFFICIAL_REQUIREMENTS.md`, `SUBMISSION_CHECKLIST.md` and this README; team details are consolidated in [Our Team](#our-team). Member eligibility, full legal acceptance and final submission were not authenticated or performed here.
 
 Software technical references in the existing source register cover Three.js math/camera, R3F/Drei, Next/React, Zustand, GSAP, Lenis, pdf-lib, Tailwind, TypeScript, Bun and the optional OpenAI endpoint. Those packages/API have demonstrable use listed below; their presence is not scientific evidence. Bundled font notices and unknown artwork rights are covered under [credits](#credits-and-attribution).
 
@@ -510,7 +509,7 @@ The 19 test files are:
 | `docs/{Memory,Phases,Implementation,HQ-Implementation,Engineering,Engineering-Audit,Game-QA,Game-Feel-Upgrade,Rules}.md` | Chronological decisions, phases, past implementation/QA and standing rules; dated counts/pending items stay historical |
 | `docs/images/README.md`, ten `*.webp` files | Real captures/report render and their version/renderer/rights conditions |
 | `submission/{PROJECT_OVERVIEW,PROBLEM_AND_SOLUTION,INNOVATION_AND_TECHNICAL_APPROACH,FEATURES_AND_USER_JOURNEY,SCIENTIFIC_ACCURACY_AND_LIMITATIONS}.md` | Judge-facing project-description drafts |
-| `submission/{README,DEMO_GUIDE,DEMO_STORYBOARD,OFFICIAL_REQUIREMENTS,SUBMISSION_CHECKLIST,TEAM_INFORMATION}.md` | Package index, live walkthrough, seven-slide content draft, verified rule notes, human gates and roster placeholders; not submitted artifacts |
+| `submission/{README,DEMO_GUIDE,DEMO_STORYBOARD,OFFICIAL_REQUIREMENTS,SUBMISSION_CHECKLIST}.md` | Package index, live walkthrough, seven-slide content draft, verified rule notes and human gates; not submitted artifacts |
 | `AGENTS.md`, `CLAUDE.md`, `CHANGELOG.md`, `CITATION.cff` | Contributor/agent rules, change history and citation metadata |
 | `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `LICENSE` | Participation, conduct/reporting limits, security disclosure caveats and project-owned code/docs licensing |
 
@@ -695,7 +694,7 @@ For a live walkthrough, use the Moon seed-5 path above and show one NOT EVALUATE
 
 ## Credits and attribution
 
-Created by **[NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**. Agency/community references are credited in the resource tables; upstream software authors retain their notices. NASA/JPL/CSA links grant neither endorsement nor permission to reuse their images, code, marks or text indiscriminately.
+Agency/community references are credited in the resource tables; upstream software authors retain their notices. NASA/JPL/CSA links grant neither endorsement nor permission to reuse their images, code, marks or text indiscriminately.
 
 - **Code and procedural work:** local TypeScript/React engine/UI, primitive spacecraft/planet/room/star geometry and Web Audio composition/cues. No imported NASA spacecraft model/texture, commercial music recording or NASA numerical dataset is established.
 - **Fonts:** Barlow (Barlow Project Authors), Inter (Inter Project Authors), Space Grotesk (Space Grotesk Project Authors), IBM Plex Mono (IBM). Four bundled `public/fonts/*.LICENSE.txt` notices retain **SIL OFL 1.1** terms; fonts are loaded locally using `next/font/local`, not a remote font API. Upstream binaries were not independently hash-verified.
@@ -709,17 +708,9 @@ Created by **[NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team
 
 MissionX is an independent educational project created for learning and demonstration purposes. It is not affiliated with, endorsed by, or an official product of NASA.
 
-## Team information
-
-**Team: [NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**
-
-Karachi, Pakistan · Universal Event · Space Mission Design Game
-
-The official public participant page confirms that team identity/context, not the current member roster, individual roles, eligibility or NASA approval. Member names/contributions/consent and Team Owner timezone must be confirmed by the owner; the original PRD's member count is not treated as verified current registration. We do not invent member biographies or private contacts.
-
 ## License and participation
 
-Project-owned software and associated documentation are provided under the **[MIT License](LICENSE)**, copyright 2026 Team **[NASA WARRIORS](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**. This is not a blanket artwork, trademark, dependency or external-resource rights grant; retain the separate notices and resolve unknown asset permissions before redistribution/submission.
+Project-owned software and associated documentation are provided under the **[MIT License](LICENSE)**, copyright 2026 Team NASA WARRIORS. This is not a blanket artwork, trademark, dependency or external-resource rights grant; retain the separate notices and resolve unknown asset permissions before redistribution/submission.
 
 [Contributing](CONTRIBUTING.md) · [Code of Conduct](CODE_OF_CONDUCT.md) · [Security](SECURITY.md) · [Citation](CITATION.cff) · [Documentation index](docs/README.md) · [Submission checklist](submission/SUBMISSION_CHECKLIST.md)
 
@@ -727,16 +718,17 @@ Project-owned software and associated documentation are provided under the **[MI
 
 ## Our Team
 
-**NASA WARRIORS** developed MissionX for the **NASA Space Apps Challenge 2026**, responding to the **Space Mission Design Game** challenge. Based in Karachi, Pakistan, the team brings a shared interest in space and education to an interactive exploration of mission-design trade-offs.
+**NASA WARRIORS** developed MissionX for the **NASA Space Apps Challenge 2026**, responding to the **Space Mission Design Game** challenge. Based in **Karachi, Pakistan**, the team shares a passion for space and education and participates through the **Universal Event**.
 
-**[Meet NASA WARRIORS on the official Space Apps team page →](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**
+### Meet the team
 
-### Team identity
+- **Ausaf Ul Islam** — Team Owner
+- **Jazib Khan**
+- **Afaq Ul Islam**
+- **Qurratulain Mughal**
 
-The public participant page lists NASA WARRIORS under the Universal Event. The repository's existing logo assets are MissionX project wordmarks; an identifiable NASA WARRIORS team logo needs to be provided before it can be displayed here.
+Names and the Team Owner designation are listed in the [official public member roster](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/?tab=members). No additional individual roles, MissionX responsibilities or profile links are listed in that view.
 
-### Team members
+**[Visit the official NASA WARRIORS team page →](https://www.spaceappschallenge.org/2026/find-a-team/nasa-warriors/)**
 
-Individual member names, official roles, MissionX responsibilities and professional profile links are awaiting team confirmation. The available public page and project records do not establish a verified roster, so no individual names or contributions are attributed here.
-
-*Through MissionX, NASA WARRIORS brings its shared interest in space and education into a collaborative learning project.*
+*Together, NASA WARRIORS brings its shared interest in space and education to MissionX.*
